@@ -23,9 +23,8 @@ export const properties: ClientCommand['properties'] = {
 
 export const execute: ClientCommand['execute'] = async (
     interaction,
-    locale,
 ): Promise<void> => {
-    const text = RegionLocales.locale(locale).commands.system;
+    const text = RegionLocales.locale(interaction.locale).commands.system;
     const { replace } = RegionLocales;
 
     const memoryMegaBytes = process.memoryUsage.rss() / (2 ** 20);

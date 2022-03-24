@@ -1,7 +1,5 @@
+import type { WebhookConfig } from '../../@types/client';
 import { BaseErrorHandler } from './BaseErrorHandler';
-import {
-    fatalWebhook,
-} from '../../../config.json';
 import { sendWebHook } from '../utility';
 
 export class ErrorHandler<E> extends BaseErrorHandler<E> {
@@ -31,7 +29,7 @@ export class ErrorHandler<E> extends BaseErrorHandler<E> {
             content: `<@${(JSON.parse(process.env.owners!)).join('><@')}>`,
             embeds: [this.errorEmbed()],
             files: [this.stackAttachment],
-            webhook: fatalWebhook,
+            webhook: JSON.parse(process.env.fatal!) as WebhookConfig,
             suppressError: true,
         });
     }

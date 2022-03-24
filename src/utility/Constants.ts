@@ -18,6 +18,14 @@ export const Constants = {
             devMode: false,
         },
         language: 'en-US',
+        performance: {
+            start: 0, //Date.now()
+            uses: 0, //uses
+            total: 0,
+            fetch: 0,
+            check: 0,
+            send: 0,
+        },
         presence: {
             activities: [{
                 name: 'Hypixel Announcements | {{ servers }} servers',
@@ -43,6 +51,8 @@ export const Constants = {
         second: 1_000,
     },
     urls: {
-        rss: 'https://hypixel.net/forums/news-and-announcements.4/-/index.rss',
+        rss: [
+            'https://hypixel.net/forums/news-and-announcements.4/-/index.rss',
+        ],
     },
 };

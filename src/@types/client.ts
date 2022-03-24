@@ -17,10 +17,7 @@ export interface ClientCommand {
         structure: ChatInputApplicationCommandData,
     },
     execute: {
-        (
-            interaction: CommandInteraction,
-            locale: string,
-        ): Promise<void>,
+        (interaction: CommandInteraction): Promise<void>,
     },
 }
 
