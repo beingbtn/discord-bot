@@ -4,6 +4,7 @@ import type {
     Collection,
     CommandInteraction,
 } from 'discord.js';
+import type { Database } from '../utility/database';
 //import type { Core } from '../core/core';
 
 export interface ClientCommand {
@@ -48,6 +49,7 @@ declare module 'discord.js' {
         cooldowns: Collection<string, Collection<string, number>>,
         //core: Core,
         customPresence: PresenceData | null,
+        database: Database,
         events: Collection<string, ClientEvent>,
     }
 }

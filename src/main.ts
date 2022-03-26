@@ -16,6 +16,7 @@ import { Log } from './utility/Log';
 import fs from 'node:fs/promises';
 import process from 'node:process';
 import { Constants } from './utility/Constants';
+import { Database } from './utility/database';
 
 process.on('exit', code => {
     Log.log(`Exiting with code ${code}`);
@@ -89,17 +90,19 @@ const client = new Client({
     },
 });
 
-client.commands = new Collection();
-client.config = {
-    ...Constants.defaults.config,
-    ...Constants.defaults.request,
-};
-client.cooldowns = new Collection();
-//client.core = new Core(client);
-client.customPresence = null;
-client.events = new Collection();
-
 (async () => {
+    client.commands = new Collection();
+    client.config = {
+        ...Constants.defaults.config,
+        ...Constants.defaults.request,
+    };
+    client.cooldowns = new Collection();
+    //client.core = new Core(client);
+    client.customPresence = null;
+    client.database = await Database.init();
+    client.events = new Collection();
+
+
     const folders = (
         await Promise.all([
             fs.readdir(`${__dirname}/commands`),

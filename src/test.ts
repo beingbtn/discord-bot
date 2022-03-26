@@ -1,5 +1,6 @@
 /* eslint-disable no-tabs */
 import { XMLParser } from 'fast-xml-parser';
+import Turndown from 'turndown';
 
 const xml = `<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
@@ -8,41 +9,38 @@ const xml = `<?xml version="1.0" encoding="utf-8"?>
     <description>Important announcements regarding the network are posted in this forum.
 
 If you click the "Watch" button in this forum you can be alerted whenever a new announcement is posted!</description>
-    <pubDate>Thu, 24 Mar 2022 03:45:56 +0000</pubDate>
-    <lastBuildDate>Thu, 24 Mar 2022 03:45:56 +0000</lastBuildDate>
+    <pubDate>Thu, 24 Mar 2022 21:34:00 +0000</pubDate>
+    <lastBuildDate>Thu, 24 Mar 2022 21:34:00 +0000</lastBuildDate>
     <generator>Hypixel - Minecraft Server and Maps</generator>
     <link>https://hypixel.net/</link>
     <atom:link rel="self" type="application/rss+xml" href="https://hypixel.net/forums/news-and-announcements.4/index.rss"/>
     <item>
-      <title>CvC Update - New Mode: Gun Game</title>
-      <pubDate>Thu, 24 Mar 2022 03:42:20 +0000</pubDate>
-      <link>https://hypixel.net/threads/cvc-update-new-mode-gun-game.4853203/</link>
-      <guid isPermaLink="false">4853203</guid>
-      <author>invalid@example.com (Brandonjja)</author>
+      <title>Microsoft Account Migration Authentication - Free Coin Boosters!</title>
+      <pubDate>Thu, 24 Mar 2022 21:32:42 +0000</pubDate>
+      <link>https://hypixel.net/threads/microsoft-account-migration-authentication-free-coin-boosters.4573688/</link>
+      <guid isPermaLink="false">4573688</guid>
+      <author>invalid@example.com (Fr0z3n)</author>
       <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Brandonjja</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/cvc-update-png.2933492/"
+      <dc:creator>Fr0z3n</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/microsoft-account-migration-png.2777774/"
 			class="bbImage "
 			style=""
-			alt="cvc-update.png"
-			title="cvc-update.png"
+			alt="microsoft-account-migration.png"
+			title="microsoft-account-migration.png"
 			width="1048" height="400" loading="lazy" /><br />
-Hey everyone!<br />
 <br />
-Today we're bringing you an update for Cops and Crims, featuring a brand new mode: Gun Game.<br />
+Hello everyone!<br />
 <br />
-Read on for more details!  <br />
+<span style="color: rgb(184, 49, 47)"><span style="font-size: 18px"><b>UPDATE 12/1/21 - The Migration Requirement is now LIVE! You MUST use one of the two options below to confirm your migration status!</b></span></span><br />
 <br />
-<b><span style="font-size: 18px">►</span></b> <span style="color: rgb(231, 135, 26)"><span style="font-size: 22px"><b>New Mode: Gun Game</b></span></span><br />
+With the option to migrate your Mojang account to a Microsoft account becoming more and more readily available to our players, we wanted to make sure that everyone is taking advantage of the increased security that comes with the migration. Although the migration isn't mandatory yet, it's still incredibly...<br />
 <br />
-Gun Game is a FFA mode where players have to go through a rotation of all the guns in the game, getting kills with each weapon. Each time you get a kill, you will receive a new gun that you must get a kill with before moving on to the next. After successfully getting a kill with...<br />
-<br />
-<a href="https://hypixel.net/threads/cvc-update-new-mode-gun-game.4853203/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>26</slash:comments>
+<a href="https://hypixel.net/threads/microsoft-account-migration-authentication-free-coin-boosters.4573688/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>596</slash:comments>
     </item>
     <item>
       <title>Bed Wars Doubles Tournament Results</title>
-      <pubDate>Thu, 24 Mar 2022 03:25:53 +0000</pubDate>
+      <pubDate>Thu, 24 Mar 2022 21:15:13 +0000</pubDate>
       <link>https://hypixel.net/threads/bed-wars-doubles-tournament-results.4876572/</link>
       <guid isPermaLink="false">4876572</guid>
       <author>invalid@example.com (ConnorLinfoot)</author>
@@ -67,37 +65,38 @@ Over the weekend we hosted the <b>Bed Wars Doubles Tournament</b>! Here are some
 </ul><br />
 <div style="text-align: center"><b><span style="font-size: 18px"><span style="color: #ff0000">You may now claim your tournament rewards at...</span></span></b>&#8203;</div><br />
 <a href="https://hypixel.net/threads/bed-wars-doubles-tournament-results.4876572/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>91</slash:comments>
+      <slash:comments>106</slash:comments>
     </item>
     <item>
-      <title>Hypixel Tournaments - Bed Wars Doubles</title>
-      <pubDate>Thu, 24 Mar 2022 02:42:29 +0000</pubDate>
-      <link>https://hypixel.net/threads/hypixel-tournaments-bed-wars-doubles.4847523/</link>
-      <guid isPermaLink="false">4847523</guid>
-      <author>invalid@example.com (ConnorLinfoot)</author>
+      <title>CvC Update - New Mode: Gun Game</title>
+      <pubDate>Thu, 24 Mar 2022 21:12:09 +0000</pubDate>
+      <link>https://hypixel.net/threads/cvc-update-new-mode-gun-game.4853203/</link>
+      <guid isPermaLink="false">4853203</guid>
+      <author>invalid@example.com (Brandonjja)</author>
       <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>ConnorLinfoot</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/bw-thread-png.2926330/"
+      <dc:creator>Brandonjja</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/cvc-update-png.2933492/"
 			class="bbImage "
 			style=""
-			alt="bw-thread.png"
-			title="bw-thread.png"
+			alt="cvc-update.png"
+			title="cvc-update.png"
 			width="1048" height="400" loading="lazy" /><br />
+Hey everyone!<br />
 <br />
-Hello everyone,<br />
+Today we're bringing you an update for Cops and Crims, featuring a brand new mode: Gun Game.<br />
 <br />
-We are happy to announce the next Hypixel Tournament - <b>Bed Wars Doubles!</b><br />
-If you don't know about tournaments or the Tournament Hall, or if you'd like to know more about some of the terms in this post, make sure to take a look at <a href="https://hypixel.net/threads/hypixel-tournaments-bed-wars-4v4v4v4.1875811/" class="link link--internal">the first tournament post</a>.<br />
- <br />
-<b>If you missed out on previous tournaments, no big deal!</b><br />
-You don't need to have played in previous ones to participate. You are on an even footing in every tournament...<br />
+Read on for more details!  <br />
 <br />
-<a href="https://hypixel.net/threads/hypixel-tournaments-bed-wars-doubles.4847523/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>438</slash:comments>
+<b><span style="font-size: 18px">►</span></b> <span style="color: rgb(231, 135, 26)"><span style="font-size: 22px"><b>New Mode: Gun Game</b></span></span><br />
+<br />
+Gun Game is a FFA mode where players have to go through a rotation of all the guns in the game, getting kills with each weapon. Each time you get a kill, you will receive a new gun that you must get a kill with before moving on to the next. After successfully getting a kill with...<br />
+<br />
+<a href="https://hypixel.net/threads/cvc-update-new-mode-gun-game.4853203/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>97</slash:comments>
     </item>
     <item>
       <title>Wool Wars v0.2 - Layout Editor, New Maps, Balance Changes + more!</title>
-      <pubDate>Thu, 24 Mar 2022 01:12:55 +0000</pubDate>
+      <pubDate>Thu, 24 Mar 2022 15:29:09 +0000</pubDate>
       <link>https://hypixel.net/threads/wool-wars-v0-2-layout-editor-new-maps-balance-changes-more.4876717/</link>
       <guid isPermaLink="false">4876717</guid>
       <author>invalid@example.com (ConnorLinfoot)</author>
@@ -135,7 +134,117 @@ We've added back a revamped Anubis as well as two new maps in this update, both 
 We...<br />
 <br />
 <a href="https://hypixel.net/threads/wool-wars-v0-2-layout-editor-new-maps-balance-changes-more.4876717/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>67</slash:comments>
+      <slash:comments>70</slash:comments>
+    </item>
+    <item>
+      <title>Official Hypixel SkyBlock Wiki Released!</title>
+      <pubDate>Thu, 24 Mar 2022 14:46:34 +0000</pubDate>
+      <link>https://hypixel.net/threads/official-hypixel-skyblock-wiki-released.4851087/</link>
+      <guid isPermaLink="false">4851087</guid>
+      <author>invalid@example.com (Hypixel Team)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Hypixel Team</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://staticassets.hypixel.net/news/5438a617-0ceb-4cc2-85a6-afa1cb39b39d.sb-wiki.png" data-url="https://staticassets.hypixel.net/news/5438a617-0ceb-4cc2-85a6-afa1cb39b39d.sb-wiki.png" class="bbImage " loading="lazy"
+		 style="" width="" height="" />&#8203;</div><br />
+Hey hey,<br />
+<br />
+Today, we're beyond excited to announce the release of the official <b>Hypixel SkyBlock Wiki</b> available at<br />
+<br />
+<br />
+<div style="text-align: center"><span style="font-size: 22px"><a href="https://wiki.hypixel.net/Main_Page" target="_blank" class="link link--external" rel="nofollow ugc noopener"><b>wiki.hypixel.net</b></a></span>&#8203;</div><br />
+<br />
+Have you ever wondered how often an item may drop or how a specific mechanic works in SkyBlock? We've got you covered!<br />
+<br />
+Continue reading to learn more about the new Hypixel SkyBlock Wiki!<br />
+<br />
+<b><span style="font-size: 18px">►</span></b> <span style="color: rgb(231, 135, 26)"><span style="font-size: 22px"><b>What is...</b></span></span><br />
+<br />
+<a href="https://hypixel.net/threads/official-hypixel-skyblock-wiki-released.4851087/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>293</slash:comments>
+    </item>
+    <item>
+      <title>SkyBlock Stranded</title>
+      <pubDate>Thu, 24 Mar 2022 09:52:52 +0000</pubDate>
+      <link>https://hypixel.net/threads/skyblock-stranded.4765261/</link>
+      <guid isPermaLink="false">4765261</guid>
+      <author>invalid@example.com (Jayavarmen)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Jayavarmen</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/staranded-sb-png.2868585/"
+			class="bbImage "
+			style=""
+			alt="staranded-sb.png"
+			title="staranded-sb.png"
+			width="1048" height="376" loading="lazy" /><br />
+<br />
+Hello,<br />
+<br />
+The first time you joined Hypixel SkyBlock, you quickly took that portal and landed on the same hub millions of other players wandered on, but what if...<br />
+<br />
+What if you never took that portal?  <br />
+<br />
+<b><b><span style="font-size: 18px">► </span></b><span style="color: rgb(243, 121, 52)"><span style="font-size: 22px">What is SkyBlock Stranded?</span></span></b><br />
+<br />
+Stranded is a new mode where players stay on their own island forever.<br />
+The rules are as follow:<br />
+<ul>
+<li data-xf-list-type="ul">Solo or Co-op.</li>
+<li data-xf-list-type="ul">Ironman rules.</li>
+<li data-xf-list-type="ul">You cannot leave your island.</li>
+</ul>The primary goal of Stranded is to...<br />
+<br />
+<a href="https://hypixel.net/threads/skyblock-stranded.4765261/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>317</slash:comments>
+    </item>
+    <item>
+      <title>New Prototype Game - Hypixel SkyBlock</title>
+      <pubDate>Thu, 24 Mar 2022 06:50:56 +0000</pubDate>
+      <link>https://hypixel.net/threads/new-prototype-game-hypixel-skyblock.2061182/</link>
+      <guid isPermaLink="false">2061182</guid>
+      <author>invalid@example.com (Jayavarmen)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Jayavarmen</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://staticassets.hypixel.net/news/5cfe76f01f26c.new%20game%20Skyblock.png" data-url="https://staticassets.hypixel.net/news/5cfe76f01f26c.new%20game%20Skyblock.png" class="bbImage " loading="lazy"
+		 style="" width="" height="" />
+
+<br />
+<br />
+Hello,<br />
+<br />
+For years SkyBlock has been one of the most requested games on the Network, today we are releasing our own version of SkyBlock in the Prototype lobby!<br />
+<br />
+<span style="font-size: 22px">▶ <span style="color: rgb(179, 89, 0)">What is SkyBlock?</span></span><br />
+SkyBlock has been around the Minecraft community for more than 7 years, longer than the Hypixel Network! Even though the game has evolved a lot through the years, the idea remains the same:<br />
+Players start on a tiny...<br />
+<br />
+<a href="https://hypixel.net/threads/new-prototype-game-hypixel-skyblock.2061182/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>530</slash:comments>
+    </item>
+    <item>
+      <title>Hypixel Tournaments - Bed Wars Doubles</title>
+      <pubDate>Thu, 24 Mar 2022 02:42:29 +0000</pubDate>
+      <link>https://hypixel.net/threads/hypixel-tournaments-bed-wars-doubles.4847523/</link>
+      <guid isPermaLink="false">4847523</guid>
+      <author>invalid@example.com (ConnorLinfoot)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>ConnorLinfoot</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/bw-thread-png.2926330/"
+			class="bbImage "
+			style=""
+			alt="bw-thread.png"
+			title="bw-thread.png"
+			width="1048" height="400" loading="lazy" /><br />
+<br />
+Hello everyone,<br />
+<br />
+We are happy to announce the next Hypixel Tournament - <b>Bed Wars Doubles!</b><br />
+If you don't know about tournaments or the Tournament Hall, or if you'd like to know more about some of the terms in this post, make sure to take a look at <a href="https://hypixel.net/threads/hypixel-tournaments-bed-wars-4v4v4v4.1875811/" class="link link--internal">the first tournament post</a>.<br />
+ <br />
+<b>If you missed out on previous tournaments, no big deal!</b><br />
+You don't need to have played in previous ones to participate. You are on an even footing in every tournament...<br />
+<br />
+<a href="https://hypixel.net/threads/hypixel-tournaments-bed-wars-doubles.4847523/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>438</slash:comments>
     </item>
     <item>
       <title>New PTL Game: Wool Wars</title>
@@ -295,80 +404,6 @@ Over the weekend we hosted the 2nd iteration of the <b>Quakecraft Solo Tournamen
       <slash:comments>144</slash:comments>
     </item>
     <item>
-      <title>New Prototype Game - Hypixel SkyBlock</title>
-      <pubDate>Tue, 22 Mar 2022 19:55:54 +0000</pubDate>
-      <link>https://hypixel.net/threads/new-prototype-game-hypixel-skyblock.2061182/</link>
-      <guid isPermaLink="false">2061182</guid>
-      <author>invalid@example.com (Jayavarmen)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Jayavarmen</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://staticassets.hypixel.net/news/5cfe76f01f26c.new%20game%20Skyblock.png" data-url="https://staticassets.hypixel.net/news/5cfe76f01f26c.new%20game%20Skyblock.png" class="bbImage " loading="lazy"
-		 style="" width="" height="" />
-
-<br />
-<br />
-Hello,<br />
-<br />
-For years SkyBlock has been one of the most requested games on the Network, today we are releasing our own version of SkyBlock in the Prototype lobby!<br />
-<br />
-<span style="font-size: 22px">▶ <span style="color: rgb(179, 89, 0)">What is SkyBlock?</span></span><br />
-SkyBlock has been around the Minecraft community for more than 7 years, longer than the Hypixel Network! Even though the game has evolved a lot through the years, the idea remains the same:<br />
-Players start on a tiny...<br />
-<br />
-<a href="https://hypixel.net/threads/new-prototype-game-hypixel-skyblock.2061182/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>529</slash:comments>
-    </item>
-    <item>
-      <title>Microsoft Account Migration Authentication - Free Coin Boosters!</title>
-      <pubDate>Tue, 22 Mar 2022 13:56:57 +0000</pubDate>
-      <link>https://hypixel.net/threads/microsoft-account-migration-authentication-free-coin-boosters.4573688/</link>
-      <guid isPermaLink="false">4573688</guid>
-      <author>invalid@example.com (Fr0z3n)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Fr0z3n</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/microsoft-account-migration-png.2777774/"
-			class="bbImage "
-			style=""
-			alt="microsoft-account-migration.png"
-			title="microsoft-account-migration.png"
-			width="1048" height="400" loading="lazy" /><br />
-<br />
-Hello everyone!<br />
-<br />
-<span style="color: rgb(184, 49, 47)"><span style="font-size: 18px"><b>UPDATE 12/1/21 - The Migration Requirement is now LIVE! You MUST use one of the two options below to confirm your migration status!</b></span></span><br />
-<br />
-With the option to migrate your Mojang account to a Microsoft account becoming more and more readily available to our players, we wanted to make sure that everyone is taking advantage of the increased security that comes with the migration. Although the migration isn't mandatory yet, it's still incredibly...<br />
-<br />
-<a href="https://hypixel.net/threads/microsoft-account-migration-authentication-free-coin-boosters.4573688/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>595</slash:comments>
-    </item>
-    <item>
-      <title>Official Hypixel SkyBlock Wiki Released!</title>
-      <pubDate>Mon, 21 Mar 2022 22:22:41 +0000</pubDate>
-      <link>https://hypixel.net/threads/official-hypixel-skyblock-wiki-released.4851087/</link>
-      <guid isPermaLink="false">4851087</guid>
-      <author>invalid@example.com (Hypixel Team)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Hypixel Team</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://staticassets.hypixel.net/news/5438a617-0ceb-4cc2-85a6-afa1cb39b39d.sb-wiki.png" data-url="https://staticassets.hypixel.net/news/5438a617-0ceb-4cc2-85a6-afa1cb39b39d.sb-wiki.png" class="bbImage " loading="lazy"
-		 style="" width="" height="" />&#8203;</div><br />
-Hey hey,<br />
-<br />
-Today, we're beyond excited to announce the release of the official <b>Hypixel SkyBlock Wiki</b> available at<br />
-<br />
-<br />
-<div style="text-align: center"><span style="font-size: 22px"><a href="https://wiki.hypixel.net/Main_Page" target="_blank" class="link link--external" rel="nofollow ugc noopener"><b>wiki.hypixel.net</b></a></span>&#8203;</div><br />
-<br />
-Have you ever wondered how often an item may drop or how a specific mechanic works in SkyBlock? We've got you covered!<br />
-<br />
-Continue reading to learn more about the new Hypixel SkyBlock Wiki!<br />
-<br />
-<b><span style="font-size: 18px">►</span></b> <span style="color: rgb(231, 135, 26)"><span style="font-size: 22px"><b>What is...</b></span></span><br />
-<br />
-<a href="https://hypixel.net/threads/official-hypixel-skyblock-wiki-released.4851087/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>291</slash:comments>
-    </item>
-    <item>
       <title>Valentine's Day is around the corner!</title>
       <pubDate>Mon, 21 Mar 2022 14:24:18 +0000</pubDate>
       <link>https://hypixel.net/threads/valentines-day-is-around-the-corner.4818064/</link>
@@ -518,33 +553,6 @@ Atlas is a replay review system that the community can take...<br />
 <a href="https://hypixel.net/threads/atlas-community-based-replay-review-system.3630110/" class="link link--internal">Read more</a></div>]]></content:encoded>
       <slash:comments>1331</slash:comments>
     </item>
-    <item>
-      <title>New Prototype Game: Invaders</title>
-      <pubDate>Thu, 17 Mar 2022 02:24:11 +0000</pubDate>
-      <link>https://hypixel.net/threads/new-prototype-game-invaders.4423763/</link>
-      <guid isPermaLink="false">4423763</guid>
-      <author>invalid@example.com (RapidTheNerd)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>RapidTheNerd</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://hypixel.net/attachments/invaders-ptl-post-png.2835754/"
-			class="bbImage "
-			style=""
-			alt="invaders-ptl-post.png"
-			title="invaders-ptl-post.png"
-			width="1040" height="400" loading="lazy" />&#8203;</div><br />
-Hello everyone!<br />
-<br />
-Today we are releasing a new game into the Prototype Lobby - <b>Invaders!</b><br />
-<br />
-Invaders is a strategic repair PvP game concept. If you're a fan of games that require strategy, resource gathering, and overcoming challenges then this might be the game for you! Invaders was originally designed in a previous Game Jam, we liked the concept and decided to develop it into a PTL game.<br />
-<br />
-Continue reading to find out more about Invaders!  <br />
-<br />
-<span style="font-size: 18px">▶</span><span style="font-size: 22px">...</span><br />
-<br />
-<a href="https://hypixel.net/threads/new-prototype-game-invaders.4423763/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>248</slash:comments>
-    </item>
   </channel>
 </rss>
 `;
@@ -624,53 +632,26 @@ for (let i = 0; i < items.length; i += 1) {
             ? val.enclosure
             : [val.enclosure]
             : [],
+        attachments: [] as string[],
     };
 
-    [
-        'content:encoded',
-        'podcast:transcript',
-        'itunes:summary',
-        'itunes:author',
-        'itunes:explicit',
-        'itunes:duration',
-        'itunes:season',
-        'itunes:episode',
-        'itunes:episodeType',
-        'itunes:image',
-    ].forEach(value => {
-        if (val[value]) {
-            obj[value.replace(':', '_') as keyof typeof obj] = val[value];
-        }
+    obj.attachments = [
+        ...obj.content.matchAll(
+            /https:\/\/hypixel\.net\/attachments\/(\S)*\//gm,
+        ),
+    ].map(array => array?.[0]);
+
+    const turndownService = new Turndown({
+        codeBlockStyle: 'fenced',
+        linkReferenceStyle: 'collapsed',
     });
 
-    if (val['media:thumbnail']) {
-        Object.assign(media, { thumbnail: val['media:thumbnail'] });
-        obj.enclosures.push(val['media:thumbnail']);
-    }
-
-    if (val['media:content']) {
-        Object.assign(media, { thumbnail: val['media:content'] });
-        obj.enclosures.push(val['media:content']);
-    }
-
-    if (val['media:group']) {
-        if (val['media:group']['media:title']) {
-            obj.title = val['media:group']['media:title'];
-        }
-
-        if (val['media:group']['media:description']) {
-            obj.description = val['media:group']['media:description'];
-        }
-
-        if (val['media:group']['media:thumbnail']) {
-            obj.enclosures.push(val['media:group']['media:thumbnail'].url);
-        }
-    }
+    obj.content = turndownService.turndown(obj.content)
+        .replaceAll('  \n', '\n');
 
     Object.assign(obj, { media });
 
     rss.items.push(obj);
 }
 
-
-console.log(rss);
+console.log(JSON.stringify(rss));

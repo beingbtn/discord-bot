@@ -1,13 +1,13 @@
-import {
-    Client,
-    DiscordAPIError,
-} from 'discord.js';
+import { Client } from 'discord.js';
 import { Constants } from '../utility/Constants';
+import { CoreChanges } from './changes';
 import { CoreError } from './error';
 import { CoreRequest } from './request';
 import { ErrorHandler } from '../utility/errors/ErrorHandler';
-import { RequestErrorHandler } from '../utility/errors/RequestErrorHandler';
 import { setTimeout } from 'node:timers/promises';
+import { CoreFormat } from './format';
+import { HTTPError } from '../utility/errors/HTTPError';
+import { RequestErrorHandler } from '../utility/errors/RequestErrorHandler';
 
 /* eslint-disable no-await-in-loop */
 
@@ -15,26 +15,28 @@ export type Performance = typeof Constants.defaults.performance;
 
 export class Core {
     client: Client;
-    error: CoreError;
     performance: {
         latest: Performance | null;
         history: Performance[];
     };
+    error: CoreError;
+    changes: CoreChanges;
     request: CoreRequest;
     uses: number;
 
     constructor(client: Client) {
         this.client = client;
-        this.error = new CoreError();
         this.performance = {
             latest: null,
             history: [],
         };
+        this.changes = new CoreChanges();
+        this.error = new CoreError();
         this.request = new CoreRequest(this.client);
         this.uses = 0;
     }
 
-    async start() {
+    async init() {
         while (true) {
             try {
                 await this.checkSystem();
@@ -65,21 +67,39 @@ export class Core {
     }
 
     private async refresh(urls: string[]) {
-        try {
-            await this.request.request(urls)
-        } catch (error) {
+        for (const url of urls) {
+            const performance = {
+                ...Constants.defaults.performance,
+                start: Date.now(),
+                uses: this.uses,
+            };
 
+            try {
+                const xmlString = await this.request.request(url);
+                const rssJSON = CoreFormat.parse(xmlString);
+                const changes = await this.changes.check(rssJSON);
+
+                if (changes.items.length > 0) {
+                    switch (changes.title) {
+                        case 'https://hypixel.net/': {
+
+                        }
+                        break;
+                        //no default
+                    }
+                }
+
+                this.updatePerformance(performance);
+            } catch (error) {
+                if (error instanceof HTTPError) {
+                    return RequestErrorHandler.init(error, this);
+                }
+
+                return ErrorHandler.init(error);
+            }
+
+            await setTimeout(1000 * 60 * 10);
         }
-
-        const performance = {
-            ...Constants.defaults.performance,
-            start: Date.now(),
-            uses: this.uses,
-        };
-
-        this.updatePerformance(performance);
-
-        await setTimeout(1000 * 60 * 10);
     }
 
     private updatePerformance(performance: Performance) {

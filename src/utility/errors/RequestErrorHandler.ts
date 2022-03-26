@@ -5,7 +5,7 @@ import {
     cleanLength,
     sendWebHook,
 } from '../../utility/utility';
-import { Core } from '../core/core';
+import { Core } from '../../core/core';
 import { ErrorHandler } from '../../utility/errors/ErrorHandler';
 import { FetchError } from 'node-fetch';
 import { HTTPError } from './HTTPError';
@@ -61,9 +61,7 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
                 generic,
                 http,
             },
-            request: {
-                uses,
-            },
+            uses,
         } = this.core;
 
         const embed = this.baseErrorEmbed()
