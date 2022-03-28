@@ -9,94 +9,14 @@ const xml = `<?xml version="1.0" encoding="utf-8"?>
     <description>Important announcements regarding the network are posted in this forum.
 
 If you click the "Watch" button in this forum you can be alerted whenever a new announcement is posted!</description>
-    <pubDate>Thu, 24 Mar 2022 21:34:00 +0000</pubDate>
-    <lastBuildDate>Thu, 24 Mar 2022 21:34:00 +0000</lastBuildDate>
+    <pubDate>Sun, 27 Mar 2022 21:37:14 +0000</pubDate>
+    <lastBuildDate>Sun, 27 Mar 2022 21:37:14 +0000</lastBuildDate>
     <generator>Hypixel - Minecraft Server and Maps</generator>
     <link>https://hypixel.net/</link>
     <atom:link rel="self" type="application/rss+xml" href="https://hypixel.net/forums/news-and-announcements.4/index.rss"/>
     <item>
-      <title>Microsoft Account Migration Authentication - Free Coin Boosters!</title>
-      <pubDate>Thu, 24 Mar 2022 21:32:42 +0000</pubDate>
-      <link>https://hypixel.net/threads/microsoft-account-migration-authentication-free-coin-boosters.4573688/</link>
-      <guid isPermaLink="false">4573688</guid>
-      <author>invalid@example.com (Fr0z3n)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Fr0z3n</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/microsoft-account-migration-png.2777774/"
-			class="bbImage "
-			style=""
-			alt="microsoft-account-migration.png"
-			title="microsoft-account-migration.png"
-			width="1048" height="400" loading="lazy" /><br />
-<br />
-Hello everyone!<br />
-<br />
-<span style="color: rgb(184, 49, 47)"><span style="font-size: 18px"><b>UPDATE 12/1/21 - The Migration Requirement is now LIVE! You MUST use one of the two options below to confirm your migration status!</b></span></span><br />
-<br />
-With the option to migrate your Mojang account to a Microsoft account becoming more and more readily available to our players, we wanted to make sure that everyone is taking advantage of the increased security that comes with the migration. Although the migration isn't mandatory yet, it's still incredibly...<br />
-<br />
-<a href="https://hypixel.net/threads/microsoft-account-migration-authentication-free-coin-boosters.4573688/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>596</slash:comments>
-    </item>
-    <item>
-      <title>Bed Wars Doubles Tournament Results</title>
-      <pubDate>Thu, 24 Mar 2022 21:15:13 +0000</pubDate>
-      <link>https://hypixel.net/threads/bed-wars-doubles-tournament-results.4876572/</link>
-      <guid isPermaLink="false">4876572</guid>
-      <author>invalid@example.com (ConnorLinfoot)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>ConnorLinfoot</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://hypixel.net/attachments/bw-tournament-resultv3-png.2939504/"
-			class="bbImage "
-			style=""
-			alt="bw-tournament-resultv3.png"
-			title="bw-tournament-resultv3.png"
-			width="1048" height="400" loading="lazy" /><br />&#8203;</div>Hello!<br />
-<br />
-Over the weekend we hosted the <b>Bed Wars Doubles Tournament</b>! Here are some stats from this tournament:<br />
-<ul>
-<li data-xf-list-type="ul"><b>3,771,326</b> kills</li>
-<li data-xf-list-type="ul"><b>3,270,066</b> players died to the void</li>
-<li data-xf-list-type="ul"><b>87,850</b> games played</li>
-<li data-xf-list-type="ul"><b>642,792 </b>beds broken</li>
-<li data-xf-list-type="ul"><b>1,213,624</b> final kills</li>
-<li data-xf-list-type="ul"><b>100,247</b> unique players</li>
-<li data-xf-list-type="ul">Combined playtime of all players during the tournament: <b>17 years and 4 months</b></li>
-</ul><br />
-<div style="text-align: center"><b><span style="font-size: 18px"><span style="color: #ff0000">You may now claim your tournament rewards at...</span></span></b>&#8203;</div><br />
-<a href="https://hypixel.net/threads/bed-wars-doubles-tournament-results.4876572/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>106</slash:comments>
-    </item>
-    <item>
-      <title>CvC Update - New Mode: Gun Game</title>
-      <pubDate>Thu, 24 Mar 2022 21:12:09 +0000</pubDate>
-      <link>https://hypixel.net/threads/cvc-update-new-mode-gun-game.4853203/</link>
-      <guid isPermaLink="false">4853203</guid>
-      <author>invalid@example.com (Brandonjja)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Brandonjja</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/cvc-update-png.2933492/"
-			class="bbImage "
-			style=""
-			alt="cvc-update.png"
-			title="cvc-update.png"
-			width="1048" height="400" loading="lazy" /><br />
-Hey everyone!<br />
-<br />
-Today we're bringing you an update for Cops and Crims, featuring a brand new mode: Gun Game.<br />
-<br />
-Read on for more details!  <br />
-<br />
-<b><span style="font-size: 18px">►</span></b> <span style="color: rgb(231, 135, 26)"><span style="font-size: 22px"><b>New Mode: Gun Game</b></span></span><br />
-<br />
-Gun Game is a FFA mode where players have to go through a rotation of all the guns in the game, getting kills with each weapon. Each time you get a kill, you will receive a new gun that you must get a kill with before moving on to the next. After successfully getting a kill with...<br />
-<br />
-<a href="https://hypixel.net/threads/cvc-update-new-mode-gun-game.4853203/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>97</slash:comments>
-    </item>
-    <item>
       <title>Wool Wars v0.2 - Layout Editor, New Maps, Balance Changes + more!</title>
-      <pubDate>Thu, 24 Mar 2022 15:29:09 +0000</pubDate>
+      <pubDate>Sun, 27 Mar 2022 19:09:14 +0000</pubDate>
       <link>https://hypixel.net/threads/wool-wars-v0-2-layout-editor-new-maps-balance-changes-more.4876717/</link>
       <guid isPermaLink="false">4876717</guid>
       <author>invalid@example.com (ConnorLinfoot)</author>
@@ -134,11 +54,119 @@ We've added back a revamped Anubis as well as two new maps in this update, both 
 We...<br />
 <br />
 <a href="https://hypixel.net/threads/wool-wars-v0-2-layout-editor-new-maps-balance-changes-more.4876717/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>70</slash:comments>
+      <slash:comments>77</slash:comments>
+    </item>
+    <item>
+      <title>CvC Update - New Mode: Gun Game</title>
+      <pubDate>Sun, 27 Mar 2022 18:21:43 +0000</pubDate>
+      <link>https://hypixel.net/threads/cvc-update-new-mode-gun-game.4853203/</link>
+      <guid isPermaLink="false">4853203</guid>
+      <author>invalid@example.com (Brandonjja)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Brandonjja</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/cvc-update-png.2933492/"
+			class="bbImage "
+			style=""
+			alt="cvc-update.png"
+			title="cvc-update.png"
+			width="1048" height="400" loading="lazy" /><br />
+Hey everyone!<br />
+<br />
+Today we're bringing you an update for Cops and Crims, featuring a brand new mode: Gun Game.<br />
+<br />
+Read on for more details!  <br />
+<br />
+<b><span style="font-size: 18px">►</span></b> <span style="color: rgb(231, 135, 26)"><span style="font-size: 22px"><b>New Mode: Gun Game</b></span></span><br />
+<br />
+Gun Game is a FFA mode where players have to go through a rotation of all the guns in the game, getting kills with each weapon. Each time you get a kill, you will receive a new gun that you must get a kill with before moving on to the next. After successfully getting a kill with...<br />
+<br />
+<a href="https://hypixel.net/threads/cvc-update-new-mode-gun-game.4853203/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>132</slash:comments>
+    </item>
+    <item>
+      <title>Microsoft Account Migration Authentication - Free Coin Boosters!</title>
+      <pubDate>Sun, 27 Mar 2022 16:36:08 +0000</pubDate>
+      <link>https://hypixel.net/threads/microsoft-account-migration-authentication-free-coin-boosters.4573688/</link>
+      <guid isPermaLink="false">4573688</guid>
+      <author>invalid@example.com (Fr0z3n)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Fr0z3n</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/microsoft-account-migration-png.2777774/"
+			class="bbImage "
+			style=""
+			alt="microsoft-account-migration.png"
+			title="microsoft-account-migration.png"
+			width="1048" height="400" loading="lazy" /><br />
+<br />
+Hello everyone!<br />
+<br />
+<span style="color: rgb(184, 49, 47)"><span style="font-size: 18px"><b>UPDATE 12/1/21 - The Migration Requirement is now LIVE! You MUST use one of the two options below to confirm your migration status!</b></span></span><br />
+<br />
+With the option to migrate your Mojang account to a Microsoft account becoming more and more readily available to our players, we wanted to make sure that everyone is taking advantage of the increased security that comes with the migration. Although the migration isn't mandatory yet, it's still incredibly...<br />
+<br />
+<a href="https://hypixel.net/threads/microsoft-account-migration-authentication-free-coin-boosters.4573688/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>602</slash:comments>
+    </item>
+    <item>
+      <title>Bed Wars Doubles Tournament Results</title>
+      <pubDate>Sun, 27 Mar 2022 09:00:52 +0000</pubDate>
+      <link>https://hypixel.net/threads/bed-wars-doubles-tournament-results.4876572/</link>
+      <guid isPermaLink="false">4876572</guid>
+      <author>invalid@example.com (ConnorLinfoot)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>ConnorLinfoot</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://hypixel.net/attachments/bw-tournament-resultv3-png.2939504/"
+			class="bbImage "
+			style=""
+			alt="bw-tournament-resultv3.png"
+			title="bw-tournament-resultv3.png"
+			width="1048" height="400" loading="lazy" /><br />&#8203;</div>Hello!<br />
+<br />
+Over the weekend we hosted the <b>Bed Wars Doubles Tournament</b>! Here are some stats from this tournament:<br />
+<ul>
+<li data-xf-list-type="ul"><b>3,771,326</b> kills</li>
+<li data-xf-list-type="ul"><b>3,270,066</b> players died to the void</li>
+<li data-xf-list-type="ul"><b>87,850</b> games played</li>
+<li data-xf-list-type="ul"><b>642,792 </b>beds broken</li>
+<li data-xf-list-type="ul"><b>1,213,624</b> final kills</li>
+<li data-xf-list-type="ul"><b>100,247</b> unique players</li>
+<li data-xf-list-type="ul">Combined playtime of all players during the tournament: <b>17 years and 4 months</b></li>
+</ul><br />
+<div style="text-align: center"><b><span style="font-size: 18px"><span style="color: #ff0000">You may now claim your tournament rewards at...</span></span></b>&#8203;</div><br />
+<a href="https://hypixel.net/threads/bed-wars-doubles-tournament-results.4876572/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>137</slash:comments>
+    </item>
+    <item>
+      <title>New PTL Game: Wool Wars</title>
+      <pubDate>Sun, 27 Mar 2022 01:03:44 +0000</pubDate>
+      <link>https://hypixel.net/threads/new-ptl-game-wool-wars.4606663/</link>
+      <guid isPermaLink="false">4606663</guid>
+      <author>invalid@example.com (Dueces)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Dueces</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center">&#8203;</div><img src="https://hypixel.net/attachments/1647290449954-png.2930955/"
+			class="bbImage "
+			style=""
+			alt="1647290449954.png"
+			title="1647290449954.png"
+			width="1040" height="400" loading="lazy" /><br />
+Hello everyone!<br />
+<br />
+Today, we will be releasing Wool Wars, a new PVP gamemode, into the prototype lobby! This game was developed during the company wide gamejam and is now ready for public testing!<br />
+<br />
+You can play the game by visiting the PTL lobby using the <b>/lobby ptl</b> command!<br />
+<br />
+Continue reading to learn more about Wool Wars.  <br />
+<br />
+<b><span style="font-size: 18px">►</span><span style="font-size: 22px"> <span style="color: rgb(243, 121, 52)">It's Time to Fight</span></span></b><br />
+Wool Wars is a 4v4 PVP gamemode where you need to place your team's color wool in the...<br />
+<br />
+<a href="https://hypixel.net/threads/new-ptl-game-wool-wars.4606663/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>325</slash:comments>
     </item>
     <item>
       <title>Official Hypixel SkyBlock Wiki Released!</title>
-      <pubDate>Thu, 24 Mar 2022 14:46:34 +0000</pubDate>
+      <pubDate>Sat, 26 Mar 2022 19:49:32 +0000</pubDate>
       <link>https://hypixel.net/threads/official-hypixel-skyblock-wiki-released.4851087/</link>
       <guid isPermaLink="false">4851087</guid>
       <author>invalid@example.com (Hypixel Team)</author>
@@ -160,11 +188,80 @@ Continue reading to learn more about the new Hypixel SkyBlock Wiki!<br />
 <b><span style="font-size: 18px">►</span></b> <span style="color: rgb(231, 135, 26)"><span style="font-size: 22px"><b>What is...</b></span></span><br />
 <br />
 <a href="https://hypixel.net/threads/official-hypixel-skyblock-wiki-released.4851087/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>293</slash:comments>
+      <slash:comments>294</slash:comments>
+    </item>
+    <item>
+      <title>Duels Update v1.1 - Cosmetics, Sumo, Rating Titles and improvements</title>
+      <pubDate>Sat, 26 Mar 2022 19:27:46 +0000</pubDate>
+      <link>https://hypixel.net/threads/duels-update-v1-1-cosmetics-sumo-rating-titles-and-improvements.1635990/</link>
+      <guid isPermaLink="false">1635990</guid>
+      <author>invalid@example.com (Nitroholic_)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Nitroholic_</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://i.imgur.com/3POtF8i.jpg" data-url="https://i.imgur.com/3POtF8i.jpg" class="bbImage " loading="lazy"
+		 style="" width="" height="" />
+
+<br />&#8203;</div>The new v1.1 update has been released for Duels, available to play now in the new Duels Lobby. Read on below for a full list of changes and additions, or play it right now by clicking the Duels Lobby NPC, game menu icon, or using the command <b><i>/lobby duels</i></b>.<br />
+<br />
+<span style="font-size: 26px">▶ What is in this update?</span><br />
+<ul>
+<li data-xf-list-type="ul">100+ new Duels Cosmetics</li>
+<li data-xf-list-type="ul">Coin gain</li>
+<li data-xf-list-type="ul">Sumo Duels and Sumo Tournaments</li>
+<li data-xf-list-type="ul">Rating leaderboards and position titles for UHC and SkyWars modes...</li>
+</ul><br />
+<a href="https://hypixel.net/threads/duels-update-v1-1-cosmetics-sumo-rating-titles-and-improvements.1635990/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>178</slash:comments>
+    </item>
+    <item>
+      <title>New PTL Game: Pixel Party</title>
+      <pubDate>Sat, 26 Mar 2022 10:32:51 +0000</pubDate>
+      <link>https://hypixel.net/threads/new-ptl-game-pixel-party.4604508/</link>
+      <guid isPermaLink="false">4604508</guid>
+      <author>invalid@example.com (Externalizable)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Externalizable</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://staticassets.hypixel.net/news/12d741d4-d332-4c60-9598-c81aa40311b2.party-pixel-ptl-post.png" data-url="https://staticassets.hypixel.net/news/12d741d4-d332-4c60-9598-c81aa40311b2.party-pixel-ptl-post.png" class="bbImage " loading="lazy"
+		 style="" width="" height="" />&#8203;</div><br />
+Hey hey,<br />
+<br />
+Earlier this month, Hypixel hosted an internal Game Jam where the team gets together in groups and creates new content for the Hypixel network to enjoy. Pixel Party ended up being finished at the end of the Game Jam-week and is now ready for public testing as a brand new Prototype game!<br />
+<br />
+You can visit the Prototype lobby by using the <b>/lobby ptl</b> command in-game...<br />
+<br />
+<a href="https://hypixel.net/threads/new-ptl-game-pixel-party.4604508/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>413</slash:comments>
+    </item>
+    <item>
+      <title>Hypixel now supports Minecraft 1.18</title>
+      <pubDate>Sat, 26 Mar 2022 01:22:04 +0000</pubDate>
+      <link>https://hypixel.net/threads/hypixel-now-supports-minecraft-1-18.4688083/</link>
+      <guid isPermaLink="false">4688083</guid>
+      <author>invalid@example.com (Hypixel Team)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Hypixel Team</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://hypixel.net/attachments/1-18-version-support-png.2822858/"
+			class="bbImage "
+			style=""
+			alt="1-18-version-support.png"
+			title="1-18-version-support.png"
+			width="1048" height="400" loading="lazy" />&#8203;</div>Hey everyone!<br />
+<br />
+Minecraft 1.18 is out! The Hypixel Server has now been updated to support the new version.<br />
+<br />
+As such, at this time, we do support the following versions:<br />
+<b>1.8, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17 and 1.18!</b><br />
+<br />
+If you come across any sort of exploits, bugs, issues, or anything else, please report it to our <a href="https://hypixel.net/forums/server-bug-reports.35/" class="link link--internal">bug report section</a>.<br />
+<br />
+Finally, as always, I'd like to remind everyone that Hypixel <a href="https://hypixel.net/threads/hypixel-optimised-for-1-8-9-best-version-of-minecraft-for-hypixel.1731620/" class="link link--internal">is better played on the 1.8.9 version of Minecraft</a> if...<br />
+<br />
+<a href="https://hypixel.net/threads/hypixel-now-supports-minecraft-1-18.4688083/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>225</slash:comments>
     </item>
     <item>
       <title>SkyBlock Stranded</title>
-      <pubDate>Thu, 24 Mar 2022 09:52:52 +0000</pubDate>
+      <pubDate>Fri, 25 Mar 2022 21:20:06 +0000</pubDate>
       <link>https://hypixel.net/threads/skyblock-stranded.4765261/</link>
       <guid isPermaLink="false">4765261</guid>
       <author>invalid@example.com (Jayavarmen)</author>
@@ -194,7 +291,22 @@ The rules are as follow:<br />
 </ul>The primary goal of Stranded is to...<br />
 <br />
 <a href="https://hypixel.net/threads/skyblock-stranded.4765261/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>317</slash:comments>
+      <slash:comments>319</slash:comments>
+    </item>
+    <item>
+      <title>Update: Mandatory Microsoft Account Migration</title>
+      <pubDate>Fri, 25 Mar 2022 09:39:51 +0000</pubDate>
+      <link>https://hypixel.net/threads/update-mandatory-microsoft-account-migration.4805155/</link>
+      <guid isPermaLink="false">4805155</guid>
+      <author>invalid@example.com (Fr0z3n)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Fr0z3n</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper">Hello everyone!<br />
+<br />
+Mojang has just released an announcement regarding the migration of your Minecraft account, you can view this <a href="https://www.minecraft.net/en-us/article/last-call-voluntarily-migrate-java-accounts" target="_blank" class="link link--external" rel="nofollow ugc noopener">HERE</a>. Starting on March 10th this year, everyone wanting to play the Java edition of Minecraft will be required to migrate their Minecraft account to a Microsoft account. For those who haven't migrated yet, you can find out more information about migrating on our FAQ thread located <a href="https://hypixel.net/threads/microsoft-account-migration-faq.3547418/" class="link link--internal">HERE</a>. We highly recommend going through the migration process earlier than...<br />
+<br />
+<a href="https://hypixel.net/threads/update-mandatory-microsoft-account-migration.4805155/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>550</slash:comments>
     </item>
     <item>
       <title>New Prototype Game - Hypixel SkyBlock</title>
@@ -247,34 +359,6 @@ You don't need to have played in previous ones to participate. You are on an eve
       <slash:comments>438</slash:comments>
     </item>
     <item>
-      <title>New PTL Game: Wool Wars</title>
-      <pubDate>Wed, 23 Mar 2022 23:28:49 +0000</pubDate>
-      <link>https://hypixel.net/threads/new-ptl-game-wool-wars.4606663/</link>
-      <guid isPermaLink="false">4606663</guid>
-      <author>invalid@example.com (Dueces)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Dueces</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center">&#8203;</div><img src="https://hypixel.net/attachments/1647290449954-png.2930955/"
-			class="bbImage "
-			style=""
-			alt="1647290449954.png"
-			title="1647290449954.png"
-			width="1040" height="400" loading="lazy" /><br />
-Hello everyone!<br />
-<br />
-Today, we will be releasing Wool Wars, a new PVP gamemode, into the prototype lobby! This game was developed during the company wide gamejam and is now ready for public testing!<br />
-<br />
-You can play the game by visiting the PTL lobby using the <b>/lobby ptl</b> command!<br />
-<br />
-Continue reading to learn more about Wool Wars.  <br />
-<br />
-<b><span style="font-size: 18px">►</span><span style="font-size: 22px"> <span style="color: rgb(243, 121, 52)">It's Time to Fight</span></span></b><br />
-Wool Wars is a 4v4 PVP gamemode where you need to place your team's color wool in the...<br />
-<br />
-<a href="https://hypixel.net/threads/new-ptl-game-wool-wars.4606663/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>319</slash:comments>
-    </item>
-    <item>
       <title>Update: Microsoft Account Migration Requirement</title>
       <pubDate>Wed, 23 Mar 2022 23:03:48 +0000</pubDate>
       <link>https://hypixel.net/threads/update-microsoft-account-migration-requirement.4677903/</link>
@@ -290,48 +374,6 @@ The time has come to require everyone who wants to play games listed as Competit
 <br />
 <a href="https://hypixel.net/threads/update-microsoft-account-migration-requirement.4677903/" class="link link--internal">Read more</a></div>]]></content:encoded>
       <slash:comments>344</slash:comments>
-    </item>
-    <item>
-      <title>Hypixel now supports Minecraft 1.18</title>
-      <pubDate>Wed, 23 Mar 2022 13:09:45 +0000</pubDate>
-      <link>https://hypixel.net/threads/hypixel-now-supports-minecraft-1-18.4688083/</link>
-      <guid isPermaLink="false">4688083</guid>
-      <author>invalid@example.com (Hypixel Team)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Hypixel Team</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://hypixel.net/attachments/1-18-version-support-png.2822858/"
-			class="bbImage "
-			style=""
-			alt="1-18-version-support.png"
-			title="1-18-version-support.png"
-			width="1048" height="400" loading="lazy" />&#8203;</div>Hey everyone!<br />
-<br />
-Minecraft 1.18 is out! The Hypixel Server has now been updated to support the new version.<br />
-<br />
-As such, at this time, we do support the following versions:<br />
-<b>1.8, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17 and 1.18!</b><br />
-<br />
-If you come across any sort of exploits, bugs, issues, or anything else, please report it to our <a href="https://hypixel.net/forums/server-bug-reports.35/" class="link link--internal">bug report section</a>.<br />
-<br />
-Finally, as always, I'd like to remind everyone that Hypixel <a href="https://hypixel.net/threads/hypixel-optimised-for-1-8-9-best-version-of-minecraft-for-hypixel.1731620/" class="link link--internal">is better played on the 1.8.9 version of Minecraft</a> if...<br />
-<br />
-<a href="https://hypixel.net/threads/hypixel-now-supports-minecraft-1-18.4688083/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>223</slash:comments>
-    </item>
-    <item>
-      <title>Update: Mandatory Microsoft Account Migration</title>
-      <pubDate>Wed, 23 Mar 2022 09:55:49 +0000</pubDate>
-      <link>https://hypixel.net/threads/update-mandatory-microsoft-account-migration.4805155/</link>
-      <guid isPermaLink="false">4805155</guid>
-      <author>invalid@example.com (Fr0z3n)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Fr0z3n</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper">Hello everyone!<br />
-<br />
-Mojang has just released an announcement regarding the migration of your Minecraft account, you can view this <a href="https://www.minecraft.net/en-us/article/last-call-voluntarily-migrate-java-accounts" target="_blank" class="link link--external" rel="nofollow ugc noopener">HERE</a>. Starting on March 10th this year, everyone wanting to play the Java edition of Minecraft will be required to migrate their Minecraft account to a Microsoft account. For those who haven't migrated yet, you can find out more information about migrating on our FAQ thread located <a href="https://hypixel.net/threads/microsoft-account-migration-faq.3547418/" class="link link--internal">HERE</a>. We highly recommend going through the migration process earlier than...<br />
-<br />
-<a href="https://hypixel.net/threads/update-mandatory-microsoft-account-migration.4805155/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>548</slash:comments>
     </item>
     <item>
       <title>Twitter Fan Art Contest - Winners!</title>
@@ -457,29 +499,6 @@ Some changes have been made to improve the forums experience...<br />
       <slash:comments>618</slash:comments>
     </item>
     <item>
-      <title>Duels Update v1.1 - Cosmetics, Sumo, Rating Titles and improvements</title>
-      <pubDate>Sun, 20 Mar 2022 11:43:59 +0000</pubDate>
-      <link>https://hypixel.net/threads/duels-update-v1-1-cosmetics-sumo-rating-titles-and-improvements.1635990/</link>
-      <guid isPermaLink="false">1635990</guid>
-      <author>invalid@example.com (Nitroholic_)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Nitroholic_</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><img src="https://i.imgur.com/3POtF8i.jpg" data-url="https://i.imgur.com/3POtF8i.jpg" class="bbImage " loading="lazy"
-		 style="" width="" height="" />
-
-<br />&#8203;</div>The new v1.1 update has been released for Duels, available to play now in the new Duels Lobby. Read on below for a full list of changes and additions, or play it right now by clicking the Duels Lobby NPC, game menu icon, or using the command <b><i>/lobby duels</i></b>.<br />
-<br />
-<span style="font-size: 26px">▶ What is in this update?</span><br />
-<ul>
-<li data-xf-list-type="ul">100+ new Duels Cosmetics</li>
-<li data-xf-list-type="ul">Coin gain</li>
-<li data-xf-list-type="ul">Sumo Duels and Sumo Tournaments</li>
-<li data-xf-list-type="ul">Rating leaderboards and position titles for UHC and SkyWars modes...</li>
-</ul><br />
-<a href="https://hypixel.net/threads/duels-update-v1-1-cosmetics-sumo-rating-titles-and-improvements.1635990/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>177</slash:comments>
-    </item>
-    <item>
       <title>2021 Roundup - Generate your unique stats on Hypixel</title>
       <pubDate>Sat, 19 Mar 2022 03:47:32 +0000</pubDate>
       <link>https://hypixel.net/threads/2021-roundup-generate-your-unique-stats-on-hypixel.4709352/</link>
@@ -530,28 +549,6 @@ The first Bed...</b><br />
 <br />
 <a href="https://hypixel.net/threads/hypixel-tournaments-bed-wars-4v4v4v4.1875811/" class="link link--internal">Read more</a></div>]]></content:encoded>
       <slash:comments>461</slash:comments>
-    </item>
-    <item>
-      <title>Atlas - Community Based Replay Review System</title>
-      <pubDate>Fri, 18 Mar 2022 16:06:32 +0000</pubDate>
-      <link>https://hypixel.net/threads/atlas-community-based-replay-review-system.3630110/</link>
-      <guid isPermaLink="false">3630110</guid>
-      <author>invalid@example.com (Fr0z3n)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Fr0z3n</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><div style="text-align: center"><b><img src="https://hypixel.net/attachments/atlas-png.2196911/"
-			class="bbImage "
-			style=""
-			alt="atlas.png"
-			title="atlas.png"
-			width="920" height="320" loading="lazy" /></b>&#8203;</div>Hello everyone!<br />
-<br />
-Have you ever wondered how you can help stop players from breaking the server rules beyond using the reporting system? Have you ever thought to yourself that you have a good understanding of what cheating looks like, but weren't sure how you can use that knowledge? Let me introduce you to our brand new community-based replay review system, Atlas. Continue reading for more info!  <br />
-<br />
-Atlas is a replay review system that the community can take...<br />
-<br />
-<a href="https://hypixel.net/threads/atlas-community-based-replay-review-system.3630110/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>1331</slash:comments>
     </item>
   </channel>
 </rss>
@@ -623,10 +620,11 @@ for (let i = 0; i < items.length; i += 1) {
             : val.created
             ? Date.parse(val.created)
             : Date.now(),
-        category: val.category || [],
+        category: val.category ?? [],
         content: val.content && val.content.$text
             ? val.content.$text
             : val['content:encoded'],
+        comments: val['slash:comments'] ?? 0,
         enclosures: val.enclosure
             ? Array.isArray(val.enclosure)
             ? val.enclosure

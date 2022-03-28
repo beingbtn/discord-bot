@@ -27,6 +27,21 @@ export const properties: ClientCommand['properties'] = {
                 description: 'Toggle Developer Mode',
             },
             {
+                name: 'interval',
+                description: 'Set the RSS fetch interval',
+                type: 1,
+                options: [
+                    {
+                        name: 'milliseconds',
+                        type: 4,
+                        description: 'The timeout in milliseconds',
+                        required: true,
+                        minValue: 180000,
+                        maxValue: 3600000,
+                    },
+                ],
+            },
+            {
                 name: 'restrequesttimeout',
                 description: 'Set the request timeout before an abort error is thrown',
                 type: 1,
@@ -67,9 +82,8 @@ export const properties: ClientCommand['properties'] = {
 
 export const execute: ClientCommand['execute'] = async (
     interaction,
-    locale,
 ): Promise<void> => {
-    const text = RegionLocales.locale(locale).commands.config;
+    const text = RegionLocales.locale(interaction.locale).commands.config;
     const replace = RegionLocales.replace;
 
     const payload: WebhookEditMessageOptions = {};
@@ -80,6 +94,8 @@ export const execute: ClientCommand['execute'] = async (
         case 'core': coreCommand();
         break;
         case 'devmode': devModeCommand();
+        break;
+        case 'interval': interval();
         break;
         case 'restrequesttimeout': restRequestTimeoutCommand();
         break;
@@ -124,6 +140,22 @@ export const execute: ClientCommand['execute'] = async (
         Log.interaction(interaction, devModeEmbed.description);
     }
 
+    function interval() {
+        const milliseconds = interaction.options.getInteger('interval', true);
+        client.config.interval = milliseconds;
+
+        const intervalEmbed = new BetterEmbed(interaction)
+            .setColor(Constants.colors.normal)
+            .setTitle(text.retryLimit.title)
+            .setDescription(replace(text.retryLimit.description, {
+                interval: milliseconds,
+            }));
+
+        payload.embeds = [intervalEmbed];
+
+        Log.interaction(interaction, intervalEmbed.description);
+    }
+
     function restRequestTimeoutCommand() {
         const milliseconds = interaction.options.getInteger('milliseconds', true);
         client.config.restRequestTimeout = milliseconds;
@@ -163,6 +195,7 @@ export const execute: ClientCommand['execute'] = async (
             .setDescription(replace(text.view.description, {
                 core: client.config.core === true ? text.on : text.off,
                 devMode: client.config.devMode === true ? text.on : text.off,
+                interval: client.config.interval,
                 restRequestTimeout: client.config.restRequestTimeout,
                 retryLimit: client.config.retryLimit,
             }));

@@ -63,9 +63,8 @@ export const properties: ClientCommand['properties'] = {
 
 export const execute: ClientCommand['execute'] = async (
     interaction,
-    locale,
 ): Promise<void> => {
-    const text = RegionLocales.locale(locale).commands.reload;
+    const text = RegionLocales.locale(interaction.locale).commands.reload;
     const { replace } = RegionLocales;
 
     switch (interaction.options.getSubcommand()) {

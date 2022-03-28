@@ -16,7 +16,7 @@ import { Log } from './utility/Log';
 import fs from 'node:fs/promises';
 import process from 'node:process';
 import { Constants } from './utility/Constants';
-import { Database } from './utility/database';
+import { Core } from './core/core';
 
 process.on('exit', code => {
     Log.log(`Exiting with code ${code}`);
@@ -97,9 +97,8 @@ const client = new Client({
         ...Constants.defaults.request,
     };
     client.cooldowns = new Collection();
-    //client.core = new Core(client);
+    client.core = new Core(client);
     client.customPresence = null;
-    client.database = await Database.init();
     client.events = new Collection();
 
 

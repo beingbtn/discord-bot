@@ -28,9 +28,8 @@ export const properties: ClientCommand['properties'] = {
 
 export const execute: ClientCommand['execute'] = async (
     interaction,
-    locale,
 ): Promise<void> => {
-    const text = RegionLocales.locale(locale).commands.eval;
+    const text = RegionLocales.locale(interaction.locale).commands.eval;
     const { replace } = RegionLocales;
 
     const input = interaction.options.getString('string', true);

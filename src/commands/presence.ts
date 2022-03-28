@@ -101,9 +101,8 @@ export const properties: ClientCommand['properties'] = {
 
 export const execute: ClientCommand['execute'] = async (
     interaction,
-    locale,
 ): Promise<void> => {
-    const text = RegionLocales.locale(locale).commands.presence;
+    const text = RegionLocales.locale(interaction.locale).commands.presence;
     const { replace } = RegionLocales;
 
     const responseEmbed = new BetterEmbed(interaction)

@@ -5,6 +5,7 @@ import {
 
 export const Constants = {
     colors: {
+        hypixel: 0xDCAF4 as ColorResolvable,
         error: 0xAA0000 as ColorResolvable,
         warning: 0xFF5555 as ColorResolvable,
         normal: 0x2f3136 as ColorResolvable, //#7289DA
@@ -16,6 +17,7 @@ export const Constants = {
         config: {
             core: true,
             devMode: false,
+            interval: 300000,
         },
         language: 'en-US',
         performance: {
@@ -23,6 +25,7 @@ export const Constants = {
             uses: 0, //uses
             total: 0,
             fetch: 0,
+            parse: 0,
             check: 0,
             send: 0,
         },
@@ -52,7 +55,7 @@ export const Constants = {
     },
     urls: {
         rss: [
-            'https://hypixel.net/forums/news-and-announcements.4/-/index.rss',
+            'https://hypixel.net/forums/official-hypixel-minecraft-server/-/index.rss',
         ],
     },
 };

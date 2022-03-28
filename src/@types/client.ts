@@ -4,8 +4,7 @@ import type {
     Collection,
     CommandInteraction,
 } from 'discord.js';
-import type { Database } from '../utility/database';
-//import type { Core } from '../core/core';
+import type { Core } from '../core/core';
 
 export interface ClientCommand {
     properties: {
@@ -33,6 +32,7 @@ export interface ClientEvent {
 export interface Config {
     core: boolean,
     devMode: boolean,
+    interval: number,
     restRequestTimeout: number,
     retryLimit: number,
 }
@@ -47,9 +47,8 @@ declare module 'discord.js' {
         commands: Collection<string, ClientCommand>,
         config: Config,
         cooldowns: Collection<string, Collection<string, number>>,
-        //core: Core,
+        core: Core,
         customPresence: PresenceData | null,
-        database: Database,
         events: Collection<string, ClientEvent>,
     }
 }

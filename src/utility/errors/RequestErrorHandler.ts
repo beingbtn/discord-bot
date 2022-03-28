@@ -69,15 +69,13 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
             .addFields(
                 {
                     name: 'Type',
-                    value:
-                        this.error instanceof Error
-                            ? this.error.name
-                            : 'Unknown',
+                    value: this.error instanceof Error
+                        ? this.error.name
+                        : 'Unknown',
                 },
                 {
                     name: 'Resuming In',
-                    value:
-                        this.timeout ??
+                    value: this.timeout ??
                         'Not applicable',
                 },
                 {

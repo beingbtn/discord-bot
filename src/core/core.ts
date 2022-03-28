@@ -8,6 +8,7 @@ import { setTimeout } from 'node:timers/promises';
 import { CoreFormat } from './format';
 import { HTTPError } from '../utility/errors/HTTPError';
 import { RequestErrorHandler } from '../utility/errors/RequestErrorHandler';
+import { CoreDispatch } from './dispatch';
 
 /* eslint-disable no-await-in-loop */
 
@@ -19,8 +20,9 @@ export class Core {
         latest: Performance | null;
         history: Performance[];
     };
-    error: CoreError;
     changes: CoreChanges;
+    dispatch: CoreDispatch;
+    error: CoreError;
     request: CoreRequest;
     uses: number;
 
@@ -31,6 +33,7 @@ export class Core {
             history: [],
         };
         this.changes = new CoreChanges();
+        this.dispatch = new CoreDispatch(this.client);
         this.error = new CoreError();
         this.request = new CoreRequest(this.client);
         this.uses = 0;
@@ -76,29 +79,37 @@ export class Core {
 
             try {
                 const xmlString = await this.request.request(url);
+                performance.fetch = Date.now();
+
                 const rssJSON = CoreFormat.parse(xmlString);
-                const changes = await this.changes.check(rssJSON);
+                performance.parse = Date.now();
+
+                console.log(JSON.stringify(rssJSON));
+
+                const changes = this.changes.check(rssJSON);
+                performance.check = Date.now();
 
                 if (changes.items.length > 0) {
-                    switch (changes.title) {
-                        case 'https://hypixel.net/': {
-
-                        }
-                        break;
-                        //no default
-                    }
+                    await this.dispatch.dispatch(rssJSON);
                 }
+
+                performance.send = Date.now();
 
                 this.updatePerformance(performance);
             } catch (error) {
                 if (error instanceof HTTPError) {
-                    return RequestErrorHandler.init(error, this);
+                    await RequestErrorHandler.init(error, this);
+                    await setTimeout(this.client.config.interval);
+                    return;
                 }
 
-                return ErrorHandler.init(error);
+                this.error.addGeneric();
+                await ErrorHandler.init(error);
+                await setTimeout(this.client.config.interval);
+                return;
             }
 
-            await setTimeout(1000 * 60 * 10);
+            await setTimeout(this.client.config.interval);
         }
     }
 
@@ -106,7 +117,8 @@ export class Core {
         //Turns the ms since the Jan 1st 1970 into relative
         performance.total = performance.send - performance.start;
         performance.send -= performance.check;
-        performance.check -= performance.fetch;
+        performance.check -= performance.parse;
+        performance.parse -= performance.fetch;
         performance.fetch -= performance.start;
 
         this.performance.latest = performance;

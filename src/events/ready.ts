@@ -24,4 +24,6 @@ export const execute: ClientEvent['execute'] = async (client: Client) => {
             await ErrorHandler.init(error);
         }
     }
+
+    await client.core.init();
 };

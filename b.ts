@@ -1,9 +1,314 @@
-const sdss = {"?xml":{"version":"1.0","encoding":"utf-8"},"rss":{"channel":{"title":"Hypixel Server Discussion","description":"Here you can discuss any general topics relating to the Hypixel Network! You can also find some useful information in the pinned threads, which we encourage you to read through.","pubDate":"Thu, 24 Mar 2022 18:46:39 +0000","lastBuildDate":"Thu, 24 Mar 2022 18:46:39 +0000","generator":"Hypixel - Minecraft Server and Maps","link":"https://hypixel.net/","atom:link":{"rel":"self","type":"application/rss+xml","href":"https://hypixel.net/forums/official-hypixel-minecraft-server/index.rss"},"item":[{"title":"5k ap (including legacy)","pubDate":"Thu, 24 Mar 2022 
-18:43:45 +0000","link":"https://hypixel.net/threads/5k-ap-including-legacy.4878201/","guid":{"$text":4878201,"isPermaLink":"false"},"author":"invalid@example.com (ignJellied)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"ignJellied","content:encoded":"<div class=\"bbWrapper\"><img src=\"https://hypixel.net/attachments/1648144096873-png.2940289/\"\n\t\t\tclass=\"bbImage \"\n\t\t\tstyle=\"\"\n\t\t\talt=\"1648144096873.png\"\n\t\t\ttitle=\"1648144096873.png\"\n\t\t\twidth=\"320\" height=\"88\" loading=\"lazy\" />\n        <img src=\"https://hypixel.net/attachments/1648144096873-png.2940289/\"\n\t\t\tclass=\"bbImage \"\n\t\t\tstyle=\"\"\n\t\t\talt=\"1648144096873.png\"\n\t\t\ttitle=\"1648144096873.png\"\n\t\t\twidth=\"320\" height=\"88\" loading=\"lazy\" /><br />\n<br />\ni have 165 legacy ap totaling 
-to 5,005 total achievement points<br />\n<br />\ngg<br />\n<br />\nok bye</div>","slash:comments":3},{"title":"8 years on hypixel","pubDate":"Thu, 24 Mar 2022 18:39:45 +0000","link":"https://hypixel.net/threads/8-years-on-hypixel.4873433/","guid":{"$text":4873433,"isPermaLink":"false"},"author":"invalid@example.com (StevenR8)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"StevenR8","content:encoded":"<div class=\"bbWrapper\"><img src=\"https://hypixel.net/attachments/1647820317579-png.2936926/\"\n\t\t\tclass=\"bbImage \"\n\t\t\tstyle=\"\"\n\t\t\talt=\"1647820317579.png\"\n\t\t\ttitle=\"1647820317579.png\"\n\t\t\twidth=\"413\" height=\"84\" loading=\"lazy\" /><br />\n(Plancke hasn't been working for me the past few months, so I'm using 25karma. Which is why it looks different)<br />\n8 years ago today, I joined hypixel for the first time. I made a lot of memories and grown a lot from being in this community. It's crazy to think I been in this community for so long and yet still not planning on leaving anytime soon. I'm not going to make the thread long as there is nothing for me to say.<br />\n<br />\nHowever hopefully I will be able to complete the goals I...<br />\n<br />\n<a href=\"https://hypixel.net/threads/8-years-on-hypixel.4873433/\" class=\"link link--internal\">Read more</a></div>","slash:comments":47},{"title":"iHaveNoFinals","pubDate":"Thu, 24 Mar 2022 17:37:46 +0000","link":"https://hypixel.net/threads/ihavenofinals.4878159/","guid":{"$text":4878159,"isPermaLink":"false"},"author":"invalid@example.com (oSplash_)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"oSplash_","content:encoded":"<div class=\"bbWrapper\">idk if thats just me but i always see this i have no finals guy saying how much losses and finals deaths he has can someone pls tell me whats the point of this account?</div>","slash:comments":2},{"title":"Kits for Wool Wars","pubDate":"Thu, 24 Mar 2022 17:17:40 +0000","link":"https://hypixel.net/threads/kits-for-wool-wars.4878172/","guid":{"$text":4878172,"isPermaLink":"false"},"author":"invalid@example.com (Skeppley)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"Skeppley","content:encoded":"<div class=\"bbWrapper\">I think you should be able to 
-purchase kits for wool wars, when you click the NPC, you can earn coins from winning games or some power-ups and then be able to purchase kits while waiting for users (as 4 kits are kinda boring to choose from)</div>","slash:comments":0},{"title":"Bring back the old Hypixel maps/make more of them?","pubDate":"Thu, 24 Mar 2022 17:04:29 +0000","link":"https://hypixel.net/threads/bring-back-the-old-hypixel-maps-make-more-of-them.4877186/","guid":{"$text":4877186,"isPermaLink":"false"},"author":"invalid@example.com (TheCreeperKnight)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"TheCreeperKnight","content:encoded":"<div class=\"bbWrapper\">As the title implies, I miss the old Herobrine's mansion and the Wither's Challenge they were a lot of fun and were well made, I think if Hypixel were to start making more/new maps they would be a big hit. Plus with so many new Minecraft versions since they first made the maps I mentioned above, they would have a lot more blocks, mobs and features to work with. Also, the Hypixel devs have a lot more experience now, especially the Skyblock developers. So if they were to start making maps...<br />\n<br />\n<a href=\"https://hypixel.net/threads/bring-back-the-old-hypixel-maps-make-more-of-them.4877186/\" class=\"link link--internal\">Read more</a></div>","slash:comments":4},{"title":"\"Suspicious activity\" perma-ban for moving countries?","pubDate":"Thu, 24 Mar 2022 16:27:46 +0000","link":"https://hypixel.net/threads/suspicious-activity-perma-ban-for-moving-countries.4874395/","guid":{"$text":4874395,"isPermaLink":"false"},"author":"invalid@example.com (LiamJacobs)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"LiamJacobs","content:encoded":"<div class=\"bbWrapper\">I moved countries a few years ago, and (I assume) as a  result my account was perma-banned for \"suspicious activity.\"<br />\n<br />\nI didn't mind at the time, as I wasn't as active on Minecraft, but now that I actually want to play on the server, it's incredibly annoying that IF my appeal is accepted, I have to sit through a two week ban for <i>moving countries</i>.<br />\nThis being a safety blanket as a \"security period\" for me to change passwords does not apply, as my account was not hacked. Furthermore, when...<br />\n<br />\n<a href=\"https://hypixel.net/threads/suspicious-activity-perma-ban-for-moving-countries.4874395/\" class=\"link link--internal\">Read more</a></div>","slash:comments":7},{"title":"Helper Application","pubDate":"Thu, 24 Mar 2022 16:17:26 +0000","link":"https://hypixel.net/threads/helper-application.4868953/","guid":{"$text":4868953,"isPermaLink":"false"},"author":"invalid@example.com (Ace_Killer)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"Ace_Killer","content:encoded":"<div class=\"bbWrapper\">Good morning,  I would like to make a formal application to become a helper/mod on the HyPixel server.<br />\nI have no interest in payment, so happy to do this on a voluntary system.<br />\n<br />\nI originally came here to play many years ago with my son. Since then we have returned over and over and have spent countless days/years playing.<br />\n<br />\nIn all of this time I have seen cheaters and abuse (while uncommon)<br />\n<br />\nI am a grown adult with a house, car kids, full time job (Senior Software Developer) etc and I would...<br />\n<br />\n<a href=\"https://hypixel.net/threads/helper-application.4868953/\" class=\"link link--internal\">Read more</a></div>","slash:comments":12},{"title":"[Guide] The Complete Guide To Hypixel Limbo","pubDate":"Thu, 24 Mar 2022 
-15:56:11 +0000","link":"https://hypixel.net/threads/guide-the-complete-guide-to-hypixel-limbo.4294170/","guid":{"$text":4294170,"isPermaLink":"false"},"author":"invalid@example.com (ForumsAreTrash)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"ForumsAreTrash","content:encoded":"<div class=\"bbWrapper\"><div style=\"text-align: center\"><span style=\"color: 
-rgb(184, 49, 47)\"><span style=\"font-size: 26px\"><u>The Complete Guide To Hypixel Limbo</u></span></span><br />\n<br />\n<span style=\"color: rgb(0, 0, 0)\"><span style=\"font-size: 15px\">The Hypixel limbo also known as the \"afk world\" is your own private server you can do many things in. There are a few rules and laws that dont apply to normal Minecraft worlds and other parts of the server. Just simply building or exploring the limbo world 
-can give you fun for hours.</span></span><br />\n<br />\n<span style=\"color: #000000\">\n\n<div class=\"bbCodeSpoiler\">\n\t<button type=\"button\" class=\"bbCodeSpoiler-button button--longText button\" data-xf-click=\"toggle\" data-xf-init=\"tooltip\" title=\"Click to reveal or hide spoiler\"><span class=\"button-text\">\n\n\t\t<span>Spoiler: <span class=\"bbCodeSpoiler-button-title\">Entrance</span></span>\n\t</span></button>\n\t<div class=\"bbCodeSpoiler-content\">\n\t\t<div class=\"bbCodeBlock bbCodeBlock--spoiler\">\n\t\t\t<div class=\"bbCodeBlock-content\">To enter the limbo world you must  make Hypixel spam the chat. Some common ways of doing this are spamming the same message in all...</div>\n\t\t</div>\n\t</div>\n</div></span>&#8203;</div><br />\n<a href=\"https://hypixel.net/threads/guide-the-complete-guide-to-hypixel-limbo.4294170/\" class=\"link link--internal\">Read more</a></div>","slash:comments":9},{"title":"Logging in....... ---> Disconnected","pubDate":"Thu, 24 Mar 2022 15:15:48 +0000","link":"https://hypixel.net/threads/logging-in-disconnected.4876564/","guid":{"$text":4876564,"isPermaLink":"false"},"author":"invalid@example.com (lune_xd11)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"lune_xd11","content:encoded":"<div class=\"bbWrapper\">I just disconnected while in a player's housing and now i can't join hypixel anymore. I get stuck on the logging in screen then about 10 seconds later, i get disconnected. Friends have the (>Lune_XD joined) but im not on the server. Pls help</div>","slash:comments":2},{"title":"block disappear","pubDate":"Thu, 24 Mar 2022 15:15:24 +0000","link":"https://hypixel.net/threads/block-disappear.4878026/","guid":{"$text":4878026,"isPermaLink":"false"},"author":"invalid@example.com (tiznatz)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"tiznatz","content:encoded":"<div class=\"bbWrapper\">this problem is not 1 or 2 time but it is like ALWAYS. i was practicing godbridging in bedwars bridge practice but then almost all the time my blocks got disappear like WHY??! so this is the quality of hypixel?</div>","slash:comments":4},{"title":"disconnection issue","pubDate":"Thu, 24 Mar 2022 15:11:24 +0000","link":"https://hypixel.net/threads/disconnection-issue.4878050/","guid":{"$text":4878050,"isPermaLink":"false"},"author":"invalid@example.com (Hypix_gamer)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"Hypix_gamer","content:encoded":"<div class=\"bbWrapper\">when i try to join server it kick me every time show \"disconnected\" anyone help me about this plz<br />\n<br />\n<br />\n<br />\n\n\n<div class=\"bbMediaWrapper\">\n\t<blockquote class=\"imgur-embed-pub\" lang=\"en\" data-id=\"TqDY5uq\">\n\t\t<a href=\"https://imgur.com/TqDY5uq\" rel=\"external\" target=\"_blank\">https://imgur.com/TqDY5uq</a>\n\t</blockquote>\n</div></div>","slash:comments":0},{"title":"NPC","pubDate":"Thu, 24 Mar 2022 15:07:34 +0000","link":"https://hypixel.net/threads/npc.4878020/","guid":{"$text":4878020,"isPermaLink":"false"},"author":"invalid@example.com (vunam2538)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"vunam2538","content:encoded":"<div class=\"bbWrapper\"><img src=\"https://hypixel.net/attachments/1648132676442-png.2940168/\"\n\t\t\tclass=\"bbImage \"\n\t\t\tstyle=\"\"\n\t\t\talt=\"1648132676442.png\"\n\t\t\ttitle=\"1648132676442.png\"\n\t\t\twidth=\"523\" height=\"417\" loading=\"lazy\" /></div>","slash:comments":2},{"title":"Fourm MVP+ Banner has different color +","pubDate":"Thu, 24 Mar 2022 14:48:32 +0000","link":"https://hypixel.net/threads/fourm-mvp-banner-has-different-color.4877941/","guid":{"$text":4877941,"isPermaLink":"false"},"author":"invalid@example.com (Skeppley)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"Skeppley","content:encoded":"<div class=\"bbWrapper\">In the fourm, all MVP + and ++ frames are just 
-light blue (gold for mvp++). and I think if your in-game + color would also be applied to the fourms</div>","slash:comments":3},{"title":"disconnected","pubDate":"Thu, 24 Mar 2022 14:36:43 +0000","link":"https://hypixel.net/threads/disconnected.4878005/","guid":{"$text":4878005,"isPermaLink":"false"},"author":"invalid@example.com (laoqiu55)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"laoqiu55","content:encoded":"<div class=\"bbWrapper\">Why can't I get into the server? It keeps showing disconnected.But other accounts can go in.I need help.</div>","slash:comments":2},{"title":"People using the word non. Stop","pubDate":"Thu, 24 Mar 2022 13:50:10 +0000","link":"https://hypixel.net/threads/people-using-the-word-non-stop.4877126/","guid":{"$text":4877126,"isPermaLink":"false"},"author":"invalid@example.com (AjmoAlpha)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"AjmoAlpha","content:encoded":"<div class=\"bbWrapper\">The Word \"non\", from what I understand, is someone without at rank. Why is this offensive? Why do people call others \"nons\". They EITHER do not have the money to buy a rank so you guys out there with 15 grand gaming pc s and mvp++ for 
-ever, stop taking advantage of your financial postion in a toxic way. I have nothing against ranks and people buying them, but when people buy a rank and then call others \"nons\" I really think that is just an unnecessary comment and, in the end, it is almost...<br />\n<br />\n<a href=\"https://hypixel.net/threads/people-using-the-word-non-stop.4877126/\" class=\"link link--internal\">Read more</a></div>","slash:comments":37},{"title":"Can you join alpha with VIP rank?","pubDate":"Thu, 24 Mar 2022 13:33:16 +0000","link":"https://hypixel.net/threads/can-you-join-alpha-with-vip-rank.4836281/","guid":{"$text":4836281,"isPermaLink":"false"},"author":"invalid@example.com (MCYolovic)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"MCYolovic","content:encoded":"<div class=\"bbWrapper\">Title</div>","slash:comments":3},{"title":"[Serious Question] How much can YT ranks bypass Watchdog?","pubDate":"Thu, 24 Mar 2022 13:28:43 +0000","link":"https://hypixel.net/threads/serious-question-how-much-can-yt-ranks-bypass-watchdog.4877138/","guid":{"$text":4877138,"isPermaLink":"false"},"author":"invalid@example.com (Sarah-)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"Sarah-","content:encoded":"<div class=\"bbWrapper\">Hm? Still like full fly or do they get watchdog banned too now</div>","slash:comments":4},{"title":"Is getting 10k AP still possible","pubDate":"Thu, 24 Mar 2022 12:39:00 +0000","link":"https://hypixel.net/threads/is-getting-10k-ap-still-possible.4876864/","guid":{"$text":4876864,"isPermaLink":"false"},"author":"invalid@example.com (seifeddin_)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"seifeddin_","content:encoded":"<div class=\"bbWrapper\">Currently at 6k achievement points want to make it to 10k and i already did all the easy ones and the ones on skyblock</div>","slash:comments":12},{"title":"how to change your country","pubDate":"Thu, 24 Mar 2022 12:32:40 +0000","link":"https://hypixel.net/threads/how-to-change-your-country.4877654/","guid":{"$text":4877654,"isPermaLink":"false"},"author":"invalid@example.com (KingofPVP440)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"KingofPVP440","content:encoded":"<div class=\"bbWrapper\">Just asking how you can change your country in the hypixel store</div>","slash:comments":24},{"title":"Entbannungs Antrag","pubDate":"Thu, 24 Mar 2022 12:10:59 +0000","link":"https://hypixel.net/threads/entbannungs-antrag.3935954/","guid":{"$text":3935954,"isPermaLink":"false"},"author":"invalid@example.com (BlackCat1)","category":{"$text":"Hypixel Server Discussion","domain":"https://hypixel.net/forums/official-hypixel-minecraft-server/"},"dc:creator":"BlackCat1","content:encoded":"<div class=\"bbWrapper\">ich bin schon lange Gebannt kann jemand mich bitte bitte entbannen? Ingame: feschtec1 Pleace</div>","slash:comments":11}]},"version":"2.0","xmlns:atom":"http://www.w3.org/2005/Atom","xmlns:dc":"http://purl.org/dc/elements/1.1/","xmlns:content":"http://purl.org/rss/1.0/modules/content/","xmlns:slash":"http://purl.org/rss/1.0/modules/slash/"}}
+const y = {
+    title: 'Hypixel Server Discussion',
+    description:
+        'Here you can discuss any general topics relating to the Hypixel Network! You can also find some useful information in the pinned threads, which we encourage you to read through.',
+    link: 'https://hypixel.net/',
+    image: '',
+    category: [],
+    items: [
+        {
+            title: 'Why Hypixel Is Successful',
+            link: 'https://hypixel.net/threads/why-hypixel-is-successful.4882826/',
+            author: 'FloppityFloppify',
+            published: 1648423765000,
+            created: 1648423765000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                'We as a species like variety and change. Hypixel is not only successful because of their collaborations with the community, but because they have variety. New games and game updates are vital for the well being of Hypixel because expectations are already set very high. In order to stay the most popular Minecraft server and in order to keep people coming back you need to have at least 20% of non-regular players logging in every couple of months or so. This can be explicitly observed through...\n\n[Read more](https://hypixel.net/threads/why-hypixel-is-successful.4882826/)',
+            attachments: [],
+        },
+        {
+            title: 'How to give a rank?',
+            link: 'https://hypixel.net/threads/how-to-give-a-rank.4879727/',
+            author: 'Krafy',
+            published: 1648422090000,
+            created: 1648422090000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                'What do you need to give ranks? I saw that you need to buy gold there, and if you buy gold, then how many times can you give a rank?',
+            attachments: [],
+        },
+        {
+            title: 'level 91',
+            link: 'https://hypixel.net/threads/level-91.4882641/',
+            author: 'awesome1184',
+            published: 1648421768000,
+            created: 1648421768000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content: 'so close to 100',
+            attachments: [],
+        },
+        {
+            title: 'Bedwars Stars',
+            link: 'https://hypixel.net/threads/bedwars-stars.4882614/',
+            author: 'Yatomon',
+            published: 1648421752000,
+            created: 1648421752000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                'I\'m trying to find ways to grind **stars** fast.\nAny tips you guys have?\n\nCurrent Stars : 30\n( ![:p](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 "Stick Out Tongue    :p") )',
+            attachments: [],
+        },
+        {
+            title: '8 years on hypixel',
+            link: 'https://hypixel.net/threads/8-years-on-hypixel.4873433/',
+            author: 'StevenR8',
+            published: 1648421195000,
+            created: 1648421195000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                "![1647820317579.png](https://hypixel.net/attachments/1647820317579-png.2936926/ \"1647820317579.png\")\n(Plancke hasn't been working for me the past few months, so I'm using 25karma. Which is why it looks different)\n8 years ago today, I joined hypixel for the first time. I made a lot of memories and grown a lot from being in this community. It's crazy to think I been in this community for so long and yet still not planning on leaving anytime soon. I'm not going to make the thread long as there is nothing for me to say.\n\nHowever hopefully I will be able to complete the goals I...\n\n[Read more](https://hypixel.net/threads/8-years-on-hypixel.4873433/)",
+            attachments: [
+                'https://hypixel.net/attachments/1647820317579-png.2936926/',
+            ],
+        },
+        {
+            title: 'A sad (but unsurprising) result - (Reddit rip)',
+            link: 'https://hypixel.net/threads/a-sad-but-unsurprising-result-reddit-rip.4882779/',
+            author: 'SomeKindaELF',
+            published: 1648421124000,
+            created: 1648421124000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                '**Fellow HYPIXEL players**​\n\n\nI was close to my 40 skill av, Hundreds of hours, 1.6b Networth \\[_Skyblock_\\]\n\n2 years ago I started a stream up as we lost someone to cancer, very young, and I wanted to do something cool... So i grew my hair and raised funds simultaneously... It was awesome!\n\nI recently decided to transition all my content over to Hypixel (specifically SKYBLOCK but eventually wanted to play other minigames) I grew a SKYBLOCK side to the community FAST who were...\n\n[Read more](https://hypixel.net/threads/a-sad-but-unsurprising-result-reddit-rip.4882779/)',
+            attachments: [],
+        },
+        {
+            title: 'Are these mods allowed?',
+            link: 'https://hypixel.net/threads/are-these-mods-allowed.4882455/',
+            author: 'StereoMadnessss',
+            published: 1648418241000,
+            created: 1648418241000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                'So I have made a list of mods for 1.18.2 meant for sodium to make up the fact that optifine is slower and the fact that I have 2013 specs. Sodium is better in my opinion but recently I have been on the fence about these mods. FastChest makes chests render as normal blocks which removes the opening animation, BetterF3 which allows you to customize the F3 menu to your liking and finally, Raised which fixes an annoying bug where the hotbar is cut off by one pixel and as such raises it to fix...\n\n[Read more](https://hypixel.net/threads/are-these-mods-allowed.4882455/)',
+            attachments: [],
+        },
+        {
+            title: '10,000 AP (Without Legacy)',
+            link: 'https://hypixel.net/threads/10-000-ap-without-legacy.4882564/',
+            author: 'spacemansub',
+            published: 1648417642000,
+            created: 1648417642000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                'Not much, but I hit **10,000** Achievement Points!\n\n![screenshot.png](https://hypixel.net/attachments/screenshot-png.2943266/ "screenshot.png")\n\n[**https://plancke.io/hypixel/player/stats/subil**](https://plancke.io/hypixel/player/stats/subil)',
+            attachments: [
+                'https://hypixel.net/attachments/screenshot-png.2943266/',
+            ],
+        },
+        {
+            title: 'My journey to Forum Nerd',
+            link: 'https://hypixel.net/threads/my-journey-to-forum-nerd.4878987/',
+            author: 'ChocolateBlocks',
+            published: 1648417130000,
+            created: 1648417130000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                "Beginnings​\n\n\nI started the forums as some random non, looking for answers about Skyblock or something else. I don't quite remember what I was looking for, but eventually, I registered and logged into my account. From there on, I mostly neglected the Forums.\n\nIn 2020, I began to use the Hypixel forum more and more. I was really dumb, when I look back into my old posts, they give me nostalgia for how things were so simple and how I was just trying to have fun. Most of my posts were...\n\n[Read more](https://hypixel.net/threads/my-journey-to-forum-nerd.4878987/)",
+            attachments: [],
+        },
+        {
+            title: "How to eliminate a large portion of hypixel's hackers: a guide",
+            link: 'https://hypixel.net/threads/how-to-eliminate-a-large-portion-of-hypixels-hackers-a-guide.4882271/',
+            author: 'adjective_noun',
+            published: 1648414492000,
+            created: 1648414492000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                '1\\. Have staff spectate the top 5% (gold division) of a random skyblock netherwart contest every day. More than 80% of the time all of them are nukers. This will remove a lot of macroers from skyblock fast.\n2\\. Have staff spectate the top 50 sumo duels players every day. Maybe even the top 100.\n3\\. Have staff spectate mega walls (5 minutes in each 40 minute game will be enough).\n4\\. On their downtime, staff should check popular mithril mining areas in skyblock. It is very likely there will be...\n\n[Read more](https://hypixel.net/threads/how-to-eliminate-a-large-portion-of-hypixels-hackers-a-guide.4882271/)',
+            attachments: [],
+        },
+        {
+            title: '[Forum Battle! - gb81 vs Centranos, who will reach 10k positives first? | 2nd to 100,000 posts!] Top Forum Statistics! [Daily Update]',
+            link: 'https://hypixel.net/threads/forum-battle-gb81-vs-centranos-who-will-reach-10k-positives-first-2nd-to-100-000-posts-top-forum-statistics-daily-update.2287428/',
+            author: 'epicercaner',
+            published: 1648408778000,
+            created: 1648408778000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                "this thread is based on [@MicrosoftWindows](https://hypixel.net/members/1606143/)'s post on every forum leaderboard. You can check it out [here](https://hypixel.net/threads/thread-of-fame-every-leaderboard-about-forums.2014337/#post-15169444).\n\n* * *\n\n### \n\nIndex\n\n1.  [Top Poster List](#POSTER)\n2.  [Top Positive Ratings List](#POSITIVE)\n3.  [Top Replied Threads List (<20k)](#REPLYnew)\n4.  [Top Replied Threads List (Legacy)](#REPLYold)\n5.  [Auto Locked Threads Hall of Fame](#HOF)\n6.  [Overall Forum Statistics](#OVERALL)\n7.  [Forum Battles](#BATTLE)\n8.  [Top 10 Watchlist](#WATCH)\n9.  [Forum Milestone](#MILESTONE)\n10.  [Last Update Time](#TIME)\n\n...\n\n[Read more](https://hypixel.net/threads/forum-battle-gb81-vs-centranos-who-will-reach-10k-positives-first-2nd-to-100-000-posts-top-forum-statistics-daily-update.2287428/)",
+            attachments: [],
+        },
+        {
+            title: 'People using the word non. Stop',
+            link: 'https://hypixel.net/threads/people-using-the-word-non-stop.4877126/',
+            author: 'AjmoAlpha',
+            published: 1648405397000,
+            created: 1648405397000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                'The Word "non", from what I understand, is someone without at rank. Why is this offensive? Why do people call others "nons". They EITHER do not have the money to buy a rank so you guys out there with 15 grand gaming pc s and mvp++ for ever, stop taking advantage of your financial postion in a toxic way. I have nothing against ranks and people buying them, but when people buy a rank and then call others "nons" I really think that is just an unnecessary comment and, in the end, it is almost...\n\n[Read more](https://hypixel.net/threads/people-using-the-word-non-stop.4877126/)',
+            attachments: [],
+        },
+        {
+            title: 'is there any low latency ip provided by hypixel officially?',
+            link: 'https://hypixel.net/threads/is-there-any-low-latency-ip-provided-by-hypixel-officially.4881920/',
+            author: 'WhoIsEthanol',
+            published: 1648404627000,
+            created: 1648404627000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                "im living in China recently and i've been banned maybe for vpn usage just now, so i wanna ask if there's any low latency ip i can use? i dont really trust other websites so if there IS any ip hypixel officially provides? and if there's not where can i get a safe one?",
+            attachments: [],
+        },
+        {
+            title: "Today I decided to figure out how much money I've spent on Hypixel",
+            link: 'https://hypixel.net/threads/today-i-decided-to-figure-out-how-much-money-ive-spent-on-hypixel.4870434/',
+            author: 'vaxx',
+            published: 1648401307000,
+            created: 1648401307000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                "Today I made the _slightly_ regretful decision to add up all of the purchases I've ever made on Hypixel\\*\n\\* Not actually _all_ of the purchases. PayPal only records transactions within the last 3 years, so the total will only be from the last 3 years.\n\n\n\nTo start off this post, I just want to say this: I have never thought about the amount of money I've spent on Hypixel before today. I mean, I knew that it was obviously a fair amount, since, you know, I've been...\n\n[Read more](https://hypixel.net/threads/today-i-decided-to-figure-out-how-much-money-ive-spent-on-hypixel.4870434/)",
+            attachments: [],
+        },
+        {
+            title: 'Someone says they are going to chargeback me, how do I prevent this???',
+            link: 'https://hypixel.net/threads/someone-says-they-are-going-to-chargeback-me-how-do-i-prevent-this.4882466/',
+            author: 'zzzjockzzz',
+            published: 1648401229000,
+            created: 1648401229000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content: 'title',
+            attachments: [],
+        },
+        {
+            title: 'chargeback doubts',
+            link: 'https://hypixel.net/threads/chargeback-doubts.4882447/',
+            author: 'Khelpixel',
+            published: 1648399638000,
+            created: 1648399638000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                'imagine if someone purchased rank or any pet or any booster for me from the hypixel store ( without me knowing ) , and then charges back .\n( this dude can be any some random guy who is purchasing this without and has no relation with me )\n\nwill i be in trouble ? if yes then how i can secure myself , since i cannot stop someone from using my name in hypixel store .\nsorry for poor english',
+            attachments: [],
+        },
+        {
+            title: 'rant about not being able to join server rn here',
+            link: 'https://hypixel.net/threads/rant-about-not-being-able-to-join-server-rn-here.4882412/',
+            author: 'BazaarTryhard',
+            published: 1648398197000,
+            created: 1648398197000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content: 'title',
+            attachments: [],
+        },
+        {
+            title: '10k fish!!',
+            link: 'https://hypixel.net/threads/10k-fish.4881670/',
+            author: '5Isa',
+            published: 1648392328000,
+            created: 1648392328000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                'Hello bonjour! just to say that I’m glad I got 10,000 fish. ![:hypixel_big_grin:](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 "Hypixel Big Grin    :hypixel_big_grin:")',
+            attachments: [],
+        },
+        {
+            title: 'There should be another AP or Questing reward besides Black ++.',
+            link: 'https://hypixel.net/threads/there-should-be-another-ap-or-questing-reward-besides-black.4882184/',
+            author: '_345',
+            published: 1648391336000,
+            created: 1648391336000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                "Nowadays, every sweat and their mother with 3,000 AP points boosts their way to Black ++. Now, I'm happy that these people are supporting the server, but it demotivates a lot of Questers / AP hunters, or atleast it does to me and a couple others I've talked to.\n\nReason being is that when you get black ++ it's so common now that it isn't really special when you grind hundreds of hours into it.\n\nI know there's rewards like the totem pole, amd maybe some pets I don't know about, but I wish...\n\n[Read more](https://hypixel.net/threads/there-should-be-another-ap-or-questing-reward-besides-black.4882184/)",
+            attachments: [],
+        },
+        {
+            title: 'I got hacked but the hacker gave me his information',
+            link: 'https://hypixel.net/threads/i-got-hacked-but-the-hacker-gave-me-his-information.4882208/',
+            author: 'Kallyc',
+            published: 1648388004000,
+            created: 1648388004000,
+            category: {
+                $text: 'Hypixel Server Discussion',
+                domain: 'https://hypixel.net/forums/official-hypixel-minecraft-server/',
+            },
+            comments: 0,
+            content:
+                'I got hacked by some guy who was offering a mod for sb flipping and just wanted to report it cause he chose to write his info down on some signs on my coop\n![1648387369766.png](https://hypixel.net/attachments/1648387369766-png.2943097/ "1648387369766.png")![1648387381601.png](https://hypixel.net/attachments/1648387381601-png.2943098/ "1648387381601.png")',
+            attachments: [
+                'https://hypixel.net/attachments/1648387369766-png.2943097/',
+                'https://hypixel.net/attachments/1648387381601-png.2943098/',
+            ],
+        },
+    ],
+};

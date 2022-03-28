@@ -1,47 +1,44 @@
 import type { rssJSON } from './format';
-import { Database } from '../utility/database';
+import { Collection } from 'discord.js';
 
 export class CoreChanges {
-    links: string[];
+    category: Collection<string, string[]>;
 
     constructor() {
-        this.links = [];
+        this.category = new Collection();
     }
 
-    async init() {
-        const links = await new Database().instance
-            .collection('posts')
-            .find({
-                'links.0': { $exists: true },
-            })
-            .limit(1)
-            .toArray();
-
-        this.links = links as unknown as string[];
+    get(data: rssJSON) {
+        return this.category.ensure(data.title, () => []);
     }
 
-    async check(data: rssJSON) {
-        const newItems: rssJSON['items'] = [];
+    set(data: rssJSON, links: string[]) {
+        this.category.set(data.title, links);
+    }
 
-        for (const item of data.items) {
-            if (this.links.includes(item.link)) {
+    check(data: rssJSON): rssJSON {
+        const potentialNew = data.items.filter(item => item.comments < 50);
+
+        const base = Object.assign(data, { items: [] });
+
+        if (potentialNew.length === 0) return base;
+
+        const knownLinks = this.get(data);
+
+        const newItems = [];
+
+        for (const item of potentialNew) {
+            if (!knownLinks.includes(item.link)) {
                 newItems.push(item);
             }
         }
 
-        if (newItems.length > 0) {
-            await new Database().instance
-                .collection('posts')
-                .updateOne(
-                    { id: 'links' },
-                    {
-                        $set: {
-                            links: this.links,
-                        },
-                    },
-                );
-        }
+        if (newItems.length === 0) return base;
 
-        return Object.assign(data, newItems);
+        const newLinks = newItems.map(item => item.link);
+
+        this.set(data, [...knownLinks, ...newLinks]);
+
+        return Object.assign(base, { items: newItems });
     }
 }

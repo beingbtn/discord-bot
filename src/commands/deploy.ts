@@ -16,7 +16,7 @@ export const properties: ClientCommand['properties'] = {
     ownerOnly: true,
     structure: {
         name: 'deploy',
-        description: 'Displays helpful information and available commands',
+        description: 'Deploy commands',
         options: [
             {
                 name: 'scope',
@@ -70,9 +70,8 @@ export const properties: ClientCommand['properties'] = {
 
 export const execute: ClientCommand['execute'] = async (
     interaction,
-    locale,
 ): Promise<void> => {
-    const text = RegionLocales.locale(locale).commands.deploy;
+    const text = RegionLocales.locale(interaction.locale).commands.deploy;
 
     const commandFiles = (await fs.readdir(__dirname)).filter(file =>
         file.endsWith('.ts'),

@@ -16,6 +16,7 @@ export type rssJSON = {
         published: number,
         created: number,
         content: string,
+        comments: number,
         attachments: string[];
     }[];
 }
@@ -51,17 +52,7 @@ export class CoreFormat {
                 ? channel['itunes:image'].href
                 : '',
             category: channel.category || [],
-            items: [] as {
-                id: unknown,
-                title: string,
-                description: string | undefined,
-                link: string,
-                author: string,
-                published: number,
-                created: number,
-                content: string,
-                attachments: string[];
-            }[],
+            items: [] as rssJSON['items'],
         };
 
         let items = channel.item || channel.entry;
@@ -99,7 +90,8 @@ export class CoreFormat {
                     : val.created
                     ? Date.parse(val.created)
                     : Date.now(),
-                category: val.category || [],
+                category: val.category ?? [],
+                comments: channel['slash:comments'] ?? 0,
                 content: val.content && val.content.$text
                     ? val.content.$text
                     : val['content:encoded'],

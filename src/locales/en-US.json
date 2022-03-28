@@ -1,15 +1,5 @@
 {
     "commands": {
-        "accessdb": {
-            "decrypted": {
-                "title": "Decrypted",
-                "description": "Database decrypted, encrypting in {{ timeout }}ms."
-            },
-            "encrypted": {
-                "title": "Encrypted",
-                "description": "Database encrypted."
-            }
-        },
         "api": {
             "api": {
                 "yes": "Yes",
@@ -22,65 +12,26 @@
                     "name": "Resuming In",
                     "value": "{{ time }}"
                 },
-                "rateLimit": {
-                    "name": "Global Rate Limit",
-                    "value": "{{ state }}"
-                },
                 "lastMinute": {
                     "name": "Last Minute Statistic",
-                    "value": "Aborts: {{ abort }}\nGeneric Errors: {{ generic }}\nHTTP: {{ http }}\nRate Limit Hits: {{ rateLimit }}"
+                    "value": "Aborts: {{ abort }}\nGeneric Errors: {{ generic }}\nHTTP: {{ http }}"
                 },
                 "nextTimeouts": {
                     "name": "Next Timeout Lengths",
-                    "value": "May not be accurate\nAbort Errors: {{ abort }}\nGeneric Errors: {{ generic }}\nHTTP Errors: {{ http }}\nRate Limit Errors: {{ rateLimit }}"
+                    "value": "May not be accurate\nAbort Errors: {{ abort }}\nGeneric Errors: {{ generic }}\nHTTP Errors: {{ http }}"
                 },
                 "apiKey": {
                     "name": "API Key",
-                    "value": "Dedicated Queries: {{ queries }} or {{ percentage }}\nInstance Queries: {{ uses }}"
+                    "value": "Instance Queries: {{ uses }}"
                 }
             },
             "set": {
                 "title": "Updated Value",
-                "description": "<HypixelErrors>.{{ category }}.{{ type }} is now {{ value }}."
+                "description": "<CoreErrors>.{{ category }}.{{ type }} is now {{ value }}."
             },
             "call": {
                 "title": "Executed!",
-                "description": "Executed <HypixelErrors>.{{ method }}."
-            }
-        },
-        "channel": {
-            "dms": "DMs",
-            "botMissingPermission": {
-                "title": "Missing Permission",
-                "description": "This bot is unable to access the channel you selected. You can either grant the bot elevated server permissions or select a different channel the bot can access."
-            },
-            "userMissingPermission": {
-                "title": "Missing Permission",
-                "description": "You must have the **Manage Channel(s)** or **Manage Webhook(s)** permission to use this command. Therefore, you are advised to use this bot in a server that you own or share with close friends.\n\nShould you decide to use a different server, all your settings will be synced and saved globally; settings are not tied to servers.\n\nFor community owners, an option to whitelist or create channels might be added soon™. In the meantime, the above permission(s) can either be given server-wide or given through a channel's advanced permissions."
-            },
-            "defender": {
-                "alreadySet": {
-                    "title": "Already Set",
-                    "description": "Defender module alerts are already set to {{ channel }}!"
-                },
-                "set": {
-                    "title": "Channel Set",
-                    "description": "Defender module alerts will now be sent to {{ channel }}!"
-                },
-                "remove": {
-                    "title": "Channel Removed",
-                    "description": "Defender module alerts will now be sent via DMs!"
-                }
-            },
-            "friends": {
-                "alreadySet": {
-                    "title": "Already Set",
-                    "description": "Friends module notifications are already set to {{ channel }}!"
-                },
-                "set": {
-                    "title": "Channel Set",
-                    "description": "Friends module notifications will now be sent to {{ channel }}!"
-                }
+                "description": "Executed <CoreErrors>.{{ method }}."
             }
         },
         "config": {
@@ -94,6 +45,10 @@
                 "title": "Developer Mode Updated",
                 "description": "Developer Mode is now {{ state }}!"
             },
+            "interval": {
+                "title": "Interval Updated",
+                "description": "The interval is now {{ milliseconds }}!"
+            },
             "restRequestTimeout": {
                 "title": "Rest Request Timeout Updated",
                 "description": "The rest request timeout is now {{ milliseconds }}!"
@@ -104,47 +59,7 @@
             },
             "view": {
                 "title": "Current Configuration",
-                "description": "Blocked Guilds: {{ blockedGuilds }}\nBlocked Users: {{ blockedUsers }}\nCore: {{ core }}\nDeveloper Mode: {{ devMode }}\nKey Percentage {{ keyPercentage }}%\nRest Request Timeout: {{ restRequestTimeout }}ms\nRetry Limit: {{ retryLimit }}"
-            }
-        },
-        "data": {
-            "delete": {
-                "confirm": {
-                    "title": "Confirmation",
-                    "description": "Are you absolutely sure that you want to delete your data? This is irreversible. Please confirm with the buttons below.\n\nThis deletion will delete everything shown in **/data view all**. Historic or relevant data like guild IDs, user IDs, usernames, errors, and similar may remain in logs, blacklists, or similar. Contact Attituding for a proper data wipe or more information."
-                },
-                "deleted": {
-                    "title": "Deleted",
-                    "description": "Your data has been deleted."
-                },
-                "aborted": {
-                    "title": "Aborted",
-                    "description": "Deletion aborted."
-                },
-                "yesButton": "Yes",
-                "noButton": "No"
-            },
-            "history": {
-                "embed": {
-                    "title": "History",
-                    "description": "• Showing {{ start }} to {{ end }} out of {{ total }}\n• Saves up to {{ max }} events"
-                },
-                "null": "None",
-                "keys": {
-                    "firstLogin": "First Login: ",
-                    "lastLogin": "Last Login: ",
-                    "lastLogout": "Last Logout: ",
-                    "version": "Version: ",
-                    "language": "Language: ",
-                    "lastClaimedReward": "Last Reward Claimed: ",
-                    "rewardScore": "Daily Rewards Streak: ",
-                    "rewardHighScore": "Best Daily Reward Streak: ",
-                    "totalDailyRewards": "Total Daily Rewards: ",
-                    "totalRewards": "Total Rewards: ",
-                    "gameType": "Game Type: ",
-                    "gameMode": "Mode: ",
-                    "gameMap": "Map: "
-                }
+                "description": "Core: {{ core }}\nDeveloper Mode: {{ devMode }}\nInterval: {{ interval }}%\nRest Request Timeout: {{ restRequestTimeout }}ms\nRetry Limit: {{ retryLimit }}"
             }
         },
         "deploy": {
@@ -248,469 +163,11 @@
                 "description": "Your language override has been changed to **{{ locale }}**!"
             }
         },
-        "modules": {
-            "defender": {
-                "title": "Defender Module",
-                "description": "The replacement for HyGuard - get notified on logins, logouts, version changes, and more.",
-                "menuPlaceholder": "Defender Module Settings",
-                "missingConfigField": {
-                    "name": "Missing Configuration",
-                    "value": "You need to configure the following settings before enabling the Defender module: {{ missingRequirements }}. Click on the menu below, select the option(s), and configure it."
-                },
-                "menu": {
-                    "toggle": {
-                        "label": "Toggle",
-                        "description": "Toggle whether this module is active",
-                        "longDescription": "Enable or disable this module.",
-                        "button": {
-                            "enable": "Enable",
-                            "disable": "Disable"
-                        }
-                    },
-                    "alerts": {
-                        "label": "Alerts",
-                        "description": "Select alerts to receive for the defender module",
-                        "longDescription": "Toggle alerts for the defender module. You can individually toggle each type of notification.",
-                        "select": {
-                            "placeholder": "Select your alerts",
-                            "options": [
-                                {
-                                    "label": "Login",
-                                    "description": "Toggle login alerts"
-                                },
-                                {
-                                    "label": "Logout",
-                                    "description": "Toggle logout alerts"
-                                },
-                                {
-                                    "label": "Version",
-                                    "description": "Toggle version alerts"
-                                },
-                                {
-                                    "label": "Game Type",
-                                    "description": "Toggle game type alerts"
-                                },
-                                {
-                                    "label": "Language",
-                                    "description": "Toggle language alerts"
-                                }
-                            ]
-                        }
-                    },
-                    "channel": {
-                        "label": "Channel",
-                        "description": "Set a channel to send alerts to",
-                        "longDescription": "Set a channel to send alerts to. Due to limitations, you need to set a channel with **/channel**. You can also choose to ignore this setting; alerts will be sent via Direct Messages instead.",
-                        "select": {
-                            "placeholder": "Select a channel",
-                            "options": [
-                                {
-                                    "label": "Disabled",
-                                    "description": "Disabled"
-                                }
-                            ]
-                        }
-                    },
-                    "gameTypes": {
-                        "label": "Blacklisted Game Type(s)",
-                        "description": "Select blacklisted game type(s)",
-                        "longDescription": "Select blacklisted game type(s). If the bot detects your account playing these games, you will be notified.",
-                        "select": {
-                            "placeholder": "None",
-                            "options": [
-                                {
-                                    "label": "Arcade"
-                                },
-                                {
-                                    "label": "Arena"
-                                },
-                                {
-                                    "label": "Bed Wars"
-                                },
-                                {
-                                    "label": "Blitz Survival Games"
-                                },
-                                {
-                                    "label": "Build Battle"
-                                },
-                                {
-                                    "label": "Cops and Crims"
-                                },
-                                {
-                                    "label": "Duels"
-                                },
-                                {
-                                    "label": "Housing"
-                                },
-                                {
-                                    "label": "Mega Walls"
-                                },
-                                {
-                                    "label": "Murder Mystery"
-                                },
-                                {
-                                    "label": "Paintball"
-                                },
-                                {
-                                    "label": "Pit"
-                                },
-                                {
-                                    "label": "Prototype"
-                                },
-                                {
-                                    "label": "Quake"
-                                },
-                                {
-                                    "label": "SkyBlock"
-                                },
-                                {
-                                    "label": "SkyWars"
-                                },
-                                {
-                                    "label": "Smash Heroes"
-                                },
-                                {
-                                    "label": "SMP"
-                                },
-                                {
-                                    "label": "Speed UHC"
-                                },
-                                {
-                                    "label": "Walls"
-                                },
-                                {
-                                    "label": "TNT Games"
-                                },
-                                {
-                                    "label": "Turbo Kart Racers"
-                                },
-                                {
-                                    "label": "VampireZ"
-                                },
-                                {
-                                    "label": "UHC Champions"
-                                },
-                                {
-                                    "label": "Warlords"
-                                }
-                            ]
-                        }
-                    },
-                    "languages": {
-                        "label": "Whitelisted Language(s)",
-                        "description": "Select whitelisted languages(s)",
-                        "longDescription": "Select whitelisted version(s) for use on Hypixel. If the bot detects you switching to a whitelisted language, it will not alert or notify you. Select none to get a notification on every language change.",
-                        "select": {
-                            "placeholder": "None",
-                            "options": [
-                                {
-                                    "label": "简体中文 (Chinese Simplified)"
-                                },
-                                {
-                                    "label": "繁體中文 (Chinese Traditional)"
-                                },
-                                {
-                                    "label": "Čeština (Czech)"
-                                },
-                                {
-                                    "label": "Nederlands (Dutch)"
-                                },
-                                {
-                                    "label": "English (English)"
-                                },
-                                {
-                                    "label": "Pirate (English)"
-                                },
-                                {
-                                    "label": "Suomi (Finnish)"
-                                },
-                                {
-                                    "label": "Français (French)"
-                                },
-                                {
-                                    "label": "Deutsch (German)"
-                                },
-                                {
-                                    "label": "Ελληνική (Greek)"
-                                },
-                                {
-                                    "label": "Italiano (Italian)"
-                                },
-                                {
-                                    "label": "日本語 (Japanese)"
-                                },
-                                {
-                                    "label": "한국어 (Korean)"
-                                },
-                                {
-                                    "label": "Português do Brasil (Portuguese Brasil)"
-                                },
-                                {
-                                    "label": "Português (Portuguese Portugal)"
-                                },
-                                {
-                                    "label": "Русский (Russian)"
-                                },
-                                {
-                                    "label": "Español (Spanish)"
-                                },
-                                {
-                                    "label": "Türkçe (Turkish)"
-                                }
-                            ]
-                        }
-                    },
-                    "versions": {
-                        "label": "Whitelisted Version(s)",
-                        "description": "Select whitelisted version(s) of Minecraft",
-                        "longDescription": "Select whitelisted version(s) of Minecraft. If the bot detects you switching to a whitelisted version, it will not alert or notify you. Select none to get a notification on every version change.",
-                        "select": {
-                            "placeholder": "None",
-                            "options": [
-                                {
-                                    "label": "1.8"
-                                },
-                                {
-                                    "label": "1.12"
-                                },
-                                {
-                                    "label": "1.14"
-                                },
-                                {
-                                    "label": "1.15"
-                                },
-                                {
-                                    "label": "1.16"
-                                },
-                                {
-                                    "label": "1.17"
-                                },
-                                {
-                                    "label": "1.18"
-                                },
-                                {
-                                    "label": "1.19"
-                                }
-                            ]
-                        }
-                    }
-                }
-            },
-            "friends": {
-                "title": "Friends Module",
-                "description": "Know when your friends are online without asking or logging onto Hypixel by sharing logins and logouts with each other. This module sends your logins and logouts to a specified channel; have your friends set this module up to the same channel and share them with each other.",
-                "menuPlaceholder": "Friend Module Settings",
-                "missingConfigField": {
-                    "name": "Missing Configuration",
-                    "value": "You need to configure the following settings before enabling the Friend module: {{ missingRequirements }}. Click on the menu below, select the option(s), and configure it."
-                },
-                "menu": {
-                    "toggle": {
-                        "label": "Toggle",
-                        "description": "Toggle whether this module is active",
-                        "longDescription": "Enable or disable this module. However, this module cannot be enabled if you have not configured it.",
-                        "button": {
-                            "enable": "Enable",
-                            "disable": "Disable"
-                        }
-                    },
-                    "channel": {
-                        "label": "Channel",
-                        "description": "Set a channel to send logins and logouts to",
-                        "longDescription": "Set a channel to send logins and logouts to. Due to limitations, you need to set a channel with **/channel**.",
-                        "select": {
-                            "placeholder": "Select a channel",
-                            "options": [
-                                {
-                                    "label": "Disabled",
-                                    "description": "Disabled"
-                                }
-                            ]
-                        }
-                    }
-                }
-            },
-            "rewards": {
-                "title": "Rewards Module",
-                "description": "Never miss a daily reward again - get notifications to claim your daily reward at your convenience!",
-                "menuPlaceholder": "Reward Module Settings",
-                "missingConfigField": {
-                    "name": "Missing Configuration",
-                    "value": "You need to configure the following settings before enabling the Rewards module: {{ missingRequirements }}. Click on the menu below, select the option(s), and configure it."
-                },
-                "menu": {
-                    "toggle": {
-                        "label": "Toggle",
-                        "description": "Toggle whether this module is enabled",
-                        "longDescription": "Enable or disable this module.",
-                        "button": {
-                            "enable": "Enable",
-                            "disable": "Disable"
-                        }
-                    },
-                    "alertTime": {
-                        "label": "Grace Period",
-                        "description": "Set when the bot should start alerting you",
-                        "longDescription": "Set how long the bot should wait **after** the daily reset to start pinging you.",
-                        "select": {
-                            "placeholder": "Select a time",
-                            "options": [
-                                {
-                                    "label": "Immediately",
-                                    "description": "Immediately after the next daily reset (12 AM EST)"
-                                },
-                                {
-                                    "label": "1 hour",
-                                    "description": "1 hour after the daily reset (1 AM EST)"
-                                },
-                                {
-                                    "label": "2 hours",
-                                    "description": "2 hours after the daily reset (2 AM EST)"
-                                },
-                                {
-                                    "label": "3 hours",
-                                    "description": "3 hours after the daily reset (3 AM EST)"
-                                },
-                                {
-                                    "label": "4 hours",
-                                    "description": "4 hours after the daily reset (4 AM EST)"
-                                },
-                                {
-                                    "label": "5 hours",
-                                    "description": "5 hours after the daily reset (5 AM EST)"
-                                },
-                                {
-                                    "label": "6 hours",
-                                    "description": "6 hours after the daily reset (6 AM EST)"
-                                },
-                                {
-                                    "label": "7 hours",
-                                    "description": "7 hours after the daily reset (7 AM EST)"
-                                },
-                                {
-                                    "label": "8 hours",
-                                    "description": "8 hours after the daily reset (8 AM EST)"
-                                },
-                                {
-                                    "label": "9 hours",
-                                    "description": "9 hours after the daily reset (9 AM EST)"
-                                },
-                                {
-                                    "label": "10 hours",
-                                    "description": "10 hours after the daily reset (10 AM EST)"
-                                },
-                                {
-                                    "label": "11 hours",
-                                    "description": "11 hours after the daily reset (11 AM EST)"
-                                },
-                                {
-                                    "label": "12 hours",
-                                    "description": "12 hours after the daily reset (12 PM EST)"
-                                },
-                                {
-                                    "label": "13 hours",
-                                    "description": "13 hours after the daily reset (1 PM EST)"
-                                },
-                                {
-                                    "label": "14 hours",
-                                    "description": "14 hours after the daily reset (2 PM EST)"
-                                },
-                                {
-                                    "label": "15 hours",
-                                    "description": "15 hours after the daily reset (3 PM EST)"
-                                },
-                                {
-                                    "label": "16 hours",
-                                    "description": "16 hours after the daily reset (4 PM EST)"
-                                },
-                                {
-                                    "label": "17 hours",
-                                    "description": "17 hours after the daily reset (5 PM EST)"
-                                },
-                                {
-                                    "label": "18 hours",
-                                    "description": "18 hours after the daily reset (6 PM EST)"
-                                },
-                                {
-                                    "label": "19 hours",
-                                    "description": "19 hours after the daily reset (7 PM EST)"
-                                },
-                                {
-                                    "label": "20 hours",
-                                    "description": "20 hours after the daily reset (8 PM EST)"
-                                },
-                                {
-                                    "label": "21 hours",
-                                    "description": "21 hours after the daily reset (9 PM EST)"
-                                },
-                                {
-                                    "label": "22 hours",
-                                    "description": "22 hours after the daily reset (10 PM EST)"
-                                },
-                                {
-                                    "label": "23 hours",
-                                    "description": "23 hours after the daily reset (11 PM EST)"
-                                }
-                            ]
-                        }
-                    },
-                    "claimNotification": {
-                        "label": "Claim Notification",
-                        "description": "Toggle notifications for when you claim the reward",
-                        "longDescription": "Toggle whether you get a confirmation when you collect the reward. It also comes with your current streak and total daily rewards!",
-                        "button": {
-                            "enable": "Enable",
-                            "disable": "Disable"
-                        }
-                    },
-                    "milestones": {
-                        "label": "Reward Milestones",
-                        "description": "Receive a congratulation on achieving streak milestones",
-                        "longDescription": "Receive a DM congratulating you when you hit a daily streak of 7, 30, 60, 90, 100, 150, 200, 250, 300, 365, 500, 750, or 1000.",
-                        "button": {
-                            "enable": "Enable",
-                            "disable": "Disable"
-                        }
-                    },
-                    "notificationInterval": {
-                        "label": "Notification Interval",
-                        "description": "Set the timeout between pings",
-                        "longDescription": "Set how long the bot should wait before pinging you again.",
-                        "select": {
-                            "placeholder": "Select a time",
-                            "options": [
-                                {
-                                    "label": "30 minutes"
-                                },
-                                {
-                                    "label": "1 hour"
-                                },
-                                {
-                                    "label": "2 hours"
-                                },
-                                {
-                                    "label": "3 hours"
-                                },
-                                {
-                                    "label": "4 hours"
-                                },
-                                {
-                                    "label": "5 hours"
-                                },
-                                {
-                                    "label": "6 hours"
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
         "performance": {
             "title": "Performance",
             "latest": {
                 "name": "Latest Performance",
-                "value": "Hypixel API Fetch: {{ fetchPerformance }}ms\nProcess Data: {{ processPerformance }}ms\nModule Execution: {{ modulePerformance }}ms\nTotal: {{ total }}ms"
+                "value": "Hypixel API Fetch: {{ fetchPerformance }}ms\nParse Data: {{ parsePerformance }}ms\nCheck Performance: {{ checkPerformance }}ms\nSend Performance: {{ sendPerformance }}ms\nTotal: {{ total }}ms"
             }
         },
         "ping": {
@@ -720,60 +177,6 @@
             "embed2": {
                 "title": "🏓 Ping!",
                 "description": "Websocket heartbeat is {{ wsPing }}ms. Roundtrip latency is {{ rtPing }}ms."
-            }
-        },
-        "player": {
-            "invalid": {
-                "title": "Invalid Input",
-                "description": "The username/UUID provided is invalid! The username cannot contain invalid characters. UUIDs must match the following regex: `/^[0-9a-f]{8}[0-9a-f]{4}[1-5][0-9a-f]{3}[89AB][0-9a-f]{3}[0-9a-f]{12}$/i`. You can test this regex with [__this__](https://regex101.com/r/A866mm/1) site."
-            },
-            "notFound": {
-                "title": "Not Found",
-                "description": "That {{ inputType }} doesn't seem to be valid. Check to see if you spelt it wrong."
-            },
-            "unknown": "Unknown",
-            "status": {
-                "online": "online",
-                "offline": "offline",
-                "embed": {
-                    "title": "Status",
-                    "description": "{{ username }} is {{ status }}",
-                    "field1": {
-                        "name": "Identity",
-                        "value": "UUID: {{ uuid }}\nTwitter: {{ TWITTER }}\nInstagram: {{ INSTAGRAM }}\nTwitch: {{ TWITCH }}\nDiscord: {{ DISCORD }}\nHypixel: {{ HYPIXEL }}"
-                    },
-                    "field2": {
-                        "name": "Last Login and Logout",
-                        "value": "Last Login: {{ lastLogin }}\nLast Logout: {{ lastLogout }}"
-                    },
-                    "field3": {
-                        "name": "Settings",
-                        "value": "Language: {{ language }}\nVersion: {{ version }}"
-                    },
-                    "onlineField": {
-                        "name": "Session",
-                        "value": "Playtime: {{ playTime }}\nGame Type: {{ gameType }}\nGame Mode: {{ gameMode }}\nGame Map: {{ gameMap }}"
-                    },
-                    "offlineField": {
-                        "name": "Last Session",
-                        "value": "Last Playtime: {{ playTime }}\nLast Game Type: {{ gameType }}"
-                    }
-                }
-            },
-            "recentGames": {
-                "playTime": "Play Time: ",
-                "elapsed": "Elapsed: ",
-                "gameMode": "Mode: ",
-                "gameMap": "Map: ",
-                "inProgress": "In Progress",
-                "embed": {
-                    "title": "Recent Games - {{ username }}",
-                    "description": "• Showing {{ start }} to {{ end }} out of {{ total }}\n• Saves up to 100 events\n• Saves events for up to 3 days\n• Games may not show up for some players",
-                    "field": {
-                        "name": "{{ gameType }} | {{ date }}",
-                        "value": "Game Start: {{ start }}\nGame End: {{ end }}\n{{ playTime }}{{ mode }}{{ map }}"
-                    }
-                }
             }
         },
         "presence": {
@@ -802,48 +205,6 @@
                 "description": "The presence is now set to the default!"
             }
         },
-        "register": {
-            "alreadyRegistered": {
-                "title": "Already Registered",
-                "description": "You have already registered! If you want to unregister, use **/data delete** or contact Attituding."
-            },
-            "invalid": {
-                "title": "Invalid Input",
-                "description": "The username/UUID provided is invalid! The username cannot contain invalid characters. UUIDs must match the following regex: `/^[0-9a-f]{8}[0-9a-f]{4}[1-5][0-9a-f]{3}[89AB][0-9a-f]{3}[0-9a-f]{12}$/i`. You can test this regex with [__this__](https://regex101.com/r/A866mm/1) site."
-            },
-            "notFound": {
-                "title": "Not Found",
-                "description": "That {{ inputType }} doesn't seem to be valid. Check to see if you spelt it wrong."
-            },
-            "alreadyUsed": {
-                "title": "UUID Already Used",
-                "description": "Your UUID is already in the database. You might have another Discord account account that is already registered. Contact Attituding for cases where you lost access to your old account."
-            },
-            "unlinked": {
-                "title": "Unlinked Account",
-                "description": "You have not linked your Discord account to your Minecraft account on Hypixel! Follow the guide below. If you just linked it, please wait a few minutes and try again."
-            },
-            "mismatched": {
-                "title": "Mismatched Tag",
-                "description": "That Minecraft account currently has a different Discord account linked! If that is your account, follow the guide below to relink it. If you just relinked it, please wait a few minutes and try again."
-            },
-            "testEmbed": {
-                "title": "Test Message",
-                "description": "This is a message to test messaging capabilities. You may ignore this message."
-            },
-            "success": {
-                "title": "Registered",
-                "description": "Registered successfully!"
-            },
-            "cannotMessage": {
-                "name": "Unable to DM",
-                "value": "You have successfully registered, but this bot is currently unable to message you through DMs. You should check your privacy settings and ensure this bot can message you before enabling modules."
-            },
-            "next": {
-                "name": "Next Steps",
-                "value": "**/modules** • Configure modules and set up notifications\n**/help** • See information about any command or about this bot"
-            }
-        },
         "reload": {
             "all": {
                 "title": "Reloaded Everything",
@@ -858,33 +219,6 @@
                     "title": "Reloaded",
                     "description": "{{ typeName }}.{{ item }} was successfully reloaded! This action took {{ timeTaken }} milliseconds."
                 }
-            }
-        },
-        "snowflake": {
-            "title": "Snowflake",
-            "input": {
-                "name": "Input",
-                "value": "{{ input }}"
-            },
-            "length": {
-                "name": "Length",
-                "value": "{{ length }}"
-            },
-            "date": {
-                "name": "Date",
-                "value": "Date: {{ date }}\nTime: {{ time }}\nRelative: {{ relative }}"
-            },
-            "worker": {
-                "name": "Worker ID",
-                "value": "{{ worker }}"
-            },
-            "process": {
-                "name": "Process ID",
-                "value": "{{ process }}"
-            },
-            "increment": {
-                "name": "Increment",
-                "value": "{{ increment }}"
             }
         },
         "system": {
@@ -907,21 +241,6 @@
                     "value": "{{ users }}"
                 }
             }
-        },
-        "systemmessage": {
-            "notFound": {
-                "title": "User not found",
-                "description": "{{ id }} was not found"
-            },
-            "preview": {
-                "buttonLabel": "Looks Good",
-                "title": "Preview",
-                "description": "Your preview is below. To abort, ignore this message."
-            },
-            "success": {
-                "title": "Success",
-                "description": "Your message was queued."
-            }
         }
     },
     "errors": {
@@ -936,10 +255,6 @@
             }
         },
         "constraintErrors": {
-            "blockedUsers": {
-                "title": "Blocked User",
-                "description": "You were blocked from using this bot. You cannot appeal this."
-            },
             "devMode": {
                 "title": "Developer Mode",
                 "description": "This bot is in developer only mode, likely due to a major issue or an upgrade that is taking place. Please check back later!"
@@ -947,10 +262,6 @@
             "owner": {
                 "title": "Insufficient Permissions",
                 "description": "You cannot execute this command without being an owner!"
-            },
-            "register": {
-                "title": "Missing Registration",
-                "description": "You must register with **/register** before using this command!"
             },
             "dm": {
                 "title": "DM Channel",
