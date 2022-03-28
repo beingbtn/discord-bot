@@ -5,7 +5,7 @@ import {
 
 export const Constants = {
     colors: {
-        hypixel: 0xDCAF4 as ColorResolvable,
+        hypixel: 0xDCAF4E as ColorResolvable,
         error: 0xAA0000 as ColorResolvable,
         warning: 0xFF5555 as ColorResolvable,
         normal: 0x2f3136 as ColorResolvable, //#7289DA
@@ -15,9 +15,9 @@ export const Constants = {
     },
     defaults: {
         config: {
-            core: true,
+            core: false,
             devMode: false,
-            interval: 300000,
+            interval: 360000,
         },
         language: 'en-US',
         performance: {
@@ -55,7 +55,8 @@ export const Constants = {
     },
     urls: {
         rss: [
-            'https://hypixel.net/forums/official-hypixel-minecraft-server/-/index.rss',
+            'https://hypixel.net/forums/news-and-announcements.4/-/index.rss',
+            'https://hypixel.net/forums/skyblock-patch-notes.158/-/index.rss',
         ],
     },
 };

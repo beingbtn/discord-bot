@@ -65,6 +65,17 @@ export interface Field {
 /*
 Command Interface
 */
+export interface Announcements {
+    botMissingPermission: BaseEmbed,
+    userMissingPermission: BaseEmbed,
+    add: {
+        alreadyAdded: BaseEmbed,
+    } & BaseEmbed,
+    remove: {
+        notFound: BaseEmbed,
+    } & BaseEmbed,
+}
+
 export interface API {
     api: {
         yes: string,
@@ -181,6 +192,7 @@ export interface System {
 }
 
 export interface Commands {
+    announcements: Announcements,
     api: API,
     config: Config,
     deploy: Deploy,

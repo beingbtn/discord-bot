@@ -1,10 +1,9 @@
+import type { rssJSON } from './format';
 import {
     Client,
     MessageEmbed,
     NewsChannel,
 } from 'discord.js';
-import type { rssJSON } from './format';
-import { Constants } from '../utility/Constants';
 
 export class CoreDispatch {
     client: Client;
@@ -18,9 +17,14 @@ export class CoreDispatch {
 
         for (const item of data.items) {
             const embed = new MessageEmbed()
-                .setAuthor({ name: `Author: ${item.author}` })
-                .setColor(Constants.colors.hypixel)
+                .setAuthor({
+                    name: `Announcement by ${item.author}`,
+                })
                 .setDescription(item.content)
+                .setFooter({
+                    text: 'Hypixel - Minecraft Server and Maps',
+                    iconURL: 'https://cdn.discordapp.com/icons/489529070913060867/f7df056de15eabfc0a0e178d641f812b.webp?size=128',
+                })
                 .setTitle(item.title)
                 .setURL(item.link);
 
@@ -30,7 +34,7 @@ export class CoreDispatch {
                 embed.setImage(mainImage);
             }
 
-            posts.push(embed);
+            posts.unshift(embed);
         }
 
         const channels = JSON.parse(process.env.channels!);
@@ -41,8 +45,8 @@ export class CoreDispatch {
 
         const splitPostEmbeds = [];
 
-        for (let index = 0; index < posts.length; index += 10) {
-            const subArray = posts.slice(index, index + 10);
+        for (let index = 0; index < posts.length; index += 5) {
+            const subArray = posts.slice(index, index + 5);
             splitPostEmbeds.push(subArray);
         }
 

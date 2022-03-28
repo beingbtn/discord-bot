@@ -9,6 +9,7 @@ import { CoreFormat } from './format';
 import { HTTPError } from '../utility/errors/HTTPError';
 import { RequestErrorHandler } from '../utility/errors/RequestErrorHandler';
 import { CoreDispatch } from './dispatch';
+import { Log } from '../utility/Log';
 
 /* eslint-disable no-await-in-loop */
 
@@ -84,12 +85,11 @@ export class Core {
                 const rssJSON = CoreFormat.parse(xmlString);
                 performance.parse = Date.now();
 
-                console.log(JSON.stringify(rssJSON));
-
                 const changes = this.changes.check(rssJSON);
                 performance.check = Date.now();
 
                 if (changes.items.length > 0) {
+                    Log.log('Messages found!');
                     await this.dispatch.dispatch(rssJSON);
                 }
 

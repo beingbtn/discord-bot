@@ -1,5 +1,31 @@
 {
     "commands": {
+        "announcements": {
+            "botMissingPermission": {
+                "title": "Missing Permission",
+                "description": "This bot is unable to use the channel you selected because of the following missing the following permission(s): {{ permissions }}. You can either grant the bot the permissions listed or select a different channel the bot can use."
+            },
+            "userMissingPermission": {
+                "title": "Missing Permission",
+                "description": "You must have the **Manage Webhook(s)** permission to use this command. These permission(s) can either be granted server-wide or given through a channel's advanced permissions."
+            },
+            "add": {
+                "title": "Added {{ type }}",
+                "description": "{{ type }} will be sent to {{ channel }}!",
+                "alreadyAdded": {
+                    "title": "{{ type }} Type Already Added",
+                    "description": "The announcement type `{{ type }}` was already added to {{ channel }}!"
+                }
+            },
+            "remove": {
+                "title": "Removed {{ type }}",
+                "description": "{{ type }} will no longer be sent to {{ channel }}!",
+                "notFound": {
+                    "title": "{{ type }} Type Not Found",
+                    "description": "The announcement type `{{ type }}` isn't added to {{ channel }}!"
+                }
+            }
+        },
         "api": {
             "api": {
                 "yes": "Yes",

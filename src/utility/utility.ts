@@ -222,6 +222,16 @@ export function formattedUnix({
         }`;
 }
 
+export function generateStackTrace() {
+    const stack = new Error().stack ?? '';
+    const cleanStack = stack
+        .split('\n')
+        .splice(2)
+        .join('\n');
+
+    return cleanStack;
+}
+
 export async function sendWebHook(
     {
         webhook,

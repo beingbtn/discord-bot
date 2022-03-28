@@ -25,6 +25,22 @@ export class CoreFormat {
     static parse(xml: string) {
         //Parsing taken and modified from https://github.com/nasa8x/rss-to-json under the MIT License
 
+        const turndownService = new Turndown({
+            codeBlockStyle: 'fenced',
+        }).addRule('image', {
+            filter: [
+                'img',
+                'hr',
+                'h1',
+                'h2',
+                'h3',
+                'h4',
+                'h5',
+                'h6',
+            ],
+            replacement: () => '',
+        });
+
         const parser = new XMLParser({
             attributeNamePrefix: '',
             //attrNodeName: "attr", //default is 'false'
@@ -32,7 +48,8 @@ export class CoreFormat {
             ignoreAttributes: false,
         });
 
-        const result = parser.parse(xml);
+        //&#8203; seems to add a lot of random new lines
+        const result = parser.parse(xml.replaceAll('&#8203;', ''));
 
         let channel = result.rss && result.rss.channel
             ? result.rss.channel
@@ -100,14 +117,17 @@ export class CoreFormat {
 
             obj.attachments = [
                 ...obj.content.matchAll(
+                    /https:\/\/staticassets\.hypixel\.net\/(\S)*\.(png|jpg)/gm,
+                ),
+                ...obj.content.matchAll(
+                    /https:\/\/i\.imgur\.com\/(\S)*\.(png|jpg)/gm,
+                ),
+                ...obj.content.matchAll(
                     /https:\/\/hypixel\.net\/attachments\/(\S)*\//gm,
                 ),
-            ].map(array => array?.[0]);
-
-            const turndownService = new Turndown({
-                codeBlockStyle: 'fenced',
-                linkReferenceStyle: 'collapsed',
-            });
+            ]
+            .sort((primary, secondary) => primary.index - secondary.index)
+            .map(array => array?.[0]);
 
             obj.content = turndownService.turndown(obj.content)
                 .replaceAll('  \n', '\n');
