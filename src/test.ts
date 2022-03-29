@@ -13,46 +13,26 @@ const xml = `<?xml version="1.0" encoding="utf-8"?>
     <link>https://hypixel.net/</link>
     <atom:link rel="self" type="application/rss+xml" href="https://hypixel.net/forums/official-hypixel-minecraft-server/index.rss"/>
     <item>
-      <title>Wool Wars v0.2 - Layout Editor, New Maps, Balance Changes + more!</title>
-      <pubDate>Sun, 27 Mar 2022 19:09:14 +0000</pubDate>
-      <link>https://hypixel.net/threads/wool-wars-v0-2-layout-editor-new-maps-balance-changes-more.4876717/</link>
-      <guid isPermaLink="false">4876717</guid>
-      <author>invalid@example.com (ConnorLinfoot)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>ConnorLinfoot</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/wool-war-patch-post-png.2939498/"
-			class="bbImage "
-			style=""
-			alt="wool-war-patch-post.png"
-			title="wool-war-patch-post.png"
-			width="1040" height="400" loading="lazy" /><br />
+      <title>[January 13] Armadillo, Double Jump, and more fixes!</title>
+      <pubDate>Sun, 30 Jan 2022 05:53:03 +0000</pubDate>
+      <link>https://hypixel.net/threads/january-13-armadillo-double-jump-and-more-fixes.4750477/</link>
+      <guid isPermaLink="false">4750477</guid>
+      <author>invalid@example.com (TheMGRF)</author>
+      <category domain="https://hypixel.net/forums/skyblock-patch-notes.158/"><![CDATA[SkyBlock Patch Notes]]></category>
+      <dc:creator>TheMGRF</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper">Hi all!<br />
 <br />
-Hey everyone!<br />
+Welcome to our first set of patch notes for 2022! Over the past few weeks we've been working to fix a bunch of issues that cropped up over the holiday period, so here is a nice break down of what we have done so far.<br />
 <br />
-Today we're releasing the 0.2 update for Wool Wars! This update brings a layout editor, new maps, balance changes, and more!<br />
-<br />
-<b><span style="color: rgb(0, 0, 0)">►</span> </b><span style="color: rgb(243, 121, 52)"><b><span style="font-size: 22px">Layout Editor</span></b></span><br />
-You can now customize your layout for different classes at the NPC in the lobby!<br />
-<br />
-<div style="text-align: center"><img src="https://hypixel.net/attachments/1648044248684-png.2939389/"
-			class="bbImage "
-			style=""
-			alt="1648044248684.png"
-			title="1648044248684.png"
-			width="497" height="428" loading="lazy" />&#8203;</div><br />
-<b><span style="color: rgb(0, 0, 0)">►</span> </b><span style="color: rgb(243, 121, 52)"><b><span style="font-size: 22px">New Maps</span></b></span><br />
-We've added back a revamped Anubis as well as two new maps in this update, both with a new map mechanic, Portals!<br />
-<img src="https://hypixel.net/attachments/1648048323150-png.2939438/"
-			class="bbImage "
-			style=""
-			alt="1648048323150.png"
-			title="1648048323150.png"
-			width="1567" height="1270" loading="lazy" /><br />
-<br />
-We...<br />
-<br />
-<a href="https://hypixel.net/threads/wool-wars-v0-2-layout-editor-new-maps-balance-changes-more.4876717/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>77</slash:comments>
+<h3>Fixes&#8203;</h3><ul>
+<li data-xf-list-type="ul"><h4>Armadillo Pet&#8203;</h4><ul>
+<li data-xf-list-type="ul">Fixed the pet not consuming energy when moving in some directions.</li>
+<li data-xf-list-type="ul">Fixed instant breaking of Gemstones regardless of item Breaking Power.</li>
+<li data-xf-list-type="ul">Fixed the Tunneler ability breaking string from traps in Crystal Hollows...</li>
+</ul></li>
+</ul><br />
+<a href="https://hypixel.net/threads/january-13-armadillo-double-jump-and-more-fixes.4750477/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>191</slash:comments>
     </item>
   </channel>
 </rss>`;
@@ -63,6 +43,11 @@ const turndownService = new Turndown({
     filter: [
         'img',
         'hr',
+    ],
+    replacement: () => '',
+})
+.addRule('header', {
+    filter: [
         'h1',
         'h2',
         'h3',
@@ -70,7 +55,13 @@ const turndownService = new Turndown({
         'h5',
         'h6',
     ],
-    replacement: () => '',
+    replacement: content => `**${content}**`,
+})
+.addRule('list', {
+    filter: [
+        'li',
+    ],
+    replacement: content => `• ${content}\n`,
 });
 
 const parser = new XMLParser({
@@ -162,7 +153,9 @@ for (let i = 0; i < items.length; i += 1) {
     .map(array => array?.[0]);
 
     obj.content = turndownService.turndown(obj.content)
-        .replaceAll('  \n', '\n');
+        .replaceAll('  \n', '\n') //Remove weird newlines
+        .replace(/\n{3,}/gm, '\n') //Remove extra newlines
+        .replace(/(^\n+|(\n+)+$)/g, ''); //Remove newlines at the end and start
 
     //@ts-expect-error stuff
     rss.items.push(obj);

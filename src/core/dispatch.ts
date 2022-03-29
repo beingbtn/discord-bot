@@ -18,7 +18,7 @@ export class CoreDispatch {
         for (const item of data.items) {
             const embed = new MessageEmbed()
                 .setAuthor({
-                    name: `Announcement by ${item.author}`,
+                    name: item.author,
                 })
                 .setDescription(item.content)
                 .setFooter({
@@ -37,10 +37,10 @@ export class CoreDispatch {
             posts.unshift(embed);
         }
 
-        const channels = JSON.parse(process.env.channels!);
+        const channels = JSON.parse(process.env.announcements!);
 
         const channel = await this.client.channels.fetch(
-            channels[data.title],
+            channels[data.title].id,
         ) as NewsChannel;
 
         const splitPostEmbeds = [];

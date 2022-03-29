@@ -21,7 +21,6 @@ export class Core {
         latest: Performance | null;
         history: Performance[];
     };
-    changes: CoreChanges;
     dispatch: CoreDispatch;
     error: CoreError;
     request: CoreRequest;
@@ -33,7 +32,6 @@ export class Core {
             latest: null,
             history: [],
         };
-        this.changes = new CoreChanges();
         this.dispatch = new CoreDispatch(this.client);
         this.error = new CoreError();
         this.request = new CoreRequest(this.client);
@@ -85,7 +83,7 @@ export class Core {
                 const rssJSON = CoreFormat.parse(xmlString);
                 performance.parse = Date.now();
 
-                const changes = this.changes.check(rssJSON);
+                const changes = await CoreChanges.check(rssJSON);
                 performance.check = Date.now();
 
                 if (changes.items.length > 0) {

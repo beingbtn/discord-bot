@@ -155,8 +155,8 @@ export const execute: ClientCommand['execute'] = async (
         ? 'News and Announcements'
         : 'SkyBlock Patch Notes';
 
-    const channels = JSON.parse(process.env.channels!);
-    const announcementID = channels[type] as string;
+    const channels = JSON.parse(process.env.announcements!);
+    const announcementID = channels[type].id as string;
 
     switch (interaction.options.getSubcommand()) {
         case 'add': await addAnnouncement();

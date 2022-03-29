@@ -31,6 +31,11 @@ export class CoreFormat {
             filter: [
                 'img',
                 'hr',
+            ],
+            replacement: () => '',
+        })
+        .addRule('header', {
+            filter: [
                 'h1',
                 'h2',
                 'h3',
@@ -38,7 +43,13 @@ export class CoreFormat {
                 'h5',
                 'h6',
             ],
-            replacement: () => '',
+            replacement: content => `**${content}**`,
+        })
+        .addRule('list', {
+            filter: [
+                'li',
+            ],
+            replacement: content => `• ${content}\n`,
         });
 
         const parser = new XMLParser({
@@ -130,7 +141,9 @@ export class CoreFormat {
             .map(array => array?.[0]);
 
             obj.content = turndownService.turndown(obj.content)
-                .replaceAll('  \n', '\n');
+                .replaceAll('  \n', '\n') //Remove weird newlines
+                .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
+                .replace(/(^\n+|(\n+)+$)/g, ''); //Remove newlines at the end and start
 
             rss.items.push(obj);
         }

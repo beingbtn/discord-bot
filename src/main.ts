@@ -10,13 +10,13 @@ import {
     Options,
     Sweepers,
 } from 'discord.js';
-//import { Core } from './core/core';
+import { Constants } from './utility/Constants';
+import { Core } from './core/core';
+import { Database } from './utility/database';
 import { ErrorHandler } from './utility/errors/ErrorHandler';
 import { Log } from './utility/Log';
 import fs from 'node:fs/promises';
 import process from 'node:process';
-import { Constants } from './utility/Constants';
-import { Core } from './core/core';
 
 process.on('exit', code => {
     Log.log(`Exiting with code ${code}`);
@@ -90,17 +90,18 @@ const client = new Client({
     },
 });
 
-(async () => {
-    client.commands = new Collection();
-    client.config = {
-        ...Constants.defaults.config,
-        ...Constants.defaults.request,
-    };
-    client.cooldowns = new Collection();
-    client.core = new Core(client);
-    client.customPresence = null;
-    client.events = new Collection();
+client.commands = new Collection();
+client.config = {
+     ...Constants.defaults.config,
+    ...Constants.defaults.request,
+};
+client.cooldowns = new Collection();
+client.core = new Core(client);
+client.customPresence = null;
+client.events = new Collection();
 
+(async () => {
+    await Database.init();
 
     const folders = (
         await Promise.all([
