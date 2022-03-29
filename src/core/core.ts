@@ -87,8 +87,9 @@ export class Core {
                 performance.check = Date.now();
 
                 if (changes.items.length > 0) {
-                    Log.log('Messages found!');
+                    Log.log(`${changes.items.length} messages found!`);
                     await this.dispatch.dispatch(rssJSON);
+                    Log.log('Finished dispatching messages!');
                 }
 
                 performance.send = Date.now();

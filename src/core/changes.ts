@@ -1,5 +1,6 @@
 import type { rssJSON } from './format';
 import { Database } from '../utility/database';
+import { Log } from '../utility/Log';
 
 export class CoreChanges {
     static async get(data: rssJSON) {
@@ -14,14 +15,10 @@ export class CoreChanges {
                 .toArray()
         )[0][data.title] as unknown as string[];
 
-        console.log('1', links, data.title);
-
         return links;
     }
 
     static async set(data: rssJSON, links: string[]) {
-        console.log('2', links, data.title);
-
         await new Database().instance
             .collection('posts')
             .updateOne(
@@ -37,13 +34,9 @@ export class CoreChanges {
     }
 
     static async check(data: rssJSON): Promise<rssJSON> {
-        console.log('start');
-
         const minComments = JSON.parse(
             process.env.announcements!,
         )[data.title].minComments;
-
-        console.log('0', minComments, data.title);
 
         const potentialNew = data.items.filter(
             item => item.comments < minComments,
@@ -59,6 +52,7 @@ export class CoreChanges {
 
         for (const item of potentialNew) {
             if (!knownLinks.includes(item.link)) {
+                Log.log(`New link found: ${item.link}`);
                 newItems.push(item);
             }
         }
