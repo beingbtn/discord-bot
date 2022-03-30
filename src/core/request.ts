@@ -1,4 +1,5 @@
 import type { Client } from 'discord.js';
+import { HTTPError } from '../utility/errors/HTTPError';
 import { Request } from '../utility/Request';
 
 export class CoreRequest {
@@ -12,6 +13,13 @@ export class CoreRequest {
         const response = await new Request(
             this.client.config,
         ).request(url);
+
+        if (response.ok === false) {
+            throw new HTTPError({
+                response: response,
+                url: url,
+            });
+        }
 
         const xml = await response.text();
 

@@ -119,7 +119,7 @@ export class CoreFormat {
                     ? Date.parse(val.created)
                     : Date.now(),
                 category: val.category ?? [],
-                comments: channel['slash:comments'] ?? 0,
+                comments: val['slash:comments'] ?? 0,
                 content: val.content && val.content.$text
                     ? val.content.$text
                     : val['content:encoded'],

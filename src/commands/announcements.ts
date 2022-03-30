@@ -92,6 +92,41 @@ export const properties: ClientCommand['properties'] = {
                     },
                 ],
             },
+            {
+                name: 'moderation',
+                description: 'Moderation Information and Changes',
+                type: 2,
+                options: [
+                    {
+                        name: 'add',
+                        description: 'Add this type of announcement to a selected channel',
+                        type: 1,
+                        options: [
+                            {
+                                name: 'channel',
+                                type: 7,
+                                channel_types: [ChannelTypes.GUILD_TEXT],
+                                description: 'Choose the channel to send these announcements to',
+                                required: true,
+                            },
+                        ],
+                    },
+                    {
+                        name: 'remove',
+                        description: 'Stop receiving these announcements',
+                        type: 1,
+                        options: [
+                            {
+                                name: 'channel',
+                                type: 7,
+                                channel_types: [ChannelTypes.GUILD_TEXT],
+                                description: 'Choose the channel you want announcements to stop being sent to',
+                                required: true,
+                            },
+                        ],
+                    },
+                ],
+            },
         ],
     },
 };
@@ -153,7 +188,9 @@ export const execute: ClientCommand['execute'] = async (
 
     const type = interaction.options.getSubcommandGroup() === 'general'
         ? 'News and Announcements'
-        : 'SkyBlock Patch Notes';
+        : interaction.options.getSubcommandGroup() === 'skyblock'
+        ? 'SkyBlock Patch Notes'
+        : 'Moderation Information and Changes';
 
     const channels = JSON.parse(process.env.announcements!);
     const announcementID = channels[type].id as string;

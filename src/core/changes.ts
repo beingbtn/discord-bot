@@ -1,6 +1,5 @@
 import type { rssJSON } from './format';
 import { Database } from '../utility/database';
-import { Log } from '../utility/Log';
 
 export class CoreChanges {
     static async get(data: rssJSON) {
@@ -34,34 +33,30 @@ export class CoreChanges {
     }
 
     static async check(data: rssJSON): Promise<rssJSON> {
-        const minComments = JSON.parse(
+        const maxComments = JSON.parse(
             process.env.announcements!,
-        )[data.title].minComments;
+        )[data.title].maxComments;
+
+        const knownLinks = await CoreChanges.get(data);
 
         const potentialNew = data.items.filter(
-            item => item.comments < minComments,
+            item => !knownLinks.includes(item.link),
         );
 
         const base = Object.assign(data, { items: [] });
 
         if (potentialNew.length === 0) return base;
 
-        const knownLinks = await CoreChanges.get(data);
+        await CoreChanges.set(
+            data,
+            [...knownLinks, ...potentialNew.map(item => item.link)],
+        );
 
-        const newItems = [];
-
-        for (const item of potentialNew) {
-            if (!knownLinks.includes(item.link)) {
-                Log.log(`New link found: ${item.link}`);
-                newItems.push(item);
-            }
-        }
+        const newItems = potentialNew.filter(
+            item => item.comments < maxComments,
+        );
 
         if (newItems.length === 0) return base;
-
-        const newLinks = newItems.map(item => item.link);
-
-        await CoreChanges.set(data, [...knownLinks, ...newLinks]);
 
         return Object.assign(base, { items: newItems });
     }

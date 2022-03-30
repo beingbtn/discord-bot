@@ -193,7 +193,7 @@
             "title": "Performance",
             "latest": {
                 "name": "Latest Performance",
-                "value": "Hypixel API Fetch: {{ fetchPerformance }}ms\nParse Data: {{ parsePerformance }}ms\nCheck Performance: {{ checkPerformance }}ms\nSend Performance: {{ sendPerformance }}ms\nTotal: {{ total }}ms"
+                "value": "Hypixel RSS Fetch: {{ fetchPerformance }}ms\nParse Data: {{ parsePerformance }}ms\nCheck Data: {{ checkPerformance }}ms\nSend: {{ sendPerformance }}ms\nTotal: {{ total }}ms"
             }
         },
         "ping": {

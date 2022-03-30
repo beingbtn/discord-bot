@@ -22,7 +22,7 @@ export class CoreDispatch {
                 })
                 .setDescription(item.content)
                 .setFooter({
-                    text: 'Hypixel - Minecraft Server and Maps',
+                    text: data.title,
                     iconURL: 'https://cdn.discordapp.com/icons/489529070913060867/f7df056de15eabfc0a0e178d641f812b.webp?size=128',
                 })
                 .setTitle(item.title)

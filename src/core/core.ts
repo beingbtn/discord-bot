@@ -87,9 +87,9 @@ export class Core {
                 performance.check = Date.now();
 
                 if (changes.items.length > 0) {
-                    Log.log(`${changes.items.length} messages found!`);
+                    Log.log(`New link(s) found: ${changes.items.map(item => item.link).join(', ')}!`);
                     await this.dispatch.dispatch(rssJSON);
-                    Log.log('Finished dispatching messages!');
+                    Log.log(`Finished dispatching messages from ${changes.title}!`);
                 }
 
                 performance.send = Date.now();
@@ -108,7 +108,10 @@ export class Core {
                 return;
             }
 
-            await setTimeout(this.client.config.interval);
+            await setTimeout(
+                this.client.config.interval /
+                Constants.urls.rss.length,
+            );
         }
     }
 
