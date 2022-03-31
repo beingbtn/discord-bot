@@ -26,7 +26,9 @@
         "typescript": "^4.6.2"
     },
     "scripts": {
-        "run": "npx ts-node src/main.ts"
+        "build": "tsc -p .",
+        "postbuild": "node out/main.js",
+        "docker": "node out/main.js"
     },
     "engines": {
         "node": ">=17.3.0"

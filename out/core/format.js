@@ -1,0 +1,121 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CoreFormat = void 0;
+const fast_xml_parser_1 = require("fast-xml-parser");
+const turndown_1 = __importDefault(require("turndown"));
+class CoreFormat {
+    static parse(xml) {
+        //Parsing taken and modified from https://github.com/nasa8x/rss-to-json under the MIT License
+        const turndownService = new turndown_1.default({
+            codeBlockStyle: 'fenced',
+        }).addRule('image', {
+            filter: [
+                'img',
+                'hr',
+            ],
+            replacement: () => '',
+        })
+            .addRule('header', {
+            filter: [
+                'h1',
+                'h2',
+                'h3',
+                'h4',
+                'h5',
+                'h6',
+            ],
+            replacement: content => `**${content}**`,
+        })
+            .addRule('list', {
+            filter: [
+                'li',
+            ],
+            replacement: content => `• ${content}\n`,
+        });
+        const parser = new fast_xml_parser_1.XMLParser({
+            attributeNamePrefix: '',
+            //attrNodeName: "attr", //default is 'false'
+            textNodeName: '$text',
+            ignoreAttributes: false,
+        });
+        //&#8203; seems to add a lot of random new lines
+        const result = parser.parse(xml.replaceAll('&#8203;', ''));
+        let channel = result.rss && result.rss.channel
+            ? result.rss.channel
+            : result.feed;
+        if (Array.isArray(channel))
+            channel = channel[0];
+        const rss = {
+            title: channel.title ?? '',
+            description: channel.description ?? '',
+            link: channel.link && channel.link.href
+                ? channel.link.href
+                : channel.link,
+            image: channel.image
+                ? channel.image.url
+                : channel['itunes:image']
+                    ? channel['itunes:image'].href
+                    : '',
+            category: channel.category || [],
+            items: [],
+        };
+        let items = channel.item || channel.entry;
+        if (items && !Array.isArray(items))
+            items = [items];
+        for (let i = 0; i < items.length; i += 1) {
+            const val = items[i];
+            const obj = {
+                id: val.guid && val.guid.$t
+                    ? val.guid.$t
+                    : val.id,
+                title: val.title && val.title.$text
+                    ? val.title.$text
+                    : val.title,
+                description: val.summary && val.summary.$text
+                    ? val.summary.$text
+                    : val.description,
+                link: val.link && val.link.href
+                    ? val.link.href
+                    : val.link,
+                author: val.author && val.author.name
+                    ? val.author.name
+                    : val['dc:creator'],
+                published: val.created
+                    ? Date.parse(val.created)
+                    : val.pubDate
+                        ? Date.parse(val.pubDate)
+                        : Date.now(),
+                created: val.updated
+                    ? Date.parse(val.updated)
+                    : val.pubDate
+                        ? Date.parse(val.pubDate)
+                        : val.created
+                            ? Date.parse(val.created)
+                            : Date.now(),
+                category: val.category ?? [],
+                comments: val['slash:comments'] ?? 0,
+                content: val.content && val.content.$text
+                    ? val.content.$text
+                    : val['content:encoded'],
+                attachments: [],
+            };
+            obj.attachments = [
+                ...obj.content.matchAll(/https:\/\/staticassets\.hypixel\.net\/(\S)*\.(png|jpg)/gm),
+                ...obj.content.matchAll(/https:\/\/i\.imgur\.com\/(\S)*\.(png|jpg)/gm),
+                ...obj.content.matchAll(/https:\/\/hypixel\.net\/attachments\/(\S)*\//gm),
+            ]
+                .sort((primary, secondary) => primary.index - secondary.index)
+                .map(array => array?.[0]);
+            obj.content = turndownService.turndown(obj.content)
+                .replaceAll('  \n', '\n') //Remove weird newlines
+                .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
+                .replace(/(^\n+|(\n+)+$)/g, ''); //Remove newlines at the end and start
+            rss.items.push(obj);
+        }
+        return rss;
+    }
+}
+exports.CoreFormat = CoreFormat;

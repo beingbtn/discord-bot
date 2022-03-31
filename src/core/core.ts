@@ -94,6 +94,8 @@ export class Core {
 
                 performance.send = Date.now();
 
+                this.uses += 1;
+
                 this.updatePerformance(performance);
             } catch (error) {
                 if (error instanceof HTTPError) {

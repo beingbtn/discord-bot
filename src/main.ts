@@ -108,7 +108,7 @@ client.events = new Collection();
             fs.readdir(`${__dirname}/commands`),
             fs.readdir(`${__dirname}/events`),
         ])
-    ).map(file => file.filter(file1 => file1.endsWith('.ts')));
+    ).map(file => file.filter(file1 => file1.endsWith('.js')));
 
     const commandPromises: Promise<ClientCommand>[] = [];
     const eventPromises: Promise<ClientEvent>[] = [];
@@ -120,7 +120,6 @@ client.events = new Collection();
     for (const file of folders[1]) {
         eventPromises.push(import(`${__dirname}/events/${file}`));
     }
-
 
     const resolvedPromises = await Promise.all([
         Promise.all(commandPromises),
@@ -149,5 +148,5 @@ client.events = new Collection();
         }
     }
 
-    await client.login(process.env.discordAPIKey!);
+    await client.login();
 })();

@@ -1,14 +1,11 @@
-import type {
-    ClientEvent,
-    ClientCommand,
-} from '../@types/client';
-import { BetterEmbed } from '../utility/utility';
-import { CommandInteraction } from 'discord.js';
-import { Constants } from '../utility/Constants';
-import { Log } from '../utility/Log';
-import { RegionLocales } from '../locales/RegionLocales';
-
-export const properties: ClientCommand['properties'] = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.execute = exports.properties = void 0;
+const utility_1 = require("../utility/utility");
+const Constants_1 = require("../utility/Constants");
+const Log_1 = require("../utility/Log");
+const RegionLocales_1 = require("../locales/RegionLocales");
+exports.properties = {
     name: 'reload',
     description: 'Reloads all imports or a single import.',
     cooldown: 0,
@@ -60,114 +57,86 @@ export const properties: ClientCommand['properties'] = {
         ],
     },
 };
-
-export const execute: ClientCommand['execute'] = async (
-    interaction,
-): Promise<void> => {
-    const text = RegionLocales.locale(interaction.locale).commands.reload;
-    const { replace } = RegionLocales;
-
+const execute = async (interaction) => {
+    const text = RegionLocales_1.RegionLocales.locale(interaction.locale).commands.reload;
+    const { replace } = RegionLocales_1.RegionLocales;
     switch (interaction.options.getSubcommand()) {
-        case 'all': await reloadAll();
-        break;
-        case 'single': await reloadSingle();
-        break;
+        case 'all':
+            await reloadAll();
+            break;
+        case 'single':
+            await reloadSingle();
+            break;
         //no default
     }
-
     async function reloadAll() {
         const now = Date.now();
-        const promises: Promise<void>[] = [];
-
+        const promises = [];
         for (const [command] of interaction.client.commands) {
             promises.push(commandRefresh(interaction, command));
         }
-
         for (const [event] of interaction.client.events) {
             promises.push(eventRefresh(interaction, event));
         }
-
         await Promise.all(promises);
-
-        const reloadedEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+        const reloadedEmbed = new utility_1.BetterEmbed(interaction)
+            .setColor(Constants_1.Constants.colors.normal)
             .setTitle(text.all.title)
             .setDescription(replace(text.all.description, {
-                imports: promises.length,
-                timeTaken: Date.now() - now,
-            }));
-
-        Log.interaction(interaction, `All imports have been reloaded after ${
-            Date.now() - now
-        } milliseconds.`);
-
+            imports: promises.length,
+            timeTaken: Date.now() - now,
+        }));
+        Log_1.Log.interaction(interaction, `All imports have been reloaded after ${Date.now() - now} milliseconds.`);
         await interaction.editReply({ embeds: [reloadedEmbed] });
     }
-
     async function reloadSingle() {
         const now = Date.now();
         const typeName = interaction.options.getString('type', true);
-        const type =
-            interaction.client[
-                typeName as keyof Pick<
-                    typeof interaction.client,
-                    'commands' | 'events'
-                >
-            ];
-        const item = interaction.options.getString('item')!;
+        const type = interaction.client[typeName];
+        const item = interaction.options.getString('item');
         const selected = type.get(item);
-
         if (typeof selected === 'undefined') {
-            const undefinedSelected = new BetterEmbed(interaction)
-                .setColor(Constants.colors.warning)
+            const undefinedSelected = new utility_1.BetterEmbed(interaction)
+                .setColor(Constants_1.Constants.colors.warning)
                 .setTitle(text.single.unknown.title)
                 .setDescription(replace(text.single.unknown.description, {
-                    typeName: typeName,
-                    item: item,
-                }));
-
+                typeName: typeName,
+                item: item,
+            }));
             await interaction.editReply({ embeds: [undefinedSelected] });
             return;
         }
-
         if (typeName === 'commands') {
             commandRefresh(interaction, selected.properties.name);
-        } else if (typeName === 'events') {
+        }
+        else if (typeName === 'events') {
             eventRefresh(interaction, selected.properties.name);
         }
-
-        const reloadedEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+        const reloadedEmbed = new utility_1.BetterEmbed(interaction)
+            .setColor(Constants_1.Constants.colors.normal)
             .setTitle(text.single.success.title)
             .setDescription(replace(text.single.success.description, {
-                typeName: typeName,
-                item: item,
-                timeTaken: Date.now() - now,
-            }));
-
-        Log.interaction(interaction, `${typeName}.${item} was successfully reloaded after ${
-            Date.now() - now
-        } milliseconds.`);
-
+            typeName: typeName,
+            item: item,
+            timeTaken: Date.now() - now,
+        }));
+        Log_1.Log.interaction(interaction, `${typeName}.${item} was successfully reloaded after ${Date.now() - now} milliseconds.`);
         await interaction.editReply({ embeds: [reloadedEmbed] });
     }
 };
-
-
-async function commandRefresh(interaction: CommandInteraction, item: string) {
-    const refreshed = await reload<ClientCommand>(`${item}.js`);
+exports.execute = execute;
+async function commandRefresh(interaction, item) {
+    const refreshed = await reload(`${item}.js`);
     interaction.client.commands.set(refreshed.properties.name, refreshed);
 }
-
-async function eventRefresh(interaction: CommandInteraction, item: string) {
-    const refreshed = await reload<ClientEvent>(`../events/${item}.js`);
+async function eventRefresh(interaction, item) {
+    const refreshed = await reload(`../events/${item}.js`);
     interaction.client.events.set(refreshed.properties.name, refreshed);
 }
-
-function reload<Type>(path: string) {
-    return new Promise<Type>(resolve => {
+function reload(path) {
+    return new Promise(resolve => {
         delete require.cache[require.resolve(`${__dirname}/${path}`)];
-        const refreshed: Type = require(`${__dirname}/${path}`); //eslint-disable-line @typescript-eslint/no-var-requires
+        const refreshed = require(`${__dirname}/${path}`); //eslint-disable-line @typescript-eslint/no-var-requires
         resolve(refreshed);
     });
 }

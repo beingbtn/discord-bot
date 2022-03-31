@@ -8,5 +8,6 @@
       "alwaysStrict": true,
       "esModuleInterop": true,
       "downlevelIteration": true,
+      "outDir": "out",
     }
   }
