@@ -1,2 +1,2 @@
 # ignore compiled js
-**.js
+out
