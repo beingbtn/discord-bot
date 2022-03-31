@@ -21,10 +21,10 @@ class ErrorHandler extends BaseErrorHandler_1.BaseErrorHandler {
     }
     async systemNotify() {
         await (0, utility_1.sendWebHook)({
-            content: `<@${(JSON.parse(process.env.owners)).join('><@')}>`,
+            content: `<@${(JSON.parse(process.env.OWNERS)).join('><@')}>`,
             embeds: [this.errorEmbed()],
             files: [this.stackAttachment],
-            webhook: JSON.parse(process.env.fatal),
+            webhook: JSON.parse(process.env.WEBHOOK_FATAL),
             suppressError: true,
         });
     }

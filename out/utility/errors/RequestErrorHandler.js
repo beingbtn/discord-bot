@@ -7,7 +7,7 @@ const utility_1 = require("../../utility/utility");
 const ErrorHandler_1 = require("../../utility/errors/ErrorHandler");
 const node_fetch_1 = require("node-fetch");
 const HTTPError_1 = require("./HTTPError");
-const owners = JSON.parse(process.env.owners);
+const owners = JSON.parse(process.env.OWNERS);
 class RequestErrorHandler extends BaseErrorHandler_1.BaseErrorHandler {
     constructor(error, core) {
         super(error);
@@ -110,8 +110,8 @@ class RequestErrorHandler extends BaseErrorHandler_1.BaseErrorHandler {
                 : [this.stackAttachment],
             webhook: this.error instanceof HTTPError_1.HTTPError ||
                 this.error instanceof node_fetch_1.FetchError
-                ? JSON.parse(process.env.request)
-                : JSON.parse(process.env.fatal),
+                ? JSON.parse(process.env.WEBHOOK_REQUEST)
+                : JSON.parse(process.env.WEBHOOK_FATAL),
             suppressError: true,
         });
     }

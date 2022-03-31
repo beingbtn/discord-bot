@@ -108,7 +108,7 @@ export const execute: ClientCommand['execute'] = async (
 
     const token = process.env.discordAPIKey!;
     const rest = new REST({ version: '9' }).setToken(token);
-    const clientID = process.env.clientID!;
+    const clientID = process.env.CLIENT_ID!;
 
     if (scope === 'global') {
         await rest.put(Routes.applicationCommands(clientID), {

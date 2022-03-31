@@ -7,8 +7,8 @@ const Constants_1 = require("../Constants");
 const ErrorHandler_1 = require("../../utility/errors/ErrorHandler");
 const RegionLocales_1 = require("../../locales/RegionLocales");
 const utility_1 = require("../../utility/utility");
-const fatalWebhook = JSON.parse(process.env.fatal);
-const owners = JSON.parse(process.env.owners);
+const fatalWebhook = JSON.parse(process.env.WEBHOOK_FATAL);
+const owners = JSON.parse(process.env.OWNERS);
 class CommandErrorHandler extends BaseCommandErrorHandler_1.BaseCommandErrorHandler {
     constructor(error, interaction, locale) {
         super(error, interaction);

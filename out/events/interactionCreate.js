@@ -8,7 +8,7 @@ const Constants_1 = require("../utility/Constants");
 const ConstraintError_1 = require("../utility/errors/ConstraintError");
 const Log_1 = require("../utility/Log");
 const utility_1 = require("../utility/utility");
-const owners = JSON.parse(process.env.owners);
+const owners = JSON.parse(process.env.OWNERS);
 exports.properties = {
     name: 'interactionCreate',
     once: false,

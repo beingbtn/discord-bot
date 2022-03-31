@@ -26,7 +26,7 @@ class CoreChanges {
         });
     }
     static async check(data) {
-        const maxComments = JSON.parse(process.env.announcements)[data.title].maxComments;
+        const maxComments = JSON.parse(process.env.ANNOUNCEMENTS)[data.title].maxComments;
         const knownLinks = await CoreChanges.get(data);
         const potentialNew = data.items.filter(item => !knownLinks.includes(item.link));
         const base = Object.assign(data, { items: [] });

@@ -26,8 +26,8 @@
         "typescript": "^4.6.2"
     },
     "scripts": {
-        "build": "tsc -p .",
-        "postbuild": "node out/main.js",
+        "prerun": "tsc -p .",
+        "run": "node out/main.js",
         "docker": "node out/main.js"
     },
     "engines": {

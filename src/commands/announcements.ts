@@ -192,7 +192,7 @@ export const execute: ClientCommand['execute'] = async (
         ? 'SkyBlock Patch Notes'
         : 'Moderation Information and Changes';
 
-    const channels = JSON.parse(process.env.announcements!);
+    const channels = JSON.parse(process.env.ANNOUNCEMENTS!);
     const announcementID = channels[type].id as string;
 
     switch (interaction.options.getSubcommand()) {

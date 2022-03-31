@@ -137,7 +137,9 @@ export class CommandConstraintErrorHandler
 
         await sendWebHook({
             embeds: embeds,
-            webhook: JSON.parse(process.env.nonFatal!) as WebhookConfig,
+            webhook: JSON.parse(
+                process.env.WEBHOOK_NON_FATAL!,
+            ) as WebhookConfig,
             suppressError: true,
         });
     }

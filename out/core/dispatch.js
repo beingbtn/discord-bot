@@ -26,7 +26,7 @@ class CoreDispatch {
             }
             posts.unshift(embed);
         }
-        const channels = JSON.parse(process.env.announcements);
+        const channels = JSON.parse(process.env.ANNOUNCEMENTS);
         const channel = await this.client.channels.fetch(channels[data.title].id);
         const splitPostEmbeds = [];
         for (let index = 0; index < posts.length; index += 5) {

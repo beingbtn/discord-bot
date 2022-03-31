@@ -13,7 +13,7 @@ import { ConstraintError } from '../utility/errors/ConstraintError';
 import { Log } from '../utility/Log';
 import { slashCommandResolver } from '../utility/utility';
 
-const owners = JSON.parse(process.env.owners!) as string[];
+const owners = JSON.parse(process.env.OWNERS!) as string[];
 
 export const properties: ClientEvent['properties'] = {
     name: 'interactionCreate',

@@ -9,8 +9,8 @@ import { ErrorHandler } from '../../utility/errors/ErrorHandler';
 import { RegionLocales } from '../../locales/RegionLocales';
 import { sendWebHook } from '../../utility/utility';
 
-const fatalWebhook = JSON.parse(process.env.fatal!) as WebhookConfig;
-const owners = JSON.parse(process.env.owners!) as string[];
+const fatalWebhook = JSON.parse(process.env.WEBHOOK_FATAL!) as WebhookConfig;
+const owners = JSON.parse(process.env.OWNERS!) as string[];
 
 export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
     readonly interaction: CommandInteraction;

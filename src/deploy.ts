@@ -14,7 +14,7 @@ import { Routes } from 'discord-api-types/v9';
 
         await new REST({ version: '9' })
             .setToken(process.env.discordAPIkey!)
-            .put(Routes.applicationCommands(process.env.clientID!), {
+            .put(Routes.applicationCommands(process.env.CLIENT_ID!), {
                 body: [deployCommand],
             });
 

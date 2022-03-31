@@ -10,7 +10,7 @@ import { ErrorHandler } from '../../utility/errors/ErrorHandler';
 import { FetchError } from 'node-fetch';
 import { HTTPError } from './HTTPError';
 
-const owners = JSON.parse(process.env.owners!) as string[];
+const owners = JSON.parse(process.env.OWNERS!) as string[];
 
 export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
     readonly core: Core;
@@ -145,8 +145,8 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
             webhook:
                 this.error instanceof HTTPError ||
                 this.error instanceof FetchError
-                    ? JSON.parse(process.env.request!) as WebhookConfig
-                    : JSON.parse(process.env.fatal!) as WebhookConfig,
+                    ? JSON.parse(process.env.WEBHOOK_REQUEST!) as WebhookConfig
+                    : JSON.parse(process.env.WEBHOOK_FATAL!) as WebhookConfig,
             suppressError: true,
         });
     }

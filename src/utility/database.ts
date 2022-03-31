@@ -4,7 +4,7 @@ import {
     ServerApiVersion,
 } from 'mongodb';
 
-const uri = `mongodb+srv://${process.env.mongoUser}:${process.env.mongoPassword}@cluster0.s4uzo.mongodb.net/hypixelAnnouncements?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.s4uzo.mongodb.net/hypixelAnnouncements?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
     serverApi: ServerApiVersion.v1,

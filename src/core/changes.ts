@@ -34,7 +34,7 @@ export class CoreChanges {
 
     static async check(data: rssJSON): Promise<rssJSON> {
         const maxComments = JSON.parse(
-            process.env.announcements!,
+            process.env.ANNOUNCEMENTS!,
         )[data.title].maxComments;
 
         const knownLinks = await CoreChanges.get(data);

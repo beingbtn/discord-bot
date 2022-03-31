@@ -68,7 +68,7 @@ class CommandConstraintErrorHandler extends BaseCommandErrorHandler_1.BaseComman
             .setDescription(`Constraint: ${this.error.message}`);
         await (0, utility_1.sendWebHook)({
             embeds: embeds,
-            webhook: JSON.parse(process.env.nonFatal),
+            webhook: JSON.parse(process.env.WEBHOOK_NON_FATAL),
             suppressError: true,
         });
     }

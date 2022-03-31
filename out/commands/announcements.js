@@ -168,7 +168,7 @@ const execute = async (interaction) => {
         : interaction.options.getSubcommandGroup() === 'skyblock'
             ? 'SkyBlock Patch Notes'
             : 'Moderation Information and Changes';
-    const channels = JSON.parse(process.env.announcements);
+    const channels = JSON.parse(process.env.ANNOUNCEMENTS);
     const announcementID = channels[type].id;
     switch (interaction.options.getSubcommand()) {
         case 'add':

@@ -33,7 +33,7 @@ const v9_1 = require("discord-api-types/v9");
         const deployCommand = (await Promise.resolve().then(() => __importStar(require(`${__dirname}/commands/deploy.ts`)))).properties.structure;
         await new rest_1.REST({ version: '9' })
             .setToken(process.env.discordAPIkey)
-            .put(v9_1.Routes.applicationCommands(process.env.clientID), {
+            .put(v9_1.Routes.applicationCommands(process.env.CLIENT_ID), {
             body: [deployCommand],
         });
         Log_1.Log.log('Successfully deployed the deploy command.');
