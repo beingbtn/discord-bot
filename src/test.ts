@@ -69,7 +69,6 @@ const turndownService = new Turndown({
 .addRule('horizontal', {
     filter: [
         'hr',
-        'img',
     ],
     replacement: () => '',
 })
@@ -183,7 +182,9 @@ for (let i = 0; i < items.length; i += 1) {
         .replaceAll('  \n', '\n') //Remove weird newlines
         .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
         .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
-        .replace(/^\[Image Removed\]\n/, ''); //Remove first 'Image Removed' text
+        .replace(/^!\[\d+\.(png|jpg)\]\(.+\)/, '') //Remove the first image at the beginning, if any
+        .replaceAll(/!\[\d+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
+        .replaceAll(/ "\d+\.(png|jpg)"/gm, ''); //Replace image descriptions
 
     rss.items.push(obj);
 }

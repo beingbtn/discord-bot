@@ -28,12 +28,6 @@ export class CoreFormat {
         const turndownService = new Turndown({
             codeBlockStyle: 'fenced',
         })
-        .addRule('image', {
-            filter: [
-                'img',
-            ],
-            replacement: () => '[Image Removed]',
-        })
         .addRule('horizontal', {
             filter: [
                 'hr',
@@ -55,7 +49,7 @@ export class CoreFormat {
             filter: [
                 'li',
             ],
-            replacement: content => `• ${content}\n`,
+            replacement: content => `• ${content.replaceAll('\n', '')}\n`,
         });
 
         const parser = new XMLParser({
@@ -150,7 +144,9 @@ export class CoreFormat {
                 .replaceAll('  \n', '\n') //Remove weird newlines
                 .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
                 .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
-                .replace(/^\[Image Removed\]\n/, ''); //Remove first 'Image Removed' text
+                .replace(/^!\[\d+\.(png|jpg)\]\(.+\)/, '') //Remove the first image at the beginning, if any
+                .replaceAll(/!\[\d+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
+                .replaceAll(/ "\d+\.(png|jpg)"/gm, ''); //Replace image descriptions
 
             rss.items.push(obj);
         }
