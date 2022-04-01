@@ -27,9 +27,15 @@ export class CoreFormat {
 
         const turndownService = new Turndown({
             codeBlockStyle: 'fenced',
-        }).addRule('image', {
+        })
+        .addRule('image', {
             filter: [
                 'img',
+            ],
+            replacement: () => '[Image Removed]',
+        })
+        .addRule('horizontal', {
+            filter: [
                 'hr',
             ],
             replacement: () => '',
@@ -143,7 +149,8 @@ export class CoreFormat {
             obj.content = turndownService.turndown(obj.content)
                 .replaceAll('  \n', '\n') //Remove weird newlines
                 .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
-                .replace(/(^\n+|(\n+)+$)/g, ''); //Remove newlines at the end and start
+                .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
+                .replace(/^\[Image Removed\]\n/, ''); //Remove first 'Image Removed' text
 
             rss.items.push(obj);
         }

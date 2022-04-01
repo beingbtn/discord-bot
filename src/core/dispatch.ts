@@ -4,6 +4,7 @@ import {
     MessageEmbed,
     NewsChannel,
 } from 'discord.js';
+import process from 'node:process';
 
 export class CoreDispatch {
     client: Client;

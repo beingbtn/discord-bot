@@ -18,6 +18,7 @@ import { ConstraintError } from './ConstraintError';
 import { ErrorHandler } from '../../utility/errors/ErrorHandler';
 import { RegionLocales } from '../../locales/RegionLocales';
 import { setTimeout } from 'node:timers/promises';
+import process from 'node:process';
 
 export class CommandConstraintErrorHandler
     extends BaseCommandErrorHandler<ConstraintError> {

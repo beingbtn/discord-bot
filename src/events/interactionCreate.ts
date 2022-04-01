@@ -12,6 +12,7 @@ import { Constants } from '../utility/Constants';
 import { ConstraintError } from '../utility/errors/ConstraintError';
 import { Log } from '../utility/Log';
 import { slashCommandResolver } from '../utility/utility';
+import process from 'node:process';
 
 const owners = JSON.parse(process.env.OWNERS!) as string[];
 

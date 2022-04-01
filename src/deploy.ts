@@ -3,6 +3,7 @@ import type { ClientCommand } from './@types/client';
 import { Log } from './utility/Log';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
+import process from 'node:process';
 
 (async () => {
     try {

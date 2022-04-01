@@ -108,7 +108,7 @@ client.events = new Collection();
             fs.readdir(`${__dirname}/commands`),
             fs.readdir(`${__dirname}/events`),
         ])
-    ).map(file => file.filter(file1 => file1.endsWith('.js')));
+    );
 
     const commandPromises: Promise<ClientCommand>[] = [];
     const eventPromises: Promise<ClientEvent>[] = [];

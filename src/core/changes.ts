@@ -1,5 +1,6 @@
 import type { rssJSON } from './format';
 import { Database } from '../utility/database';
+import process from 'node:process';
 
 export class CoreChanges {
     static async get(data: rssJSON) {

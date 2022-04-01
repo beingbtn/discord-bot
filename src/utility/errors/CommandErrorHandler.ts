@@ -8,6 +8,7 @@ import { Constants } from '../Constants';
 import { ErrorHandler } from '../../utility/errors/ErrorHandler';
 import { RegionLocales } from '../../locales/RegionLocales';
 import { sendWebHook } from '../../utility/utility';
+import process from 'node:process';
 
 const fatalWebhook = JSON.parse(process.env.WEBHOOK_FATAL!) as WebhookConfig;
 const owners = JSON.parse(process.env.OWNERS!) as string[];

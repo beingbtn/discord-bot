@@ -10,6 +10,7 @@ import {
 } from 'discord.js';
 import { Log } from '../utility/Log';
 import { RegionLocales } from '../locales/RegionLocales';
+import process from 'node:process';
 
 export const properties: ClientCommand['properties'] = {
     name: 'announcements',

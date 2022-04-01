@@ -3,6 +3,7 @@ import {
     MongoClient,
     ServerApiVersion,
 } from 'mongodb';
+import process from 'node:process';
 
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.s4uzo.mongodb.net/hypixelAnnouncements?retryWrites=true&w=majority`;
 

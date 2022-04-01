@@ -61,6 +61,16 @@ export const properties: ClientCommand['properties'] = {
     },
 };
 
+//Determines if the runtime is using .js or ts-node
+let extension: string;
+
+try {
+    require('../main.js');
+    extension = '.js';
+} catch {
+    extension = '.ts';
+}
+
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
@@ -155,19 +165,19 @@ export const execute: ClientCommand['execute'] = async (
 
 
 async function commandRefresh(interaction: CommandInteraction, item: string) {
-    const refreshed = await reload<ClientCommand>(`${item}.js`);
+    const refreshed = await reload<ClientCommand>(`${item}`);
     interaction.client.commands.set(refreshed.properties.name, refreshed);
 }
 
 async function eventRefresh(interaction: CommandInteraction, item: string) {
-    const refreshed = await reload<ClientEvent>(`../events/${item}.js`);
+    const refreshed = await reload<ClientEvent>(`../events/${item}`);
     interaction.client.events.set(refreshed.properties.name, refreshed);
 }
 
 function reload<Type>(path: string) {
     return new Promise<Type>(resolve => {
-        delete require.cache[require.resolve(`${__dirname}/${path}`)];
-        const refreshed: Type = require(`${__dirname}/${path}`); //eslint-disable-line @typescript-eslint/no-var-requires
+        delete require.cache[require.resolve(`${__dirname}/${path}${extension}`)];
+        const refreshed: Type = require(`${__dirname}/${path}${extension}`); //eslint-disable-line @typescript-eslint/no-var-requires
         resolve(refreshed);
     });
 }

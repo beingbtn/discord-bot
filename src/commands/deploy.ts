@@ -6,6 +6,7 @@ import { RegionLocales } from '../locales/RegionLocales';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import fs from 'node:fs/promises';
+import process from 'node:process';
 
 export const properties: ClientCommand['properties'] = {
     name: 'deploy',
@@ -73,9 +74,7 @@ export const execute: ClientCommand['execute'] = async (
 ): Promise<void> => {
     const text = RegionLocales.locale(interaction.locale).commands.deploy;
 
-    const commandFiles = (await fs.readdir(__dirname)).filter(file =>
-        file.endsWith('.js'),
-    );
+    const commandFiles = (await fs.readdir(__dirname));
 
     const userCommands: object[] = [];
     const ownerCommands: object[] = [];

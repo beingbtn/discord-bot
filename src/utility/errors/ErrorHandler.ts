@@ -1,6 +1,7 @@
 import type { WebhookConfig } from '../../@types/client';
 import { BaseErrorHandler } from './BaseErrorHandler';
 import { sendWebHook } from '../utility';
+import process from 'node:process';
 
 export class ErrorHandler<E> extends BaseErrorHandler<E> {
     data: string[];

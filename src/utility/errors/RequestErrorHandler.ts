@@ -9,6 +9,7 @@ import { Core } from '../../core/core';
 import { ErrorHandler } from '../../utility/errors/ErrorHandler';
 import { FetchError } from 'node-fetch';
 import { HTTPError } from './HTTPError';
+import process from 'node:process';
 
 const owners = JSON.parse(process.env.OWNERS!) as string[];
 
