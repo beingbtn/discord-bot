@@ -144,6 +144,7 @@ export class CoreFormat {
                 .replaceAll('  \n', '\n') //Remove weird newlines
                 .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
                 .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
+                .replace(/\*\*\n\n•/gm, '**\n•')
                 .replace(/^!\[\d+\.(png|jpg)\]\(.+\)/, '') //Remove the first image at the beginning, if any
                 .replaceAll(/!\[\d+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
                 .replaceAll(/ "\d+\.(png|jpg)"/gm, ''); //Replace image descriptions
