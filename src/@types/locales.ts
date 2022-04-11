@@ -1,54 +1,3 @@
-import type {
-    MessageSelectMenuOptions,
-    MessageSelectOptionData,
-} from 'discord.js';
-
-/*
-Universal Module Data Separation Stuff
-*/
-export interface SelectMenuTopLocale {
-    label: string,
-    description: string,
-    longDescription: string,
-}
-
-export interface SelectMenuTopStructure {
-    value: string,
-}
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface SelectMenuOptionLocale extends Omit<MessageSelectOptionData, 'value'> {
-
-}
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface SelectMenuOptionStructure extends Omit<MessageSelectOptionData, 'label'> {
-
-}
-
-export interface SelectMenuLocale extends Omit<MessageSelectMenuOptions, 'customId' | 'options'> {
-    options: SelectMenuOptionLocale[],
-}
-
-export interface SelectMenuStructure extends Omit<MessageSelectMenuOptions, 'options'> {
-    options: SelectMenuOptionStructure[],
-}
-
-/*
-Toggle Buttons
-*/
-
-export interface LocaleButton {
-    enable: string,
-    disable: string,
-}
-
-export interface ButtonData {
-    enableCustomID: string,
-    disableCustomID: string,
-}
-
-
 /*
 General Interfaces
 */
@@ -124,9 +73,7 @@ export interface Eval {
 export interface Help {
     information: {
         introduction: Field,
-        modules: Field,
-        setup: Field,
-        other: Field,
+        category: Field,
         legal: Field,
     },
     all: {

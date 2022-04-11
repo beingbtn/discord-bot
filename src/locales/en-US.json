@@ -128,19 +128,11 @@
             "information": {
                 "introduction": {
                     "name": "Introduction",
-                    "value": "NotifHy is a notification bot for Hypixel. Share logins with friends, get reminders to claim daily rewards, and get alerts on suspicious activity. This bot is the successor to HyGuard, which you can read about [here](https://hypixel.net/threads/discord-bot-hyguard-a-bot-that-monitors-your-account-24-7.4368395/ \"Hypixel Forums\")."
+                    "value": "Hypixel Announcements is a bot that sends you the latest news from the Hypixel Network. This bot allows you to easily choose where and what kinds of announcements you want to receive."
                 },
-                "modules": {
-                    "name": "Modules",
-                    "value": "Modules are how different types of notifications are separated. Once you register, simply select and configure the modules you want to use.\n\n• The Defender module is an implementation of [HyGuard](https://hypixel.net/threads/discord-bot-hyguard-a-bot-that-monitors-your-account-24-7.4368395/ \"Hypixel Forums\")\n• The Friends module sends your login and logouts to a channel to share\n• The Rewards module sends you a DM reminding you to claim your daily reward"
-                },
-                "setup": {
-                    "name": "Setup",
-                    "value": "• You should use a server that you own or is owned by your friends\n• Invite the bot by clicking [here](https://notifhy.attituding.live/invite/ \"Invite\") and granting the OAuth2 scopes\n• Use **/register** followed by your username or UUID\n• Using **/discord** on Hypixel may be required to link or relink your Discord account to your Minecraft account\n• Use **/modules** followed by the module you are interested in\n• Configure the module by clicking on the select menus and buttons. The **Toggle** setting will tell you what settings need to be configured before you can enable the module\n• **/channel** may be required for some modules in order to tell the bot where you want alerts/notifications to go"
-                },
-                "other": {
-                    "name": "Other Information",
-                    "value": "Learn more at https://notifhy.attituding.live/ or the GitHub page below."
+                "category": {
+                    "name": "Announcement Categories",
+                    "value": "• **General** announcements refer to any announcements found [here](\"https://hypixel.net/forums/news-and-announcements.4/\" \"News and Announcements\")\n• **SkyBlock** announcements refer to any announcements found [here](\"https://hypixel.net/forums/skyblock-patch-notes.158/\" \"SkyBlock Patch Notes\")\n• **Moderation** announcements refer to any announcements found [here](\"https://hypixel.net/forums/moderation-information-and-changes.164/\" \"Moderation Information and Changes\")"
                 },
                 "legal": {
                     "name": "Legal Stuff",
