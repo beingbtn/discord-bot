@@ -14,6 +14,35 @@ const xml = `
     <link>https://hypixel.net/</link>
     <atom:link rel="self" type="application/rss+xml" href="https://hypixel.net/forums/skyblock-patch-notes.158/index.rss"/>
     <item>
+      <title>Easter Event on Hypixel</title>
+      <pubDate>Tue, 12 Apr 2022 23:37:59 +0000</pubDate>
+      <link>https://hypixel.net/threads/easter-event-on-hypixel.4903080/</link>
+      <guid isPermaLink="false">4903080</guid>
+      <author>invalid@example.com (Sylent)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Sylent</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/easter-newspost-png.2957680/"
+			class="bbImage "
+			style=""
+			alt="easter-newspost.png"
+			title="easter-newspost.png"
+			width="1048" height="400" loading="lazy" /><br />
+<br />
+Hey everyone!<br />
+<br />
+Spring has just arrived! With it, we've got an Easter event with more spring-themed content for everyone on the server! We've got new maps, new cosmetics, and more!<br />
+<ul>
+<li data-xf-list-type="ul"><b>Easter Sale - Up to 85% off!</b></li>
+<li data-xf-list-type="ul">Easter Simulator returns!</li>
+<li data-xf-list-type="ul">Updated Easter Loot Chests for SkyWars, Bed Wars, and Murder Mystery!</li>
+<li data-xf-list-type="ul">Return of <b>Easter Mystery Boxes</b></li>
+<li data-xf-list-type="ul">New Main Lobby reskin &amp; returning SkyWars and Bed Wars lobbies!</li>
+<li data-xf-list-type="ul">Refreshed SkyBlock Easter Cosmetics for Ranked...</li>
+</ul><br />
+<a href="https://hypixel.net/threads/easter-event-on-hypixel.4903080/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>21</slash:comments>
+    </item>
+    <item>
     <title>[April 1] Tool Reforges Patch</title>
     <pubDate>Fri, 01 Apr 2022 16:14:47 +0000</pubDate>
     <link>https://hypixel.net/threads/april-1-tool-reforges-patch.4887972/</link>
@@ -179,12 +208,13 @@ for (let i = 0; i < items.length; i += 1) {
     .map(array => array?.[0]);
 
     obj.content = turndownService.turndown(obj.content)
+        .replace(/^!\[\S+\.(png|jpg)\]\(.+\)/, '') //Remove the first image at the beginning, if any
+        .replaceAll(/!\[\S+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
+        .replaceAll(/ "\S+\.(png|jpg)"/gm, '') //Replace image descriptions at the end of hyperlinks
         .replaceAll('  \n', '\n') //Remove weird newlines
         .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
         .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
-        .replace(/^!\[\d+\.(png|jpg)\]\(.+\)/, '') //Remove the first image at the beginning, if any
-        .replaceAll(/!\[\d+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
-        .replaceAll(/ "\d+\.(png|jpg)"/gm, ''); //Replace image descriptions
+        .replace(/\*\*\n\n•/gm, '**\n•'); //Remove weird newlines with lists
 
     rss.items.push(obj);
 }

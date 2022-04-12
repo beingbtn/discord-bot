@@ -141,13 +141,13 @@ export class CoreFormat {
             .map(array => array?.[0]);
 
             obj.content = turndownService.turndown(obj.content)
+                .replace(/^!\[\S+\.(png|jpg)\]\(.+\)/, '') //Remove the first image at the beginning, if any
+                .replaceAll(/!\[\S+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
+                .replaceAll(/ "\S+\.(png|jpg)"/gm, '') //Replace image descriptions at the end of hyperlinks
                 .replaceAll('  \n', '\n') //Remove weird newlines
                 .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
                 .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
-                .replace(/\*\*\n\n•/gm, '**\n•') //Remove weird newlines with lists
-                .replace(/^!\[\d+\.(png|jpg)\]\(.+\)/, '') //Remove the first image at the beginning, if any
-                .replaceAll(/!\[\d+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
-                .replaceAll(/ "\d+\.(png|jpg)"/gm, ''); //Replace image descriptions
+                .replace(/\*\*\n\n•/gm, '**\n•'); //Remove weird newlines with lists
 
             rss.items.push(obj);
         }
