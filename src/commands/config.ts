@@ -141,7 +141,7 @@ export const execute: ClientCommand['execute'] = async (
     }
 
     function interval() {
-        const milliseconds = interaction.options.getInteger('interval', true);
+        const milliseconds = interaction.options.getInteger('milliseconds', true);
         client.config.interval = milliseconds;
 
         const intervalEmbed = new BetterEmbed(interaction)

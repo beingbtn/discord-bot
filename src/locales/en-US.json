@@ -85,7 +85,7 @@
             },
             "view": {
                 "title": "Current Configuration",
-                "description": "Core: {{ core }}\nDeveloper Mode: {{ devMode }}\nInterval: {{ interval }}%\nRest Request Timeout: {{ restRequestTimeout }}ms\nRetry Limit: {{ retryLimit }}"
+                "description": "Core: {{ core }}\nDeveloper Mode: {{ devMode }}\nInterval: {{ interval }}ms\nRest Request Timeout: {{ restRequestTimeout }}ms\nRetry Limit: {{ retryLimit }}"
             }
         },
         "deploy": {
