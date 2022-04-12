@@ -146,9 +146,9 @@ export const execute: ClientCommand['execute'] = async (
 
         const intervalEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.retryLimit.title)
-            .setDescription(replace(text.retryLimit.description, {
-                interval: milliseconds,
+            .setTitle(text.interval.title)
+            .setDescription(replace(text.interval.description, {
+                milliseconds: milliseconds,
             }));
 
         payload.embeds = [intervalEmbed];
