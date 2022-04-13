@@ -8,6 +8,7 @@ import {
     MessageComponentInteraction,
 } from 'discord.js';
 import { RegionLocales } from '../locales/RegionLocales';
+import { Log } from '../utility/Log';
 
 export const properties: ClientCommand['properties'] = {
     name: 'editannouncements',
@@ -39,62 +40,67 @@ export const execute: ClientCommand['execute'] = async (
 
     const messageID = interaction.options.getString('message', true);
 
-    try {
-        const message = await interaction.channel!.messages.fetch(messageID);
+    const message = await interaction.channel!.messages.fetch(messageID);
 
-        const content = `this is a test message plz ignore thx ${Date.now()}}`;
+    const content = `this is a test message plz ignore thx ${Date.now()}}`;
 
-        message.embeds[0]!.description = content;
+    message.embeds[0]!.description = content;
 
-        const button = new MessageActionRow()
-            .setComponents(
-                new MessageButton()
-                    .setCustomId('true')
-                    .setLabel(text.preview.buttonLabel)
-                    .setStyle(DiscordConstants.MessageButtonStyles.PRIMARY),
-            );
+    const button = new MessageActionRow()
+        .setComponents(
+            new MessageButton()
+                .setCustomId('true')
+                .setLabel(text.preview.buttonLabel)
+                .setStyle(DiscordConstants.MessageButtonStyles.PRIMARY),
+        );
 
-        const previewEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
-            .setTitle(text.preview.title)
-            .setDescription(text.preview.description);
+    const previewEmbed = new BetterEmbed(interaction)
+        .setColor(Constants.colors.normal)
+        .setTitle(text.preview.title)
+        .setDescription(text.preview.description);
 
-        await interaction.followUp({
-            embeds: [
-                previewEmbed,
-                ...message.embeds,
-            ],
-            components: [button],
+    const reply = await interaction.followUp({
+        embeds: [
+            previewEmbed,
+            ...message.embeds,
+        ],
+        components: [button],
+    });
+
+    const componentFilter = (i: MessageComponentInteraction) =>
+        interaction.user.id === i.user.id &&
+        i.message.id === reply.id;
+
+    await interaction.client.channels.fetch(interaction.channelId);
+
+    const disabledRows = disableComponents([button]);
+
+    const previewButton = await awaitComponent(interaction.channel!, 'BUTTON', {
+        filter: componentFilter,
+        idle: Constants.ms.second * 30,
+    });
+
+    if (previewButton === null) {
+        await interaction.editReply({
+            components: disabledRows,
         });
 
-        const componentFilter = (i: MessageComponentInteraction) =>
-            interaction.user.id === i.user.id &&
-            i.message.id === message.id;
-
-        await interaction.client.channels.fetch(interaction.channelId);
-
-        const previewButton = await awaitComponent(interaction.channel!, 'BUTTON', {
-            filter: componentFilter,
-            idle: Constants.ms.second * 30,
-        });
-
-        if (previewButton === null) {
-            const disabledRows = disableComponents([button]);
-
-            await interaction.editReply({
-                components: disabledRows,
-            });
-
-            return;
-        }
-
-        await message.edit({ embeds: message.embeds });
-    } catch (error) {
-        const errorEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.warning)
-            .setTitle('placeholder')
-            .setDescription(JSON.stringify(error));
-
-        await interaction.editReply({ embeds: [errorEmbed] });
+        return;
     }
+
+    Log.interaction(interaction, 'Editing message...');
+
+    await message.edit({ embeds: message.embeds });
+
+    Log.interaction(interaction, 'Published message!');
+
+    const successEmbed = new BetterEmbed(interaction)
+        .setColor(Constants.colors.normal)
+        .setTitle(text.success.title)
+        .setDescription(text.success.description);
+
+    await previewButton.update({
+        embeds: [successEmbed],
+        components: disabledRows,
+    });
 };
