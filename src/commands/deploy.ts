@@ -105,7 +105,7 @@ export const execute: ClientCommand['execute'] = async (
             ? ownerCommands
             : userCommands;
 
-    const token = process.env.discordAPIKey!;
+    const token = process.env.DISCORD_TOKEN!;
     const rest = new REST({ version: '9' }).setToken(token);
     const clientID = process.env.CLIENT_ID!;
 
