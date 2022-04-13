@@ -1,10 +1,11 @@
 import type { ClientCommand } from '../@types/client';
-import { awaitComponent, BetterEmbed } from '../utility/utility';
+import { awaitComponent, BetterEmbed, disableComponents } from '../utility/utility';
 import { Constants } from '../utility/Constants';
 import {
     Constants as DiscordConstants,
     MessageActionRow,
     MessageButton,
+    MessageComponentInteraction,
 } from 'discord.js';
 import { RegionLocales } from '../locales/RegionLocales';
 
@@ -41,7 +42,7 @@ export const execute: ClientCommand['execute'] = async (
     try {
         const message = await interaction.channel!.messages.fetch(messageID);
 
-        const content = 'testing 123 testing 321';
+        const content = `this is a test message plz ignore thx ${Date.now()}}`;
 
         message.embeds[0]!.description = content;
 
@@ -66,9 +67,24 @@ export const execute: ClientCommand['execute'] = async (
             components: [button],
         });
 
-        await awaitComponent(interaction.channel!, 'BUTTON', {
-            time: 30_000,
+        const componentFilter = (i: MessageComponentInteraction) =>
+            interaction.user.id === i.user.id &&
+            i.message.id === message.id;
+
+        const previewButton = await awaitComponent(interaction.channel!, 'BUTTON', {
+            filter: componentFilter,
+            idle: Constants.ms.second * 30,
         });
+
+        if (previewButton === null) {
+            const disabledRows = disableComponents([button]);
+
+            await interaction.editReply({
+                components: disabledRows,
+            });
+
+            return;
+        }
 
         await message.edit({ embeds: message.embeds });
     } catch (error) {

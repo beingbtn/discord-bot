@@ -95,7 +95,7 @@
         "editannouncements": {
             "preview": {
                 "title": "Announcement Preview",
-                "description": "This is the preview of the new announcement.",
+                "description": "This is a preview of the new announcement.",
                 "buttonLabel": "Looks Good!"
             },
             "success": {
