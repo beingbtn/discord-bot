@@ -22,7 +22,7 @@ export const properties: ClientCommand['properties'] = {
         description: 'Edit announcements',
         options: [
             {
-                name: 'messageID',
+                name: 'message',
                 description: 'Message ID',
                 type: 3,
                 required: true,
@@ -56,7 +56,7 @@ export const execute: ClientCommand['execute'] = async (
         interaction.locale,
     ).commands.editannouncements;
 
-    const messageID = interaction.options.getString('messageID', true);
+    const messageID = interaction.options.getString('message', true);
     const index = interaction.options.getNumber('index', true);
     const description = interaction.options.getString('description', false);
     const image = interaction.options.getString('image', false);
