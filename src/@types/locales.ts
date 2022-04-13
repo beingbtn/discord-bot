@@ -55,6 +55,18 @@ export interface Deploy {
     none: string,
 }
 
+export interface EditAnnouncements {
+    preview: {
+        title: string,
+        description: string,
+        buttonLabel: string,
+    },
+    success: {
+        title: string,
+        description: string,
+    },
+}
+
 export interface Eval {
     maxLength: Field,
     success: {
@@ -143,6 +155,7 @@ export interface Commands {
     api: API,
     config: Config,
     deploy: Deploy,
+    editannouncements: EditAnnouncements,
     eval: Eval,
     help: Help,
     language: Language,
