@@ -22,10 +22,28 @@ export const properties: ClientCommand['properties'] = {
         description: 'Edit announcements',
         options: [
             {
-                name: 'message',
+                name: 'messageID',
                 description: 'Message ID',
                 type: 3,
                 required: true,
+            },
+            {
+                name: 'index',
+                description: 'The index of the embed to modify',
+                type: 4,
+                required: true,
+            },
+            {
+                name: 'description',
+                description: 'The new description for the embed',
+                type: 3,
+                required: false,
+            },
+            {
+                name: 'image',
+                description: 'The new image states for the embed',
+                type: 3,
+                required: false,
             },
         ],
     },
@@ -38,13 +56,20 @@ export const execute: ClientCommand['execute'] = async (
         interaction.locale,
     ).commands.editannouncements;
 
-    const messageID = interaction.options.getString('message', true);
+    const messageID = interaction.options.getString('messageID', true);
+    const index = interaction.options.getNumber('index', true);
+    const description = interaction.options.getString('description', false);
+    const image = interaction.options.getString('image', false);
 
     const message = await interaction.channel!.messages.fetch(messageID);
 
-    const content = `this is a test message plz ignore thx ${Date.now()}}`;
+    if (image) {
+        message.embeds[index].setImage(image);
+    }
 
-    message.embeds[0]!.description = content;
+    if (description) {
+        message.embeds[index].setDescription(description);
+    }
 
     const button = new MessageActionRow()
         .setComponents(
@@ -62,7 +87,7 @@ export const execute: ClientCommand['execute'] = async (
     const reply = await interaction.followUp({
         embeds: [
             previewEmbed,
-            ...message.embeds,
+            message.embeds[index],
         ],
         components: [button],
     });
