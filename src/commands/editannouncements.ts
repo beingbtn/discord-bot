@@ -53,8 +53,16 @@ export const execute: ClientCommand['execute'] = async (
                     .setStyle(DiscordConstants.MessageButtonStyles.PRIMARY),
             );
 
+        const previewEmbed = new BetterEmbed(interaction)
+            .setColor(Constants.colors.normal)
+            .setTitle(text.preview.title)
+            .setDescription(text.preview.description);
+
         await interaction.followUp({
-            embeds: message.embeds,
+            embeds: [
+                previewEmbed,
+                ...message.embeds,
+            ],
             components: [button],
         });
 

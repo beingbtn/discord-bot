@@ -92,6 +92,17 @@
             "title": "Success!",
             "none": "None"
         },
+        "editannouncements": {
+            "preview": {
+                "title": "Announcement Preview",
+                "description": "This is the preview of the new announcement.",
+                "buttonLabel": "Looks Good!"
+            },
+            "success": {
+                "title": "Announcement Published",
+                "description": "Your edit has been published!"
+            }
+        },
         "eval": {
             "maxLength": {
                 "name": "Over Max Length",
