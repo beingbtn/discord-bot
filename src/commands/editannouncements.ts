@@ -6,6 +6,7 @@ import {
     MessageActionRow,
     MessageButton,
     MessageComponentInteraction,
+    MessageEmbed,
 } from 'discord.js';
 import { RegionLocales } from '../locales/RegionLocales';
 import { Log } from '../utility/Log';
@@ -57,19 +58,23 @@ export const execute: ClientCommand['execute'] = async (
     ).commands.editannouncements;
 
     const messageID = interaction.options.getString('message', true);
-    const index = interaction.options.getNumber('index', true);
+    const index = interaction.options.getInteger('index', true);
     const description = interaction.options.getString('description', false);
     const image = interaction.options.getString('image', false);
 
     const message = await interaction.channel!.messages.fetch(messageID);
 
+    const tempEmbed = new MessageEmbed(message.embeds[index]);
+
     if (image) {
-        message.embeds[index].setImage(image);
+        tempEmbed.setImage(image);
     }
 
     if (description) {
-        message.embeds[index].setDescription(description);
+        tempEmbed.setDescription(description);
     }
+
+    message.embeds[index] = tempEmbed;
 
     const button = new MessageActionRow()
         .setComponents(
