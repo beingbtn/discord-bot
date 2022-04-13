@@ -71,6 +71,8 @@ export const execute: ClientCommand['execute'] = async (
             interaction.user.id === i.user.id &&
             i.message.id === message.id;
 
+        await interaction.client.channels.fetch(interaction.channelId);
+
         const previewButton = await awaitComponent(interaction.channel!, 'BUTTON', {
             filter: componentFilter,
             idle: Constants.ms.second * 30,
