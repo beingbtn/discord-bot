@@ -17,7 +17,7 @@ export const Constants = {
         config: {
             core: true,
             devMode: false,
-            interval: 60000,
+            interval: 120000,
         },
         language: 'en-US',
         performance: {
