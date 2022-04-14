@@ -139,7 +139,7 @@
             "information": {
                 "introduction": {
                     "name": "Introduction",
-                    "value": "Hypixel Announcements is a bot that sends you the latest news from the Hypixel Network. This bot allows you to easily choose where and what kinds of announcements you want to receive."
+                    "value": "Hypixel News is a bot that sends you the latest news from the Hypixel Network. This bot allows you to easily choose where and what kinds of announcements you want to receive."
                 },
                 "category": {
                     "name": "Announcement Categories",
@@ -147,7 +147,7 @@
                 },
                 "legal": {
                     "name": "Legal Stuff",
-                    "value": "By using this service, you agree to our [Privacy Policy](https://notifhy.attituding.live/legal/privacy-policy/ \"Privacy Policy\") and our [Terms of Service](https://notifhy.attituding.live/legal/terms-of-service/ \"Terms of Service\")."
+                    "value": "By using this service, you agree to our [Privacy Policy](https://hypixelnews.attituding.live/legal/privacy-policy/ \"Privacy Policy\") and our [Terms of Service](https://hypixelnews.attituding.live/legal/terms-of-service/ \"Terms of Service\")."
                 }
             },
             "all": {
