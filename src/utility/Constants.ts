@@ -14,11 +14,6 @@ export const Constants = {
         off: 0x555555 as ColorResolvable,
     },
     defaults: {
-        config: {
-            core: true,
-            devMode: false,
-            interval: 120000,
-        },
         language: 'en-US',
         performance: {
             start: 0, //Date.now()

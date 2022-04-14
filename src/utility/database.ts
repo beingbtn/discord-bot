@@ -4,6 +4,7 @@ import {
     ServerApiVersion,
 } from 'mongodb';
 import process from 'node:process';
+import { Config } from '../@types/client';
 
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.s4uzo.mongodb.net/hypixelAnnouncements?retryWrites=true&w=majority`;
 
@@ -25,5 +26,32 @@ export class Database {
 
     static async close() {
         await client.close();
+    }
+
+    async getConfig() {
+        return (
+            await this.instance
+                .collection('config')
+                .find({ })
+                .project<Config>({
+                    _id: 0,
+                })
+                .toArray()
+        )[0];
+    }
+
+    async setConfig(key: string, value: boolean | number) {
+        await this.instance
+            .collection('config')
+            .updateOne(
+                {
+                    [key]: { $exists: true },
+                },
+                {
+                    $set: {
+                        [key]: value,
+                    },
+                },
+            );
     }
 }

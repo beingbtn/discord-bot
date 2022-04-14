@@ -10,7 +10,6 @@ import {
     Options,
     Sweepers,
 } from 'discord.js';
-import { Constants } from './utility/Constants';
 import { Core } from './core/core';
 import { Database } from './utility/database';
 import { ErrorHandler } from './utility/errors/ErrorHandler';
@@ -90,18 +89,15 @@ const client = new Client({
     },
 });
 
-client.commands = new Collection();
-client.config = {
-     ...Constants.defaults.config,
-    ...Constants.defaults.request,
-};
-client.cooldowns = new Collection();
-client.core = new Core(client);
-client.customPresence = null;
-client.events = new Collection();
-
 (async () => {
     await Database.init();
+
+    client.commands = new Collection();
+    client.config = await new Database().getConfig();
+    client.cooldowns = new Collection();
+    client.core = new Core(client);
+    client.customPresence = null;
+    client.events = new Collection();
 
     const folders = (
         await Promise.all([

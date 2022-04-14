@@ -4,6 +4,7 @@ import { Constants } from '../utility/Constants';
 import { Log } from '../utility/Log';
 import { RegionLocales } from '../locales/RegionLocales';
 import { WebhookEditMessageOptions } from 'discord.js';
+import { Database } from '../utility/database';
 
 export const properties: ClientCommand['properties'] = {
     name: 'config',
@@ -91,23 +92,25 @@ export const execute: ClientCommand['execute'] = async (
     const client = interaction.client;
 
     switch (interaction.options.getSubcommand()) {
-        case 'core': coreCommand();
+        case 'core': await coreCommand();
         break;
-        case 'devmode': devModeCommand();
+        case 'devmode': await devModeCommand();
         break;
-        case 'interval': interval();
+        case 'interval': await interval();
         break;
-        case 'restrequesttimeout': restRequestTimeoutCommand();
+        case 'restrequesttimeout': await restRequestTimeoutCommand();
         break;
-        case 'retrylimit': retryLimitCommand();
+        case 'retrylimit': await retryLimitCommand();
         break;
         case 'view': viewCommand();
         break;
         //no default
     }
 
-    function coreCommand() {
+    async function coreCommand() {
         client.config.core = !client.config.core;
+
+        await new Database().setConfig('core', client.config.core);
 
         const coreEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
@@ -123,8 +126,10 @@ export const execute: ClientCommand['execute'] = async (
         Log.interaction(interaction, coreEmbed.description);
     }
 
-    function devModeCommand() {
+    async function devModeCommand() {
         client.config.devMode = !client.config.devMode;
+
+        await new Database().setConfig('devMode', client.config.devMode);
 
         const devModeEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
@@ -140,9 +145,11 @@ export const execute: ClientCommand['execute'] = async (
         Log.interaction(interaction, devModeEmbed.description);
     }
 
-    function interval() {
+    async function interval() {
         const milliseconds = interaction.options.getInteger('milliseconds', true);
         client.config.interval = milliseconds;
+
+        await new Database().setConfig('interval', milliseconds);
 
         const intervalEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
@@ -156,9 +163,11 @@ export const execute: ClientCommand['execute'] = async (
         Log.interaction(interaction, intervalEmbed.description);
     }
 
-    function restRequestTimeoutCommand() {
+    async function restRequestTimeoutCommand() {
         const milliseconds = interaction.options.getInteger('milliseconds', true);
         client.config.restRequestTimeout = milliseconds;
+
+        await new Database().setConfig('restRequestTimeout', milliseconds);
 
         const keyPercentageEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
@@ -172,9 +181,11 @@ export const execute: ClientCommand['execute'] = async (
         Log.interaction(interaction, keyPercentageEmbed.description);
     }
 
-    function retryLimitCommand() {
+    async function retryLimitCommand() {
         const limit = interaction.options.getInteger('limit', true);
         client.config.retryLimit = limit;
+
+        await new Database().setConfig('retryLimit', limit);
 
         const keyPercentageEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
