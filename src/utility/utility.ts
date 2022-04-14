@@ -258,11 +258,6 @@ export function setPresence(client: Client) {
     if (presence === null) {
         //@ts-expect-error typings not available yet for structuredClone
         presence = structuredClone(Constants.defaults.presence);
-
-        presence!.activities?.forEach(activity => {
-            activity.name = activity.name
-                ?.replace('{{ servers }}', String(client.guilds.cache.size));
-        });
     }
 
     client.user?.setPresence(presence!);

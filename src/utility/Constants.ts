@@ -31,7 +31,7 @@ export const Constants = {
         },
         presence: {
             activities: [{
-                name: 'Hypixel Announcements | {{ servers }} servers',
+                name: 'Hypixel Announcements',
                 type: 'WATCHING',
             }],
             status: 'online',
