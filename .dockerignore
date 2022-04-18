@@ -1,6 +1,8 @@
 node_modules
-LICENSE
-.gitignore
+.env.sample
 .eslintrc
+.gitignore
+.prettierrc.json
+LICENSE
 .vscode
-**.ts
+**.js

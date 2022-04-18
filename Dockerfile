@@ -2,10 +2,10 @@ FROM node:latest
 
 WORKDIR /usr/src/app
 
-COPY package.json .
+ADD . /usr/src/app
 
 RUN npm install --production
 
-ADD . /usr/src/app
+RUN npm run prerun
 
 CMD ["npm","run","docker"]
