@@ -147,7 +147,7 @@
                 },
                 "legal": {
                     "name": "Legal Stuff",
-                    "value": "By using this service, you agree to our [Privacy Policy](https://hypixelnews.attituding.live/legal/privacy-policy/ \"Privacy Policy\") and our [Terms of Service](https://hypixelnews.attituding.live/legal/terms-of-service/ \"Terms of Service\")."
+                    "value": "By using this service, you agree to our [Privacy Policy](https://attituding.github.io/Hypixel-News/legal/privacy-policy/ \"Privacy Policy\") and our [Terms of Service](https://attituding.github.io/Hypixel-News/legal/terms-of-service/ \"Terms of Service\")."
                 }
             },
             "all": {
