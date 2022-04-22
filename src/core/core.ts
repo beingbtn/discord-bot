@@ -11,6 +11,7 @@ import { RequestErrorHandler } from '../utility/errors/RequestErrorHandler';
 import { CoreDispatch } from './dispatch';
 import { Log } from '../utility/Log';
 import { CoreEmbed } from './embed';
+import { CoreComponents } from './components';
 
 /* eslint-disable no-await-in-loop */
 
@@ -89,8 +90,9 @@ export class Core {
 
                 if (changes.items.length > 0) {
                     Log.log(`New link(s) found: ${changes.items.map(item => item.link).join(', ')}!`);
-                    const embeds = CoreEmbed.create(rssJSON);
-                    await this.dispatch.dispatch(embeds, rssJSON);
+                    const embeds = CoreEmbed.create(changes);
+                    const components = CoreComponents.create(changes);
+                    await this.dispatch.dispatch(embeds, components, changes);
                     Log.log(`Finished dispatching messages from ${changes.title}!`);
                 }
 

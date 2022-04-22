@@ -147,7 +147,8 @@ export class CoreFormat {
                 .replaceAll('  \n', '\n') //Remove weird newlines
                 .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
                 .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
-                .replace(/\*\*\n\n•/gm, '**\n•'); //Remove weird newlines with lists
+                .replace(/\*\*\n\n•/gm, '**\n•') //Remove weird newlines with lists
+                .replace(/\n\n\[Read more\]\(.+\)/m, ''); //Remove read more text
 
             rss.items.push(obj);
         }
