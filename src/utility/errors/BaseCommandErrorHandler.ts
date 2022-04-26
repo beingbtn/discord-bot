@@ -1,4 +1,5 @@
 import {
+    ButtonInteraction,
     CommandInteraction,
     GuildChannel,
     TextChannel,
@@ -8,11 +9,11 @@ import { Constants } from '../Constants';
 import { slashCommandResolver } from '../utility';
 
 export class BaseCommandErrorHandler<E> extends BaseErrorHandler<E> {
-    readonly interaction: CommandInteraction;
+    readonly interaction: CommandInteraction | ButtonInteraction;
 
     constructor(
         error: E,
-        interaction: CommandInteraction,
+        interaction: CommandInteraction | ButtonInteraction,
     ) {
         super(error);
         this.interaction = interaction;
@@ -28,9 +29,11 @@ export class BaseCommandErrorHandler<E> extends BaseErrorHandler<E> {
             user,
         } = this.interaction;
 
-        const command = slashCommandResolver(
-            this.interaction,
-        );
+        const command = this.interaction instanceof CommandInteraction
+            ? slashCommandResolver(
+                this.interaction,
+            )
+            : null;
 
         return this.baseErrorEmbed()
             .addFields(
@@ -42,7 +45,7 @@ export class BaseCommandErrorHandler<E> extends BaseErrorHandler<E> {
                 {
                     name: 'Interaction',
                     value: `ID: ${id}
-                    Command: ${command}
+                    Command: ${command ?? 'N/A'}
                     Created At: <t:${Math.round(
                         createdTimestamp / Constants.ms.second,
                     )}:T>`,

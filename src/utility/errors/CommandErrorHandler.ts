@@ -1,6 +1,7 @@
 import type { WebhookConfig } from '../../@types/client';
 import { BaseCommandErrorHandler } from './BaseCommandErrorHandler';
 import {
+    ButtonInteraction,
     CommandInteraction,
     MessageEmbed,
 } from 'discord.js';
@@ -14,12 +15,12 @@ const fatalWebhook = JSON.parse(process.env.WEBHOOK_FATAL!) as WebhookConfig;
 const owners = JSON.parse(process.env.OWNERS!) as string[];
 
 export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
-    readonly interaction: CommandInteraction;
+    readonly interaction: CommandInteraction | ButtonInteraction;
     readonly locale: string;
 
     constructor(
         error: E,
-        interaction: CommandInteraction,
+        interaction: CommandInteraction | ButtonInteraction,
         locale: string,
     ) {
         super(error, interaction);
@@ -29,7 +30,7 @@ export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
 
     static async init<T>(
         error: T,
-        interaction: CommandInteraction,
+        interaction: CommandInteraction | ButtonInteraction,
         locale: string,
     ) {
         const handler = new CommandErrorHandler(error, interaction, locale);
@@ -48,7 +49,9 @@ export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
     }
 
     private async userNotify() {
-        const { commandName } = this.interaction;
+        const commandName = this.interaction instanceof CommandInteraction
+            ? this.interaction.commandName
+            : null;
 
         const text = RegionLocales
             .locale(this.locale)
@@ -60,7 +63,7 @@ export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
             .setColor(Constants.colors.error)
             .setTitle(text.commandErrors.embed.title)
             .setDescription(replace(text.commandErrors.embed.description, {
-                commandName: commandName,
+                commandName: commandName ?? 'N/A',
             }))
             .addFields({
                 name: text.commandErrors.embed.field.name,
