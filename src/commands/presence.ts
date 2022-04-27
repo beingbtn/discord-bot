@@ -6,7 +6,6 @@ import {
     setPresence,
 } from '../utility/utility';
 import { Constants } from '../utility/Constants';
-import { RegionLocales } from '../locales/RegionLocales';
 
 export const properties: ClientCommand['properties'] = {
     name: 'presence',
@@ -102,8 +101,7 @@ export const properties: ClientCommand['properties'] = {
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const text = RegionLocales.locale(interaction.locale).commands.presence;
-    const { replace } = RegionLocales;
+    const { i18n } = interaction;
 
     const responseEmbed = new BetterEmbed(interaction)
         .setColor(Constants.colors.normal);
@@ -124,37 +122,29 @@ export const execute: ClientCommand['execute'] = async (
         };
 
         responseEmbed
-            .setTitle(text.set.title)
+            .setTitle(i18n.getMessage('commandsPresenceSetTitle'))
             .addFields([
                 {
-                    name: text.set.status.name,
-                    value: replace(text.set.status.value, {
-                        status: status,
-                    }),
+                    name: i18n.getMessage('commandsPresenceSetStatusName'),
+                    value: status,
                 },
                 {
-                    name: text.set.type.name,
-                    value: replace(text.set.type.value, {
-                        type: type,
-                    }),
+                    name: i18n.getMessage('commandsPresenceSetTypeName'),
+                    value: type,
                 },
                 {
-                    name: text.set.name.name,
-                    value: replace(text.set.name.value, {
-                        name: name,
-                    }),
+                    name: i18n.getMessage('commandsPresenceSetNameName'),
+                    value: name,
                 },
                 {
-                    name: text.set.url.name,
-                    value: replace(text.set.url.value, {
-                        url: url ?? text.set.none,
-                    }),
+                    name: i18n.getMessage('commandsPresenceSetURLName'),
+                    value: url ?? i18n.getMessage('null'),
                 },
             ]);
     } else {
         responseEmbed
-            .setTitle(text.cleared.title)
-            .setDescription(text.cleared.description);
+            .setTitle(i18n.getMessage('commandsPresenceClearTitle'))
+            .setDescription(i18n.getMessage('commandsPresenceClearTitle'));
 
         interaction.client.customPresence = null;
     }

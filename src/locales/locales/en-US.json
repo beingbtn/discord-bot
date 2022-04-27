@@ -236,5 +236,26 @@
     },
     "commandsPingDescription": {
         "message": "Websocket heartbeat is $1ms. Roundtrip latency is $2ms."
+    },
+    "commandsPresenceSetTitle": {
+        "message": "Presence Set"
+    },
+    "commandsPresenceSetStatusName": {
+        "message": "Status"
+    },
+    "commandsPresenceSetTypeName": {
+        "message": "Type"
+    },
+    "commandsPresenceSetNameName": {
+        "message": "Name"
+    },
+    "commandsPresenceSetURLName": {
+        "message": "URL"
+    },
+    "commandsPresenceClearTitle": {
+        "message": "Presence Cleared"
+    },
+    "commandsPresenceClearDescription": {
+        "message": "The presence has been reset to the default!"
     }
 }
