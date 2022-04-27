@@ -9,7 +9,6 @@ import {
     TextChannel,
 } from 'discord.js';
 import { Log } from '../utility/Log';
-import { RegionLocales } from '../locales/RegionLocales';
 import process from 'node:process';
 
 export const properties: ClientCommand['properties'] = {
@@ -139,10 +138,7 @@ export const execute: ClientCommand['execute'] = async (
         return;
     }
 
-    const text = RegionLocales.locale(
-        interaction.locale,
-    ).commands.announcements;
-    const { replace } = RegionLocales;
+    const { i18n } = interaction;
 
     const channel = interaction.options.getChannel('channel', true) as TextChannel;
 
@@ -155,8 +151,12 @@ export const execute: ClientCommand['execute'] = async (
     if (userHasPermission === false) {
         const missingPermission = new BetterEmbed(interaction)
             .setColor(Constants.colors.warning)
-            .setTitle(text.userMissingPermission.title)
-            .setDescription(text.userMissingPermission.description);
+            .setTitle(i18n.getMessage(
+                'commandsAnnouncementsUserMissingPermissionTitle',
+            ))
+            .setDescription(i18n.getMessage(
+                'commandsAnnouncementsUserMissingPermissionDescription',
+            ));
 
         Log.interaction(interaction, 'User missing permission');
 
@@ -175,10 +175,14 @@ export const execute: ClientCommand['execute'] = async (
     if (botHasPermission.length > 0) {
         const missingPermission = new BetterEmbed(interaction)
             .setColor(Constants.colors.warning)
-            .setTitle(text.botMissingPermission.title)
-            .setDescription(replace(text.botMissingPermission.description, {
-                permissions: botHasPermission,
-            }));
+            .setTitle(i18n.getMessage(
+                'commandsAnnouncementsBotMissingPermissionTitle',
+            ))
+            .setDescription(i18n.getMessage(
+                'commandsAnnouncementsBotMissingPermissionDescription', [
+                    botHasPermission.join(', '),
+                ],
+            ));
 
         Log.interaction(interaction, 'Bot missing permission(s)');
 
@@ -213,13 +217,13 @@ export const execute: ClientCommand['execute'] = async (
         if (typeof existingAnnouncements !== 'undefined') {
             const alreadyAddedEmbed = new BetterEmbed(interaction)
                 .setColor(Constants.colors.warning)
-                .setTitle(replace(text.add.alreadyAdded.title, {
-                    type: type,
-                }))
-                .setDescription(replace(text.add.alreadyAdded.description, {
-                    type: type,
-                    channel: Formatters.channelMention(channel.id),
-                }));
+                .setTitle(i18n.getMessage('commandsAnnouncementsAddAlreadyAddedTitle', [
+                    type,
+                ]))
+                .setDescription(i18n.getMessage('commandsAnnouncementsAddAlreadyAddedDescription', [
+                    type,
+                    Formatters.channelMention(channel.id),
+                ]));
 
             Log.interaction(interaction, `${type} announcement type was already added to ${channel.id}`);
 
@@ -246,13 +250,13 @@ export const execute: ClientCommand['execute'] = async (
 
         const addEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(replace(text.add.title, {
-                type: type,
-            }))
-            .setDescription(replace(text.add.description, {
-                type: type,
-                channel: Formatters.channelMention(channel.id),
-            }));
+            .setTitle(i18n.getMessage('commandsAnnouncementsAddTitle', [
+                type,
+            ]))
+            .setDescription(i18n.getMessage('commandsAnnouncementsAddDescription', [
+                type,
+                Formatters.channelMention(channel.id),
+            ]));
 
         Log.interaction(interaction, `${type} announcements added to ${channel.id}`);
 
@@ -268,13 +272,13 @@ export const execute: ClientCommand['execute'] = async (
         if (typeof announcementWebhook === 'undefined') {
             const notFoundEmbed = new BetterEmbed(interaction)
                 .setColor(Constants.colors.warning)
-                .setTitle(replace(text.remove.notFound.title, {
-                    type: type,
-                }))
-                .setDescription(replace(text.remove.notFound.description, {
-                    type: type,
-                    channel: Formatters.channelMention(channel.id),
-                }));
+                .setTitle(i18n.getMessage('commandsAnnouncementsRemoveNotFoundTitle', [
+                    type,
+                ]))
+                .setDescription(i18n.getMessage('commandsAnnouncementsRemoveNotFoundDescription', [
+                    type,
+                    Formatters.channelMention(channel.id),
+                ]));
 
             Log.interaction(interaction, `${type} announcement type isn't added to ${channel.id}`);
 
@@ -287,13 +291,13 @@ export const execute: ClientCommand['execute'] = async (
 
         const removeEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(replace(text.remove.title, {
-                type: type,
-            }))
-            .setDescription(replace(text.remove.description, {
-                type: type,
-                channel: Formatters.channelMention(channel.id),
-            }));
+            .setTitle(i18n.getMessage('commandsAnnouncementsRemoveTitle', [
+                type,
+            ]))
+            .setDescription(i18n.getMessage('commandsAnnouncementsRemoveDescription', [
+                type,
+                Formatters.channelMention(channel.id),
+            ]));
 
         Log.interaction(interaction, `${type} announcements removed from ${channel.id}`);
 

@@ -1,5 +1,232 @@
 {
-    "thisIsATestKey": {
-        "message": "testKeys"
+    "null": {
+        "message": "Unknown"
+    },
+    "yes": {
+        "message": "Yes"
+    },
+    "no": {
+        "message": "No"
+    },
+    "commandsAnnouncementsBotMissingPermissionTitle": {
+        "message": "Missing Permission"
+    },
+    "commandsAnnouncementsBotMissingPermissionDescription": {
+        "message": "This bot is unable to use the channel you selected because it is missing permission(s): $1. Grant the bot the listed permissions or select a different channel that the bot can use."
+    },
+    "commandsAnnouncementsUserMissingPermissionTitle": {
+        "message": "Missing Permission"
+    },
+    "commandsAnnouncementsUserMissingPermissionDescription": {
+        "message": "You must have the **Manage Webhook(s)** permission to use this command. This permission can either be granted server-wide or given through a channel's advanced permissions."
+    },
+    "commandsAnnouncementsAddTitle": {
+        "message": "Added $1"
+    },
+    "commandsAnnouncementsAddDescription": {
+        "message": "$1 will be sent to $2!"
+    },
+    "commandsAnnouncementsAddAlreadyAddedTitle": {
+        "message": "$1 Type Already Added!"
+    },
+    "commandsAnnouncementsAddAlreadyAddedDescription": {
+        "message": "The announcement type `$1` was already added to $2!"
+    },
+    "commandsAnnouncementsRemoveTitle": {
+        "message": "Removed $1"
+    },
+    "commandsAnnouncementsRemoveDescription": {
+        "message": "$1 will no longer be sent too $2!"
+    },
+    "commandsAnnouncementsRemoveNotFoundTitle": {
+        "message": "$1 Type Not Found"
+    },
+    "commandsAnnouncementsRemoveNotFoundDescription": {
+        "message": "The announcement type `$1` isn't added to $2!"
+    },
+    "commandsAPIStatsEnabledName": {
+        "message": "Enabled"
+    },
+    "commandsAPIStatsResumeName": {
+        "message": "Resuming In"
+    },
+    "commandsAPIStatsLastMinuteName": {
+        "message": "Last Minute Statistic"
+    },
+    "commandsAPIStatsLastMinuteValue": {
+        "message": "Aborts: $1\nGeneric Errors: $2\nHTTP: $3"
+    },
+    "commandsAPIStatsNextTimeoutsName": {
+        "message": "Next Timeout Lengths"
+    },
+    "commandsAPIStatsNextTimeoutsValue": {
+        "message": "May not be accurate\nAbort Errors: $1\nGeneric Errors: $2\nHTTP Errors: $3"
+    },
+    "commandsAPIStatsUsesName": {
+        "message": "Uses"
+    },
+    "commandsAPISetTitle": {
+        "message": "Updated Value"
+    },
+    "commandsAPISetValue": {
+        "message": "<CoreErrors>.$1.$2 is now $3."
+    },
+    "commandsAPICallTitle": {
+        "message": "Executed"
+    },
+    "commandsAPICallValue": {
+        "message": "Executed <CoreErrors>.$1."
+    },
+    "commandsConfigCoreTitle": {
+        "message": "Core State Updated"
+    },
+    "commandsConfigCoreDescription": {
+        "message": "The core is now $1"
+    },
+    "commandsConfigDevModeTitle": {
+        "message": "Developer Mode Updated"
+    },
+    "commandsConfigDevModeDescription": {
+        "message": "Developer Mode is now"
+    },
+    "commandsConfigIntervalTitle": {
+        "message": "Interval Updated"
+    },
+    "commandsConfigIntervalDescription": {
+        "message": "The interval is now $1"
+    },
+    "commandsConfigRestRequestTimeoutTitle": {
+        "message": "Rest Request Timeout Updated"
+    },
+    "commandsConfigRestRequestTimeoutDescription": {
+        "message": "The rest request timeout is now $1"
+    },
+    "commandsConfigRetryLimitTitle": {
+        "message": "Retry Limit Updated"
+    },
+    "commandsConfigRetryLimitDescription": {
+        "message": "The retry limit is now $1"
+    },
+    "commandsConfigViewTitle": {
+        "message": "Current Configuration"
+    },
+    "commandsConfigViewDescription": {
+        "message": "Core: $1\nDeveloper Mode: $2\nInterval: $3ms\nRest Request Timeout: $4ms\nRetry Limit: $5"
+    },
+    "commandsDeployTitle": {
+        "message": "Success"
+    },
+    "commandsDeployNone": {
+        "message": "None"
+    },
+    "commandsEditAnnouncementsPreviewTitle": {
+        "message": "Announcement Preview"
+    },
+    "commandsEditAnnouncementsPreviewDescription": {
+        "message": "This is a preview of the new announcement."
+    },
+    "commandsEditAnnouncementsPreviewButtonLabel": {
+        "message": "Looks Good!"
+    },
+    "commandsEditAnnouncementsSuccess": {
+        "message": "Announcement Published"
+    },
+    "commandsEditAnnouncementsSuccessDescription": {
+        "message": "Your edit has been published!"
+    },
+
+
+    "commandsEvalMaxLengthName": {
+        "message": "Over Max Length"
+    },
+    "commandsEvalMaxLengthValue": {
+        "message": "The error is over 1024 characters long."
+    },
+    "commandsEvalSuccessTitle": {
+        "message": "Executed Eval"
+    },
+    "commandsEvalFailTitle": {
+        "message": "Failed Eval"
+    },
+    "commandsEvalInputName": {
+        "message": "Input"
+    },
+    "commandsEvalOutputName": {
+        "message": "Output"
+    },
+    "commandsEvalTypeName": {
+        "message": "Type"
+    },
+    "commandsEvalTimeTakenName": {
+        "message": "Time Taken"
+    },
+    "commandsHelpInformationIntroductionName": {
+        "message": "Introduction"
+    },
+    "commandsHelpInformationIntroductionValue": {
+        "message": "Hypixel News is a bot that sends you the latest news from the Hypixel Network. This bot allows you to easily choose where and what kinds of announcements you want to receive."
+    },
+    "commandsHelpInformationCategoryName": {
+        "message": "Announcement Categories"
+    },
+    "commandsHelpInformationCategoryValue": {
+        "message": "• **General** announcements refer to any announcements found [here](https://hypixel.net/forums/news-and-announcements.4/ \"News and Announcements\")\n• **SkyBlock** announcements refer to any announcements found [here](https://hypixel.net/forums/skyblock-patch-notes.158/ \"SkyBlock Patch Notes\")\n• **Moderation** announcements refer to any announcements found [here](https://hypixel.net/forums/moderation-information-and-changes.164/ \"Moderation Information and Changes\")"
+    },
+    "commandsHelpInformationLegalName": {
+        "message": "Legal Stuff"
+    },
+    "commandsHelpInformationLegalValue": {
+        "message": "By using this service, you agree to our [Privacy Policy](https://attituding.github.io/Hypixel-News/legal/privacy-policy/ \"Privacy Policy\") and our [Terms of Service](https://attituding.github.io/Hypixel-News/legal/terms-of-service/ \"Terms of Service\")."
+    },
+    "commandsHelpAllTitle": {
+        "message": "Commands"
+    },
+    "commandsHelpAllName": {
+        "message": "/$1"
+    },
+    "commandsHelpSpecificTitle": {
+        "message": "Invalid Command"
+    },
+    "commandsHelpSpecificInvalidTitle": {
+        "message": "/$1"
+    },
+    "commandsHelpSpecificInvalidDescription": {
+        "message": "**/$1** isn't a valid command!"
+    },
+    "commandsHelpSpecificCooldownName": {
+        "message": "Command Cooldown"
+    },
+    "commandsHelpSpecificCooldownValue": {
+        "message": "$1 second(s)."
+    },
+    "commandsHelpSpecificDMName": {
+        "message": "Direct Messages"
+    },
+    "commandsHelpSpecificDMValue": {
+        "message": "This command cannot be used in a DM channel."
+    },
+    "commandsHelpSpecificOwnerName": {
+        "message": "Bot Owner"
+    },
+    "commandsHelpSpecificOwnerValue": {
+        "message": "Being an owner is required to execute this command."
+    },
+    "commandsPerformanceTitle": {
+        "message": "Performance"
+    },
+    "commandsPerformanceLatestName": {
+        "message": "Latest Performance"
+    },
+    "commandsPerformanceLatestValue": {
+        "message": "Hypixel RSS Fetch: $1ms\nParse Data: $2ms\nCheck Data: $3ms\nSend: $4ms\nTotal: $5ms"
+    },
+    "commandsPingLoadingTitle": {
+        "message": "Pinging..."
+    },
+    "commandsPingTitle": {
+        "message": "🏓 Ping"
+    },
+    "commandsPingDescription": {
+        "message": "Websocket heartbeat is $1ms. Roundtrip latency is $2ms."
     }
 }

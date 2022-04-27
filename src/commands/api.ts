@@ -5,7 +5,6 @@ import {
 } from '../utility/utility';
 import { Constants } from '../utility/Constants';
 import { Log } from '../utility/Log';
-import { RegionLocales } from '../locales/RegionLocales';
 
 export const properties: ClientCommand['properties'] = {
     name: 'api',
@@ -115,8 +114,7 @@ type TimeoutSettables = 'timeout' | 'resumeAfter';
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const text = RegionLocales.locale(interaction.locale).commands.api;
-    const { replace } = RegionLocales;
+    const { i18n } = interaction;
 
     switch (interaction.options.getSubcommand()) {
         case 'stats': await stats();
@@ -143,41 +141,36 @@ export const execute: ClientCommand['execute'] = async (
             )
             .addFields(
                 {
-                    name: text.api.enabled.name,
-                    value: replace(text.api.enabled.value, {
-                        state: interaction.client.config.core === true
-                            ? text.api.yes
-                            : text.api.no,
-                    }),
+                    name: i18n.getMessage('commandsAPIStatsEnabledName'),
+                    value: i18n.getMessage(
+                        interaction.client.config.core === true
+                            ? 'yes'
+                            : 'no',
+                    ),
                 },
                 {
-                    name: text.api.resume.name,
-                    value: replace(text.api.resume.value, {
-                        time: cleanLength(getTimeout() - Date.now()) ??
-                        'Not applicable',
-                    }),
+                    name: i18n.getMessage('commandsAPIStatsResumeName'),
+                    value: cleanLength(getTimeout() - Date.now()) ?? i18n.getMessage('null'),
                 },
                 {
-                    name: text.api.lastMinute.name,
-                    value: replace(text.api.lastMinute.value, {
-                        abort: abort.lastMinute,
-                        generic: generic.lastMinute,
-                        http: http.lastMinute,
-                    }),
+                    name: i18n.getMessage('commandsAPIStatsLastMinuteName'),
+                    value: i18n.getMessage('commandsAPIStatsLastMinuteValue', [
+                        abort.lastMinute,
+                        generic.lastMinute,
+                        http.lastMinute,
+                    ]),
                 },
                 {
-                    name: text.api.nextTimeouts.name,
-                    value: replace(text.api.nextTimeouts.value, {
-                        abort: cleanLength(abort.timeout),
-                        generic: cleanLength(generic.timeout),
-                        http: cleanLength(http.timeout),
-                    }),
+                    name: i18n.getMessage('commandsAPIStatsNextTimeoutsName'),
+                    value: i18n.getMessage('commandsAPIStatsNextTimeoutsValue', [
+                        cleanLength(abort.timeout) ?? i18n.getMessage('null'),
+                        cleanLength(generic.timeout) ?? i18n.getMessage('null'),
+                        cleanLength(http.timeout) ?? i18n.getMessage('null'),
+                    ]),
                 },
                 {
-                    name: text.api.apiKey.name,
-                    value: replace(text.api.apiKey.value, {
-                        uses: uses,
-                    }),
+                    name: i18n.getMessage('commandsAPIStatsUsesName'),
+                    value: String(uses),
                 },
             );
 
@@ -196,12 +189,12 @@ export const execute: ClientCommand['execute'] = async (
         ] = value;
         const setEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.set.title)
-            .setDescription(replace(text.set.description, {
-                category: category,
-                type: type,
-                value: value,
-            }));
+            .setTitle(i18n.getMessage('commandsAPISetTitle'))
+            .setDescription(i18n.getMessage('commandsAPISetTitle', [
+                category,
+                type,
+                value,
+            ]));
 
         Log.interaction(interaction, setEmbed.description);
 
@@ -225,10 +218,10 @@ export const execute: ClientCommand['execute'] = async (
 
         const callEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.call.title)
-            .setDescription(replace(text.call.title, {
-                method: method,
-            }));
+            .setTitle(i18n.getMessage('commandsAPICallTitle'))
+            .setDescription(i18n.getMessage('commandsAPICallTitle', [
+                method,
+            ]));
 
         Log.interaction(interaction, callEmbed.description);
 

@@ -13,6 +13,7 @@ import { ConstraintError } from '../utility/errors/ConstraintError';
 import { Log } from '../utility/Log';
 import { slashCommandResolver } from '../utility/utility';
 import process from 'node:process';
+import { i18n } from '../locales/i18n';
 
 const owners = JSON.parse(process.env.OWNERS!) as string[];
 
@@ -26,6 +27,8 @@ export const execute: ClientEvent['execute'] = async (
 ): Promise<void> => {
     try {
         if (interaction.isCommand()) {
+            interaction.i18n = new i18n(interaction.locale);
+
             const command: ClientCommand | undefined =
                 interaction.client.commands.get(interaction.commandName);
 

@@ -5,6 +5,7 @@ import type {
     CommandInteraction,
 } from 'discord.js';
 import type { Core } from '../core/core';
+import { i18n } from '../locales/i18n';
 
 export interface ClientCommand {
     properties: {
@@ -50,5 +51,9 @@ declare module 'discord.js' {
         core: Core,
         customPresence: PresenceData | null,
         events: Collection<string, ClientEvent>,
+    }
+
+    interface Interaction {
+        i18n: i18n,
     }
 }

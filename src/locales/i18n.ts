@@ -12,20 +12,22 @@ export class i18n {
             locales[Constants.defaults.language as keyof typeof locales]!;
     }
 
-    getMessage(string: keyof typeof this.locale, options: (string | number)[]) {
+    getMessage(
+        string: keyof typeof this.locale,
+        options?: (string | number)[],
+    ) {
         let message = this.locale[string]?.message;
 
-        let index = 1;
+        if (message && options) {
+            let index = options.length;
 
-        if (message) {
-            for (const option of options) {
-                message = message.replace(`$${index}`, String(option));
+            for (const option of options.reverse()) {
+                message = message.replaceAll(`$${index}`, String(option));
+                index -= 1;
             }
-
-            index += 1;
         }
 
-        return message ?? '';
+        return message ?? 'null';
     }
 
     getLocale() {
