@@ -32,12 +32,6 @@ export const properties: ClientCommand['properties'] = {
                 required: true,
             },
             {
-                name: 'index',
-                description: 'The index of the embed to modify',
-                type: 4,
-                required: true,
-            },
-            {
                 name: 'description',
                 description: 'The new description for the embed',
                 type: 3,
@@ -59,13 +53,12 @@ export const execute: ClientCommand['execute'] = async (
     const { i18n } = interaction;
 
     const messageID = interaction.options.getString('message', true);
-    const index = interaction.options.getInteger('index', true);
     const description = interaction.options.getString('description', false);
     const image = interaction.options.getString('image', false);
 
     const message = await interaction.channel!.messages.fetch(messageID);
 
-    const tempEmbed = new MessageEmbed(message.embeds[index]);
+    const tempEmbed = new MessageEmbed(message.embeds[0]);
 
     if (image) {
         tempEmbed.setImage(image);
@@ -75,7 +68,7 @@ export const execute: ClientCommand['execute'] = async (
         tempEmbed.setDescription(description);
     }
 
-    message.embeds[index] = tempEmbed;
+    message.embeds[0] = tempEmbed;
 
     const button = new MessageActionRow().setComponents(
         new MessageButton()
@@ -96,7 +89,7 @@ export const execute: ClientCommand['execute'] = async (
         );
 
     const reply = await interaction.followUp({
-        embeds: [previewEmbed, message.embeds[index]],
+        embeds: [previewEmbed, ...message.embeds],
         components: [button],
     });
 

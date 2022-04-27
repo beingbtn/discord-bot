@@ -5,7 +5,6 @@ import {
     cleanRound,
 } from '../utility/utility';
 import { Constants } from '../utility/Constants';
-import { RegionLocales } from '../locales/RegionLocales';
 import process from 'node:process';
 
 export const properties: ClientCommand['properties'] = {
@@ -24,41 +23,36 @@ export const properties: ClientCommand['properties'] = {
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const text = RegionLocales.locale(interaction.locale).commands.system;
-    const { replace } = RegionLocales;
+    const { i18n } = interaction;
 
     const memoryMegaBytes = process.memoryUsage.rss() / (2 ** 20);
 
     const responseEmbed = new BetterEmbed(interaction)
         .setColor(Constants.colors.normal)
-        .setTitle(text.embed.title)
+        .setTitle(i18n.getMessage('commandsSystemTitle'))
         .addFields(
             {
-                name: text.embed.field1.name,
-                value: replace(text.embed.field1.value, {
-                    uptime: cleanLength(process.uptime() * 1000)!,
-                }),
+                name: i18n.getMessage('commandsSystemUptimeName'),
+                value: String(cleanLength(process.uptime() * 1000)),
             },
             {
-                name: text.embed.field2.name,
-                value: replace(text.embed.field2.value, {
-                    memoryMegaBytes: cleanRound(memoryMegaBytes, 1),
-                }),
+                name: i18n.getMessage('commandsSystemMemoryName'),
+                value: i18n.getMessage('commandsSystemMemberValue', [
+                    cleanRound(memoryMegaBytes, 1),
+                ]),
             },
             {
-                name: text.embed.field3.name,
-                value: replace(text.embed.field3.value, {
-                    servers: interaction.client.guilds.cache.size,
-                }),
+                name: i18n.getMessage('commandsSystemServersName'),
+                value: String(interaction.client.guilds.cache.size),
             },
             {
-                name: text.embed.field4.name,
-                value: replace(text.embed.field4.value, {
-                    users: interaction.client.guilds.cache.reduce(
+                name: i18n.getMessage('commandsSystemUsersName'),
+                value: String(
+                    interaction.client.guilds.cache.reduce(
                         (acc, guild) => acc + guild.memberCount,
                         0,
                     ),
-                }),
+                ),
             },
         );
 

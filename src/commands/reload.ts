@@ -6,7 +6,6 @@ import { BetterEmbed } from '../utility/utility';
 import { CommandInteraction } from 'discord.js';
 import { Constants } from '../utility/Constants';
 import { Log } from '../utility/Log';
-import { RegionLocales } from '../locales/RegionLocales';
 
 export const properties: ClientCommand['properties'] = {
     name: 'reload',
@@ -74,8 +73,7 @@ try {
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const text = RegionLocales.locale(interaction.locale).commands.reload;
-    const { replace } = RegionLocales;
+    const { i18n } = interaction;
 
     switch (interaction.options.getSubcommand()) {
         case 'all': await reloadAll();
@@ -101,11 +99,11 @@ export const execute: ClientCommand['execute'] = async (
 
         const reloadedEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.all.title)
-            .setDescription(replace(text.all.description, {
-                imports: promises.length,
-                timeTaken: Date.now() - now,
-            }));
+            .setTitle(i18n.getMessage('commandsReloadAllTitle'))
+            .setDescription(i18n.getMessage('commandsReloadAllDescription', [
+                promises.length,
+                Date.now() - now,
+            ]));
 
         Log.interaction(interaction, `All imports have been reloaded after ${
             Date.now() - now
@@ -130,11 +128,13 @@ export const execute: ClientCommand['execute'] = async (
         if (typeof selected === 'undefined') {
             const undefinedSelected = new BetterEmbed(interaction)
                 .setColor(Constants.colors.warning)
-                .setTitle(text.single.unknown.title)
-                .setDescription(replace(text.single.unknown.description, {
-                    typeName: typeName,
-                    item: item,
-                }));
+                .setTitle(i18n.getMessage('commandsReloadSingleUnknownTitle'))
+                .setDescription(
+                    i18n.getMessage('commandsReloadSingleUnknownDescription', [
+                        typeName,
+                        item,
+                    ],
+                ));
 
             await interaction.editReply({ embeds: [undefinedSelected] });
             return;
@@ -148,12 +148,14 @@ export const execute: ClientCommand['execute'] = async (
 
         const reloadedEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.single.success.title)
-            .setDescription(replace(text.single.success.description, {
-                typeName: typeName,
-                item: item,
-                timeTaken: Date.now() - now,
-            }));
+            .setTitle(i18n.getMessage('commandsReloadSingleSuccessTitle'))
+            .setDescription(
+                i18n.getMessage('commandsReloadSingleSuccessDescription', [
+                    typeName,
+                    item,
+                    Date.now() - now,
+                ],
+            ));
 
         Log.interaction(interaction, `${typeName}.${item} was successfully reloaded after ${
             Date.now() - now

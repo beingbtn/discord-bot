@@ -257,5 +257,41 @@
     },
     "commandsPresenceClearDescription": {
         "message": "The presence has been reset to the default!"
+    },
+    "commandsReloadAllTitle": {
+        "message": "Reloaded Everything"
+    },
+    "commandsReloadAllDescription": {
+        "message": "$1 imports have been reloaded! This action took $2ms"
+    },
+    "commandsReloadSingleUnknownTitle": {
+        "message": "Unknown Item"
+    },
+    "commandsReloadSingleUnknownDescription": {
+        "message": "There is no item with the structure $1.$2!"
+    },
+    "commandsReloadSingleSuccessTitle": {
+        "message": "Reloaded"
+    },
+    "commandsReloadSingleSuccessDescription": {
+        "message": "$1.$2 was successfully reloaded! This action took $3 milliseconds."
+    },
+    "commandsSystemTitle": {
+        "message": "System"
+    },
+    "commandsSystemUptimeName": {
+        "message": "Uptime"
+    },
+    "commandsSystemMemoryName": {
+        "message": "Memory Usage"
+    },
+    "commandsSystemMemberValue": {
+        "message": "$1MB"
+    },
+    "commandsSystemServersName": {
+        "message": "Servers"
+    },
+    "commandsSystemUsersName": {
+        "message": "Users"
     }
 }
