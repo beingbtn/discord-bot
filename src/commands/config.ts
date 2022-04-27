@@ -1,10 +1,9 @@
 import type { ClientCommand } from '../@types/client';
+import type { WebhookEditMessageOptions } from 'discord.js';
 import { BetterEmbed } from '../utility/utility';
 import { Constants } from '../utility/Constants';
-import { Log } from '../utility/Log';
-import { RegionLocales } from '../locales/RegionLocales';
-import { WebhookEditMessageOptions } from 'discord.js';
 import { Database } from '../utility/database';
+import { Log } from '../utility/Log';
 
 export const properties: ClientCommand['properties'] = {
     name: 'config',
@@ -84,26 +83,31 @@ export const properties: ClientCommand['properties'] = {
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const text = RegionLocales.locale(interaction.locale).commands.config;
-    const replace = RegionLocales.replace;
+    const { i18n } = interaction;
 
     const payload: WebhookEditMessageOptions = {};
 
     const client = interaction.client;
 
     switch (interaction.options.getSubcommand()) {
-        case 'core': await coreCommand();
-        break;
-        case 'devmode': await devModeCommand();
-        break;
-        case 'interval': await interval();
-        break;
-        case 'restrequesttimeout': await restRequestTimeoutCommand();
-        break;
-        case 'retrylimit': await retryLimitCommand();
-        break;
-        case 'view': viewCommand();
-        break;
+        case 'core':
+            await coreCommand();
+            break;
+        case 'devmode':
+            await devModeCommand();
+            break;
+        case 'interval':
+            await interval();
+            break;
+        case 'restrequesttimeout':
+            await restRequestTimeoutCommand();
+            break;
+        case 'retrylimit':
+            await retryLimitCommand();
+            break;
+        case 'view':
+            viewCommand();
+            break;
         //no default
     }
 
@@ -114,12 +118,14 @@ export const execute: ClientCommand['execute'] = async (
 
         const coreEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.core.title)
-            .setDescription(replace(text.core.description, {
-                state: client.config.core === true
-                    ? text.on
-                    : text.off,
-            }));
+            .setTitle(i18n.getMessage('commandsConfigCoreTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigCoreDescription', [
+                    client.config.core === true
+                        ? i18n.getMessage('on')
+                        : i18n.getMessage('off'),
+                ]),
+            );
 
         payload.embeds = [coreEmbed];
 
@@ -133,12 +139,14 @@ export const execute: ClientCommand['execute'] = async (
 
         const devModeEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.devMode.title)
-            .setDescription(replace(text.devMode.description, {
-                state: client.config.devMode === true
-                    ? text.on
-                    : text.off,
-            }));
+            .setTitle(i18n.getMessage('commandsConfigDevModeTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigDevModeDescription', [
+                    client.config.devMode === true
+                        ? i18n.getMessage('on')
+                        : i18n.getMessage('off'),
+                ]),
+            );
 
         payload.embeds = [devModeEmbed];
 
@@ -146,17 +154,21 @@ export const execute: ClientCommand['execute'] = async (
     }
 
     async function interval() {
-        const milliseconds = interaction.options.getInteger('milliseconds', true);
+        const milliseconds = interaction.options.getInteger(
+            'milliseconds',
+            true,
+        );
+
         client.config.interval = milliseconds;
 
         await new Database().setConfig('interval', milliseconds);
 
         const intervalEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.interval.title)
-            .setDescription(replace(text.interval.description, {
-                milliseconds: milliseconds,
-            }));
+            .setTitle(i18n.getMessage('commandsConfigIntervalTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigIntervalTitle', [milliseconds]),
+            );
 
         payload.embeds = [intervalEmbed];
 
@@ -164,17 +176,23 @@ export const execute: ClientCommand['execute'] = async (
     }
 
     async function restRequestTimeoutCommand() {
-        const milliseconds = interaction.options.getInteger('milliseconds', true);
+        const milliseconds = interaction.options.getInteger(
+            'milliseconds',
+            true,
+        );
+
         client.config.restRequestTimeout = milliseconds;
 
         await new Database().setConfig('restRequestTimeout', milliseconds);
 
         const keyPercentageEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.restRequestTimeout.title)
-            .setDescription(replace(text.restRequestTimeout.description, {
-                milliseconds: milliseconds,
-            }));
+            .setTitle(i18n.getMessage('commandsConfigRestRequestTimeoutTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigRestRequestTimeoutDescription', [
+                    milliseconds,
+                ]),
+            );
 
         payload.embeds = [keyPercentageEmbed];
 
@@ -182,17 +200,21 @@ export const execute: ClientCommand['execute'] = async (
     }
 
     async function retryLimitCommand() {
-        const limit = interaction.options.getInteger('limit', true);
+        const limit = interaction.options.getInteger(
+            'limit',
+            true,
+        );
+
         client.config.retryLimit = limit;
 
         await new Database().setConfig('retryLimit', limit);
 
         const keyPercentageEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.retryLimit.title)
-            .setDescription(replace(text.retryLimit.description, {
-                limit: limit,
-            }));
+            .setTitle(i18n.getMessage('commandsConfigRetryLimitTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigRetryLimitDescription', [limit]),
+            );
 
         payload.embeds = [keyPercentageEmbed];
 
@@ -202,14 +224,20 @@ export const execute: ClientCommand['execute'] = async (
     function viewCommand() {
         const viewEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.view.title)
-            .setDescription(replace(text.view.description, {
-                core: client.config.core === true ? text.on : text.off,
-                devMode: client.config.devMode === true ? text.on : text.off,
-                interval: client.config.interval,
-                restRequestTimeout: client.config.restRequestTimeout,
-                retryLimit: client.config.retryLimit,
-            }));
+            .setTitle(i18n.getMessage('commandsConfigViewTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigRetryLimitDescription', [
+                    client.config.core === true
+                        ? i18n.getMessage('on')
+                        : i18n.getMessage('off'),
+                    client.config.devMode === true
+                        ? i18n.getMessage('on')
+                        : i18n.getMessage('off'),
+                    client.config.interval,
+                    client.config.restRequestTimeout,
+                    client.config.retryLimit,
+                ]),
+            );
 
         payload.embeds = [viewEmbed];
     }

@@ -29,8 +29,4 @@ export class i18n {
 
         return message ?? 'null';
     }
-
-    getLocale() {
-        return this.locale;
-    }
 }

@@ -2,7 +2,6 @@ import type { ClientCommand } from '../@types/client';
 import { BetterEmbed } from '../utility/utility';
 import { Constants } from '../utility/Constants';
 import { Log } from '../utility/Log';
-import { RegionLocales } from '../locales/RegionLocales';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import fs from 'node:fs/promises';
@@ -72,9 +71,9 @@ export const properties: ClientCommand['properties'] = {
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const text = RegionLocales.locale(interaction.locale).commands.deploy;
+    const { i18n } = interaction;
 
-    const commandFiles = (await fs.readdir(__dirname));
+    const commandFiles = await fs.readdir(__dirname);
 
     const userCommands: object[] = [];
     const ownerCommands: object[] = [];
@@ -93,8 +92,8 @@ export const execute: ClientCommand['execute'] = async (
 
     const scope = interaction.options.getString('scope', true);
     const type = interaction.options.getString('type', true);
-    const guildID = interaction.options.getString('guild') ??
-        interaction.guildId!;
+    const guildID =
+        interaction.options.getString('guild') ?? interaction.guildId!;
 
     const commands =
         type === 'both'
@@ -121,15 +120,18 @@ export const execute: ClientCommand['execute'] = async (
 
     const successEmbed = new BetterEmbed(interaction)
         .setColor(Constants.colors.normal)
-        .setTitle(text.title)
+        .setTitle(i18n.getMessage('commandsDeployTitle'))
         .setDescription(
             JSON.stringify(commands).slice(
                 0,
                 Constants.limits.embedDescription,
-            ) ?? text.none,
+            ) ?? i18n.getMessage('commandsDeployNone'),
         );
 
-    Log.interaction(interaction, `Scope: ${scope} | Type: ${type} | Guild ID: ${guildID}`);
+    Log.interaction(
+        interaction,
+        `Scope: ${scope} | Type: ${type} | Guild ID: ${guildID}`,
+    );
 
     await interaction.editReply({ embeds: [successEmbed] });
 };

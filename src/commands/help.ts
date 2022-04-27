@@ -1,7 +1,6 @@
 import type { ClientCommand } from '../@types/client';
 import { BetterEmbed } from '../utility/utility';
 import { Constants } from '../utility/Constants';
-import { RegionLocales } from '../locales/RegionLocales';
 
 export const properties: ClientCommand['properties'] = {
     name: 'help',
@@ -49,8 +48,7 @@ export const properties: ClientCommand['properties'] = {
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const replace = RegionLocales.replace;
-    const text = RegionLocales.locale(interaction.locale).commands.help;
+    const { i18n } = interaction;
 
     if (interaction.options.getSubcommand() === 'information') {
         await information();
@@ -65,16 +63,16 @@ export const execute: ClientCommand['execute'] = async (
             .setColor(Constants.colors.normal)
             .addFields(
                 {
-                    name: text.information.introduction.name,
-                    value: text.information.introduction.value,
+                    name: i18n.getMessage('commandsHelpInformationIntroductionName'),
+                    value: i18n.getMessage('commandsHelpInformationIntroductionValue'),
                 },
                 {
-                    name: text.information.category.name,
-                    value: text.information.category.value,
+                    name: i18n.getMessage('commandsHelpInformationCategoryName'),
+                    value: i18n.getMessage('commandsHelpInformationCategoryValue'),
                 },
                 {
-                    name: text.information.legal.name,
-                    value: text.information.legal.value,
+                    name: i18n.getMessage('commandsHelpInformationLegalName'),
+                    value: i18n.getMessage('commandsHelpInformationLegalValue'),
                 },
             );
 
@@ -92,47 +90,43 @@ export const execute: ClientCommand['execute'] = async (
         if (typeof command === 'undefined') {
             commandSearchEmbed
                 .setColor(Constants.colors.warning)
-                .setTitle(text.specific.invalid.title)
-                .setDescription(replace(text.specific.invalid.description, {
-                    command: commandArg,
-                }));
+                .setTitle(i18n.getMessage('commandsHelpSpecificInvalidTitle'))
+                .setDescription(i18n.getMessage('commandsHelpSpecificInvalidDescription', [
+                    commandArg,
+                ]));
 
             await interaction.editReply({ embeds: [commandSearchEmbed] });
             return;
         }
 
         commandSearchEmbed.setTitle(
-            replace(text.specific.title, {
-                command: commandArg,
-            }),
+            i18n.getMessage('commandsHelpSpecificTitle', [
+                commandArg,
+            ]),
         );
 
         commandSearchEmbed.setDescription(
-            replace(text.specific.description, {
-                commandDescription: command.properties.description,
-            }),
+            command.properties.description,
         );
 
         commandSearchEmbed.addFields({
-            name: text.specific.cooldown.name,
-            value: replace(text.specific.cooldown.value, {
-                commandCooldown:
-                    command.properties.cooldown /
-                    Constants.ms.second,
-            }),
+            name: i18n.getMessage('commandsHelpSpecificCooldownName'),
+            value: i18n.getMessage('commandsHelpSpecificCooldownName', [
+                command.properties.cooldown / Constants.ms.second,
+            ]),
         });
 
         if (command.properties.noDM === true) {
             commandSearchEmbed.addFields({
-                name: text.specific.dm.name,
-                value: replace(text.specific.dm.value),
+                name: i18n.getMessage('commandsHelpSpecificDMName'),
+                value: i18n.getMessage('commandsHelpSpecificDMValue'),
             });
         }
 
         if (command.properties.ownerOnly === true) {
             commandSearchEmbed.addFields({
-                name: text.specific.owner.name,
-                value: replace(text.specific.owner.value),
+                name: i18n.getMessage('commandsHelpSpecificOwnerName'),
+                value: i18n.getMessage('commandsHelpSpecificOwnerValue'),
             });
         }
 
@@ -145,16 +139,14 @@ export const execute: ClientCommand['execute'] = async (
         );
         const allCommandsEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
-            .setTitle(text.all.title);
+            .setTitle(i18n.getMessage('commandsHelpAllTitle'));
 
         for (const command of commandsCollection.values()) {
             allCommandsEmbed.addFields({
-                name: replace(text.all.field.name, {
-                    commandName: command.properties.name,
-                }),
-                value: replace(text.all.field.value, {
-                    commandDescription: command.properties.description,
-                }),
+                name: i18n.getMessage('commandsHelpAllName', [
+                    command.properties.name,
+                ]),
+                value: command.properties.description,
             });
         }
 

@@ -1,7 +1,6 @@
 import type { ClientCommand } from '../@types/client';
 import { Constants } from '../utility/Constants';
 import { BetterEmbed } from '../utility/utility';
-import { RegionLocales } from '../locales/RegionLocales';
 
 export const properties: ClientCommand['properties'] = {
     name: 'performance',
@@ -19,8 +18,7 @@ export const properties: ClientCommand['properties'] = {
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const text = RegionLocales.locale(interaction.locale).commands.performance;
-    const { replace } = RegionLocales;
+    const { i18n } = interaction;
 
     const {
         fetch: fetchPerformance,
@@ -32,16 +30,16 @@ export const execute: ClientCommand['execute'] = async (
 
     const responseEmbed = new BetterEmbed(interaction)
         .setColor(Constants.colors.normal)
-        .setTitle(text.title)
+        .setTitle(i18n.getMessage('commandsPerformanceTitle'))
         .addFields({
-            name: text.latest.name,
-            value: replace(text.latest.value, {
-                fetchPerformance: fetchPerformance,
-                parsePerformance: parsePerformance,
-                checkPerformance: checkPerformance,
-                sendPerformance: sendPerformance,
-                total: total,
-            }),
+            name: i18n.getMessage('commandsPerformanceLatestName'),
+            value: i18n.getMessage('commandsPerformanceLatestValue', [
+                fetchPerformance,
+                parsePerformance,
+                checkPerformance,
+                sendPerformance,
+                total,
+            ]),
         });
 
     await interaction.editReply({

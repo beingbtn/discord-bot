@@ -1,5 +1,9 @@
 import type { ClientCommand } from '../@types/client';
-import { awaitComponent, BetterEmbed, disableComponents } from '../utility/utility';
+import {
+    awaitComponent,
+    BetterEmbed,
+    disableComponents,
+} from '../utility/utility';
 import { Constants } from '../utility/Constants';
 import {
     Constants as DiscordConstants,
@@ -8,7 +12,6 @@ import {
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
-import { RegionLocales } from '../locales/RegionLocales';
 import { Log } from '../utility/Log';
 
 export const properties: ClientCommand['properties'] = {
@@ -53,9 +56,7 @@ export const properties: ClientCommand['properties'] = {
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const text = RegionLocales.locale(
-        interaction.locale,
-    ).commands.editannouncements;
+    const { i18n } = interaction;
 
     const messageID = interaction.options.getString('message', true);
     const index = interaction.options.getInteger('index', true);
@@ -76,30 +77,31 @@ export const execute: ClientCommand['execute'] = async (
 
     message.embeds[index] = tempEmbed;
 
-    const button = new MessageActionRow()
-        .setComponents(
-            new MessageButton()
-                .setCustomId('true')
-                .setLabel(text.preview.buttonLabel)
-                .setStyle(DiscordConstants.MessageButtonStyles.PRIMARY),
-        );
+    const button = new MessageActionRow().setComponents(
+        new MessageButton()
+            .setCustomId('true')
+            .setLabel(
+                i18n.getMessage(
+                    'commandsEditAnnouncementsPreviewButtonLabel',
+                ),
+            )
+            .setStyle(DiscordConstants.MessageButtonStyles.PRIMARY),
+    );
 
     const previewEmbed = new BetterEmbed(interaction)
         .setColor(Constants.colors.normal)
-        .setTitle(text.preview.title)
-        .setDescription(text.preview.description);
+        .setTitle(i18n.getMessage('commandsEditAnnouncementsPreviewTitle'))
+        .setDescription(
+            i18n.getMessage('commandsEditAnnouncementsPreviewDescription'),
+        );
 
     const reply = await interaction.followUp({
-        embeds: [
-            previewEmbed,
-            message.embeds[index],
-        ],
+        embeds: [previewEmbed, message.embeds[index]],
         components: [button],
     });
 
     const componentFilter = (i: MessageComponentInteraction) =>
-        interaction.user.id === i.user.id &&
-        i.message.id === reply.id;
+        interaction.user.id === i.user.id && i.message.id === reply.id;
 
     await interaction.client.channels.fetch(interaction.channelId);
 
@@ -126,8 +128,10 @@ export const execute: ClientCommand['execute'] = async (
 
     const successEmbed = new BetterEmbed(interaction)
         .setColor(Constants.colors.normal)
-        .setTitle(text.success.title)
-        .setDescription(text.success.description);
+        .setTitle(i18n.getMessage('commandsEditAnnouncementsSuccessTitle'))
+        .setDescription(
+            i18n.getMessage('commandsEditAnnouncementsSuccessDescription'),
+        );
 
     await previewButton.update({
         embeds: [successEmbed],

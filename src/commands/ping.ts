@@ -6,7 +6,6 @@ import {
 import { BetterEmbed } from '../utility/utility';
 import { Constants } from '../utility/Constants';
 import { Log } from '../utility/Log';
-import { RegionLocales } from '../locales/RegionLocales';
 
 export const properties: ClientCommand['properties'] = {
     name: 'ping',
@@ -24,12 +23,11 @@ export const properties: ClientCommand['properties'] = {
 export const execute: ClientCommand['execute'] = async (
     interaction,
 ): Promise<void> => {
-    const text = RegionLocales.locale(interaction.locale).commands.ping;
-    const replace = RegionLocales.replace;
+    const { i18n } = interaction;
 
     const initialPingEmbed = new BetterEmbed(interaction)
         .setColor(Constants.colors.normal)
-        .setTitle(text.embed1.title);
+        .setTitle(i18n.getMessage('commandsPingLoadingTitle'));
 
     const sentReply = await interaction.editReply({
         embeds: [initialPingEmbed],
@@ -49,11 +47,11 @@ export const execute: ClientCommand['execute'] = async (
 
     const pingEmbed = new BetterEmbed(interaction)
         .setColor(embedColor)
-        .setTitle(text.embed2.title)
-        .setDescription(replace(text.embed2.description, {
-            wsPing: interaction.client.ws.ping,
-            rtPing: roundTripDelay,
-        }));
+        .setTitle(i18n.getMessage('commandsPingTitle'))
+        .setDescription(i18n.getMessage('commandsPingTitle', [
+            interaction.client.ws.ping,
+            roundTripDelay,
+        ]));
 
     Log.interaction(interaction, `WS: ${interaction.client.ws.ping}ms | RT: ${roundTripDelay}ms`);
 

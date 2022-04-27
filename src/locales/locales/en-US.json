@@ -8,6 +8,12 @@
     "no": {
         "message": "No"
     },
+    "on": {
+        "message": "On"
+    },
+    "off": {
+        "message": "Off"
+    },
     "commandsAnnouncementsBotMissingPermissionTitle": {
         "message": "Missing Permission"
     },
@@ -119,22 +125,21 @@
     "commandsDeployNone": {
         "message": "None"
     },
+    "commandsEditAnnouncementsPreviewButtonLabel": {
+        "message": "Looks Good!"
+    },
     "commandsEditAnnouncementsPreviewTitle": {
         "message": "Announcement Preview"
     },
     "commandsEditAnnouncementsPreviewDescription": {
         "message": "This is a preview of the new announcement."
     },
-    "commandsEditAnnouncementsPreviewButtonLabel": {
-        "message": "Looks Good!"
-    },
-    "commandsEditAnnouncementsSuccess": {
+    "commandsEditAnnouncementsSuccessTitle": {
         "message": "Announcement Published"
     },
     "commandsEditAnnouncementsSuccessDescription": {
         "message": "Your edit has been published!"
     },
-
 
     "commandsEvalMaxLengthName": {
         "message": "Over Max Length"
@@ -160,6 +165,9 @@
     "commandsEvalTimeTakenName": {
         "message": "Time Taken"
     },
+    "commandsEvalTimeTakenValue": {
+        "message": "$1ms"
+    },
     "commandsHelpInformationIntroductionName": {
         "message": "Introduction"
     },
@@ -184,14 +192,14 @@
     "commandsHelpAllName": {
         "message": "/$1"
     },
-    "commandsHelpSpecificTitle": {
-        "message": "Invalid Command"
-    },
     "commandsHelpSpecificInvalidTitle": {
-        "message": "/$1"
+        "message": "Invalid Command"
     },
     "commandsHelpSpecificInvalidDescription": {
         "message": "**/$1** isn't a valid command!"
+    },
+    "commandsHelpSpecificTitle": {
+        "message": "/$1"
     },
     "commandsHelpSpecificCooldownName": {
         "message": "Command Cooldown"
