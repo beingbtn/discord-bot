@@ -1,12 +1,12 @@
-import type { WebhookConfig } from '../../@types/client';
+import type { WebhookConfig } from '../@types/client';
 import { AbortError } from './AbortError';
-import { BaseErrorHandler } from '../../utility/errors/BaseErrorHandler';
+import { BaseErrorHandler } from './BaseErrorHandler';
 import {
     cleanLength,
     sendWebHook,
-} from '../../utility/utility';
-import { Core } from '../../core/core';
-import { ErrorHandler } from '../../utility/errors/ErrorHandler';
+} from '../utility/utility';
+import { Core } from '../core/core';
+import { ErrorHandler } from './ErrorHandler';
 import { FetchError } from 'node-fetch';
 import { HTTPError } from './HTTPError';
 import process from 'node:process';
@@ -99,8 +99,8 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
                     )}`,
                 },
                 {
-                    name: 'Request',
-                    value: `Instance Queries: ${uses}`,
+                    name: 'Uses',
+                    value: String(uses),
                 },
             );
 

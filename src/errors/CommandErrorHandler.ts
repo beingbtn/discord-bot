@@ -1,14 +1,13 @@
-import type { WebhookConfig } from '../../@types/client';
+import type { WebhookConfig } from '../@types/client';
 import { BaseCommandErrorHandler } from './BaseCommandErrorHandler';
 import {
     ButtonInteraction,
     CommandInteraction,
     MessageEmbed,
 } from 'discord.js';
-import { Constants } from '../Constants';
-import { ErrorHandler } from '../../utility/errors/ErrorHandler';
-import { RegionLocales } from '../../locales/RegionLocales';
-import { sendWebHook } from '../../utility/utility';
+import { Constants } from '../utility/Constants';
+import { ErrorHandler } from './ErrorHandler';
+import { sendWebHook } from '../utility/utility';
 import process from 'node:process';
 
 const fatalWebhook = JSON.parse(process.env.WEBHOOK_FATAL!) as WebhookConfig;
@@ -16,24 +15,21 @@ const owners = JSON.parse(process.env.OWNERS!) as string[];
 
 export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
     readonly interaction: CommandInteraction | ButtonInteraction;
-    readonly locale: string;
 
     constructor(
         error: E,
         interaction: CommandInteraction | ButtonInteraction,
-        locale: string,
     ) {
         super(error, interaction);
+
         this.interaction = interaction;
-        this.locale = locale;
     }
 
     static async init<T>(
         error: T,
         interaction: CommandInteraction | ButtonInteraction,
-        locale: string,
     ) {
-        const handler = new CommandErrorHandler(error, interaction, locale);
+        const handler = new CommandErrorHandler(error, interaction);
 
         try {
             handler.errorLog();
@@ -53,23 +49,19 @@ export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
             ? this.interaction.commandName
             : null;
 
-        const text = RegionLocales
-            .locale(this.locale)
-            .errors;
-
-        const { replace } = RegionLocales;
-
         const embed = new MessageEmbed()
             .setColor(Constants.colors.error)
-            .setTitle(text.commandErrors.embed.title)
-            .setDescription(replace(text.commandErrors.embed.description, {
-                commandName: commandName ?? 'N/A',
-            }))
+            .setTitle(this.i18n.getMessage('errorsInteractionReplyTitle'))
+            .setDescription(
+                this.i18n.getMessage('errorsInteractionReplyTitle', [
+                    commandName ?? this.i18n.getMessage('null'),
+                ],
+            ))
             .addFields({
-                name: text.commandErrors.embed.field.name,
-                value: replace(text.commandErrors.embed.field.value, {
-                    id: this.incidentID,
-                }),
+                name: this.i18n.getMessage(
+                    'errorsInteractionReplyIncidentName',
+                ),
+                value: this.incidentID,
             });
 
         const payLoad = { embeds: [embed], ephemeral: true };
@@ -84,7 +76,9 @@ export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
                 await this.interaction.reply(payLoad);
             }
         } catch (err) {
-            const message = 'An error has occurred and also failed to notify the user';
+            const message = this.i18n.getMessage(
+                'errorsInteractionReplyFailedNotify',
+            );
 
             this.log(message, err);
 
@@ -103,9 +97,9 @@ export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
     }
 
     private async systemNotify() {
-        const embeds = [this.getGuildInformation(), this.errorEmbed()];
+        const embeds = [this.interactionErrorEmbed(), this.errorEmbed()];
 
-        embeds[0].setTitle('Unexpected Error');
+        embeds[0].setTitle(this.i18n.getMessage('errorsGeneralUnexpected'));
 
         await sendWebHook({
             content: `<@${owners.join('><@')}>`,

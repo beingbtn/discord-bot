@@ -4,7 +4,7 @@ import type {
 import {
     ButtonInteraction,
 } from 'discord.js';
-import { CommandErrorHandler } from '../utility/errors/CommandErrorHandler';
+import { CommandErrorHandler } from '../errors/CommandErrorHandler';
 import { i18n } from '../locales/i18n';
 
 export const properties: ClientEvent['properties'] = {

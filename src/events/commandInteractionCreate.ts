@@ -6,10 +6,10 @@ import {
     Collection,
     CommandInteraction,
 } from 'discord.js';
-import { CommandConstraintErrorHandler } from '../utility/errors/CommandConstraintErrorHandler';
-import { CommandErrorHandler } from '../utility/errors/CommandErrorHandler';
+import { CommandConstraintErrorHandler } from '../errors/CommandConstraintErrorHandler';
+import { CommandErrorHandler } from '../errors/CommandErrorHandler';
 import { Constants } from '../utility/Constants';
-import { ConstraintError } from '../utility/errors/ConstraintError';
+import { ConstraintError } from '../errors/ConstraintError';
 import { Log } from '../utility/Log';
 import { slashCommandResolver } from '../utility/utility';
 import process from 'node:process';
@@ -61,7 +61,6 @@ export const execute: ClientEvent['execute'] = async (
             await CommandErrorHandler.init(
                 error,
                 interaction,
-                interaction.locale,
             );
         }
     }

@@ -18,9 +18,9 @@ export class HTTPError extends Error {
         super(
             message ??
             response?.statusText ??
-            String(response?.status) ??
-            'Unknown',
+            String(response?.status),
         );
+
         this.name = 'HTTPError';
         this.response = response ?? null;
         this.status = response?.status ?? 500;

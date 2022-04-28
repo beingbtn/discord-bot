@@ -1,6 +1,6 @@
-import type { WebhookConfig } from '../../@types/client';
+import type { WebhookConfig } from '../@types/client';
 import { BaseErrorHandler } from './BaseErrorHandler';
-import { sendWebHook } from '../utility';
+import { sendWebHook } from '../utility/utility';
 import process from 'node:process';
 
 export class ErrorHandler<E> extends BaseErrorHandler<E> {
@@ -21,7 +21,7 @@ export class ErrorHandler<E> extends BaseErrorHandler<E> {
         this.log(this.error);
 
         if (this.data.length > 0) {
-            this.log('Extra data:', ...this.data);
+            this.log(...this.data);
         }
     }
 

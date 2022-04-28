@@ -1,7 +1,7 @@
 import type { Client } from 'discord.js';
 import type { ClientEvent } from '../@types/client';
 import { Constants } from '../utility/Constants';
-import { ErrorHandler } from '../utility/errors/ErrorHandler';
+import { ErrorHandler } from '../errors/ErrorHandler';
 import { Log } from '../utility/Log';
 import { setPresence } from '../utility/utility';
 

@@ -1,4 +1,4 @@
-import type { Locale } from '../../@types/locales';
+import type { Locale } from '../@types/locales';
 
 export class ConstraintError extends Error {
     readonly cooldown?: number;
@@ -8,7 +8,6 @@ export class ConstraintError extends Error {
         this.name = 'ConstraintError';
         this.cooldown = cooldown;
 
-        //Thank you to https://www.dannyguo.com/blog/how-to-fix-instanceof-not-working-for-custom-errors-in-typescript/
         Object.setPrototypeOf(this, ConstraintError.prototype);
         Error.captureStackTrace(this, this.constructor);
     }

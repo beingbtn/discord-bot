@@ -140,7 +140,6 @@
     "commandsEditAnnouncementsSuccessDescription": {
         "message": "Your edit has been published!"
     },
-
     "commandsEvalMaxLengthName": {
         "message": "Over Max Length"
     },
@@ -293,5 +292,62 @@
     },
     "commandsSystemUsersName": {
         "message": "Users"
+    },
+    "errorsInteractionInformationUserName": {
+        "message": "User"
+    },
+    "errorsInteractionInformationUserValue": {
+        "message": "Tag: $1\nID: $2"
+    },
+    "errorsInteractionInformationInteractionName": {
+        "message": "Interaction"
+    },
+    "errorsInteractionInformationInteractionValue": {
+        "message": "ID: $1\nCommand: $2\nCreated At: $3"
+    },
+    "errorsInteractionInformationGuildName": {
+        "message": "Guild"
+    },
+    "errorsInteractionInformationGuildValue": {
+        "message": "Guild ID: $1\nGuild Name: $2\nOwner ID: $3\nGuild Member Count: $4\nPermissions: "
+    },
+    "errorsInteractionInformationChannelName": {
+        "message": "Channel"
+    },
+    "errorsInteractionInformationChannelValue": {
+        "message": "Channel ID: $1\nChannel Type: $2\nName: $3\nPermissions: $4"
+    },
+    "errorsInteractionInformationOtherName": {
+        "message": "Other"
+    },
+    "errorsInteractionInformationOtherValue": {
+        "message": "Websocket Ping: $1"
+    },
+    "errorsInteractionReplyTitle": {
+        "message": "Oops"
+    },
+    "errorsInteractionReplyDescription": {
+        "message": "An error occurred while executing the command **/{{ commandName }}**! This error has been automatically forwarded for review. It should be resolved soon. Sorry."
+    },
+    "errorsInteractionReplyIncidentName": {
+        "message": "Incident ID"
+    },
+    "errorsGeneralError": {
+        "message": "Error"
+    },
+    "errorsInteractionReplyFailedNotify": {
+        "message": "An error has occurred and also failed to notify the user"
+    },
+    "errorsGeneralUnexpected": {
+        "message": "Unexpected Error"
+    },
+    "errorsRequestSuccessAfterRetry": {
+        "message": "Successfully fetched after a retry"
+    },
+    "errorsRequest500_600": {
+        "message": "Retrying due to a response between 500 and 600: $1"
+    },
+    "errorsRequestAbort": {
+        "message": "Retrying due to an AbortError"
     }
 }

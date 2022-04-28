@@ -4,11 +4,10 @@ import { Log } from './utility/Log';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import process from 'node:process';
+import { i18n } from './locales/i18n';
 
 (async () => {
     try {
-        Log.log('Starting deployment of the deploy command.');
-
         const deployCommand = (
             (await import(`${__dirname}/commands/deploy.ts`)) as ClientCommand
         ).properties.structure;
@@ -19,7 +18,7 @@ import process from 'node:process';
                 body: [deployCommand],
             });
 
-        Log.log('Successfully deployed the deploy command.');
+        Log.log(new i18n().getMessage('commandsDeployTitle'));
     } catch (error) {
         Log.error(error);
     }

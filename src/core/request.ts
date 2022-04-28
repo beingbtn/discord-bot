@@ -1,5 +1,5 @@
 import type { Client } from 'discord.js';
-import { HTTPError } from '../utility/errors/HTTPError';
+import { HTTPError } from '../errors/HTTPError';
 import { Request } from '../utility/Request';
 
 export class CoreRequest {

@@ -1,22 +1,22 @@
-import type { WebhookConfig } from '../../@types/client';
+import type { WebhookConfig } from '../@types/client';
 import { BaseCommandErrorHandler } from './BaseCommandErrorHandler';
 import {
     BaseEmbed,
     Locale,
-} from '../../@types/locales';
+} from '../@types/locales';
 import {
     BetterEmbed,
     cleanRound,
     sendWebHook,
-} from '../../utility/utility';
+} from '../utility/utility';
 import {
     ColorResolvable,
     CommandInteraction,
 } from 'discord.js';
-import { Constants } from '../Constants';
+import { Constants } from '../utility/Constants';
 import { ConstraintError } from './ConstraintError';
-import { ErrorHandler } from '../../utility/errors/ErrorHandler';
-import { RegionLocales } from '../../locales/RegionLocales';
+import { ErrorHandler } from './ErrorHandler';
+import { RegionLocales } from '../locales/RegionLocales';
 import { setTimeout } from 'node:timers/promises';
 import process from 'node:process';
 
@@ -130,7 +130,7 @@ export class CommandConstraintErrorHandler
     }
 
     private async systemNotify() {
-        const embeds = [this.getGuildInformation()];
+        const embeds = [this.interactionErrorEmbed()];
 
         embeds[0]
             .setTitle('User Failed Constraint')

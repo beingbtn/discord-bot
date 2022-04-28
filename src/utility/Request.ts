@@ -1,4 +1,4 @@
-import { AbortError } from './errors/AbortError';
+import { AbortError } from '../errors/AbortError';
 import { Constants } from './Constants';
 import fetch, {
     RequestInit,
@@ -6,8 +6,10 @@ import fetch, {
 } from 'node-fetch';
 import { Log } from './Log';
 import { setTimeout } from 'node:timers';
+import { i18n } from '../locales/i18n';
 
 export class Request {
+    readonly i18n: i18n;
     readonly restRequestTimeout: number;
     private try: number;
     readonly tryLimit: number;
@@ -16,6 +18,8 @@ export class Request {
         retryLimit?: number,
         restRequestTimeout?: number,
     }) {
+        this.i18n = new i18n();
+
         this.restRequestTimeout = config?.restRequestTimeout ??
             Constants.defaults.request.restRequestTimeout;
 
@@ -42,7 +46,9 @@ export class Request {
 
             if (response.ok === true) {
                 if (this.try > 1) {
-                    Log.request('Successfully fetched after a retry');
+                    Log.request(
+                        this.i18n.getMessage('errorsRequestSuccessAfterRetry'),
+                    );
                 }
 
                 return response;
@@ -53,14 +59,17 @@ export class Request {
                 response.status >= 500 &&
                 response.status < 600
             ) {
-                Log.request(`Retrying due to a response between 500 and 600: ${response.status}`);
+                Log.request(this.i18n.getMessage('errorsRequest500_600', [
+                    response.status,
+                ]));
+
                 return this.request(url, fetchOptions);
             }
 
             return response;
         } catch (error) {
             if (this.try < this.tryLimit) {
-                Log.request('Retrying due to an AbortError');
+                Log.request(this.i18n.getMessage('errorsRequestAbort'));
                 return this.request(url, fetchOptions);
             }
 

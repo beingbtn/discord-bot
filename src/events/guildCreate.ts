@@ -1,6 +1,6 @@
 import type { ClientEvent } from '../@types/client';
 import type { Guild } from 'discord.js';
-import { ErrorHandler } from '../utility/errors/ErrorHandler';
+import { ErrorHandler } from '../errors/ErrorHandler';
 import { Log } from '../utility/Log';
 import { setPresence } from '../utility/utility';
 

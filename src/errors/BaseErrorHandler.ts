@@ -1,21 +1,26 @@
 import {
     BetterEmbed,
     generateStackTrace,
-} from '../utility';
-import { Constants } from '../Constants';
+} from '../utility/utility';
+import { Constants } from '../utility/Constants';
 import {
     FileOptions,
     SnowflakeUtil,
 } from 'discord.js';
-import { Log } from '../Log';
+import { Log } from '../utility/Log';
+import { i18n } from '../locales/i18n';
 
 export class BaseErrorHandler<E> {
     readonly error: E;
     readonly incidentID: string;
     readonly stackAttachment: FileOptions;
+    i18n: i18n;
 
     constructor(error: E) {
         this.error = error;
+
+        this.i18n = new i18n();
+
         this.incidentID = SnowflakeUtil.generate();
 
         Object.defineProperty(error, 'fullStack', {
@@ -46,12 +51,12 @@ export class BaseErrorHandler<E> {
             .setTitle(
                 this.error instanceof Error
                     ? this.error.name
-                    : 'Error',
+                    : this.i18n.getMessage('errorsGeneralError'),
             );
     }
 
     log(...text: unknown[]) {
-        const id = `Incident ${this.incidentID} |`;
+        const id = `${this.incidentID} |`;
 
         Log.error(id, ...text);
     }
