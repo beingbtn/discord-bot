@@ -41,10 +41,10 @@ export class BaseCommandErrorHandler<E> extends BaseErrorHandler<E> {
             .addFields(
                 {
                     name: this.i18n.getMessage(
-                        'errorsInteractionInformationChannelName',
+                        'errorsInteractionInformationUserName',
                     ),
                     value: this.i18n.getMessage(
-                        'errorsInteractionInformationChannelValue',
+                        'errorsInteractionInformationUserValue',
                         [
                             user.tag,
                             user.id,
@@ -56,7 +56,7 @@ export class BaseCommandErrorHandler<E> extends BaseErrorHandler<E> {
                         'errorsInteractionInformationInteractionName',
                     ),
                     value: this.i18n.getMessage(
-                        'errorsInteractionInformationInteractionName',
+                        'errorsInteractionInformationInteractionValue',
                         [
                             id,
                             command ?? this.i18n.getMessage('null'),

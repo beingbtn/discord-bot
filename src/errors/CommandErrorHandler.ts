@@ -53,7 +53,7 @@ export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
             .setColor(Constants.colors.error)
             .setTitle(this.i18n.getMessage('errorsInteractionReplyTitle'))
             .setDescription(
-                this.i18n.getMessage('errorsInteractionReplyTitle', [
+                this.i18n.getMessage('errorsInteractionReplyDescription', [
                     commandName ?? this.i18n.getMessage('null'),
                 ],
             ))

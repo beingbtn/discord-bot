@@ -74,50 +74,50 @@
     "commandsAPISetTitle": {
         "message": "Updated Value"
     },
-    "commandsAPISetValue": {
+    "commandsAPISetDescription": {
         "message": "<CoreErrors>.$1.$2 is now $3."
     },
     "commandsAPICallTitle": {
         "message": "Executed"
     },
-    "commandsAPICallValue": {
+    "commandsAPICallDescription": {
         "message": "Executed <CoreErrors>.$1."
     },
     "commandsConfigCoreTitle": {
         "message": "Core State Updated"
     },
     "commandsConfigCoreDescription": {
-        "message": "The core is now $1"
+        "message": "The core is now **$1**."
     },
     "commandsConfigDevModeTitle": {
         "message": "Developer Mode Updated"
     },
     "commandsConfigDevModeDescription": {
-        "message": "Developer Mode is now"
+        "message": "Developer Mode is now **$1**."
     },
     "commandsConfigIntervalTitle": {
         "message": "Interval Updated"
     },
     "commandsConfigIntervalDescription": {
-        "message": "The interval is now $1"
+        "message": "The interval is now **$1**."
     },
     "commandsConfigRestRequestTimeoutTitle": {
         "message": "Rest Request Timeout Updated"
     },
     "commandsConfigRestRequestTimeoutDescription": {
-        "message": "The rest request timeout is now $1"
+        "message": "The rest request timeout is now **$1**."
     },
     "commandsConfigRetryLimitTitle": {
         "message": "Retry Limit Updated"
     },
     "commandsConfigRetryLimitDescription": {
-        "message": "The retry limit is now $1"
+        "message": "The retry limit is now **$1**."
     },
     "commandsConfigViewTitle": {
         "message": "Current Configuration"
     },
     "commandsConfigViewDescription": {
-        "message": "Core: $1\nDeveloper Mode: $2\nInterval: $3ms\nRest Request Timeout: $4ms\nRetry Limit: $5"
+        "message": "Core: **$1**\nDeveloper Mode: **$2**\nInterval: **$3**ms\nRest Request Timeout: **$4**ms\nRetry Limit: **$5**"
     },
     "commandsDeployTitle": {
         "message": "Success"
@@ -293,6 +293,36 @@
     "commandsSystemUsersName": {
         "message": "Users"
     },
+    "errorsInteractionConstraintDevModeTitle": {
+        "message": "Developer Mode"
+    },
+    "errorsInteractionConstraintDevModeDescription": {
+        "message": "This bot is in developer only mode, likely due to a major issue or an upgrade that is taking place. Please check back later!"
+    },
+    "errorsInteractionConstraintOwnerTitle": {
+        "message": "Insufficient Permissions"
+    },
+    "errorsInteractionConstraintOwnerDescription": {
+        "message": "You cannot execute this command without being an owner!"
+    },
+    "errorsInteractionConstraintDMTitle": {
+        "message": "DM Channel"
+    },
+    "errorsInteractionConstraintDMDescription": {
+        "message": "You cannot execute this command in the DM channel! Please switch to a server channel!"
+    },
+    "errorsInteractionConstraintCooldownWaitingTitle": {
+        "message": "Cooldown"
+    },
+    "errorsInteractionConstraintCooldownWaitingDescription": {
+        "message": "You are executing commands too quickly! The cooldown of this command is $1 seconds. This message will turn green in $2 seconds once the cooldown expires."
+    },
+    "errorsInteractionConstraintCooldownCooldownOverTitle": {
+        "message": "Cooldown Over"
+    },
+    "errorsInteractionConstraintCooldownCooldownOverDescription": {
+        "message": "The cooldown has expired! You can now execute the command **/$1**!"
+    },
     "errorsInteractionInformationUserName": {
         "message": "User"
     },
@@ -309,7 +339,7 @@
         "message": "Guild"
     },
     "errorsInteractionInformationGuildValue": {
-        "message": "Guild ID: $1\nGuild Name: $2\nOwner ID: $3\nGuild Member Count: $4\nPermissions: "
+        "message": "Guild ID: $1\nGuild Name: $2\nOwner ID: $3\nGuild Member Count: $4\nPermissions: $5"
     },
     "errorsInteractionInformationChannelName": {
         "message": "Channel"
@@ -327,7 +357,7 @@
         "message": "Oops"
     },
     "errorsInteractionReplyDescription": {
-        "message": "An error occurred while executing the command **/{{ commandName }}**! This error has been automatically forwarded for review. It should be resolved soon. Sorry."
+        "message": "An error occurred while executing the command **/$1**! This error has been automatically forwarded for review. It should be resolved soon. Sorry."
     },
     "errorsInteractionReplyIncidentName": {
         "message": "Incident ID"

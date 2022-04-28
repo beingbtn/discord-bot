@@ -1,9 +1,14 @@
-import type { Locale } from '../@types/locales';
-
 export class ConstraintError extends Error {
     readonly cooldown?: number;
 
-    constructor(message: keyof Locale['errors']['constraintErrors'], cooldown?: number) {
+    constructor(
+        message:
+            | 'devMode'
+            | 'owner'
+            | 'dm'
+            | 'cooldown',
+        cooldown?: number,
+    ) {
         super(message);
         this.name = 'ConstraintError';
         this.cooldown = cooldown;

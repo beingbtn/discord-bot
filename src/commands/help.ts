@@ -111,7 +111,7 @@ export const execute: ClientCommand['execute'] = async (
 
         commandSearchEmbed.addFields({
             name: i18n.getMessage('commandsHelpSpecificCooldownName'),
-            value: i18n.getMessage('commandsHelpSpecificCooldownName', [
+            value: i18n.getMessage('commandsHelpSpecificCooldownValue', [
                 command.properties.cooldown / Constants.ms.second,
             ]),
         });

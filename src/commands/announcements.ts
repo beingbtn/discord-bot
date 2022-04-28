@@ -14,7 +14,7 @@ import process from 'node:process';
 export const properties: ClientCommand['properties'] = {
     name: 'announcements',
     description: 'Configure what announcements you want to receive.',
-    cooldown: 10_000,
+    cooldown: 5_000,
     ephemeral: true,
     noDM: true,
     ownerOnly: false,

@@ -48,7 +48,7 @@ export const execute: ClientCommand['execute'] = async (
     const pingEmbed = new BetterEmbed(interaction)
         .setColor(embedColor)
         .setTitle(i18n.getMessage('commandsPingTitle'))
-        .setDescription(i18n.getMessage('commandsPingTitle', [
+        .setDescription(i18n.getMessage('commandsPingDescription', [
             interaction.client.ws.ping,
             roundTripDelay,
         ]));

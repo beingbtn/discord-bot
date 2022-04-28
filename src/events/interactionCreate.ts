@@ -43,7 +43,9 @@ export const execute: ClientEvent['execute'] = async (
                     interaction.inGuild(),
             });
 
-            generalConstraints(interaction, command);
+            devModeConstraint(interaction);
+            ownerConstraint(interaction, command);
+            dmConstraint(interaction, command);
             cooldownConstraint(interaction, command);
 
             await command.execute(
@@ -55,7 +57,6 @@ export const execute: ClientEvent['execute'] = async (
             await CommandConstraintErrorHandler.init(
                 error,
                 interaction,
-                interaction.locale,
             );
         } else {
             await CommandErrorHandler.init(
@@ -66,12 +67,10 @@ export const execute: ClientEvent['execute'] = async (
     }
 };
 
-function generalConstraints(
+function devModeConstraint(
     interaction: CommandInteraction,
-    command: ClientCommand,
 ) {
     const { devMode } = interaction.client.config;
-    const { ownerOnly, noDM } = command.properties;
 
     if (
         devMode === true &&
@@ -79,6 +78,13 @@ function generalConstraints(
     ) {
         throw new ConstraintError('devMode');
     }
+}
+
+function ownerConstraint(
+    interaction: CommandInteraction,
+    command: ClientCommand,
+) {
+    const { ownerOnly } = command.properties;
 
     if (
         ownerOnly === true &&
@@ -86,6 +92,13 @@ function generalConstraints(
     ) {
         throw new ConstraintError('owner');
     }
+}
+
+function dmConstraint(
+    interaction: CommandInteraction,
+    command: ClientCommand,
+) {
+    const { noDM } = command.properties;
 
     if (
         noDM === true &&

@@ -190,7 +190,7 @@ export const execute: ClientCommand['execute'] = async (
         const setEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsAPISetTitle'))
-            .setDescription(i18n.getMessage('commandsAPISetTitle', [
+            .setDescription(i18n.getMessage('commandsAPISetDescription', [
                 category,
                 type,
                 value,
@@ -219,7 +219,7 @@ export const execute: ClientCommand['execute'] = async (
         const callEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsAPICallTitle'))
-            .setDescription(i18n.getMessage('commandsAPICallTitle', [
+            .setDescription(i18n.getMessage('commandsAPICallDescription', [
                 method,
             ]));
 

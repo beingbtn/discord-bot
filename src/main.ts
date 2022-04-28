@@ -130,7 +130,6 @@ const client = new Client({
         client.events.set(event.properties.name, event);
     }
 
-
     for (const {
         properties: { name, once },
     } of client.events.values()) {

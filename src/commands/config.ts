@@ -167,7 +167,9 @@ export const execute: ClientCommand['execute'] = async (
             .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsConfigIntervalTitle'))
             .setDescription(
-                i18n.getMessage('commandsConfigIntervalTitle', [milliseconds]),
+                i18n.getMessage('commandsConfigIntervalDescription', [
+                    milliseconds,
+                ]),
             );
 
         payload.embeds = [intervalEmbed];
@@ -226,7 +228,7 @@ export const execute: ClientCommand['execute'] = async (
             .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsConfigViewTitle'))
             .setDescription(
-                i18n.getMessage('commandsConfigRetryLimitDescription', [
+                i18n.getMessage('commandsConfigViewDescription', [
                     client.config.core === true
                         ? i18n.getMessage('on')
                         : i18n.getMessage('off'),
