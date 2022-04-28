@@ -10,10 +10,10 @@ import { CommandConstraintErrorHandler } from '../errors/CommandConstraintErrorH
 import { CommandErrorHandler } from '../errors/CommandErrorHandler';
 import { Constants } from '../utility/Constants';
 import { ConstraintError } from '../errors/ConstraintError';
+import { i18n } from '../locales/i18n';
 import { Log } from '../utility/Log';
 import { slashCommandResolver } from '../utility/utility';
 import process from 'node:process';
-import { i18n } from '../locales/i18n';
 
 const owners = JSON.parse(process.env.OWNERS!) as string[];
 

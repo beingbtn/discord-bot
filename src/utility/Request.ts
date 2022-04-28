@@ -4,9 +4,9 @@ import fetch, {
     RequestInit,
     Response,
 } from 'node-fetch';
+import { i18n } from '../locales/i18n';
 import { Log } from './Log';
 import { setTimeout } from 'node:timers';
-import { i18n } from '../locales/i18n';
 
 export class Request {
     readonly i18n: i18n;
