@@ -87,7 +87,9 @@ export const execute: ClientCommand['execute'] = async (
             {
                 name: i18n.getMessage('commandsEvalTimeTakenName'),
                 value: Formatters.codeBlock(
-                    i18n.getMessage('commandsEvalTimeTakenValue', [timeTaken]),
+                    i18n.getMessage('commandsEvalTimeTakenValue', [
+                        timeTaken,
+                    ]),
                 ),
             },
         );
