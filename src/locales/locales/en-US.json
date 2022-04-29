@@ -32,17 +32,17 @@
     "commandsAnnouncementsAddDescription": {
         "message": "$1 will be sent to $2!"
     },
-    "commandsAnnouncementsAddAlreadyAddedTitle": {
-        "message": "$1 Type Already Added!"
-    },
-    "commandsAnnouncementsAddAlreadyAddedDescription": {
-        "message": "The announcement type `$1` was already added to $2!"
+    "commandsAnnouncementsAddLog": {
+        "message": "$1 added to $2"
     },
     "commandsAnnouncementsRemoveTitle": {
         "message": "Removed $1"
     },
     "commandsAnnouncementsRemoveDescription": {
-        "message": "$1 will no longer be sent too $2!"
+        "message": "$1 will no longer be sent to $2!"
+    },
+    "commandsAnnouncementsRemoveLog": {
+        "message": "$1 removed from $2"
     },
     "commandsAnnouncementsRemoveNotFoundTitle": {
         "message": "$1 Type Not Found"
@@ -87,31 +87,31 @@
         "message": "Core State Updated"
     },
     "commandsConfigCoreDescription": {
-        "message": "The core is now **$1**."
+        "message": "The core is now **$1.**"
     },
     "commandsConfigDevModeTitle": {
         "message": "Developer Mode Updated"
     },
     "commandsConfigDevModeDescription": {
-        "message": "Developer Mode is now **$1**."
+        "message": "Developer Mode is now **$1.**"
     },
     "commandsConfigIntervalTitle": {
         "message": "Interval Updated"
     },
     "commandsConfigIntervalDescription": {
-        "message": "The interval is now **$1**."
+        "message": "The interval is now **$1.**"
     },
     "commandsConfigRestRequestTimeoutTitle": {
         "message": "Rest Request Timeout Updated"
     },
     "commandsConfigRestRequestTimeoutDescription": {
-        "message": "The rest request timeout is now **$1**."
+        "message": "The rest request timeout is now **$1.**"
     },
     "commandsConfigRetryLimitTitle": {
         "message": "Retry Limit Updated"
     },
     "commandsConfigRetryLimitDescription": {
-        "message": "The retry limit is now **$1**."
+        "message": "The retry limit is now **$1.**"
     },
     "commandsConfigViewTitle": {
         "message": "Current Configuration"
@@ -261,7 +261,7 @@
         "message": "Reloaded Everything"
     },
     "commandsReloadAllDescription": {
-        "message": "$1 imports have been reloaded! This action took $2ms"
+        "message": "$1 imports have been reloaded! This action took $2ms."
     },
     "commandsReloadSingleUnknownTitle": {
         "message": "Unknown Item"

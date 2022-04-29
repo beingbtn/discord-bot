@@ -25,105 +25,42 @@ export const properties: ClientCommand['properties'] = {
             {
                 name: 'general',
                 description: 'General Hypixel News and Announcements',
-                type: 2,
+                type: 1,
                 options: [
                     {
-                        name: 'add',
-                        description: 'Add this type of announcement to a selected channel',
-                        type: 1,
-                        options: [
-                            {
-                                name: 'channel',
-                                type: 7,
-                                channel_types: [ChannelTypes.GUILD_TEXT],
-                                description: 'Choose the channel to send these announcements to',
-                                required: true,
-                            },
-                        ],
-                    },
-                    {
-                        name: 'remove',
-                        description: 'Stop receiving these announcements',
-                        type: 1,
-                        options: [
-                            {
-                                name: 'channel',
-                                type: 7,
-                                channel_types: [ChannelTypes.GUILD_TEXT],
-                                description: 'Choose the channel you want announcements to stop being sent to',
-                                required: true,
-                            },
-                        ],
+                        name: 'channel',
+                        type: 7,
+                        channel_types: [ChannelTypes.GUILD_TEXT],
+                        description: 'The channel where Hypixel News and Announcements should be toggled',
+                        required: true,
                     },
                 ],
             },
             {
                 name: 'skyblock',
                 description: 'SkyBlock Patch Notes',
-                type: 2,
+                type: 1,
                 options: [
                     {
-                        name: 'add',
-                        description: 'Add this type of announcement to a selected channel',
-                        type: 1,
-                        options: [
-                            {
-                                name: 'channel',
-                                type: 7,
-                                channel_types: [ChannelTypes.GUILD_TEXT],
-                                description: 'Choose the channel to send these announcements to',
-                                required: true,
-                            },
-                        ],
-                    },
-                    {
-                        name: 'remove',
-                        description: 'Stop receiving these announcements',
-                        type: 1,
-                        options: [
-                            {
-                                name: 'channel',
-                                type: 7,
-                                channel_types: [ChannelTypes.GUILD_TEXT],
-                                description: 'Choose the channel you want announcements to stop being sent to',
-                                required: true,
-                            },
-                        ],
+                        name: 'channel',
+                        type: 7,
+                        channel_types: [ChannelTypes.GUILD_TEXT],
+                        description: 'The channel where SkyBlock Patch Notes should be toggled',
+                        required: true,
                     },
                 ],
             },
             {
                 name: 'moderation',
                 description: 'Moderation Information and Changes',
-                type: 2,
+                type: 1,
                 options: [
                     {
-                        name: 'add',
-                        description: 'Add this type of announcement to a selected channel',
-                        type: 1,
-                        options: [
-                            {
-                                name: 'channel',
-                                type: 7,
-                                channel_types: [ChannelTypes.GUILD_TEXT],
-                                description: 'Choose the channel to send these announcements to',
-                                required: true,
-                            },
-                        ],
-                    },
-                    {
-                        name: 'remove',
-                        description: 'Stop receiving these announcements',
-                        type: 1,
-                        options: [
-                            {
-                                name: 'channel',
-                                type: 7,
-                                channel_types: [ChannelTypes.GUILD_TEXT],
-                                description: 'Choose the channel you want announcements to stop being sent to',
-                                required: true,
-                            },
-                        ],
+                        name: 'channel',
+                        type: 7,
+                        channel_types: [ChannelTypes.GUILD_TEXT],
+                        description: 'The channel where Moderation Information and Changes should be toggled',
+                        required: true,
                     },
                 ],
             },
@@ -191,46 +128,46 @@ export const execute: ClientCommand['execute'] = async (
         return;
     }
 
-    const type = interaction.options.getSubcommandGroup() === 'general'
+    const type = interaction.options.getSubcommand() === 'general'
         ? 'News and Announcements'
-        : interaction.options.getSubcommandGroup() === 'skyblock'
+        : interaction.options.getSubcommand() === 'skyblock'
         ? 'SkyBlock Patch Notes'
         : 'Moderation Information and Changes';
 
     const channels = JSON.parse(process.env.ANNOUNCEMENTS!);
     const announcementID = channels[type].id as string;
 
-    switch (interaction.options.getSubcommand()) {
-        case 'add': await addAnnouncement();
-            break;
-        case 'remove': await removeAnnouncement();
-            break;
-        //No default
-    }
+    const oldWebhooks = await channel.fetchWebhooks();
+    const existingAnnouncementWebhook = oldWebhooks
+        .filter(webhook => webhook.sourceChannel?.id === announcementID)
+        .first();
 
-    async function addAnnouncement() {
-        const oldWebhooks = await channel.fetchWebhooks();
-        const existingAnnouncements = oldWebhooks
-            .filter(webhook => webhook.sourceChannel?.id === announcementID)
-            .first();
+    if (existingAnnouncementWebhook) {
+        //Remove webhook
 
-        if (typeof existingAnnouncements !== 'undefined') {
-            const alreadyAddedEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.warning)
-                .setTitle(i18n.getMessage('commandsAnnouncementsAddAlreadyAddedTitle', [
-                    type,
-                ]))
-                .setDescription(i18n.getMessage('commandsAnnouncementsAddAlreadyAddedDescription', [
-                    type,
-                    Formatters.channelMention(channel.id),
-                ]));
+        await existingAnnouncementWebhook.delete();
 
-            Log.interaction(interaction, `${type} announcement type was already added to ${channel.id}`);
+        const removeEmbed = new BetterEmbed(interaction)
+            .setColor(Constants.colors.normal)
+            .setTitle(i18n.getMessage('commandsAnnouncementsRemoveTitle', [
+                type,
+            ]))
+            .setDescription(i18n.getMessage('commandsAnnouncementsRemoveDescription', [
+                type,
+                Formatters.channelMention(channel.id),
+            ]));
 
-            await interaction.editReply({ embeds: [alreadyAddedEmbed] });
+        Log.interaction(
+            interaction,
+            i18n.getMessage('commandsAnnouncementsRemoveLog', [
+                type,
+                channel.id,
+            ],
+        ));
 
-            return;
-        }
+        await interaction.editReply({ embeds: [removeEmbed] });
+    } else {
+        //Add webhook
 
         const newsChannel = await interaction.client.channels.fetch(
             announcementID,
@@ -253,54 +190,21 @@ export const execute: ClientCommand['execute'] = async (
             .setTitle(i18n.getMessage('commandsAnnouncementsAddTitle', [
                 type,
             ]))
-            .setDescription(i18n.getMessage('commandsAnnouncementsAddDescription', [
-                type,
-                Formatters.channelMention(channel.id),
-            ]));
-
-        Log.interaction(interaction, `${type} announcements added to ${channel.id}`);
-
-        await interaction.editReply({ embeds: [addEmbed] });
-    }
-
-    async function removeAnnouncement() {
-        const webhooks = await channel.fetchWebhooks();
-        const announcementWebhook = webhooks
-            .filter(webhook => webhook.sourceChannel?.id === announcementID)
-            .first();
-
-        if (typeof announcementWebhook === 'undefined') {
-            const notFoundEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.warning)
-                .setTitle(i18n.getMessage('commandsAnnouncementsRemoveNotFoundTitle', [
-                    type,
-                ]))
-                .setDescription(i18n.getMessage('commandsAnnouncementsRemoveNotFoundDescription', [
+            .setDescription(
+                i18n.getMessage('commandsAnnouncementsAddDescription', [
                     type,
                     Formatters.channelMention(channel.id),
-                ]));
+                ],
+            ));
 
-            Log.interaction(interaction, `${type} announcement type isn't added to ${channel.id}`);
-
-            await interaction.editReply({ embeds: [notFoundEmbed] });
-
-            return;
-        }
-
-        await announcementWebhook.delete();
-
-        const removeEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
-            .setTitle(i18n.getMessage('commandsAnnouncementsRemoveTitle', [
+        Log.interaction(
+            interaction,
+            i18n.getMessage('commandsAnnouncementsAddLog', [
                 type,
-            ]))
-            .setDescription(i18n.getMessage('commandsAnnouncementsRemoveDescription', [
-                type,
-                Formatters.channelMention(channel.id),
-            ]));
+                channel.id,
+            ],
+        ));
 
-        Log.interaction(interaction, `${type} announcements removed from ${channel.id}`);
-
-        await interaction.editReply({ embeds: [removeEmbed] });
+        await interaction.editReply({ embeds: [addEmbed] });
     }
 };
