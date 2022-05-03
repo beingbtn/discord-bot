@@ -32,7 +32,7 @@ export const properties: ClientCommand['properties'] = {
                         name: 'status',
                         type: 3,
                         description: 'The status to use',
-                        required: true,
+                        required: false,
                         choices: [
                             {
                                 name: 'Online',
@@ -56,7 +56,7 @@ export const properties: ClientCommand['properties'] = {
                         name: 'type',
                         type: 3,
                         description: 'The type to display',
-                        required: true,
+                        required: false,
                         choices: [
                             {
                                 name: 'Playing',
@@ -84,7 +84,7 @@ export const properties: ClientCommand['properties'] = {
                         name: 'name',
                         type: 3,
                         description: 'The message/name to display',
-                        required: true,
+                        required: false,
                     },
                     {
                         name: 'url',
@@ -107,18 +107,21 @@ export const execute: ClientCommand['execute'] = async (
         .setColor(Constants.colors.normal);
 
     if (interaction.options.getSubcommand() === 'set') {
-        const type = interaction.options.getString('type', true);
-        const name = interaction.options.getString('name', true);
+        const type = interaction.options.getString('type', false);
+        const name = interaction.options.getString('name', false);
         const url = interaction.options.getString('url', false);
-        const status = interaction.options.getString('status', true);
+        const status = interaction.options.getString('status', false);
+
+        const currentPresence = interaction.client.user!.presence;
+        const currentActivity = currentPresence.activities[0];
 
         interaction.client.customPresence = {
             activities: [{
-                type: type as ExcludeEnum<typeof ActivityTypes, 'CUSTOM'>,
-                name: name,
-                url: url ?? undefined,
+                type: (type ?? currentActivity.type) as ExcludeEnum<typeof ActivityTypes, 'CUSTOM'>,
+                name: name ?? currentActivity.name,
+                url: url ?? currentActivity.url ?? undefined,
             }],
-            status: status as PresenceStatusData,
+            status: (status ?? currentPresence.status) as PresenceStatusData,
         };
 
         responseEmbed
@@ -126,19 +129,19 @@ export const execute: ClientCommand['execute'] = async (
             .addFields([
                 {
                     name: i18n.getMessage('commandsPresenceSetStatusName'),
-                    value: status,
+                    value: status ?? currentPresence.status ?? i18n.getMessage('null'),
                 },
                 {
                     name: i18n.getMessage('commandsPresenceSetTypeName'),
-                    value: type,
+                    value: type ?? currentActivity.type ?? i18n.getMessage('null'),
                 },
                 {
                     name: i18n.getMessage('commandsPresenceSetNameName'),
-                    value: name,
+                    value: name ?? currentActivity.name ?? i18n.getMessage('null'),
                 },
                 {
                     name: i18n.getMessage('commandsPresenceSetURLName'),
-                    value: url ?? i18n.getMessage('null'),
+                    value: url ?? currentActivity.url ?? i18n.getMessage('null'),
                 },
             ]);
     } else {
