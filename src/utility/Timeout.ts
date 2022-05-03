@@ -78,7 +78,7 @@ export class Timeout {
         this.clearTimeout = setTimeout(() => {
             this.pauseFor = 0;
             this.timeout = this.baseTimeout;
-        }, this.timeout + 30_000) as unknown as number;
+        }, this.timeout * 1.25) as unknown as number;
 
         this.lastMinute += 1;
 

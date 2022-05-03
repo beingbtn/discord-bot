@@ -48,7 +48,7 @@ export const properties: ClientCommand['properties'] = {
                             },
                             {
                                 name: 'Do Not Disturb ',
-                                value: 'dnd ',
+                                value: 'dnd',
                             },
                         ],
                     },
