@@ -43,6 +43,12 @@ export const properties: ClientCommand['properties'] = {
                 type: 3,
                 required: false,
             },
+            {
+                name: 'url',
+                description: 'The new url for the embed',
+                type: 3,
+                required: false,
+            },
         ],
     },
 };
@@ -55,17 +61,22 @@ export const execute: ClientCommand['execute'] = async (
     const messageID = interaction.options.getString('message', true);
     const description = interaction.options.getString('description', false);
     const image = interaction.options.getString('image', false);
+    const url = interaction.options.getString('url', false);
 
     const message = await interaction.channel!.messages.fetch(messageID);
 
     const tempEmbed = new MessageEmbed(message.embeds[0]);
 
+    if (description) {
+        tempEmbed.setDescription(description);
+    }
+
     if (image) {
         tempEmbed.setImage(image);
     }
 
-    if (description) {
-        tempEmbed.setDescription(description);
+    if (url) {
+        tempEmbed.setURL(url);
     }
 
     message.embeds[0] = tempEmbed;
