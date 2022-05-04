@@ -87,31 +87,31 @@
         "message": "Core State Updated"
     },
     "commandsConfigCoreDescription": {
-        "message": "The core is now **$1.**"
+        "message": "The core is now **$1**."
     },
     "commandsConfigDevModeTitle": {
         "message": "Developer Mode Updated"
     },
     "commandsConfigDevModeDescription": {
-        "message": "Developer Mode is now **$1.**"
+        "message": "Developer Mode is now **$1**."
     },
     "commandsConfigIntervalTitle": {
         "message": "Interval Updated"
     },
     "commandsConfigIntervalDescription": {
-        "message": "The interval is now **$1.**"
+        "message": "The interval is now **$1**ms."
     },
     "commandsConfigRestRequestTimeoutTitle": {
         "message": "Rest Request Timeout Updated"
     },
     "commandsConfigRestRequestTimeoutDescription": {
-        "message": "The rest request timeout is now **$1.**"
+        "message": "The rest request timeout is now **$1**."
     },
     "commandsConfigRetryLimitTitle": {
         "message": "Retry Limit Updated"
     },
     "commandsConfigRetryLimitDescription": {
-        "message": "The retry limit is now **$1.**"
+        "message": "The retry limit is now **$1**."
     },
     "commandsConfigViewTitle": {
         "message": "Current Configuration"
@@ -124,6 +124,12 @@
     },
     "commandsDeployNone": {
         "message": "None"
+    },
+    "commandsEditAnnouncementsLogEditing": {
+        "message": "Sending message..."
+    },
+    "commandsEditAnnouncementsLogPublished": {
+        "message": "Published edit!"
     },
     "commandsEditAnnouncementsPreviewButtonLabel": {
         "message": "Looks Good!"
@@ -275,6 +281,33 @@
     "commandsReloadSingleSuccessDescription": {
         "message": "$1.$2 was successfully reloaded! This action took $3 milliseconds."
     },
+    "commandsSendAnnouncementsLogSending": {
+        "message": "Sending message..."
+    },
+    "commandsSendAnnouncementsLogPublished": {
+        "message": "Published announcement!"
+    },
+    "commandsSendAnnouncementsEmbedAuthorName": {
+        "message": "Hypixel News"
+    },
+    "commandsSendAnnouncementsEmbedFooterName": {
+        "message": "Special Announcement"
+    },
+    "commandsSendAnnouncementsPreviewButtonLabel": {
+        "message": "Looks Good!"
+    },
+    "commandsSendAnnouncementsPreviewTitle": {
+        "message": "Announcement Preview"
+    },
+    "commandsSendAnnouncementsPreviewDescription": {
+        "message": "This is a preview of the announcement."
+    },
+    "commandsSendAnnouncementsSuccessTitle": {
+        "message": "Announcement Published"
+    },
+    "commandsSendAnnouncementsSuccessDescription": {
+        "message": "Your announcement has been published!"
+    },
     "commandsSystemTitle": {
         "message": "System"
     },
@@ -357,7 +390,7 @@
         "message": "Oops"
     },
     "errorsInteractionReplyDescription": {
-        "message": "An error occurred while executing the command **/$1**! This error has been automatically forwarded for review. It should be resolved soon. Sorry."
+        "message": "An error occurred while executing the command **/$1**! This error has been automatically forwarded for review. Sorry."
     },
     "errorsInteractionReplyIncidentName": {
         "message": "Incident ID"

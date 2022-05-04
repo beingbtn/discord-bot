@@ -129,19 +129,27 @@ export const execute: ClientCommand['execute'] = async (
             .addFields([
                 {
                     name: i18n.getMessage('commandsPresenceSetStatusName'),
-                    value: status ?? currentPresence.status ?? i18n.getMessage('null'),
+                    value: status ??
+                        currentPresence.status ??
+                        i18n.getMessage('null'),
                 },
                 {
                     name: i18n.getMessage('commandsPresenceSetTypeName'),
-                    value: type ?? currentActivity.type ?? i18n.getMessage('null'),
+                    value: type ??
+                        currentActivity.type ??
+                        i18n.getMessage('null'),
                 },
                 {
                     name: i18n.getMessage('commandsPresenceSetNameName'),
-                    value: name ?? currentActivity.name ?? i18n.getMessage('null'),
+                    value: name ??
+                        currentActivity.name ??
+                        i18n.getMessage('null'),
                 },
                 {
                     name: i18n.getMessage('commandsPresenceSetURLName'),
-                    value: url ?? currentActivity.url ?? i18n.getMessage('null'),
+                    value: url ??
+                        currentActivity.url ??
+                        i18n.getMessage('null'),
                 },
             ]);
     } else {

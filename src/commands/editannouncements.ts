@@ -39,7 +39,7 @@ export const properties: ClientCommand['properties'] = {
             },
             {
                 name: 'image',
-                description: 'The new image states for the embed',
+                description: 'The new image for the embed',
                 type: 3,
                 required: false,
             },
@@ -113,11 +113,17 @@ export const execute: ClientCommand['execute'] = async (
         return;
     }
 
-    Log.interaction(interaction, 'Editing message...');
+    Log.interaction(
+        interaction,
+        i18n.getMessage('commandsEditAnnouncementsLogEditing'),
+    );
 
     await message.edit({ embeds: message.embeds });
 
-    Log.interaction(interaction, 'Published message!');
+    Log.interaction(
+        interaction,
+        i18n.getMessage('commandsEditAnnouncementsLogPublished'),
+    );
 
     const successEmbed = new BetterEmbed(interaction)
         .setColor(Constants.colors.normal)

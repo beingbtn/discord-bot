@@ -29,6 +29,6 @@ export class i18n {
             }
         }
 
-        return message ?? 'null';
+        return message || 'null';
     }
 }
