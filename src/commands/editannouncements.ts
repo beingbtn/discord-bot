@@ -32,6 +32,12 @@ export const properties: ClientCommand['properties'] = {
                 required: true,
             },
             {
+                name: 'title',
+                description: 'The new title for the embed',
+                type: 3,
+                required: false,
+            },
+            {
                 name: 'description',
                 description: 'The new description for the embed',
                 type: 3,
@@ -59,6 +65,7 @@ export const execute: ClientCommand['execute'] = async (
     const { i18n } = interaction;
 
     const messageID = interaction.options.getString('message', true);
+    const title = interaction.options.getString('title', true);
     const description = interaction.options.getString('description', false);
     const image = interaction.options.getString('image', false);
     const url = interaction.options.getString('url', false);
@@ -66,6 +73,10 @@ export const execute: ClientCommand['execute'] = async (
     const message = await interaction.channel!.messages.fetch(messageID);
 
     const tempEmbed = new MessageEmbed(message.embeds[0]);
+
+    if (title) {
+        tempEmbed.setTitle(title);
+    }
 
     if (description) {
         tempEmbed.setDescription(description);
