@@ -4,7 +4,7 @@ import { Log } from './Log';
 const pool = new Pool();
 
 pool.on('error', error => {
-    Log.error('PostgreSQL Pool Error', error.stack);
+    Log.error(`PostgreSQL Pool Error | Total Clients: ${pool.totalCount} Idle CLients: ${pool.idleCount}`, error.stack);
 });
 
 export class Database {
