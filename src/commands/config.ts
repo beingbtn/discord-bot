@@ -115,8 +115,8 @@ export const execute: ClientCommand['execute'] = async (
         client.config.core = !client.config.core;
 
         await Database.query(
-            'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config],
+            'UPDATE config SET core = $1 WHERE index = 0',
+            [client.config.core],
         );
 
         const coreEmbed = new BetterEmbed(interaction)
@@ -139,8 +139,8 @@ export const execute: ClientCommand['execute'] = async (
         client.config.devMode = !client.config.devMode;
 
         await Database.query(
-            'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config],
+            'UPDATE config SET devMode = $1 WHERE index = 0',
+            [client.config.devMode],
         );
 
         const devModeEmbed = new BetterEmbed(interaction)
@@ -168,8 +168,8 @@ export const execute: ClientCommand['execute'] = async (
         client.config.interval = milliseconds;
 
         await Database.query(
-            'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config],
+            'UPDATE config SET interval = $1 WHERE index = 0',
+            [client.config.interval],
         );
 
         const intervalEmbed = new BetterEmbed(interaction)
@@ -195,8 +195,8 @@ export const execute: ClientCommand['execute'] = async (
         client.config.restRequestTimeout = milliseconds;
 
         await Database.query(
-            'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config],
+            'UPDATE config SET restRequestTimeout = $1 WHERE index = 0',
+            [client.config.restRequestTimeout],
         );
 
         const keyPercentageEmbed = new BetterEmbed(interaction)
@@ -222,8 +222,8 @@ export const execute: ClientCommand['execute'] = async (
         client.config.retryLimit = limit;
 
         await Database.query(
-            'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config],
+            'UPDATE config SET retryLimit = $1 WHERE index = 0',
+            [client.config.retryLimit],
         );
 
         const keyPercentageEmbed = new BetterEmbed(interaction)

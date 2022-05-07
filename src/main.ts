@@ -96,9 +96,9 @@ const client = new Client({
 
     client.config = (
         await Database.query(
-            'SELECT config FROM config WHERE index = 0',
+            'SELECT * FROM config WHERE index = 0',
         )
-    ).rows[0].config as Config;
+    ).rows[0] as Config;
 
     client.cooldowns = new Collection();
     client.core = new Core(client);
