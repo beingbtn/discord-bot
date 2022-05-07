@@ -2,6 +2,7 @@ import 'dotenv/config';
 import type {
     ClientCommand,
     ClientEvent,
+    Config,
 } from './@types/client';
 import {
     Client,
@@ -19,6 +20,7 @@ import process from 'node:process';
 
 process.on('exit', code => {
     Log.log(`Exiting with code ${code}`);
+    Database.close();
 });
 
 process.on('unhandledRejection', async error => {
@@ -90,10 +92,14 @@ const client = new Client({
 });
 
 (async () => {
-    await Database.init();
-
     client.commands = new Collection();
-    client.config = await new Database().getConfig();
+
+    client.config = (
+        await Database.query(
+            'SELECT config FROM config WHERE index = 0',
+        )
+    ).rows[0].config as Config;
+
     client.cooldowns = new Collection();
     client.core = new Core(client);
     client.customPresence = null;

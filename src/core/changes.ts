@@ -4,33 +4,19 @@ import process from 'node:process';
 
 export class CoreChanges {
     static async get(data: rssJSON) {
-        const links = (
-            await new Database().instance
-                .collection('posts')
-                .find({ })
-                .project({
-                    [data.title]: 1,
-                    _id: 0,
-                })
-                .toArray()
-        )[0][data.title] as unknown as string[];
+        const links = await Database.query(
+            'SELECT posts FROM posts WHERE type = $1',
+            [data.title],
+        );
 
-        return links;
+        return links.rows[0].posts;
     }
 
     static async set(data: rssJSON, links: string[]) {
-        await new Database().instance
-            .collection('posts')
-            .updateOne(
-                {
-                    [data.title]: { $exists: true },
-                },
-                {
-                    $set: {
-                        [data.title]: links,
-                    },
-                },
-            );
+        await Database.query(
+            'UPDATE posts SET posts = $1 WHERE type = $2',
+            [links, data.title],
+        );
     }
 
     static async check(data: rssJSON): Promise<rssJSON> {

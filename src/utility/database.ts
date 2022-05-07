@@ -1,57 +1,22 @@
-import {
-    Db,
-    MongoClient,
-    ServerApiVersion,
-} from 'mongodb';
-import process from 'node:process';
-import { Config } from '../@types/client';
+import { Pool } from 'pg';
 
-const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.s4uzo.mongodb.net/hypixelNews?retryWrites=true&w=majority`;
-
-const client = new MongoClient(uri, {
-    serverApi: ServerApiVersion.v1,
-});
+const pool = new Pool();
 
 export class Database {
-    instance: Db;
+    static async query(input: string, values?: unknown[]) {
+        const client = await pool.connect();
 
-    constructor(table?: string | undefined) {
-        this.instance = client.db(table);
-    }
+        try {
+            const query = await client.query(input, values);
 
-    static async init() {
-        await client.connect();
-        return new Database();
+            return query;
+        } catch (error) {
+            client.release();
+            throw error;
+        }
     }
 
     static async close() {
-        await client.close();
-    }
-
-    async getConfig() {
-        return (
-            await this.instance
-                .collection('config')
-                .find({ })
-                .project<Config>({
-                    _id: 0,
-                })
-                .toArray()
-        )[0];
-    }
-
-    async setConfig(key: string, value: boolean | number) {
-        await this.instance
-            .collection('config')
-            .updateOne(
-                {
-                    [key]: { $exists: true },
-                },
-                {
-                    $set: {
-                        [key]: value,
-                    },
-                },
-            );
+        await pool.end();
     }
 }

@@ -114,7 +114,10 @@ export const execute: ClientCommand['execute'] = async (
     async function coreCommand() {
         client.config.core = !client.config.core;
 
-        await new Database().setConfig('core', client.config.core);
+        await Database.query(
+            'UPDATE config SET config = $1 WHERE index = 0',
+            [client.config.core],
+        );
 
         const coreEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
@@ -135,7 +138,10 @@ export const execute: ClientCommand['execute'] = async (
     async function devModeCommand() {
         client.config.devMode = !client.config.devMode;
 
-        await new Database().setConfig('devMode', client.config.devMode);
+        await Database.query(
+            'UPDATE config SET config = $1 WHERE index = 0',
+            [client.config.devMode],
+        );
 
         const devModeEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
@@ -161,7 +167,10 @@ export const execute: ClientCommand['execute'] = async (
 
         client.config.interval = milliseconds;
 
-        await new Database().setConfig('interval', milliseconds);
+        await Database.query(
+            'UPDATE config SET config = $1 WHERE index = 0',
+            [client.config.interval],
+        );
 
         const intervalEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
@@ -185,7 +194,10 @@ export const execute: ClientCommand['execute'] = async (
 
         client.config.restRequestTimeout = milliseconds;
 
-        await new Database().setConfig('restRequestTimeout', milliseconds);
+        await Database.query(
+            'UPDATE config SET config = $1 WHERE index = 0',
+            [client.config.restRequestTimeout],
+        );
 
         const keyPercentageEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
@@ -209,7 +221,10 @@ export const execute: ClientCommand['execute'] = async (
 
         client.config.retryLimit = limit;
 
-        await new Database().setConfig('retryLimit', limit);
+        await Database.query(
+            'UPDATE config SET config = $1 WHERE index = 0',
+            [client.config.retryLimit],
+        );
 
         const keyPercentageEmbed = new BetterEmbed(interaction)
             .setColor(Constants.colors.normal)
