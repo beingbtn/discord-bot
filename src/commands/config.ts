@@ -116,7 +116,7 @@ export const execute: ClientCommand['execute'] = async (
 
         await Database.query(
             'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config.core],
+            [client.config],
         );
 
         const coreEmbed = new BetterEmbed(interaction)
@@ -140,7 +140,7 @@ export const execute: ClientCommand['execute'] = async (
 
         await Database.query(
             'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config.devMode],
+            [client.config],
         );
 
         const devModeEmbed = new BetterEmbed(interaction)
@@ -169,7 +169,7 @@ export const execute: ClientCommand['execute'] = async (
 
         await Database.query(
             'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config.interval],
+            [client.config],
         );
 
         const intervalEmbed = new BetterEmbed(interaction)
@@ -196,7 +196,7 @@ export const execute: ClientCommand['execute'] = async (
 
         await Database.query(
             'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config.restRequestTimeout],
+            [client.config],
         );
 
         const keyPercentageEmbed = new BetterEmbed(interaction)
@@ -223,7 +223,7 @@ export const execute: ClientCommand['execute'] = async (
 
         await Database.query(
             'UPDATE config SET config = $1 WHERE index = 0',
-            [client.config.retryLimit],
+            [client.config],
         );
 
         const keyPercentageEmbed = new BetterEmbed(interaction)
