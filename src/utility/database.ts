@@ -1,6 +1,11 @@
 import { Pool } from 'pg';
+import { Log } from './Log';
 
 const pool = new Pool();
+
+pool.on('error', error => {
+    Log.error('PostgreSQL Pool Error', error.stack);
+});
 
 export class Database {
     static async query(input: string, values?: unknown[]) {
