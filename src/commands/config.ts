@@ -115,7 +115,7 @@ export const execute: ClientCommand['execute'] = async (
         client.config.core = !client.config.core;
 
         await Database.query(
-            'UPDATE config SET core = $1 WHERE index = 0',
+            'UPDATE config SET "core" = $1 WHERE index = 0',
             [client.config.core],
         );
 
@@ -139,7 +139,7 @@ export const execute: ClientCommand['execute'] = async (
         client.config.devMode = !client.config.devMode;
 
         await Database.query(
-            'UPDATE config SET devMode = $1 WHERE index = 0',
+            'UPDATE config SET "devMode" = $1 WHERE index = 0',
             [client.config.devMode],
         );
 
@@ -168,7 +168,7 @@ export const execute: ClientCommand['execute'] = async (
         client.config.interval = milliseconds;
 
         await Database.query(
-            'UPDATE config SET interval = $1 WHERE index = 0',
+            'UPDATE config SET "interval" = $1 WHERE index = 0',
             [client.config.interval],
         );
 
@@ -195,7 +195,7 @@ export const execute: ClientCommand['execute'] = async (
         client.config.restRequestTimeout = milliseconds;
 
         await Database.query(
-            'UPDATE config SET restRequestTimeout = $1 WHERE index = 0',
+            'UPDATE config SET "restRequestTimeout" = $1 WHERE index = 0',
             [client.config.restRequestTimeout],
         );
 
@@ -222,7 +222,7 @@ export const execute: ClientCommand['execute'] = async (
         client.config.retryLimit = limit;
 
         await Database.query(
-            'UPDATE config SET retryLimit = $1 WHERE index = 0',
+            'UPDATE config SET "retryLimit" = $1 WHERE index = 0',
             [client.config.retryLimit],
         );
 
