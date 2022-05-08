@@ -9,7 +9,7 @@ import { Constants } from '../utility/Constants';
 import { i18n } from '../locales/i18n';
 import { slashCommandResolver, timestamp } from '../utility/utility';
 
-export class BaseCommandErrorHandler<E> extends BaseErrorHandler<E> {
+export class BaseInteractionErrorHandler<E> extends BaseErrorHandler<E> {
     readonly interaction: CommandInteraction | ButtonInteraction;
 
     constructor(

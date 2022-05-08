@@ -1,5 +1,5 @@
 import type { WebhookConfig } from '../@types/client';
-import { BaseCommandErrorHandler } from './BaseCommandErrorHandler';
+import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
 import {
     BetterEmbed,
     cleanRound,
@@ -16,7 +16,7 @@ import { setTimeout } from 'node:timers/promises';
 import process from 'node:process';
 
 export class CommandConstraintErrorHandler
-    extends BaseCommandErrorHandler<ConstraintError> {
+    extends BaseInteractionErrorHandler<ConstraintError> {
     readonly interaction: CommandInteraction;
 
     constructor(

@@ -34,9 +34,9 @@ export const properties: ClientCommand['properties'] = {
                     {
                         name: 'milliseconds',
                         type: 4,
-                        description: 'The timeout in milliseconds',
+                        description: 'The interval in milliseconds',
                         required: true,
-                        minValue: 180000,
+                        minValue: 60,
                         maxValue: 3600000,
                     },
                 ],

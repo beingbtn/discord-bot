@@ -1,5 +1,5 @@
 import type { WebhookConfig } from '../@types/client';
-import { BaseCommandErrorHandler } from './BaseCommandErrorHandler';
+import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
 import {
     ButtonInteraction,
     CommandInteraction,
@@ -13,7 +13,7 @@ import process from 'node:process';
 const fatalWebhook = JSON.parse(process.env.WEBHOOK_FATAL!) as WebhookConfig;
 const owners = JSON.parse(process.env.OWNERS!) as string[];
 
-export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
+export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
     readonly interaction: CommandInteraction | ButtonInteraction;
 
     constructor(
@@ -29,7 +29,7 @@ export class CommandErrorHandler<E> extends BaseCommandErrorHandler<E> {
         error: T,
         interaction: CommandInteraction | ButtonInteraction,
     ) {
-        const handler = new CommandErrorHandler(error, interaction);
+        const handler = new InteractionErrorHandler(error, interaction);
 
         try {
             handler.errorLog();

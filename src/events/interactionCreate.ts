@@ -3,11 +3,12 @@ import type {
     ClientEvent,
 } from '../@types/client';
 import {
+    ButtonInteraction,
     Collection,
     CommandInteraction,
 } from 'discord.js';
 import { CommandConstraintErrorHandler } from '../errors/CommandConstraintErrorHandler';
-import { CommandErrorHandler } from '../errors/CommandErrorHandler';
+import { InteractionErrorHandler } from '../errors/CommandErrorHandler';
 import { Constants } from '../utility/Constants';
 import { ConstraintError } from '../errors/ConstraintError';
 import { i18n } from '../locales/i18n';
@@ -23,7 +24,7 @@ export const properties: ClientEvent['properties'] = {
 };
 
 export const execute: ClientEvent['execute'] = async (
-    interaction: CommandInteraction,
+    interaction: ButtonInteraction | CommandInteraction,
 ): Promise<void> => {
     try {
         if (interaction.isCommand()) {
@@ -53,13 +54,16 @@ export const execute: ClientEvent['execute'] = async (
             );
         }
     } catch (error) {
-        if (error instanceof ConstraintError) {
+        if (
+            interaction instanceof CommandInteraction &&
+            error instanceof ConstraintError
+        ) {
             await CommandConstraintErrorHandler.init(
                 error,
                 interaction,
             );
         } else {
-            await CommandErrorHandler.init(
+            await InteractionErrorHandler.init(
                 error,
                 interaction,
             );
