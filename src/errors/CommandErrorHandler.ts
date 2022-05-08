@@ -1,7 +1,6 @@
 import type { WebhookConfig } from '../@types/client';
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
 import {
-    CommandInteraction,
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
@@ -45,17 +44,11 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
     }
 
     private async userNotify() {
-        const commandName = this.interaction instanceof CommandInteraction
-            ? this.interaction.commandName
-            : null;
-
         const embed = new MessageEmbed()
             .setColor(Constants.colors.error)
             .setTitle(this.i18n.getMessage('errorsInteractionReplyTitle'))
             .setDescription(
-                this.i18n.getMessage('errorsInteractionReplyDescription', [
-                    commandName ?? this.i18n.getMessage('null'),
-                ],
+                this.i18n.getMessage('errorsInteractionReplyDescription',
             ))
             .addFields({
                 name: this.i18n.getMessage(

@@ -27,7 +27,7 @@ export const properties: ClientCommand['properties'] = {
         options: [
             {
                 name: 'message',
-                description: 'Message ID',
+                description: 'The message to target',
                 type: 3,
                 required: true,
             },

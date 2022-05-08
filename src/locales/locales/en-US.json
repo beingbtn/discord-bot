@@ -14,6 +14,9 @@
     "off": {
         "message": "Off"
     },
+    "none": {
+        "message": "None"
+    },
     "commandsAnnouncementsBotMissingPermissionTitle": {
         "message": "Missing Permission"
     },
@@ -224,6 +227,15 @@
     "commandsHelpSpecificOwnerValue": {
         "message": "Being an owner is required to execute this command."
     },
+    "commandsNotificationsPublicTitle": {
+        "message": "Announcement Notifications"
+    },
+    "commandsNotificationsPublicDescription": {
+        "message": "Use the buttons below to manage the notifications you want to receive. Clicking on a button will toggle notifications for those announcements."
+    },
+    "commandsNotificationsPrivateTitle": {
+        "message": "Sent"
+    },
     "commandsPerformanceTitle": {
         "message": "Performance"
     },
@@ -390,7 +402,7 @@
         "message": "Oops"
     },
     "errorsInteractionReplyDescription": {
-        "message": "An error occurred while executing the command **/$1**! This error has been automatically forwarded for review. Sorry."
+        "message": "An error occurred while executing the interaction! This error has been automatically forwarded for review. Sorry."
     },
     "errorsInteractionReplyIncidentName": {
         "message": "Incident ID"
@@ -412,5 +424,23 @@
     },
     "errorsRequestAbort": {
         "message": "Retrying due to an AbortError"
+    },
+    "notificationsLabel": {
+        "message": "Notifications"
+    },
+    "notificationsAddTitle": {
+        "message": "Added $1 Notifications"
+    },
+    "notificationsAddDescription": {
+        "message": "You will be notified whenever **$1** are published!"
+    },
+    "notificationsRemoveTitle": {
+        "message": "Removed $1 Notifications"
+    },
+    "notificationsRemoveDescription": {
+        "message": "You will no longer be notified whenever new **$1** are posted!"
+    },
+    "notificationsCurrentName": {
+        "message": "Your Notifications"
     }
 }

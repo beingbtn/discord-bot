@@ -29,7 +29,7 @@ export const properties: ClientCommand['properties'] = {
         options: [
             {
                 name: 'channel',
-                description: 'The channel ID to send the announcement to',
+                description: 'The channel to send the announcement to',
                 type: 7,
                 channel_types: [ChannelTypes.GUILD_NEWS],
                 required: true,

@@ -13,7 +13,7 @@ import { Constants } from '../utility/Constants';
 import { ConstraintError } from '../errors/ConstraintError';
 import { i18n } from '../locales/i18n';
 import { Log } from '../utility/Log';
-import { slashCommandResolver } from '../utility/utility';
+import { BetterEmbed, slashCommandResolver } from '../utility/utility';
 import process from 'node:process';
 
 const owners = JSON.parse(process.env.OWNERS!) as string[];
@@ -52,8 +52,69 @@ export const execute: ClientEvent['execute'] = async (
             await command.execute(
                 interaction,
             );
-        } else if (interaction.isSelectMenu()) {
-            //Handling for notification select menus
+        } else if (interaction.isButton() && interaction.inCachedGuild()) {
+            //Handling for notifications
+
+            const category = interaction.customId;
+
+            const announcements = JSON.parse(process.env.ANNOUNCEMENTS!) as {
+                [key: string]: {
+                    id: string,
+                    role: string,
+                }
+            };
+
+            const announcement = announcements[category];
+            const memberRoles = interaction.member.roles;
+            const hasRole = memberRoles.cache.has(announcement.role);
+
+            const notificationsEmbed = new BetterEmbed({
+                text: interaction.i18n.getMessage('notificationsLabel'),
+                iconURL: interaction.user.displayAvatarURL(),
+            })
+            .setColor(Constants.colors.normal);
+
+            if (hasRole) {
+                await memberRoles.remove(announcement.role);
+
+                notificationsEmbed
+                    .setTitle(interaction.i18n.getMessage(
+                        'notificationsRemoveTitle', [
+                        category,
+                    ]))
+                    .setDescription(interaction.i18n.getMessage(
+                        'notificationsRemoveDescription', [
+                        category,
+                    ]));
+            } else {
+                await memberRoles.add(announcement.role);
+
+                notificationsEmbed
+                    .setTitle(interaction.i18n.getMessage(
+                        'notificationsAddTitle', [
+                        category,
+                    ]))
+                    .setDescription(interaction.i18n.getMessage(
+                        'notificationsAddDescription', [
+                        category,
+                    ]));
+            }
+
+            await interaction.member.fetch();
+
+            notificationsEmbed
+                .addFields([{
+                    name: interaction.i18n.getMessage('notificationsCurrentName'),
+                    value: Object.entries(announcements).filter(
+                            ([, value]) => memberRoles.cache.has(value.role),
+                        ).map(([key]) => key).join(', ') ||
+                    interaction.i18n.getMessage('none'),
+                }]);
+
+            await interaction.reply({
+                embeds: [notificationsEmbed],
+                ephemeral: true,
+            });
         }
     } catch (error) {
         if (

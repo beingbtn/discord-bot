@@ -1,6 +1,9 @@
 import type { ActivityTypes } from 'discord.js/typings/enums';
 import type { ClientCommand } from '../@types/client';
-import type { ExcludeEnum, PresenceStatusData } from 'discord.js';
+import type {
+    ExcludeEnum,
+    PresenceStatusData,
+} from 'discord.js';
 import {
     BetterEmbed,
     setPresence,
