@@ -3,9 +3,9 @@ import type {
     ClientEvent,
 } from '../@types/client';
 import {
-    ButtonInteraction,
     Collection,
     CommandInteraction,
+    MessageComponentInteraction,
 } from 'discord.js';
 import { CommandConstraintErrorHandler } from '../errors/CommandConstraintErrorHandler';
 import { InteractionErrorHandler } from '../errors/CommandErrorHandler';
@@ -24,12 +24,12 @@ export const properties: ClientEvent['properties'] = {
 };
 
 export const execute: ClientEvent['execute'] = async (
-    interaction: ButtonInteraction | CommandInteraction,
+    interaction: MessageComponentInteraction,
 ): Promise<void> => {
     try {
-        if (interaction.isCommand()) {
-            interaction.i18n = new i18n(interaction.locale);
+        interaction.i18n = new i18n(interaction.locale);
 
+        if (interaction.isCommand()) {
             const command: ClientCommand | undefined =
                 interaction.client.commands.get(interaction.commandName);
 
@@ -52,6 +52,8 @@ export const execute: ClientEvent['execute'] = async (
             await command.execute(
                 interaction,
             );
+        } else if (interaction.isSelectMenu()) {
+            //Handling for notification select menus
         }
     } catch (error) {
         if (

@@ -1,8 +1,8 @@
 import type { WebhookConfig } from '../@types/client';
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
 import {
-    ButtonInteraction,
     CommandInteraction,
+    MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
 import { Constants } from '../utility/Constants';
@@ -14,11 +14,11 @@ const fatalWebhook = JSON.parse(process.env.WEBHOOK_FATAL!) as WebhookConfig;
 const owners = JSON.parse(process.env.OWNERS!) as string[];
 
 export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
-    readonly interaction: CommandInteraction | ButtonInteraction;
+    readonly interaction: MessageComponentInteraction;
 
     constructor(
         error: E,
-        interaction: CommandInteraction | ButtonInteraction,
+        interaction: MessageComponentInteraction,
     ) {
         super(error, interaction);
 
@@ -27,7 +27,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
 
     static async init<T>(
         error: T,
-        interaction: CommandInteraction | ButtonInteraction,
+        interaction: MessageComponentInteraction,
     ) {
         const handler = new InteractionErrorHandler(error, interaction);
 

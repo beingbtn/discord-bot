@@ -1,7 +1,7 @@
 import {
-    ButtonInteraction,
     CommandInteraction,
     GuildChannel,
+    MessageComponentInteraction,
     TextChannel,
 } from 'discord.js';
 import { BaseErrorHandler } from './BaseErrorHandler';
@@ -10,11 +10,11 @@ import { i18n } from '../locales/i18n';
 import { slashCommandResolver, timestamp } from '../utility/utility';
 
 export class BaseInteractionErrorHandler<E> extends BaseErrorHandler<E> {
-    readonly interaction: CommandInteraction | ButtonInteraction;
+    readonly interaction: MessageComponentInteraction;
 
     constructor(
         error: E,
-        interaction: CommandInteraction | ButtonInteraction,
+        interaction: MessageComponentInteraction,
     ) {
         super(error);
         this.interaction = interaction;
