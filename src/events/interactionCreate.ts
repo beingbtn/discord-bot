@@ -6,6 +6,7 @@ import {
     Collection,
     CommandInteraction,
     MessageComponentInteraction,
+    MessageEmbed,
 } from 'discord.js';
 import { CommandConstraintErrorHandler } from '../errors/CommandConstraintErrorHandler';
 import { InteractionErrorHandler } from '../errors/CommandErrorHandler';
@@ -13,7 +14,7 @@ import { Constants } from '../utility/Constants';
 import { ConstraintError } from '../errors/ConstraintError';
 import { i18n } from '../locales/i18n';
 import { Log } from '../utility/Log';
-import { BetterEmbed, slashCommandResolver } from '../utility/utility';
+import { slashCommandResolver } from '../utility/utility';
 import process from 'node:process';
 
 const owners = JSON.parse(process.env.OWNERS!) as string[];
@@ -68,11 +69,8 @@ export const execute: ClientEvent['execute'] = async (
             const memberRoles = interaction.member.roles;
             const hasRole = memberRoles.cache.has(announcement.role);
 
-            const notificationsEmbed = new BetterEmbed({
-                text: interaction.i18n.getMessage('notificationsLabel'),
-                iconURL: interaction.user.displayAvatarURL(),
-            })
-            .setColor(Constants.colors.normal);
+            const notificationsEmbed = new MessageEmbed()
+                .setColor(Constants.colors.normal);
 
             if (hasRole) {
                 await memberRoles.remove(announcement.role);

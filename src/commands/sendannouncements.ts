@@ -32,7 +32,10 @@ export const properties: ClientCommand['properties'] = {
                 name: 'channel',
                 description: 'The channel to send the announcement to',
                 type: 7,
-                channel_types: [ChannelTypes.GUILD_NEWS],
+                channel_types: [
+                    ChannelTypes.GUILD_NEWS,
+                    ChannelTypes.GUILD_TEXT,
+                ],
                 required: true,
             },
             {
@@ -63,6 +66,12 @@ export const properties: ClientCommand['properties'] = {
                 name: 'role',
                 description: 'The role to mention with the announcement',
                 type: 8,
+                required: false,
+            },
+            {
+                name: 'crosspost',
+                description: 'Whether to crosspost the announcement (default to true)',
+                type: 5,
                 required: false,
             },
         ],
@@ -163,7 +172,10 @@ export const execute: ClientCommand['execute'] = async (
 
     const sentAnnouncement = await channel.send({ embeds: [announcement] });
 
-    if (sentAnnouncement.crosspostable) {
+    if (
+        sentAnnouncement.crosspostable &&
+        interaction.options.getBoolean('crosspost', false) !== false
+    ) {
         await sentAnnouncement.crosspost();
     }
 

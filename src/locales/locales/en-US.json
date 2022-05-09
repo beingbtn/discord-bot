@@ -432,7 +432,7 @@
         "message": "Added $1 Notifications"
     },
     "notificationsAddDescription": {
-        "message": "You will be notified whenever **$1** are published!"
+        "message": "You will now be notified whenever **$1** are published!"
     },
     "notificationsRemoveTitle": {
         "message": "Removed $1 Notifications"

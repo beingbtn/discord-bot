@@ -55,6 +55,12 @@ export const properties: ClientCommand['properties'] = {
                 type: 3,
                 required: false,
             },
+            {
+                name: 'crosspost',
+                description: 'Whether to crosspost the announcement, if not already (default to true)',
+                type: 5,
+                required: false,
+            },
         ],
     },
 };
@@ -140,7 +146,15 @@ export const execute: ClientCommand['execute'] = async (
         i18n.getMessage('commandsEditAnnouncementsLogEditing'),
     );
 
-    await message.edit({ embeds: message.embeds });
+    const editedAnnouncement = await message.edit({ embeds: message.embeds });
+
+    //Case for when a channel is converted to an announcement channel
+    if (
+        editedAnnouncement.crosspostable &&
+        interaction.options.getBoolean('crosspost', false) !== false
+    ) {
+        await editedAnnouncement.crosspost();
+    }
 
     Log.interaction(
         interaction,
