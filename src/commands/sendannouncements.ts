@@ -7,6 +7,7 @@ import {
 import { Constants } from '../utility/Constants';
 import {
     Constants as DiscordConstants,
+    Formatters,
     MessageActionRow,
     MessageButton,
     MessageComponentInteraction,
@@ -56,6 +57,12 @@ export const properties: ClientCommand['properties'] = {
                 name: 'url',
                 description: 'The url for the embed',
                 type: 3,
+                required: false,
+            },
+            {
+                name: 'role',
+                description: 'The role to mention with the announcement',
+                type: 8,
                 required: false,
             },
         ],
@@ -147,6 +154,12 @@ export const execute: ClientCommand['execute'] = async (
         interaction,
         i18n.getMessage('commandsSendAnnouncementsLogSending'),
     );
+
+    const role = interaction.options.getRole('role', false);
+
+    if (role) {
+        channel.send({ content: Formatters.roleMention(role.id) });
+    }
 
     const sentAnnouncement = await channel.send({ embeds: [announcement] });
 
