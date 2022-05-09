@@ -167,7 +167,12 @@ export const execute: ClientCommand['execute'] = async (
     const role = interaction.options.getRole('role', false);
 
     if (role) {
-        channel.send({ content: Formatters.roleMention(role.id) });
+        await channel.send({
+            content: Formatters.roleMention(role.id),
+            allowedMentions: {
+                parse: ['roles'],
+            },
+        });
     }
 
     const sentAnnouncement = await channel.send({ embeds: [announcement] });
