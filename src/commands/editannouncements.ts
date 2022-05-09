@@ -71,7 +71,7 @@ export const execute: ClientCommand['execute'] = async (
     const { i18n } = interaction;
 
     const messageID = interaction.options.getString('message', true);
-    const title = interaction.options.getString('title', true);
+    const title = interaction.options.getString('title', false);
     const description = interaction.options.getString('description', false);
     const image = interaction.options.getString('image', false);
     const url = interaction.options.getString('url', false);
