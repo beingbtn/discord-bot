@@ -53,7 +53,11 @@ export const execute: ClientEvent['execute'] = async (
             await command.execute(
                 interaction,
             );
-        } else if (interaction.isButton() && interaction.inCachedGuild()) {
+        } else if (
+            interaction.isButton() &&
+            interaction.inCachedGuild() &&
+            interaction.message.flags.has('EPHEMERAL') === false
+        ) {
             //Handling for notifications
 
             const category = interaction.customId;
