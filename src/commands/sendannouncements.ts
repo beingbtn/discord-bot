@@ -24,6 +24,16 @@ export const properties: ClientCommand['properties'] = {
     ephemeral: true,
     noDM: true,
     ownerOnly: true,
+    permissions: {
+        bot: {
+            global: [],
+            local: [],
+        },
+        user: {
+            global: [],
+            local: [],
+        },
+    },
     structure: {
         name: 'sendannouncements',
         description: 'Manually send announcements',

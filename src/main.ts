@@ -112,29 +112,21 @@ const client = new Client({
         ])
     );
 
-    const commandPromises: Promise<ClientCommand>[] = [];
-    const eventPromises: Promise<ClientEvent>[] = [];
+    await Promise.all([
+        ...folders[0].map(async commandFile => {
+            const command: ClientCommand = await import(
+                `${__dirname}/commands/${commandFile}`
+            );
+            client.commands.set(command.properties.name, command);
+        }),
+        ...folders[1].map(async eventFile => {
+            const event: ClientEvent = await import(
+                `${__dirname}/events/${eventFile}`
+            );
 
-    for (const file of folders[0]) {
-        commandPromises.push(import(`${__dirname}/commands/${file}`));
-    }
-
-    for (const file of folders[1]) {
-        eventPromises.push(import(`${__dirname}/events/${file}`));
-    }
-
-    const resolvedPromises = await Promise.all([
-        Promise.all(commandPromises),
-        Promise.all(eventPromises),
+            client.events.set(event.properties.name, event);
+        }),
     ]);
-
-    for (const command of resolvedPromises[0]) {
-        client.commands.set(command.properties.name, command);
-    }
-
-    for (const event of resolvedPromises[1]) {
-        client.events.set(event.properties.name, event);
-    }
 
     for (const {
         properties: { name, once },

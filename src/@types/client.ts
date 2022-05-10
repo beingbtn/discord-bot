@@ -15,6 +15,16 @@ export interface ClientCommand {
         ephemeral: boolean,
         noDM: boolean,
         ownerOnly: boolean,
+        permissions: {
+            bot: {
+                global: bigint[],
+                local: bigint[],
+            },
+            user: {
+                global: bigint[],
+                local: bigint[],
+            },
+        },
         structure: ChatInputApplicationCommandData,
     },
     execute: {

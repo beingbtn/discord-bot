@@ -18,6 +18,16 @@ export const properties: ClientCommand['properties'] = {
     ephemeral: true,
     noDM: true,
     ownerOnly: false,
+    permissions: {
+        bot: {
+            global: [],
+            local: [],
+        },
+        user: {
+            global: [],
+            local: [],
+        },
+    },
     structure: {
         name: 'announcements',
         description: 'Configure what announcements you want to receive',

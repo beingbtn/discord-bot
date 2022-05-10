@@ -177,6 +177,22 @@ function dmConstraint(
     }
 }
 
+function userPermissionsConstraint(
+    interaction: CommandInteraction,
+    command: ClientCommand,
+) {
+    const permissions = command.properties.permissions.user;
+}
+
+function botPermissionsConstraint(
+    interaction: CommandInteraction,
+    command: ClientCommand,
+) {
+    const permissions = command.properties.permissions.user;
+    
+    new Permissions()
+}
+
 function cooldownConstraint(
     interaction: CommandInteraction,
     command: ClientCommand,

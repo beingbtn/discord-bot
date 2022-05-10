@@ -13,6 +13,16 @@ export const properties: ClientCommand['properties'] = {
     ephemeral: true,
     noDM: false,
     ownerOnly: true,
+    permissions: {
+        bot: {
+            global: [],
+            local: [],
+        },
+        user: {
+            global: [],
+            local: [],
+        },
+    },
     structure: {
         name: 'api',
         description: 'Toggles dynamic settings',

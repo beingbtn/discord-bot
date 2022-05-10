@@ -133,6 +133,22 @@ export class CommandConstraintErrorHandler
         });
     }
 
+    static async resolveConstraint(
+        interaction: CommandInteraction,
+        title: string,
+        description: string,
+        color?: ColorResolvable,
+    ) {
+        const embed = new BetterEmbed(interaction)
+            .setColor(color ?? Constants.colors.warning)
+            .setTitle(title)
+            .setDescription(description);
+
+        await interaction.editReply({
+            embeds: [embed],
+        });
+    }
+
     private async systemNotify() {
         const embeds = [this.interactionErrorEmbed()];
 

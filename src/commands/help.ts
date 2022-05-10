@@ -9,6 +9,16 @@ export const properties: ClientCommand['properties'] = {
     ephemeral: true,
     noDM: false,
     ownerOnly: false,
+    permissions: {
+        bot: {
+            global: [],
+            local: [],
+        },
+        user: {
+            global: [],
+            local: [],
+        },
+    },
     structure: {
         name: 'help',
         description: 'Displays helpful information and available commands',

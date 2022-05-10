@@ -17,6 +17,16 @@ export const properties: ClientCommand['properties'] = {
     ephemeral: true,
     noDM: false,
     ownerOnly: true,
+    permissions: {
+        bot: {
+            global: [],
+            local: [],
+        },
+        user: {
+            global: [],
+            local: [],
+        },
+    },
     structure: {
         name: 'presence',
         description: 'Set a custom presence for the bot',
