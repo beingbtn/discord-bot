@@ -231,7 +231,7 @@
         "message": "Announcement Notifications"
     },
     "commandsNotificationsPublicDescription": {
-        "message": "Use the buttons below to manage the notifications you want to receive. Clicking on a button will toggle notifications for those announcements."
+        "message": "Use the buttons below to manage the notifications you want to receive. Clicking on a button will toggle notifications for the selected announcement category."
     },
     "commandsNotificationsPrivateTitle": {
         "message": "Sent"
