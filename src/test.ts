@@ -209,7 +209,7 @@ for (let i = 0; i < items.length; i += 1) {
 
     obj.content = turndownService.turndown(obj.content)
         .replace(/^!\[\S+\.(png|jpg)\]\(.+\)/, '') //Remove the first image at the beginning, if any
-        .replaceAll(/!\[\S+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
+        .replaceAll(/\n!\[\S+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
         .replaceAll(/ "\S+\.(png|jpg)"/gm, '') //Replace image descriptions at the end of hyperlinks
         .replaceAll('  \n', '\n') //Remove weird newlines
         .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
