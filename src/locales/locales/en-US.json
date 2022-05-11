@@ -356,6 +356,30 @@
     "errorsInteractionConstraintDMDescription": {
         "message": "You cannot execute this command in the DM channel! Please switch to a server channel!"
     },
+    "errorsInteractionConstraintUserGlobalPermissionsTitle": {
+        "message": "Missing Permission(s)"
+    },
+    "errorsInteractionConstraintUserGlobalPermissionsDescription": {
+        "message": "You don't have the required server permission(s) to use this command! Please ensure that you have the following given through your role: $1"
+    },
+    "errorsInteractionConstraintUserLocalPermissionsTitle": {
+        "message": "Missing Permission(s)"
+    },
+    "errorsInteractionConstraintUserLocalPermissionsDescription": {
+        "message": "You don't have the required permission(s) to use this command! Please ensure that you have the following given through your role or through the channel's advanced permissions: $1"
+    },
+    "errorsInteractionConstraintBotGlobalPermissionsTitle": {
+        "message": "Missing Permission(s)"
+    },
+    "errorsInteractionConstraintBotGlobalPermissionsDescription": {
+        "message": "This bot doesn't have the required server permission(s) to use this command! Please ensure that you have given the bot the following through its role: $1"
+    },
+    "errorsInteractionConstraintBotLocalPermissionsTitle": {
+        "message": "Missing Permission(s)"
+    },
+    "errorsInteractionConstraintBotLocalPermissionsDescription": {
+        "message": "This bot doesn't have the required permission(s) to use this command! Please ensure that you have given the bot the following through its role or through the channel's advanced permissions: $1"
+    },
     "errorsInteractionConstraintCooldownWaitingTitle": {
         "message": "Cooldown"
     },

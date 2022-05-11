@@ -128,17 +128,14 @@ const client = new Client({
         }),
     ]);
 
-    for (const {
-        properties: { name, once },
-    } of client.events.values()) {
-        const execute = (...parameters: unknown[]) =>
-            client.events.get(name)!.execute(...parameters);
-
-        if (once === false) {
-            client.on(name, execute);
-        } else {
-            client.once(name, execute);
-        }
+    for (const { properties } of client.events.values()) {
+        client[
+            properties.once === false ? 'on' : 'once'
+        ](
+            properties.name,
+            (...parameters: unknown[]) =>
+                client.events.get(properties.name)!.execute(...parameters),
+        );
     }
 
     await client.login();

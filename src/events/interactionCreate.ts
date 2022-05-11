@@ -3,12 +3,19 @@ import type {
     ClientEvent,
 } from '../@types/client';
 import {
-    Collection,
     CommandInteraction,
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
 import { CommandConstraintErrorHandler } from '../errors/CommandConstraintErrorHandler';
+import {
+    devModeConstraint,
+    ownerConstraint,
+    userPermissionsConstraint,
+    botPermissionsConstraint,
+    dmConstraint,
+    cooldownConstraint,
+} from '../utility/constraints';
 import { InteractionErrorHandler } from '../errors/CommandErrorHandler';
 import { Constants } from '../utility/Constants';
 import { ConstraintError } from '../errors/ConstraintError';
@@ -16,8 +23,6 @@ import { i18n } from '../locales/i18n';
 import { Log } from '../utility/Log';
 import { slashCommandResolver } from '../utility/utility';
 import process from 'node:process';
-
-const owners = JSON.parse(process.env.OWNERS!) as string[];
 
 export const properties: ClientEvent['properties'] = {
     name: 'interactionCreate',
@@ -45,10 +50,12 @@ export const execute: ClientEvent['execute'] = async (
                     interaction.inGuild(),
             });
 
-            devModeConstraint(interaction);
-            ownerConstraint(interaction, command);
-            dmConstraint(interaction, command);
-            cooldownConstraint(interaction, command);
+            await devModeConstraint(interaction);
+            await ownerConstraint(interaction, command);
+            await userPermissionsConstraint(interaction, command);
+            await botPermissionsConstraint(interaction, command);
+            await dmConstraint(interaction, command);
+            await cooldownConstraint(interaction, command);
 
             await command.execute(
                 interaction,
@@ -59,6 +66,7 @@ export const execute: ClientEvent['execute'] = async (
             interaction.message.flags.has('EPHEMERAL') === false
         ) {
             //Handling for notifications
+            //Move to a "persistent" folder or something
 
             const category = interaction.customId;
 
@@ -135,86 +143,3 @@ export const execute: ClientEvent['execute'] = async (
         }
     }
 };
-
-function devModeConstraint(
-    interaction: CommandInteraction,
-) {
-    const { devMode } = interaction.client.config;
-
-    if (
-        devMode === true &&
-        owners.includes(interaction.user.id) === false
-    ) {
-        throw new ConstraintError('devMode');
-    }
-}
-
-function ownerConstraint(
-    interaction: CommandInteraction,
-    command: ClientCommand,
-) {
-    const { ownerOnly } = command.properties;
-
-    if (
-        ownerOnly === true &&
-        owners.includes(interaction.user.id) === false
-    ) {
-        throw new ConstraintError('owner');
-    }
-}
-
-function dmConstraint(
-    interaction: CommandInteraction,
-    command: ClientCommand,
-) {
-    const { noDM } = command.properties;
-
-    if (
-        noDM === true &&
-        !interaction.inCachedGuild()
-    ) {
-        throw new ConstraintError('dm');
-    }
-}
-
-function userPermissionsConstraint(
-    interaction: CommandInteraction,
-    command: ClientCommand,
-) {
-    const permissions = command.properties.permissions.user;
-}
-
-function botPermissionsConstraint(
-    interaction: CommandInteraction,
-    command: ClientCommand,
-) {
-    const permissions = command.properties.permissions.user;
-    
-    new Permissions()
-}
-
-function cooldownConstraint(
-    interaction: CommandInteraction,
-    command: ClientCommand,
-) {
-    const { client: { cooldowns }, user } = interaction;
-    const { name, cooldown } = command.properties;
-
-    const timestamps = cooldowns.get(name);
-
-    if (typeof timestamps === 'undefined') {
-        cooldowns.set(name, new Collection());
-        cooldowns.get(name)!.set(user.id, Date.now());
-        return;
-    }
-
-    const expireTime = Number(timestamps.get(user.id)) + cooldown;
-    const isCooldown = expireTime > (Constants.ms.second * 2.5) + Date.now();
-    const timeLeft = expireTime - Date.now();
-
-    if (isCooldown === true) {
-        throw new ConstraintError('cooldown', timeLeft);
-    }
-
-    timestamps.set(user.id, Date.now());
-}
