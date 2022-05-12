@@ -14,80 +14,50 @@ const xml = `
     <link>https://hypixel.net/</link>
     <atom:link rel="self" type="application/rss+xml" href="https://hypixel.net/forums/skyblock-patch-notes.158/index.rss"/>
     <item>
-      <title>Easter Event on Hypixel</title>
-      <pubDate>Tue, 12 Apr 2022 23:37:59 +0000</pubDate>
-      <link>https://hypixel.net/threads/easter-event-on-hypixel.4903080/</link>
-      <guid isPermaLink="false">4903080</guid>
-      <author>invalid@example.com (Sylent)</author>
-      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Sylent</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/easter-newspost-png.2957680/"
+      <title>[May 11] Sunshade Patch</title>
+      <pubDate>Wed, 11 May 2022 23:45:50 +0000</pubDate>
+      <link>https://hypixel.net/threads/may-11-sunshade-patch.4944569/</link>
+      <guid isPermaLink="false">4944569</guid>
+      <author>invalid@example.com (Minikloon)</author>
+      <category domain="https://hypixel.net/forums/skyblock-patch-notes.158/"><![CDATA[SkyBlock Patch Notes]]></category>
+      <dc:creator>Minikloon</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper">Hello!<br />
+It's small update!<br />
+Sunshade, cause it's hot <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="smilie smilie--sprite smilie--sprite33" alt=":hypixel_cool:" title="Hypixel Cool    :hypixel_cool:" loading="lazy" data-shortname=":hypixel_cool:" /> outside! <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="smilie smilie--sprite smilie--sprite33" alt=":hypixel_cool:" title="Hypixel Cool    :hypixel_cool:" loading="lazy" data-shortname=":hypixel_cool:" /><br />
+<br />
+<b>Items</b><br />
+<ul>
+<li data-xf-list-type="ul">New Netherrack-Looking Sunshade dropping from blazes in the Smoldering Tombs</li>
+</ul><div style="text-align: center"><img src="https://hypixel.net/attachments/1652285032387-png.2983007/"
 			class="bbImage "
 			style=""
-			alt="easter-newspost.png"
-			title="easter-newspost.png"
-			width="1048" height="400" loading="lazy" /><br />
-<br />
-Hey everyone!<br />
-<br />
-Spring has just arrived! With it, we've got an Easter event with more spring-themed content for everyone on the server! We've got new maps, new cosmetics, and more!<br />
-<ul>
-<li data-xf-list-type="ul"><b>Easter Sale - Up to 85% off!</b></li>
-<li data-xf-list-type="ul">Easter Simulator returns!</li>
-<li data-xf-list-type="ul">Updated Easter Loot Chests for SkyWars, Bed Wars, and Murder Mystery!</li>
-<li data-xf-list-type="ul">Return of <b>Easter Mystery Boxes</b></li>
-<li data-xf-list-type="ul">New Main Lobby reskin &amp; returning SkyWars and Bed Wars lobbies!</li>
-<li data-xf-list-type="ul">Refreshed SkyBlock Easter Cosmetics for Ranked...</li>
-</ul><br />
-<a href="https://hypixel.net/threads/easter-event-on-hypixel.4903080/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>21</slash:comments>
-    </item>
-    <item>
-    <title>[April 1] Tool Reforges Patch</title>
-    <pubDate>Fri, 01 Apr 2022 16:14:47 +0000</pubDate>
-    <link>https://hypixel.net/threads/april-1-tool-reforges-patch.4887972/</link>
-    <guid isPermaLink="false">4887972</guid>
-    <author>invalid@example.com (Minikloon)</author>
-    <category domain="https://hypixel.net/forums/skyblock-patch-notes.158/"><![CDATA[SkyBlock Patch Notes]]></category>
-    <dc:creator>Minikloon</dc:creator>
-    <content:encoded><![CDATA[<div class="bbWrapper">Hey all.<br />
-<br />
-This update is unrelated to April Fool's I swear.<br />
-<br />
-<div style="text-align: center"><img src="https://hypixel.net/attachments/1648805723526-png.2947167/"
-          class="bbImage "
-          style=""
-          alt="1648805723526.png"
-          title="1648805723526.png"
-          width="280" height="248" loading="lazy" /><br />
-Proof this isn't April's Fool<br />&#8203;</div>All jokes asides it really isn't.<br />
-<br />
+			alt="1652285032387.png"
+			title="1652285032387.png"
+			width="390" height="121" loading="lazy" />&#8203;</div><ul>
+<li data-xf-list-type="ul">Spaced out the crimson isle armor sets lore to be more readable</li>
+</ul><div style="text-align: center"><img src="https://hypixel.net/attachments/1652284733108-png.2983001/"
+			class="bbImage "
+			style=""
+			alt="1652284733108.png"
+			title="1652284733108.png"
+			width="357" height="528" loading="lazy" /><br />
+Spacing!&#8203;</div><ul>
+<li data-xf-list-type="ul">Added stacks from crimson isle set bonuses in the action bar</li>
+</ul><div style="text-align: center"><img src="https://hypixel.net/attachments/1652284780401-png.2983003/"
+			class="bbImage "
+			style=""
+			alt="1652284780401.png"
+			title="1652284780401.png"
+			width="574" height="53" loading="lazy" /><br />
+5 Hydra Strike stacks!&#8203;</div><br />
 <b>Features</b><br />
 <ul>
-<li data-xf-list-type="ul"><div style="text-align: left">Added a new set of Tools Reforges available in the Blacksmith.&#8203;</div></li>
+<li data-xf-list-type="ul">Added Grandma Wolf pet to Rusty</li>
+<li data-xf-list-type="ul">Made the...</li>
 </ul><br />
-<div style="text-align: center"><img src="https://hypixel.net/attachments/1648805901473-png.2947169/"
-          class="bbImage "
-          style=""
-          alt="1648805901473.png"
-          title="1648805901473.png"
-          width="625" height="602" loading="lazy" /><br />
-Breakdown of the new reforges&#8203;</div><ul>
-<li data-xf-list-type="ul"><div style="text-align: left">Now showing reforges passives on Reforge Stones:&#8203;</div></li>
-</ul><div style="text-align: center"><img src="https://hypixel.net/attachments/1648806182544-png.2947174/"
-          class="bbImage "
-          style=""
-          alt="1648806182544.png"
-          title="1648806182544.png"
-          width="372" height="399" loading="lazy" />&#8203;</div><br />
-<b>Small Bugfixes</b><br />
-<ul>
-<li data-xf-list-type="ul">Fixed /coopadd not checking for co-op invitation settings</li>
-<li data-xf-list-type="ul">Prevent...</li>
-</ul><br />
-<a href="https://hypixel.net/threads/april-1-tool-reforges-patch.4887972/" class="link link--internal">Read more</a></div>]]></content:encoded>
-    <slash:comments>94</slash:comments>
-  </item>
+<a href="https://hypixel.net/threads/may-11-sunshade-patch.4944569/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>122</slash:comments>
+    </item>
   </channel>
 </rss>
 `;
@@ -191,7 +161,7 @@ for (let i = 0; i < items.length; i += 1) {
             ? val.content.$text
             : val['content:encoded'],
         attachments: [] as string[],
-    };
+    } as rssJSON['items'][0];
 
     obj.attachments = [
         ...obj.content.matchAll(
@@ -204,7 +174,7 @@ for (let i = 0; i < items.length; i += 1) {
             /https:\/\/hypixel\.net\/attachments\/(\S)*\//gm,
         ),
     ]
-    .sort((primary, secondary) => primary.index - secondary.index)
+    .sort((primary, secondary) => primary.index! - secondary.index!)
     .map(array => array?.[0]);
 
     obj.content = turndownService.turndown(obj.content)
@@ -216,6 +186,15 @@ for (let i = 0; i < items.length; i += 1) {
         .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
         .replace(/\*\*\n\n•/gm, '**\n•') //Remove weird newlines with lists
         .replace(/\n\n\[Read more\]\(.+\)/m, ''); //Remove read more text
+
+    //Icon/Emoji Handling
+    const icons = [...obj.content.matchAll(/!\[(\S+)\]\(.*?\)/gm)];
+
+    obj.content = icons.reduce(
+        (acc, current) =>
+            acc.replace(current[0], current[1]),
+        obj.content,
+    );
 
     rss.items.push(obj);
 }

@@ -124,7 +124,7 @@ export class CoreFormat {
                     ? val.content.$text
                     : val['content:encoded'],
                 attachments: [] as string[],
-            };
+            } as rssJSON['items'][0];
 
             obj.attachments = [
                 ...obj.content.matchAll(
@@ -137,7 +137,7 @@ export class CoreFormat {
                     /https:\/\/hypixel\.net\/attachments\/(\S)*\//gm,
                 ),
             ]
-            .sort((primary, secondary) => primary.index - secondary.index)
+            .sort((primary, secondary) => primary.index! - secondary.index!)
             .map(array => array?.[0]);
 
             obj.content = turndownService.turndown(obj.content)
@@ -149,6 +149,15 @@ export class CoreFormat {
                 .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
                 .replace(/\*\*\n\n•/gm, '**\n•') //Remove weird newlines with lists
                 .replace(/\n\n\[Read more\]\(.+\)/m, ''); //Remove read more text
+
+            //Icon/Emoji Handling
+            const icons = [...obj.content.matchAll(/!\[(\S+)\]\(.*?\)/gm)];
+
+            obj.content = icons.reduce(
+                (acc, current) =>
+                    acc.replace(current[0], current[1]),
+                obj.content,
+            );
 
             rss.items.push(obj);
         }
