@@ -148,12 +148,12 @@ export class CoreFormat {
                 .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
                 .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
                 .replace(/\*\*\n\n•/gm, '**\n•') //Remove weird newlines with lists
-                .replace(/\n\n\[Read more\]\(.+\)/m, ''); //Remove read more text
+                .replace(/\n\n\[Read more\]\(.+\)/m, ''); //Remove "Read More" text
 
-            //Icon/Emoji Handling
-            const icons = [...obj.content.matchAll(/!\[(\S+)\]\(.*?\)/gm)];
-
-            obj.content = icons.reduce(
+            //Icon/Emoji handling
+            obj.content = [
+                ...obj.content.matchAll(/!\[(\S+)\]\(.*?\)/gm),
+            ].reduce(
                 (acc, current) =>
                     acc.replace(current[0], current[1]),
                 obj.content,
