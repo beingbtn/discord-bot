@@ -161,7 +161,7 @@ for (let i = 0; i < items.length; i += 1) {
             ? val.content.$text
             : val['content:encoded'],
         attachments: [] as string[],
-    } as rssJSON['items'][0];
+    } as rssJSON['items'][number];
 
     obj.attachments = [
         ...obj.content.matchAll(
