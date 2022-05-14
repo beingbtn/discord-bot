@@ -73,12 +73,8 @@ export const execute: ClientCommand['execute'] = async (
             .setColor(Constants.colors.normal)
             .addFields(
                 {
-                    name: i18n.getMessage('commandsHelpInformationIntroductionName'),
-                    value: i18n.getMessage('commandsHelpInformationIntroductionValue'),
-                },
-                {
-                    name: i18n.getMessage('commandsHelpInformationCategoryName'),
-                    value: i18n.getMessage('commandsHelpInformationCategoryValue'),
+                    name: i18n.getMessage('commandsHelpInformationAboutName'),
+                    value: i18n.getMessage('commandsHelpInformationAboutValue'),
                 },
                 {
                     name: i18n.getMessage('commandsHelpInformationLegalName'),
