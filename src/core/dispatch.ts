@@ -50,7 +50,9 @@ export class CoreDispatch {
                 components: [actionRow],
             });
 
-            await unpublished.crosspost(); //eslint-disable-line no-await-in-loop
+            if (unpublished.crosspostable) {
+                await unpublished.crosspost(); //eslint-disable-line no-await-in-loop
+            }
         }
     }
 }

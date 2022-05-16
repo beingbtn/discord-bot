@@ -1,9 +1,8 @@
 import type { rssJSON } from './format';
 import { Database } from '../utility/database';
-import process from 'node:process';
 
 export class CoreChanges {
-    static async get(data: rssJSON) {
+    static async get(data: rssJSON): Promise<string[]> {
         const links = await Database.query(
             'SELECT posts FROM posts WHERE type = $1',
             [data.title],
@@ -24,27 +23,42 @@ export class CoreChanges {
             process.env.ANNOUNCEMENTS!,
         )[data.title].maxComments;
 
-        const knownLinks = await CoreChanges.get(data);
+        const threadIDRegex = /https:\/\/hypixel\.net\/threads\/.*?\.(\d*?)\//;
 
-        const potentialNew = data.items.filter(
-            item => !knownLinks.includes(item.link),
+        const knownThreads = await CoreChanges.get(data);
+
+        const knownThreadIDs = knownThreads.map(link =>
+            Number(link.match(threadIDRegex)![1]!),
+        );
+
+        const potentialNewThreads = data.items.filter(
+            item => {
+                const threadID = Number(
+                    item.link.match(threadIDRegex)![1]!,
+                );
+
+                return knownThreadIDs.includes(threadID) === false;
+            },
         );
 
         const base = Object.assign(data, { items: [] });
 
-        if (potentialNew.length === 0) return base;
+        if (potentialNewThreads.length === 0) return base;
 
         await CoreChanges.set(
             data,
-            [...knownLinks, ...potentialNew.map(item => item.link)],
+            [
+                ...knownThreads,
+                ...potentialNewThreads.map(item => item.link),
+            ],
         );
 
-        const newItems = potentialNew.filter(
+        const newThreads = potentialNewThreads.filter(
             item => item.comments < maxComments,
         );
 
-        if (newItems.length === 0) return base;
+        if (newThreads.length === 0) return base;
 
-        return Object.assign(base, { items: newItems });
+        return Object.assign(base, { items: newThreads });
     }
 }
