@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import { Pool, PoolClient } from 'pg';
 import { Log } from './Log';
 
 const pool = new Pool({
@@ -17,6 +17,22 @@ export class Database {
             const query = await client.query(input, values);
 
             return query;
+        } finally {
+            client.release();
+        }
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    static async transaction(func: (client: PoolClient) => Promise<void>) {
+        const client = await pool.connect();
+
+        try {
+            await client.query('BEGIN');
+            await func(client);
+            await client.query('COMMIT');
+        } catch (error) {
+            await client.query('ROLLBACK');
+            throw error;
         } finally {
             client.release();
         }

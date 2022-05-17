@@ -2,19 +2,31 @@ import type { rssJSON } from './format';
 import { Database } from '../utility/database';
 
 export class CoreChanges {
-    static async get(data: rssJSON): Promise<string[]> {
+    static async get(data: rssJSON): Promise<{
+        id: string,
+        title: string,
+        content: string,
+    }[]> {
+        const ids = data.items.map(item => `'${item.id}'`).join(', ');
+
         const links = await Database.query(
-            'SELECT posts FROM posts WHERE type = $1',
-            [data.title],
+            `SELECT id, title, content FROM "${data.title}" WHERE id IN (${ids})`,
         );
 
-        return links.rows[0].posts;
+        return links.rows;
     }
 
-    static async set(data: rssJSON, links: string[]) {
+    static async insert(data: rssJSON, item: rssJSON['items'][number]) {
         await Database.query(
-            'UPDATE posts SET posts = $1 WHERE type = $2',
-            [links, data.title],
+            `INSERT INTO "${data.title}" (id, title, content) VALUES ($1, $2, $3)`,
+            [item.id, item.title, item.content],
+        );
+    }
+
+    static async update(data: rssJSON, item: rssJSON['items'][number]) {
+        await Database.query(
+            `UPDATE "${data.title}" SET title = $1, content = $2 WHERE id = $3`,
+            [item.title, item.content, item.id],
         );
     }
 
@@ -23,42 +35,46 @@ export class CoreChanges {
             process.env.ANNOUNCEMENTS!,
         )[data.title].maxComments;
 
-        const threadIDRegex = /https:\/\/hypixel\.net\/threads\/.*?\.(\d*?)\//;
-
         const knownThreads = await CoreChanges.get(data);
 
-        const knownThreadIDs = knownThreads.map(link =>
-            Number(link.match(threadIDRegex)![1]!),
+        const knownIDs = knownThreads.map(thread => thread.id);
+
+        const potentiallyNewThreads = data.items.filter(item =>
+            knownIDs.includes(item.id) === false,
         );
 
-        const potentialNewThreads = data.items.filter(
-            item => {
-                const threadID = Number(
-                    item.link.match(threadIDRegex)![1]!,
-                );
-
-                return knownThreadIDs.includes(threadID) === false;
-            },
+        const newThreads = potentiallyNewThreads.filter(item =>
+            item.comments < maxComments,
         );
 
-        const base = Object.assign(data, { items: [] });
+        await Promise.all(
+            potentiallyNewThreads.map(
+                thread => CoreChanges.insert(data, thread),
+            ),
+        );
 
-        if (potentialNewThreads.length === 0) return base;
+        //Can optimize by filtering out new threads
+        const editedThreads = data.items.filter(item =>
+            typeof knownThreads.find(thread =>
+                thread.id === item.id &&
+                (
+                    thread.content !== item.content ||
+                    thread.title !== item.title
+                ),
+            ) !== 'undefined',
+        );
 
-        await CoreChanges.set(
-            data,
-            [
-                ...knownThreads,
-                ...potentialNewThreads.map(item => item.link),
+        await Promise.all(
+            editedThreads.map(
+                thread => CoreChanges.update(data, thread),
+            ),
+        );
+
+        return Object.assign(data, {
+            items: [
+                ...newThreads,
+                ...editedThreads,
             ],
-        );
-
-        const newThreads = potentialNewThreads.filter(
-            item => item.comments < maxComments,
-        );
-
-        if (newThreads.length === 0) return base;
-
-        return Object.assign(base, { items: newThreads });
+        });
     }
 }

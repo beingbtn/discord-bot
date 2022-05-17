@@ -6,6 +6,7 @@ import {
     MessageEmbed,
     NewsChannel,
 } from 'discord.js';
+import { setTimeout } from 'node:timers/promises';
 import process from 'node:process';
 
 export class CoreDispatch {
@@ -51,8 +52,12 @@ export class CoreDispatch {
             });
 
             if (unpublished.crosspostable) {
-                await unpublished.crosspost(); //eslint-disable-line no-await-in-loop
+                // eslint-disable-next-line no-await-in-loop
+                await unpublished.crosspost();
             }
+
+            // eslint-disable-next-line no-await-in-loop
+            await setTimeout(2500);
         }
     }
 }

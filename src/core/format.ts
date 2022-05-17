@@ -8,13 +8,14 @@ export type rssJSON = {
     image: string;
     category: unknown;
     items: {
-        id: unknown,
+        id: string,
         title: string,
         description: string | undefined,
         link: string,
         author: string,
         published: number,
         created: number,
+        edited: boolean,
         content: string,
         comments: number,
         attachments: string[];
@@ -91,9 +92,11 @@ export class CoreFormat {
             const val = items[i];
 
             const obj = {
-                id: val.guid && val.guid.$t
-                    ? val.guid.$t
-                    : val.id,
+                id: String(
+                    val.guid && val.guid.$text
+                        ? val.guid.$text
+                        : val.guid,
+                ),
                 title: val.title && val.title.$text
                     ? val.title.$text
                     : val.title,
@@ -118,6 +121,7 @@ export class CoreFormat {
                     : val.created
                     ? Date.parse(val.created)
                     : Date.now(),
+                edited: false,
                 category: val.category ?? [],
                 comments: val['slash:comments'] ?? 0,
                 content: val.content && val.content.$text
@@ -141,8 +145,8 @@ export class CoreFormat {
             .map(array => array?.[0]);
 
             obj.content = turndownService.turndown(obj.content)
-                .replace(/^!\[\S+\.(png|jpg)\]\(.+\)/, '') //Remove the first image at the beginning, if any
-                .replaceAll(/\n!\[\S+\.(png|jpg)]/gm, '[Image]') //Replace image hyperlink text with [Image]
+                .replace(/^!\[\S*?\]\(.+\)/, '') //Remove the first image at the beginning, if any
+                .replaceAll(/\n!\[\S*?\]/gm, '[Image]') //Replace image hyperlink text with [Image]
                 .replaceAll(/ "\S+\.(png|jpg)"/gm, '') //Replace image descriptions at the end of hyperlinks
                 .replaceAll('  \n', '\n') //Remove weird newlines
                 .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
