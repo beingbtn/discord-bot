@@ -12,7 +12,7 @@ export class CoreError {
 
         this.abort = new Timeout({ baseTimeout: 0 });
         this.generic = new Timeout({ baseTimeout: 30_000 });
-        this.http = new Timeout({ baseTimeout: 30_000 });
+        this.http = new Timeout({ baseTimeout: 180_000 });
 
         this.addAbort = this.addAbort.bind(this);
         this.addGeneric = this.addGeneric.bind(this);
