@@ -138,7 +138,8 @@ export const execute: ClientCommand['execute'] = async (
 
     const disabledRows = disableComponents([button]);
 
-    const previewButton = await awaitComponent(interaction.channel!, 'BUTTON', {
+    const previewButton = await awaitComponent(interaction.channel!, {
+        componentType: 'BUTTON',
         filter: componentFilter,
         idle: Constants.ms.second * 30,
     });

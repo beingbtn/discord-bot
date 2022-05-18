@@ -6,7 +6,7 @@ import {
     EmbedFieldData,
     Formatters,
     MessageActionRow,
-    MessageComponentType,
+    MessageComponentTypeResolvable,
     MessageEmbed,
     TextBasedChannel,
     WebhookClient,
@@ -14,16 +14,12 @@ import {
 } from 'discord.js';
 import { Constants } from './Constants';
 
-export async function awaitComponent(
+export async function awaitComponent<T extends MessageComponentTypeResolvable>(
     channel: TextBasedChannel,
-    component: MessageComponentType,
-    options: Omit<AwaitMessageCollectorOptionsParams<typeof component, true>, 'componentType'>,
+    options: AwaitMessageCollectorOptionsParams<T, true>,
 ) {
     try {
-        return await channel.awaitMessageComponent({
-            componentType: component,
-            ...options,
-        });
+        return await channel.awaitMessageComponent<T>(options);
     } catch (error) {
         if (
             error instanceof Error &&
@@ -256,7 +252,6 @@ export function setPresence(client: Client) {
     let presence = client.customPresence;
 
     if (presence === null) {
-        //@ts-expect-error typings not available yet for structuredClone
         presence = structuredClone(Constants.defaults.presence);
     }
 
