@@ -1,6 +1,6 @@
 {
     "name": "hypixel-news",
-    "description": "A simple bot that sends you the latest news from the Hypixel Network.",
+    "description": "Hypixel News is a project that sends you the latest news from the Hypixel Network. ",
     "license": "MIT",
     "author": "Attituding <Attituding@outlook.com>",
     "main": "src/main.ts",
