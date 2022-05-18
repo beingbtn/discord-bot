@@ -73,7 +73,6 @@ export class CoreChanges {
         return Object.assign(data, {
             items: [
                 ...newThreads,
-                ...editedThreads,
             ],
         });
     }
