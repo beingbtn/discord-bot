@@ -6,11 +6,12 @@ export class CoreChanges {
         id: string,
         title: string,
         content: string,
+        message: string | null,
     }[]> {
         const ids = data.items.map(item => `'${item.id}'`).join(', ');
 
         const links = await Database.query(
-            `SELECT id, title, content FROM "${data.title}" WHERE id IN (${ids})`,
+            `SELECT id, title, content, message FROM "${data.title}" WHERE id IN (${ids})`,
         );
 
         return links.rows;
@@ -57,12 +58,17 @@ export class CoreChanges {
         const editedThreads = data.items.filter(item =>
             typeof knownThreads.find(thread =>
                 thread.id === item.id &&
+                thread.message &&
                 (
                     thread.content !== item.content ||
                     thread.title !== item.title
                 ),
             ) !== 'undefined',
         );
+
+        for (const editedThread of editedThreads) {
+            editedThread.edited = true;
+        }
 
         await Promise.all(
             editedThreads.map(
@@ -73,6 +79,7 @@ export class CoreChanges {
         return Object.assign(data, {
             items: [
                 ...newThreads,
+                ...editedThreads,
             ],
         });
     }

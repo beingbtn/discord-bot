@@ -89,10 +89,21 @@ export class Core {
                 performance.check = Date.now();
 
                 if (changes.items.length > 0) {
-                    Log.log(`New link(s) found: ${changes.items.map(item => item.link).join(', ')}!`);
+                    const newPosts = changes.items.filter(
+                        item => item.edited === false,
+                    );
+
+                    const editedPosts = changes.items.filter(
+                        item => item.edited === true,
+                    );
+
+                    Log.log(`New Posts Found: ${newPosts.length} ${newPosts.map(post => post.link)}`);
+                    Log.log(`Edited Posts Found: ${editedPosts.length} ${editedPosts.map(post => post.link)}`);
+
                     const embeds = CoreEmbed.create(changes);
                     const components = CoreComponents.create(changes);
                     await this.dispatch.dispatch(embeds, components, changes);
+
                     Log.log(`Finished dispatching messages from ${changes.title}!`);
                 }
 

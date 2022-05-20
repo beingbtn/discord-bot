@@ -23,7 +23,7 @@ import process from 'node:process';
         ).properties.structure;
 
         await new REST({ version: '9' })
-            .setToken(process.env.discordAPIkey!)
+            .setToken(process.env.DISCORD_TOKEN!)
             .put(Routes.applicationCommands(process.env.CLIENT_ID!), {
                 body: [deployCommand],
             });

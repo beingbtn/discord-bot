@@ -221,6 +221,18 @@
     "commandsHelpSpecificOwnerValue": {
         "message": "Being an owner is required to execute this command."
     },
+    "commandsLinkLinkedTitle": {
+        "message": "Linked"
+    },
+    "commandsLinkLinkedDescription": {
+        "message": "$1 is now linked to $2."
+    },
+    "commandsLinkUnlinkedTitle": {
+        "message": "Unlinked"
+    },
+    "commandsLinkUnlinkedDescription": {
+        "message": "$1 is no longer linked to $1."
+    },
     "commandsNotificationsPublicTitle": {
         "message": "Announcement Notifications"
     },

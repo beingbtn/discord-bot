@@ -67,7 +67,7 @@ export const properties: ClientCommand['properties'] = {
             },
             {
                 name: 'crosspost',
-                description: 'Whether to crosspost the announcement, if not already (default to true)',
+                description: 'Whether to crosspost the announcement, if not already (defaults to true)',
                 type: 5,
                 required: false,
             },
