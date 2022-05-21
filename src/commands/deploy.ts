@@ -1,6 +1,6 @@
 import type { ClientCommand } from '../@types/client';
 import { BetterEmbed } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { Log } from '../utility/Log';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
@@ -129,12 +129,12 @@ export const execute: ClientCommand['execute'] = async (
     }
 
     const successEmbed = new BetterEmbed(interaction)
-        .setColor(Constants.colors.normal)
+        .setColor(constants.colors.normal)
         .setTitle(i18n.getMessage('commandsDeployTitle'))
         .setDescription(
             JSON.stringify(commands).slice(
                 0,
-                Constants.limits.embedDescription,
+                constants.limits.embedDescription,
             ) ?? i18n.getMessage('commandsDeployNone'),
         );
 

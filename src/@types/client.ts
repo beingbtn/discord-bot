@@ -61,6 +61,7 @@ declare module 'discord.js' {
         core: Core,
         customPresence: PresenceData | null,
         events: Collection<string, ClientEvent>,
+        i18n: i18n,
     }
 
     interface Interaction {

@@ -1,4 +1,5 @@
 import type { ClientEvent } from '../@types/client';
+import { client } from '../main';
 import { Log } from '../utility/Log';
 
 export const properties: ClientEvent['properties'] = {
@@ -7,5 +8,8 @@ export const properties: ClientEvent['properties'] = {
 };
 
 export const execute: ClientEvent['execute'] = (error: Error): void => {
-    Log.error(`discord.js Error`, error);
+    Log.error(
+        client.i18n.getMessage('eventsError'),
+        error,
+    );
 };

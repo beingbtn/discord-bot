@@ -6,7 +6,7 @@ import {
     ChannelTypes,
     MessageButtonStyles,
 } from 'discord.js/typings/enums';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import {
     MessageActionRow,
     MessageButton,
@@ -52,7 +52,7 @@ export const execute: ClientCommand['execute'] = async (
     const { i18n } = interaction;
 
     const notificationsEmbed = new MessageEmbed()
-        .setColor(Constants.colors.normal)
+        .setColor(constants.colors.normal)
         .setTitle(
             i18n.getMessage('commandsNotificationsPublicTitle'),
         )
@@ -87,7 +87,7 @@ export const execute: ClientCommand['execute'] = async (
     });
 
     const embed = new BetterEmbed(interaction)
-        .setColor(Constants.colors.normal)
+        .setColor(constants.colors.normal)
         .setTitle(i18n.getMessage('commandsNotificationsPrivateTitle'));
 
     await interaction.editReply({ embeds: [embed] });

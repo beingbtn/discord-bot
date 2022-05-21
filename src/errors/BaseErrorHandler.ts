@@ -2,7 +2,7 @@ import {
     BetterEmbed,
     generateStackTrace,
 } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import {
     FileOptions,
     SnowflakeUtil,
@@ -43,7 +43,7 @@ export class BaseErrorHandler<E> {
 
     baseErrorEmbed() {
         return new BetterEmbed({ text: this.incidentID })
-            .setColor(Constants.colors.error);
+            .setColor(constants.colors.error);
     }
 
     errorEmbed() {

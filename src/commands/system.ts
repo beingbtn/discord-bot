@@ -4,7 +4,7 @@ import {
     cleanLength,
     cleanRound,
 } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import process from 'node:process';
 
 export const properties: ClientCommand['properties'] = {
@@ -38,7 +38,7 @@ export const execute: ClientCommand['execute'] = async (
     const memoryMegaBytes = process.memoryUsage.rss() / (2 ** 20);
 
     const responseEmbed = new BetterEmbed(interaction)
-        .setColor(Constants.colors.normal)
+        .setColor(constants.colors.normal)
         .setTitle(i18n.getMessage('commandsSystemTitle'))
         .addFields(
             {

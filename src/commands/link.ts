@@ -2,7 +2,7 @@ import type { ClientCommand } from '../@types/client';
 import {
     BetterEmbed,
 } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { Database } from '../utility/database';
 
 export const properties: ClientCommand['properties'] = {
@@ -117,7 +117,7 @@ export const execute: ClientCommand['execute'] = async (
     );
 
     const linkEmbed = new BetterEmbed(interaction)
-        .setColor(Constants.colors.normal)
+        .setColor(constants.colors.normal)
         .setTitle(interaction.options.getSubcommand() === 'link'
             ? i18n.getMessage('commandsLinkLinkedTitle')
             : i18n.getMessage('commandsLinkUnlinkedTitle'),

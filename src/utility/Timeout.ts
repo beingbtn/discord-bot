@@ -2,7 +2,7 @@ import {
     clearTimeout,
     setTimeout,
 } from 'node:timers';
-import { Constants } from './Constants';
+import { constants } from './constants';
 
 /* eslint-disable no-unused-vars */
 
@@ -25,7 +25,7 @@ export class Timeout {
 
     constructor(options?: TimeoutOptions) {
         //Timeout set when the timeout is cleared
-        this.baseTimeout = options?.baseTimeout ?? Constants.ms.minute;
+        this.baseTimeout = options?.baseTimeout ?? constants.ms.minute;
 
         //Holds a setTimeout Id for clearing
         this.clearTimeout = undefined;
@@ -34,7 +34,7 @@ export class Timeout {
         this.lastMinute = 0;
 
         //Upper limit to this.timeout
-        this.maxTimeout = options?.maxTimeout ?? Constants.ms.day / 2;
+        this.maxTimeout = options?.maxTimeout ?? constants.ms.day / 2;
 
         //The value that would be used for a setTimeout
         this.pauseFor = 0;
@@ -43,7 +43,7 @@ export class Timeout {
         this.resumeAfter = 0;
 
         //Holds the next timeout length
-        this.timeout = options?.baseTimeout ?? Constants.ms.minute;
+        this.timeout = options?.baseTimeout ?? constants.ms.minute;
 
         //Optional value to manipulate the increase in timeout
         this.increment = options?.increment;
@@ -84,7 +84,7 @@ export class Timeout {
 
         setTimeout(() => {
             this.lastMinute -= 1;
-        }, Constants.ms.minute);
+        }, constants.ms.minute);
     }
 
     getPauseFor() {

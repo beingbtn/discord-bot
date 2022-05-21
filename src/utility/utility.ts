@@ -12,7 +12,7 @@ import {
     WebhookClient,
     WebhookMessageOptions,
 } from 'discord.js';
-import { Constants } from './Constants';
+import { constants } from './constants';
 
 export async function awaitComponent<T extends MessageComponentTypeResolvable>(
     channel: TextBasedChannel,
@@ -155,20 +155,20 @@ export function cleanLength(
         return null;
     }
 
-    let newMS = Math.floor(ms / Constants.ms.second) *
-        Constants.ms.second;
+    let newMS = Math.floor(ms / constants.ms.second) *
+        constants.ms.second;
 
     if (rejectZero ? newMS <= 0 : newMS < 0) {
         return null;
     }
 
-    const days = Math.floor(newMS / Constants.ms.day);
-    newMS -= days * Constants.ms.day;
-    const hours = Math.floor(newMS / Constants.ms.hour);
-    newMS -= hours * Constants.ms.hour;
-    const minutes = Math.floor(newMS / Constants.ms.minute);
-    newMS -= minutes * Constants.ms.minute;
-    const seconds = Math.floor(newMS / Constants.ms.second);
+    const days = Math.floor(newMS / constants.ms.day);
+    newMS -= days * constants.ms.day;
+    const hours = Math.floor(newMS / constants.ms.hour);
+    newMS -= hours * constants.ms.hour;
+    const minutes = Math.floor(newMS / constants.ms.minute);
+    newMS -= minutes * constants.ms.minute;
+    const seconds = Math.floor(newMS / constants.ms.second);
     return days > 0
         ? `${days}d ${hours}h ${minutes}m ${seconds}s`
         : hours > 0
@@ -252,7 +252,7 @@ export function setPresence(client: Client) {
     let presence = client.customPresence;
 
     if (presence === null) {
-        presence = structuredClone(Constants.defaults.presence);
+        presence = structuredClone(constants.defaults.presence);
     }
 
     client.user?.setPresence(presence!);

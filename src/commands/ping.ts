@@ -4,7 +4,7 @@ import {
     Message,
 } from 'discord.js';
 import { BetterEmbed } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { Log } from '../utility/Log';
 
 export const properties: ClientCommand['properties'] = {
@@ -36,7 +36,7 @@ export const execute: ClientCommand['execute'] = async (
     const { i18n } = interaction;
 
     const initialPingEmbed = new BetterEmbed(interaction)
-        .setColor(Constants.colors.normal)
+        .setColor(constants.colors.normal)
         .setTitle(i18n.getMessage('commandsPingLoadingTitle'));
 
     const sentReply = await interaction.editReply({
@@ -50,10 +50,10 @@ export const execute: ClientCommand['execute'] = async (
 
     const embedColor: ColorResolvable =
         interaction.client.ws.ping < 80 && roundTripDelay < 160
-            ? Constants.colors.on
+            ? constants.colors.on
             : interaction.client.ws.ping < 100 && roundTripDelay < 250
-            ? Constants.colors.ok
-            : Constants.colors.warning;
+            ? constants.colors.ok
+            : constants.colors.warning;
 
     const pingEmbed = new BetterEmbed(interaction)
         .setColor(embedColor)

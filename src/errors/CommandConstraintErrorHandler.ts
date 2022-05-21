@@ -8,7 +8,7 @@ import {
     ColorResolvable,
     CommandInteraction,
 } from 'discord.js';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { ConstraintError } from './ConstraintError';
 import { ErrorHandler } from './ErrorHandler';
 import process from 'node:process';
@@ -47,7 +47,7 @@ export class CommandConstraintErrorHandler
         color?: ColorResolvable,
     ) {
         const embed = new BetterEmbed(interaction)
-            .setColor(color ?? Constants.colors.warning)
+            .setColor(color ?? constants.colors.warning)
             .setTitle(title)
             .setDescription(description);
 
@@ -57,15 +57,26 @@ export class CommandConstraintErrorHandler
     }
 
     private errorLog() {
-        this.log(`${this.interaction.user.id} failed the constraint ${this.error.message}`);
+        this.log(this.i18n.getMessage(
+            'errorsInteractionConstraintLog',
+            [
+                this.interaction.user.id,
+                this.error.message,
+            ],
+        ));
     }
 
     private async systemNotify() {
         const embeds = [this.interactionErrorEmbed()];
 
         embeds[0]
-            .setTitle('User Failed Constraint')
-            .setDescription(`Constraint: ${this.error.message}`);
+            .setTitle(this.i18n.getMessage('errorsInteractionConstraintSystemTitle'))
+            .setDescription(this.i18n.getMessage(
+                'errorsInteractionConstraintSystemDescription',
+                [
+                    this.error.message,
+                ],
+            ));
 
         await sendWebHook({
             embeds: embeds,

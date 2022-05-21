@@ -1,5 +1,5 @@
 import { Client } from 'discord.js';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { CoreChanges } from './changes';
 import { CoreError } from './error';
 import { CoreRequest } from './request';
@@ -15,7 +15,7 @@ import { CoreComponents } from './components';
 
 /* eslint-disable no-await-in-loop */
 
-export type Performance = typeof Constants.defaults.performance;
+export type Performance = typeof constants.defaults.performance;
 
 export class Core {
     client: Client;
@@ -60,7 +60,7 @@ export class Core {
             return;
         }
 
-        const urls = Constants.urls.rss;
+        const urls = constants.urls.rss;
 
         if (urls.length === 0) {
             await setTimeout(2500);
@@ -73,7 +73,7 @@ export class Core {
     private async refresh(urls: string[]) {
         for (const url of urls) {
             const performance = {
-                ...Constants.defaults.performance,
+                ...constants.defaults.performance,
                 start: Date.now(),
                 uses: this.uses,
             };
@@ -97,14 +97,23 @@ export class Core {
                         item => item.edited === true,
                     );
 
-                    Log.log(`New Posts Found: ${newPosts.length} ${newPosts.map(post => post.link)}`);
-                    Log.log(`Edited Posts Found: ${editedPosts.length} ${editedPosts.map(post => post.link)}`);
+                    Log.log(this.client.i18n.getMessage('coreCoreLogNewPosts', [
+                        newPosts.length,
+                        newPosts.map(post => post.link).join(', '),
+                    ]));
+
+                    Log.log(this.client.i18n.getMessage('coreCoreLogEditedPosts', [
+                        editedPosts.length,
+                        editedPosts.map(post => post.link).join(', '),
+                    ]));
 
                     const embeds = CoreEmbed.create(changes);
                     const components = CoreComponents.create(changes);
                     await this.dispatch.dispatch(embeds, components, changes);
 
-                    Log.log(`Finished dispatching messages from ${changes.title}!`);
+                    Log.log(this.client.i18n.getMessage('coreCoreLogFinishedPosts', [
+                        changes.title,
+                    ]));
                 }
 
                 performance.send = Date.now();
@@ -127,7 +136,7 @@ export class Core {
 
             await setTimeout(
                 this.client.config.interval /
-                Constants.urls.rss.length,
+                constants.urls.rss.length,
             );
         }
     }
@@ -144,10 +153,10 @@ export class Core {
 
         const { history } = this.performance;
 
-        if (history[0]?.start + Constants.ms.hour > Date.now()) return;
+        if (history[0]?.start + constants.ms.hour > Date.now()) return;
 
         history.unshift(performance);
 
-        history.splice(Constants.limits.performanceHistory);
+        history.splice(constants.limits.performanceHistory);
     }
 }

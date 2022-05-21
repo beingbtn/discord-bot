@@ -8,7 +8,7 @@ import {
     BetterEmbed,
     setPresence,
 } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 
 export const properties: ClientCommand['properties'] = {
     name: 'presence',
@@ -117,7 +117,7 @@ export const execute: ClientCommand['execute'] = async (
     const { i18n } = interaction;
 
     const responseEmbed = new BetterEmbed(interaction)
-        .setColor(Constants.colors.normal);
+        .setColor(constants.colors.normal);
 
     if (interaction.options.getSubcommand() === 'set') {
         const type = interaction.options.getString('type', false);

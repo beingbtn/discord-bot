@@ -344,6 +344,57 @@
     "commandsSystemUsersName": {
         "message": "Users"
     },
+    "coreComponentsButtonsReadMoreLabel": {
+        "message": "Read More"
+    },
+    "coreCoreLogNewPosts": {
+        "message": "New Posts Found: $1 $2"
+    },
+    "coreCoreLogEditedPosts": {
+        "message": "Edited Posts Found: $1 $2"
+    },
+    "coreCoreLogFinishedPosts": {
+        "message": "Finished dispatching messages from $1"
+    },
+    "errorsCoreRequestStatusTitle": {
+        "message": "Degraded Performance"
+    },
+    "errorsCoreRequestStatusType": {
+        "message": "Type"
+    },
+    "errorsCoreRequestStatusResumeName": {
+        "message": "Resuming In"
+    },
+    "errorsCoreRequestStatusLastMinuteName": {
+        "message": "Last Minute Statistic"
+    },
+    "errorsCoreRequestStatusLastMinuteValue": {
+        "message": "Aborts: $1\nGeneric Errors: $2\nHTTP: $3"
+    },
+    "errorsCoreRequestStatusNextTimeoutsName": {
+        "message": "Next Timeout Lengths"
+    },
+    "errorsCoreRequestStatusNextTimeoutsValue": {
+        "message": "May not be accurate\nAbort Errors: $1\nGeneric Errors: $2\nHTTP Errors: $3"
+    },
+    "errorsCoreRequestStatusUsesName": {
+        "message": "Uses"
+    },
+    "errorsCoreRequestSystemAbortErrorErrorDescription": {
+        "message": "A timeout has been applied."
+    },
+    "errorsCoreRequestSystemHTTPErrorErrorDescription": {
+        "message": "A timeout has been applied."
+    },
+    "errorsCoreRequestSystemHTTPErrorErrorStatusName": {
+        "message": "Status"
+    },
+    "errorsCoreRequestSystemFetchErrorDescription": {
+        "message": "A timeout has been applied."
+    },
+    "errorsDatabasePool": {
+        "message": "PostgreSQL Pool Error | Total Clients: $1 Idle Clients: $2 Waiting Clients: $3"
+    },
     "errorsInteractionConstraintDevModeTitle": {
         "message": "Developer Mode"
     },
@@ -397,6 +448,15 @@
     },
     "errorsInteractionConstraintCooldownCooldownOverDescription": {
         "message": "The cooldown has expired! You can now execute the command **/$1**!"
+    },
+    "errorsInteractionConstraintLog": {
+        "message": "$1 failed the constraint $2"
+    },
+    "errorsInteractionConstraintSystemTitle": {
+        "message": "User Failed Constraint"
+    },
+    "errorsInteractionConstraintSystemDescription": {
+        "message": "Constraint: $1"
     },
     "errorsInteractionInformationUserName": {
         "message": "User"
@@ -454,6 +514,36 @@
     },
     "errorsRequestAbort": {
         "message": "Retrying due to an AbortError"
+    },
+    "eventsDebug": {
+        "message": "Discord.js Debug:"
+    },
+    "eventsError": {
+        "message": "Discord.js Error:"
+    },
+    "eventsGuildCreate": {
+        "message": "Bot has joined a guild. Guild: $1 | $2 Guild Owner: $3 Guild Member Count: $4 (w/ bot)"
+    },
+    "eventsGuildDelete": {
+        "message": "Bot has left a guild; joined $1. Guild: $2 | $4 Guild Owner: $5 Guild Member Count: $6 (new count)"
+    },
+    "eventsRateLimit": {
+        "message": "Discord.js RateLimit:"
+    },
+    "eventsWarn": {
+        "message": "Discord.js Warning:"
+    },
+    "logError": {
+        "message": "ERROR"
+    },
+    "logInteraction": {
+        "message": "INTERACTION"
+    },
+    "logLog": {
+        "message": "LOG"
+    },
+    "logRequest": {
+        "message": "REQUEST"
     },
     "notificationsLabel": {
         "message": "Notifications"

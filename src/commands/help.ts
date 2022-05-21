@@ -1,6 +1,6 @@
 import type { ClientCommand } from '../@types/client';
 import { BetterEmbed } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 
 export const properties: ClientCommand['properties'] = {
     name: 'help',
@@ -70,7 +70,7 @@ export const execute: ClientCommand['execute'] = async (
 
     async function information() {
         const informationEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(constants.colors.normal)
             .addFields(
                 {
                     name: i18n.getMessage('commandsHelpInformationAboutName'),
@@ -91,11 +91,11 @@ export const execute: ClientCommand['execute'] = async (
         const command: ClientCommand | undefined =
             interaction.client.commands.get(commandArg);
         const commandSearchEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal);
+            .setColor(constants.colors.normal);
 
         if (typeof command === 'undefined') {
             commandSearchEmbed
-                .setColor(Constants.colors.warning)
+                .setColor(constants.colors.warning)
                 .setTitle(i18n.getMessage('commandsHelpSpecificInvalidTitle'))
                 .setDescription(i18n.getMessage('commandsHelpSpecificInvalidDescription', [
                     commandArg,
@@ -118,7 +118,7 @@ export const execute: ClientCommand['execute'] = async (
         commandSearchEmbed.addFields({
             name: i18n.getMessage('commandsHelpSpecificCooldownName'),
             value: i18n.getMessage('commandsHelpSpecificCooldownValue', [
-                command.properties.cooldown / Constants.ms.second,
+                command.properties.cooldown / constants.ms.second,
             ]),
         });
 
@@ -144,7 +144,7 @@ export const execute: ClientCommand['execute'] = async (
             command => command.properties.ownerOnly === false,
         );
         const allCommandsEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(constants.colors.normal)
             .setTitle(i18n.getMessage('commandsHelpAllTitle'));
 
         for (const command of commandsCollection.values()) {

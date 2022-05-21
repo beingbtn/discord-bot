@@ -5,7 +5,7 @@ import {
     CommandInteraction,
     Collection,
 } from 'discord.js';
-import { Constants } from './Constants';
+import { constants } from './constants';
 import { ConstraintError } from '../errors/ConstraintError';
 import { setTimeout } from 'node:timers/promises';
 
@@ -198,7 +198,7 @@ export async function cooldownConstraint(
     }
 
     const expireTime = Number(timestamps.get(user.id)) + cooldown;
-    const isCooldown = expireTime > (Constants.ms.second * 2.5) + Date.now();
+    const isCooldown = expireTime > (constants.ms.second * 2.5) + Date.now();
     const timeLeft = expireTime - Date.now();
 
     if (isCooldown === true) {
@@ -226,7 +226,7 @@ export async function cooldownConstraint(
                 'errorsInteractionConstraintCooldownCooldownOverDescription', [
                     command.properties.name,
             ]),
-            Constants.colors.on,
+            constants.colors.on,
         );
 
         throw new ConstraintError('cooldown');

@@ -14,6 +14,7 @@ import {
 import { Core } from './core/core';
 import { Database } from './utility/database';
 import { ErrorHandler } from './errors/ErrorHandler';
+import { i18n } from './locales/i18n';
 import { Log } from './utility/Log';
 import fs from 'node:fs/promises';
 import process from 'node:process';
@@ -35,7 +36,7 @@ process.on('uncaughtException', async error => {
     process.exit(1);
 });
 
-const client = new Client({
+export const client = new Client({
     allowedMentions: {
         parse: ['users'],
         repliedUser: true,
@@ -104,6 +105,7 @@ const client = new Client({
     client.core = new Core(client);
     client.customPresence = null;
     client.events = new Collection();
+    client.i18n = new i18n();
 
     const folders = (
         await Promise.all([

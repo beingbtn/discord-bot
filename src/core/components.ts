@@ -1,3 +1,4 @@
+import { client } from '../main';
 import {
     Constants,
     MessageActionRow,
@@ -11,7 +12,9 @@ export class CoreComponents {
 
         for (const item of data.items) {
             const button = new MessageButton()
-                .setLabel('Read More')
+                .setLabel(client.i18n.getMessage(
+                    'coreComponentsButtonsReadMoreLabel',
+                ))
                 .setStyle(Constants.MessageButtonStyles.LINK)
                 .setURL(item.link);
 

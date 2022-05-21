@@ -1,5 +1,5 @@
 import type { ClientCommand } from '../@types/client';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { BetterEmbed } from '../utility/utility';
 
 export const properties: ClientCommand['properties'] = {
@@ -39,7 +39,7 @@ export const execute: ClientCommand['execute'] = async (
     } = interaction.client.core.performance.latest!;
 
     const responseEmbed = new BetterEmbed(interaction)
-        .setColor(Constants.colors.normal)
+        .setColor(constants.colors.normal)
         .setTitle(i18n.getMessage('commandsPerformanceTitle'))
         .addFields({
             name: i18n.getMessage('commandsPerformanceLatestName'),

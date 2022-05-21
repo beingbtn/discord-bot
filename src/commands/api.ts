@@ -3,7 +3,7 @@ import {
     BetterEmbed,
     cleanLength,
 } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { Log } from '../utility/Log';
 
 export const properties: ClientCommand['properties'] = {
@@ -143,11 +143,11 @@ export const execute: ClientCommand['execute'] = async (
             interaction.client.core;
 
         const statsEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(constants.colors.normal)
             .setDescription(
                 JSON.stringify(
                     interaction.client.core.performance,
-                ).slice(0, Constants.limits.embedDescription),
+                ).slice(0, constants.limits.embedDescription),
             )
             .addFields(
                 {
@@ -198,7 +198,7 @@ export const execute: ClientCommand['execute'] = async (
             type as TimeoutSettables
         ] = value;
         const setEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(constants.colors.normal)
             .setTitle(i18n.getMessage('commandsAPISetTitle'))
             .setDescription(i18n.getMessage('commandsAPISetDescription', [
                 category,
@@ -227,7 +227,7 @@ export const execute: ClientCommand['execute'] = async (
         }
 
         const callEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(constants.colors.normal)
             .setTitle(i18n.getMessage('commandsAPICallTitle'))
             .setDescription(i18n.getMessage('commandsAPICallDescription', [
                 method,

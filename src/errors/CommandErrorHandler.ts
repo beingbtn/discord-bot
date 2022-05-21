@@ -4,7 +4,7 @@ import {
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { ErrorHandler } from './ErrorHandler';
 import { sendWebHook } from '../utility/utility';
 import process from 'node:process';
@@ -45,7 +45,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
 
     private async userNotify() {
         const embed = new MessageEmbed()
-            .setColor(Constants.colors.error)
+            .setColor(constants.colors.error)
             .setTitle(this.i18n.getMessage('errorsInteractionReplyTitle'))
             .setDescription(
                 this.i18n.getMessage('errorsInteractionReplyDescription',

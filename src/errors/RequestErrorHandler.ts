@@ -66,40 +66,59 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
         } = this.core;
 
         const embed = this.baseErrorEmbed()
-            .setTitle('Degraded Performance')
+            .setTitle(this.i18n.getMessage(
+                'errorsCoreRequestStatusTitle',
+            ))
             .addFields(
                 {
-                    name: 'Type',
+                    name: this.i18n.getMessage(
+                        'errorsCoreRequestStatusType',
+                    ),
                     value: this.error instanceof Error
                         ? this.error.name
-                        : 'Unknown',
+                        : this.i18n.getMessage('null'),
                 },
                 {
-                    name: 'Resuming In',
-                    value: this.timeout ??
-                        'Not applicable',
+                    name: this.i18n.getMessage(
+                        'errorsCoreRequestStatusResumeName',
+                    ),
+                    value: cleanLength(
+                        this.core.error.getTimeout() - Date.now(),
+                    ) ?? this.i18n.getMessage('null'),
                 },
                 {
-                    name: 'Last Minute Statistics',
-                    value: `Abort Errors: ${abort.lastMinute} 
-                    HTTP Errors: ${http.lastMinute}
-                    Other Errors: ${generic.lastMinute}`,
+                    name: this.i18n.getMessage(
+                        'errorsCoreRequestStatusLastMinuteName',
+                    ),
+                    value: this.i18n.getMessage(
+                        'errorsCoreRequestStatusLastMinuteValue',
+                        [
+                            abort.lastMinute,
+                            generic.lastMinute,
+                            http.lastMinute,
+                        ],
+                    ),
                 },
                 {
-                    name: 'Next Timeouts',
-                    value: `May not be accurate
-                     Abort Errors: ${cleanLength(
-                        abort.timeout,
-                    )}
-                    HTTP Errors: ${cleanLength(
-                        http.timeout,
-                    )}
-                    Other Errors: ${cleanLength(
-                        generic.timeout,
-                    )}`,
+                    name: this.i18n.getMessage(
+                        'errorsCoreRequestStatusNextTimeoutsName',
+                    ),
+                    value: this.i18n.getMessage(
+                        'errorsCoreRequestStatusNextTimeoutsValue',
+                        [
+                            cleanLength(abort.timeout) ??
+                                this.i18n.getMessage('null'),
+                            cleanLength(generic.timeout) ??
+                                this.i18n.getMessage('null'),
+                            cleanLength(http.timeout) ??
+                                this.i18n.getMessage('null'),
+                        ],
+                    ),
                 },
                 {
-                    name: 'Uses',
+                    name: this.i18n.getMessage(
+                        'errorsCoreRequestStatusUsesName',
+                    ),
                     value: String(uses),
                 },
             );
@@ -112,22 +131,29 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
 
         if (this.error instanceof AbortError) {
             if (this.timeout !== null) {
-                embed
-                    .setDescription('A timeout has been applied.');
+                embed.setDescription(this.i18n.getMessage(
+                    'errorsCoreRequestSystemAbortErrorErrorDescription',
+                ));
             }
         } else if (this.error instanceof HTTPError) {
             embed
-                .setDescription('A timeout has been applied.')
+                .setDescription(this.i18n.getMessage(
+                    'errorsCoreRequestSystemHTTPErrorErrorDescription',
+                ))
                 .addFields({
-                    name: 'Request',
-                    value: `Status: ${this.error.status}`,
+                    name: this.i18n.getMessage(
+                        'errorsCoreRequestSystemHTTPErrorErrorStatusName',
+                    ),
+                    value: String(this.error.status),
                 });
         } else if (this.error instanceof FetchError) {
-            embed
-                .setDescription('A timeout has been applied.');
+            embed.setDescription(this.i18n.getMessage(
+                'errorsCoreRequestSystemFetchErrorDescription',
+            ));
         } else {
-            embed
-                .setTitle('Unexpected Error');
+            embed.setTitle(this.i18n.getMessage(
+                'errorsGeneralUnexpected',
+            ));
         }
 
         await sendWebHook({

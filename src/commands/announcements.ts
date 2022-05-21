@@ -1,7 +1,7 @@
 import type { ClientCommand } from '../@types/client';
 import { BetterEmbed } from '../utility/utility';
 import { ChannelTypes } from 'discord.js/typings/enums';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import {
     Formatters,
     NewsChannel,
@@ -97,7 +97,7 @@ export const execute: ClientCommand['execute'] = async (
 
     if (userHasPermission === false) {
         const missingPermission = new BetterEmbed(interaction)
-            .setColor(Constants.colors.warning)
+            .setColor(constants.colors.warning)
             .setTitle(i18n.getMessage(
                 'commandsAnnouncementsUserMissingPermissionTitle',
             ))
@@ -121,7 +121,7 @@ export const execute: ClientCommand['execute'] = async (
 
     if (botHasPermission.length > 0) {
         const missingPermission = new BetterEmbed(interaction)
-            .setColor(Constants.colors.warning)
+            .setColor(constants.colors.warning)
             .setTitle(i18n.getMessage(
                 'commandsAnnouncementsBotMissingPermissionTitle',
             ))
@@ -158,7 +158,7 @@ export const execute: ClientCommand['execute'] = async (
         await existingAnnouncementWebhook.delete();
 
         const removeEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(constants.colors.normal)
             .setTitle(i18n.getMessage('commandsAnnouncementsRemoveTitle', [
                 type,
             ]))
@@ -196,7 +196,7 @@ export const execute: ClientCommand['execute'] = async (
         });
 
         const addEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(constants.colors.normal)
             .setTitle(i18n.getMessage('commandsAnnouncementsAddTitle', [
                 type,
             ]))

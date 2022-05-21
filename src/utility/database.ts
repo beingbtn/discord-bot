@@ -1,40 +1,48 @@
-import { Pool, PoolClient } from 'pg';
 import { Log } from './Log';
+import {
+    Pool,
+    PoolClient,
+} from 'pg';
+import { client } from '../main';
 
 const pool = new Pool({
     idleTimeoutMillis: 300_000,
 });
 
 pool.on('error', error => {
-    Log.error(`PostgreSQL Pool Error | Total Clients: ${pool.totalCount} Idle Clients: ${pool.idleCount} Waiting Clients: ${pool.waitingCount}`, error.stack);
+    Log.error(client.i18n.getMessage('errorsDatabasePool', [
+        pool.totalCount,
+        pool.idleCount,
+        pool.waitingCount,
+    ]), error.stack);
 });
 
 export class Database {
     static async query(input: string, values?: unknown[]) {
-        const client = await pool.connect();
+        const poolClient = await pool.connect();
 
         try {
-            const query = await client.query(input, values);
+            const query = await poolClient.query(input, values);
 
             return query;
         } finally {
-            client.release();
+            poolClient.release();
         }
     }
 
     // eslint-disable-next-line no-unused-vars
-    static async transaction(func: (client: PoolClient) => Promise<void>) {
-        const client = await pool.connect();
+    static async transaction(func: (poolClient: PoolClient) => Promise<void>) {
+        const poolClient = await pool.connect();
 
         try {
-            await client.query('BEGIN');
-            await func(client);
-            await client.query('COMMIT');
+            await poolClient.query('BEGIN');
+            await func(poolClient);
+            await poolClient.query('COMMIT');
         } catch (error) {
-            await client.query('ROLLBACK');
+            await poolClient.query('ROLLBACK');
             throw error;
         } finally {
-            client.release();
+            poolClient.release();
         }
     }
 

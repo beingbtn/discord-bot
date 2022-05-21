@@ -1,4 +1,5 @@
 import type { ClientEvent } from '../@types/client';
+import { client } from '../main';
 import { Log } from '../utility/Log';
 
 export const properties: ClientEvent['properties'] = {
@@ -8,5 +9,8 @@ export const properties: ClientEvent['properties'] = {
 
 export const execute: ClientEvent['execute'] = (info: string): void => {
     return;
-    Log.log(info);
+    Log.error(
+        client.i18n.getMessage('eventsDebug'),
+        info,
+    );
 };

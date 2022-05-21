@@ -5,7 +5,7 @@ import {
     TextChannel,
 } from 'discord.js';
 import { BaseErrorHandler } from './BaseErrorHandler';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { i18n } from '../locales/i18n';
 import { slashCommandResolver, timestamp } from '../utility/utility';
 
@@ -61,7 +61,7 @@ export class BaseInteractionErrorHandler<E> extends BaseErrorHandler<E> {
                             id,
                             command ?? this.i18n.getMessage('null'),
                             timestamp(
-                                createdTimestamp / Constants.ms.second,
+                                createdTimestamp / constants.ms.second,
                                 'T',
                             )!,
                         ],

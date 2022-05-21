@@ -1,6 +1,6 @@
 import type { ClientCommand } from '../@types/client';
 import { BetterEmbed } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { Formatters } from 'discord.js';
 import { Log } from '../utility/Log';
 
@@ -53,14 +53,14 @@ export const execute: ClientCommand['execute'] = async (
         const output = await eval(input); //eslint-disable-line no-eval
         const end = Date.now();
         const timeTaken = end - start;
-        const outputMaxLength = output?.length >= Constants.limits.embedField;
+        const outputMaxLength = output?.length >= constants.limits.embedField;
 
-        evalEmbed.setColor(Constants.colors.normal).addFields(
+        evalEmbed.setColor(constants.colors.normal).addFields(
             {
                 name: i18n.getMessage('commandsEvalOutputName'),
                 value: Formatters.codeBlock(
                     'javascript',
-                    output?.toString()?.slice(0, Constants.limits.embedField),
+                    output?.toString()?.slice(0, constants.limits.embedField),
                 ),
             },
             {
@@ -90,10 +90,10 @@ export const execute: ClientCommand['execute'] = async (
         const timeTaken = end - start;
 
         const outputMaxLength = Boolean(
-            (error as Error).message.length >= Constants.limits.embedField,
+            (error as Error).message.length >= constants.limits.embedField,
         );
 
-        evalEmbed.setColor(Constants.colors.normal).addFields(
+        evalEmbed.setColor(constants.colors.normal).addFields(
             {
                 name: i18n.getMessage('commandsEvalTimeTakenName'),
                 value: Formatters.codeBlock(

@@ -4,7 +4,7 @@ import {
     BetterEmbed,
     disableComponents,
 } from '../utility/utility';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import {
     Constants as DiscordConstants,
     Formatters,
@@ -138,7 +138,7 @@ export const execute: ClientCommand['execute'] = async (
     );
 
     const previewEmbed = new BetterEmbed(interaction)
-        .setColor(Constants.colors.normal)
+        .setColor(constants.colors.normal)
         .setTitle(i18n.getMessage('commandsSendAnnouncementsPreviewTitle'))
         .setDescription(
             i18n.getMessage('commandsSendAnnouncementsPreviewDescription'),
@@ -159,7 +159,7 @@ export const execute: ClientCommand['execute'] = async (
     const previewButton = await awaitComponent(interaction.channel!, {
         componentType: 'BUTTON',
         filter: componentFilter,
-        idle: Constants.ms.second * 30,
+        idle: constants.ms.second * 30,
     });
 
     if (previewButton === null) {
@@ -201,7 +201,7 @@ export const execute: ClientCommand['execute'] = async (
     );
 
     const successEmbed = new BetterEmbed(interaction)
-        .setColor(Constants.colors.normal)
+        .setColor(constants.colors.normal)
         .setTitle(i18n.getMessage('commandsSendAnnouncementsSuccessTitle'))
         .setDescription(
             i18n.getMessage('commandsSendAnnouncementsSuccessDescription'),

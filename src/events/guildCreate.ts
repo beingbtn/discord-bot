@@ -17,9 +17,12 @@ export const execute: ClientEvent['execute'] = async (guild: Guild): Promise<voi
         return;
     }
 
-    Log.log(
-        `Bot has joined a guild. Guild: ${guild.name} | ${guild.id} Guild Owner: ${guild.ownerId} Guild Member Count: ${guild.memberCount} (w/ bot)`,
-    );
+    Log.log(guild.client.i18n.getMessage('eventsGuildCreate', [
+        guild.name,
+        guild.id,
+        guild.ownerId,
+        guild.memberCount,
+    ]));
 
     try {
         setPresence(guild.client);

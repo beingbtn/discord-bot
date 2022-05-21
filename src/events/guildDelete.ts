@@ -24,15 +24,15 @@ export const execute: ClientEvent['execute'] = async (guild: Guild): Promise<voi
         ms: guild.joinedTimestamp,
         date: true,
         utc: true,
-    });
+    })!;
 
-    Log.log(
-        `Bot has left a guild; joined ${joinedAt}. Guild: ${
-            guild.name
-        } | ${guild.id} Guild Owner: ${guild.ownerId} Guild Member Count: ${
-            guild.memberCount - 1
-        } (new count)`,
-    );
+    Log.log(guild.client.i18n.getMessage('eventsGuildDelete', [
+        joinedAt,
+        guild.name,
+        guild.id,
+        guild.ownerId,
+        guild.memberCount - 1,
+    ]));
 
     try {
         setPresence(guild.client);

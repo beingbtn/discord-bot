@@ -4,7 +4,7 @@ import type {
 } from '../@types/client';
 import { BetterEmbed } from '../utility/utility';
 import { CommandInteraction } from 'discord.js';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { Log } from '../utility/Log';
 
 export const properties: ClientCommand['properties'] = {
@@ -108,7 +108,7 @@ export const execute: ClientCommand['execute'] = async (
         await Promise.all(promises);
 
         const reloadedEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(constants.colors.normal)
             .setTitle(i18n.getMessage('commandsReloadAllTitle'))
             .setDescription(i18n.getMessage('commandsReloadAllDescription', [
                 promises.length,
@@ -137,7 +137,7 @@ export const execute: ClientCommand['execute'] = async (
 
         if (typeof selected === 'undefined') {
             const undefinedSelected = new BetterEmbed(interaction)
-                .setColor(Constants.colors.warning)
+                .setColor(constants.colors.warning)
                 .setTitle(i18n.getMessage('commandsReloadSingleUnknownTitle'))
                 .setDescription(
                     i18n.getMessage('commandsReloadSingleUnknownDescription', [
@@ -157,7 +157,7 @@ export const execute: ClientCommand['execute'] = async (
         }
 
         const reloadedEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(constants.colors.normal)
             .setTitle(i18n.getMessage('commandsReloadSingleSuccessTitle'))
             .setDescription(
                 i18n.getMessage('commandsReloadSingleSuccessDescription', [

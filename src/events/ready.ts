@@ -1,6 +1,6 @@
 import type { Client } from 'discord.js';
 import type { ClientEvent } from '../@types/client';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { Log } from '../utility/Log';
 import { setPresence } from '../utility/utility';
@@ -15,7 +15,7 @@ export const execute: ClientEvent['execute'] = async (client: Client) => {
 
     await set();
 
-    setInterval(set, Constants.ms.hour);
+    setInterval(set, constants.ms.hour);
 
     async function set() {
         try {

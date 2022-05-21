@@ -17,7 +17,7 @@ import {
     cooldownConstraint,
 } from '../utility/constraints';
 import { InteractionErrorHandler } from '../errors/CommandErrorHandler';
-import { Constants } from '../utility/Constants';
+import { constants } from '../utility/constants';
 import { ConstraintError } from '../errors/ConstraintError';
 import { i18n } from '../locales/i18n';
 import { Log } from '../utility/Log';
@@ -82,7 +82,7 @@ export const execute: ClientEvent['execute'] = async (
             const hasRole = memberRoles.cache.has(announcement.role);
 
             const notificationsEmbed = new MessageEmbed()
-                .setColor(Constants.colors.normal);
+                .setColor(constants.colors.normal);
 
             if (hasRole) {
                 await memberRoles.remove(announcement.role);
