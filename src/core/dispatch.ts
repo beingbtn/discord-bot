@@ -6,7 +6,7 @@ import {
     MessageEmbed,
     NewsChannel,
 } from 'discord.js';
-import { Database } from '../utility/databasee';
+import { Database } from '../utility/Database';
 import { setTimeout } from 'node:timers/promises';
 import process from 'node:process';
 

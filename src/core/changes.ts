@@ -1,5 +1,5 @@
 import type { rssJSON } from './format';
-import { Database } from '../utility/databasee';
+import { Database } from '../utility/Database';
 
 export class CoreChanges {
     static async get(data: rssJSON): Promise<{

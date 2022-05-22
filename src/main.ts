@@ -13,7 +13,7 @@ import {
     Sweepers,
 } from 'discord.js';
 import { Core } from './core/core';
-import { Database } from './utility/databasee';
+import { Database } from './utility/Database';
 import { ErrorHandler } from './errors/ErrorHandler';
 import { i18n } from './locales/i18n';
 import { Log } from './utility/Log';
