@@ -65,7 +65,7 @@ export class Sentry {
         return this;
     }
 
-    captureMessage(...messages: string[]) {
+    captureMessages(...messages: string[]) {
         for (const message of messages) {
             SentryClient.captureMessage(
                 message,

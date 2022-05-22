@@ -34,7 +34,7 @@ export class CommandConstraintErrorHandler
             this.sentry
                 .setSeverity(Severity.Warning)
                 .interactionConstraintContext(this.error.message)
-                .captureMessage(this.error.message);
+                .captureMessages(this.error.message);
         } catch (error) {
             new ErrorHandler(error, this.incidentID).init();
         }

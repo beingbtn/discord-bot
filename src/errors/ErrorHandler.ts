@@ -17,6 +17,6 @@ export class ErrorHandler<E> extends BaseErrorHandler<E> {
 
         this.sentry
             .captureException(this.error)
-            .captureMessage(...this.data);
+            .captureMessages(...this.data);
     }
 }
