@@ -160,7 +160,7 @@ export const execute: ClientCommand['execute'] = async (
                 },
                 {
                     name: i18n.getMessage('commandsAPIStatsResumeName'),
-                    value: cleanLength(getTimeout() - Date.now()) ?? i18n.getMessage('null'),
+                    value: cleanLength(getTimeout()) ?? i18n.getMessage('null'),
                 },
                 {
                     name: i18n.getMessage('commandsAPIStatsLastMinuteName'),

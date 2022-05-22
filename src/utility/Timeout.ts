@@ -28,6 +28,7 @@ export class Timeout {
         this.baseTimeout = options?.baseTimeout ?? constants.ms.minute;
 
         //Holds a setTimeout Id for clearing
+        //eslint-disable-next-line no-undefined
         this.clearTimeout = undefined;
 
         //Number of addError calls in the last minute
