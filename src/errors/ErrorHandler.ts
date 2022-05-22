@@ -1,4 +1,5 @@
 import { BaseErrorHandler } from './BaseErrorHandler';
+import { Severity } from '@sentry/node';
 
 export class ErrorHandler<E> extends BaseErrorHandler<E> {
     data: string[];
@@ -8,7 +9,7 @@ export class ErrorHandler<E> extends BaseErrorHandler<E> {
         this.data = data;
     }
 
-    init() {
+    init(severity?: Severity) {
         this.log(this.error);
 
         if (this.data.length > 0) {
@@ -16,6 +17,7 @@ export class ErrorHandler<E> extends BaseErrorHandler<E> {
         }
 
         this.sentry
+            .setSeverity(severity ?? Severity.Error)
             .captureException(this.error)
             .captureMessages(...this.data);
     }

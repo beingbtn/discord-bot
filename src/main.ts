@@ -32,12 +32,20 @@ process.on('exit', code => {
 });
 
 process.on('unhandledRejection', error => {
-    new ErrorHandler(error, 'unhandledRejection').init();
+    new ErrorHandler(
+        error,
+        'unhandledRejection',
+    ).init(Sentry.Severity.Fatal);
+
     process.exit(1);
 });
 
 process.on('uncaughtException', error => {
-    new ErrorHandler(error, 'uncaughtException').init();
+    new ErrorHandler(
+        error,
+        'uncaughtException',
+    ).init(Sentry.Severity.Fatal);
+
     process.exit(1);
 });
 
