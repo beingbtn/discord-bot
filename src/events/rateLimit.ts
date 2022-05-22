@@ -2,6 +2,8 @@ import type { ClientEvent } from '../@types/client';
 import type { RateLimitData } from 'discord.js';
 import { client } from '../main';
 import { Log } from '../utility/Log';
+import { Sentry } from '../errors/Sentry';
+import { Severity } from '@sentry/node';
 
 export const properties: ClientEvent['properties'] = {
     name: 'rateLimit',
@@ -13,4 +15,8 @@ export const execute: ClientEvent['execute'] = (rateLimitInfo: RateLimitData): v
         client.i18n.getMessage('eventsRateLimit'),
         rateLimitInfo,
     );
+
+    new Sentry()
+        .setSeverity(Severity.Warning)
+        .captureException(rateLimitInfo);
 };

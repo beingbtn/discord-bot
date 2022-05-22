@@ -3,7 +3,7 @@ import {
     BetterEmbed,
 } from '../utility/utility';
 import { constants } from '../utility/constants';
-import { Database } from '../utility/database';
+import { Database } from '../utility/databasee';
 
 export const properties: ClientCommand['properties'] = {
     name: 'link',

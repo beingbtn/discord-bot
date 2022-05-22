@@ -1,4 +1,3 @@
-import type { WebhookConfig } from '../@types/client';
 import {
     AwaitMessageCollectorOptionsParams,
     Client,
@@ -9,8 +8,6 @@ import {
     MessageComponentTypeResolvable,
     MessageEmbed,
     TextBasedChannel,
-    WebhookClient,
-    WebhookMessageOptions,
 } from 'discord.js';
 import { constants } from './constants';
 
@@ -46,13 +43,6 @@ export function disableComponents(messageActionRows: MessageActionRow[]) {
     }
 
     return actionRows;
-}
-
-export function arrayRemove<Type extends unknown[]>(
-    array: Type,
-    ...items: unknown[]
-): Type {
-    return array.filter(item => !(items.includes(item))) as Type;
 }
 
 type Footer =
@@ -97,37 +87,6 @@ export class BetterEmbed extends MessageEmbed {
 
         return this;
     }
-}
-
-export function capitolToNormal(item: string | null) {
-    function containsLowerCase(string: string): boolean {
-        let lowerCase = false;
-
-        for (let i = 0; i < string.length; i += 1) {
-            const character = string.charAt(i);
-            if (character === character.toLowerCase()) {
-                lowerCase = true;
-                break;
-            }
-        }
-
-        return lowerCase;
-    }
-
-    return typeof item === 'string'
-        ? item
-            .replaceAll('_', ' ')
-            .toLowerCase()
-            .split(' ')
-            .map(value => {
-                if (containsLowerCase(value)) {
-                    return value.charAt(0).toUpperCase() + value.slice(1);
-                }
-
-                return value;
-            })
-            .join(' ')
-        : item;
 }
 
 export function cleanDate(ms: number | Date): string | null {
@@ -228,26 +187,6 @@ export function generateStackTrace() {
     return cleanStack;
 }
 
-export async function sendWebHook(
-    {
-        webhook,
-        suppressError,
-        ...payload
-    }: {
-        webhook: WebhookConfig,
-        suppressError?: boolean,
-    } & WebhookMessageOptions,
-): Promise<void> {
-    try {
-        await new WebhookClient({ id: webhook.id, token: webhook.token })
-            .send(payload);
-    } catch (err) {
-        if (suppressError === false) {
-            throw err;
-        }
-    }
-}
-
 export function setPresence(client: Client) {
     let presence = client.customPresence;
 
@@ -290,17 +229,6 @@ export const slashCommandResolver = (interaction: CommandInteraction) => {
 
     return commandOptions.join(' ');
 };
-
-export function timeAgo(ms: unknown): number | null {
-    if (
-        !isNumber(ms) ||
-        ms < 0
-    ) {
-        return null;
-    }
-
-    return Date.now() - ms;
-}
 
 export function timestamp(
     ms: unknown,

@@ -131,10 +131,10 @@ export const execute: ClientEvent['execute'] = async (
             interaction instanceof CommandInteraction &&
             error instanceof ConstraintError
         ) {
-            await CommandConstraintErrorHandler.init(
+            new CommandConstraintErrorHandler(
                 error,
                 interaction,
-            );
+            ).init();
         } else {
             await InteractionErrorHandler.init(
                 error,

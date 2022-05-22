@@ -1,16 +1,11 @@
-import type { WebhookConfig } from '../@types/client';
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
+import { constants } from '../utility/constants';
+import { ErrorHandler } from './ErrorHandler';
 import {
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
-import { constants } from '../utility/constants';
-import { ErrorHandler } from './ErrorHandler';
-import { sendWebHook } from '../utility/utility';
-import process from 'node:process';
-
-const fatalWebhook = JSON.parse(process.env.WEBHOOK_FATAL!) as WebhookConfig;
-const owners = JSON.parse(process.env.OWNERS!) as string[];
+import { Severity } from '@sentry/node';
 
 export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
     readonly interaction: MessageComponentInteraction;
@@ -32,15 +27,18 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
 
         try {
             handler.errorLog();
-            await handler.systemNotify();
             await handler.userNotify();
         } catch (error2) {
-            await ErrorHandler.init(error2, handler.incidentID);
+            new ErrorHandler(error2, handler.incidentID).init();
         }
     }
 
     private errorLog() {
         this.log(this.error);
+
+        this.sentry
+            .setSeverity(Severity.Error)
+            .captureException(this.error);
     }
 
     private async userNotify() {
@@ -75,31 +73,9 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
 
             this.log(message, err);
 
-            const failedEmbed = this
-                .errorEmbed()
-                .setDescription(message);
-
-            await sendWebHook({
-                content: `<@${owners.join('><@')}>`,
-                embeds: [failedEmbed],
-                files: [this.stackAttachment],
-                webhook: fatalWebhook,
-                suppressError: true,
-            });
+            this.sentry
+                .setSeverity(Severity.Error)
+                .captureException(err);
         }
-    }
-
-    private async systemNotify() {
-        const embeds = [this.interactionErrorEmbed(), this.errorEmbed()];
-
-        embeds[0].setTitle(this.i18n.getMessage('errorsGeneralUnexpected'));
-
-        await sendWebHook({
-            content: `<@${owners.join('><@')}>`,
-            embeds: embeds,
-            files: [this.stackAttachment],
-            webhook: fatalWebhook,
-            suppressError: true,
-        });
     }
 }

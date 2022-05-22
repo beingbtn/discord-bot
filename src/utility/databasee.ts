@@ -4,12 +4,19 @@ import {
     PoolClient,
 } from 'pg';
 import { client } from '../main';
+import { Sentry } from '../errors/Sentry';
+import { Severity } from '@sentry/node';
 
 const pool = new Pool({
     idleTimeoutMillis: 300_000,
 });
 
 pool.on('error', error => {
+    new Sentry()
+        .setSeverity(Severity.Warning)
+        .databaseContext(pool)
+        .captureException(error);
+
     Log.error(client.i18n.getMessage('errorsDatabasePool', [
         pool.totalCount,
         pool.idleCount,

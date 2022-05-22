@@ -132,6 +132,7 @@ export const execute: ClientCommand['execute'] = async (
             activities: [{
                 type: (type ?? currentActivity.type) as ExcludeEnum<typeof ActivityTypes, 'CUSTOM'>,
                 name: name ?? currentActivity.name,
+                // eslint-disable-next-line no-undefined
                 url: url ?? currentActivity.url ?? undefined,
             }],
             status: (status ?? currentPresence.status) as PresenceStatusData,

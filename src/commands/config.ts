@@ -2,7 +2,7 @@ import type { ClientCommand } from '../@types/client';
 import type { WebhookEditMessageOptions } from 'discord.js';
 import { BetterEmbed } from '../utility/utility';
 import { constants } from '../utility/constants';
-import { Database } from '../utility/database';
+import { Database } from '../utility/databasee';
 import { Log } from '../utility/Log';
 
 export const properties: ClientCommand['properties'] = {

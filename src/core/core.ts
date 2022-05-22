@@ -1,17 +1,17 @@
 import { Client } from 'discord.js';
 import { constants } from '../utility/constants';
 import { CoreChanges } from './changes';
+import { CoreComponents } from './components';
+import { CoreDispatch } from './dispatch';
+import { CoreEmbed } from './embed';
 import { CoreError } from './error';
+import { CoreFormat } from './format';
 import { CoreRequest } from './request';
 import { ErrorHandler } from '../errors/ErrorHandler';
-import { setTimeout } from 'node:timers/promises';
-import { CoreFormat } from './format';
 import { HTTPError } from '../errors/HTTPError';
-import { RequestErrorHandler } from '../errors/RequestErrorHandler';
-import { CoreDispatch } from './dispatch';
 import { Log } from '../utility/Log';
-import { CoreEmbed } from './embed';
-import { CoreComponents } from './components';
+import { RequestErrorHandler } from '../errors/RequestErrorHandler';
+import { setTimeout } from 'node:timers/promises';
 
 /* eslint-disable no-await-in-loop */
 
@@ -45,7 +45,7 @@ export class Core {
             try {
                 await this.checkSystem();
             } catch (error) {
-                await ErrorHandler.init(error);
+                new ErrorHandler(error).init();
             }
         }
     }
@@ -123,14 +123,12 @@ export class Core {
                 this.updatePerformance(performance);
             } catch (error) {
                 if (error instanceof HTTPError) {
-                    await RequestErrorHandler.init(error, this);
-                    await setTimeout(this.client.config.interval);
+                    new RequestErrorHandler(error, this).init();
                     return;
                 }
 
                 this.error.addGeneric();
-                await ErrorHandler.init(error);
-                await setTimeout(this.client.config.interval);
+                new ErrorHandler(error).init();
                 return;
             }
 

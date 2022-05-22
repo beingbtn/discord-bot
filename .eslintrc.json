@@ -16,7 +16,7 @@
     ],
     "rules": {
         "no-eq-null": "off",
-        "complexity": "off",
+        "complexity": ["error", 20],
         "prefer-destructuring": "off",
         "no-continue": "off",
         "multiline-comment-style":"off",
@@ -24,10 +24,10 @@
         "max-params": ["error", 5],
         "object-curly-newline": ["error", { "consistent": true }],
         "@typescript-eslint/no-non-null-assertion": "off",
-        "require-atomic-updates": "off",
+        "require-atomic-updates": "error",
         "lines-between-class-members": "off",
         "no-constant-condition": ["error", { "checkLoops": false }],
-        "no-undefined": "off",
+        "no-undefined": "error",
         "line-comment-position": "off",
         "no-unused-vars": ["error", { "args": "after-used", "ignoreRestSiblings": true }],
         "array-bracket-newline": ["error", "consistent"],
@@ -46,17 +46,7 @@
           "ignoreDestructuring": true,
           "ignoreImports": true,
           "properties": "never",
-          "allow": [
-              "Hypixel400_403_422",
-              "mc_version",
-              "first_login",
-              "last_login",
-              "last_logout",
-              "last_game",
-              "streak_current",
-              "streak_best",
-              "claimed_daily"
-          ]
+          "allow": []
         }],
         "no-extra-parens": "off",
         "prefer-named-capture-group": "off",
@@ -80,7 +70,7 @@
         }],
         "one-var": "off",
         "object-shorthand": ["error", "consistent"],
-        "sort-vars": "off",
+        "sort-vars": "error",
         "no-use-before-define": ["error", {
           "functions": false,
           "classes": false,

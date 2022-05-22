@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import '@sentry/tracing';
 import type {
     ClientCommand,
     ClientEvent,
@@ -12,27 +13,31 @@ import {
     Sweepers,
 } from 'discord.js';
 import { Core } from './core/core';
-import { Database } from './utility/database';
+import { Database } from './utility/databasee';
 import { ErrorHandler } from './errors/ErrorHandler';
 import { i18n } from './locales/i18n';
 import { Log } from './utility/Log';
+import * as Sentry from '@sentry/node';
 import fs from 'node:fs/promises';
 import process from 'node:process';
 
+Sentry.init({
+    dsn: process.env.DSN,
+    tracesSampleRate: 1.0,
+});
+
 process.on('exit', code => {
-    Log.log(`Exiting with code ${code}`);
+    Log.log(code);
     Database.close();
 });
 
-process.on('unhandledRejection', async error => {
-    Log.error('unhandledRejection');
-    await ErrorHandler.init(error);
+process.on('unhandledRejection', error => {
+    new ErrorHandler(error, 'unhandledRejection').init();
     process.exit(1);
 });
 
-process.on('uncaughtException', async error => {
-    Log.error('uncaughtException');
-    await ErrorHandler.init(error);
+process.on('uncaughtException', error => {
+    new ErrorHandler(error, 'uncaughtException').init();
     process.exit(1);
 });
 
@@ -107,12 +112,10 @@ export const client = new Client({
     client.events = new Collection();
     client.i18n = new i18n();
 
-    const folders = (
-        await Promise.all([
-            fs.readdir(`${__dirname}/commands`),
-            fs.readdir(`${__dirname}/events`),
-        ])
-    );
+    const folders = await Promise.all([
+        fs.readdir(`${__dirname}/commands`),
+        fs.readdir(`${__dirname}/events`),
+    ]);
 
     await Promise.all([
         ...folders[0].map(async commandFile => {

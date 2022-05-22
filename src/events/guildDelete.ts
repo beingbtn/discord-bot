@@ -12,7 +12,7 @@ export const properties: ClientEvent['properties'] = {
     once: false,
 };
 
-export const execute: ClientEvent['execute'] = async (guild: Guild): Promise<void> => {
+export const execute: ClientEvent['execute'] = (guild: Guild): void => {
     if (
         guild.available === false ||
         !guild.client.isReady()
@@ -37,6 +37,6 @@ export const execute: ClientEvent['execute'] = async (guild: Guild): Promise<voi
     try {
         setPresence(guild.client);
     } catch (error) {
-        await ErrorHandler.init(error);
+        new ErrorHandler(error).init();
     }
 };

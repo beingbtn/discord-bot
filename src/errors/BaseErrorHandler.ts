@@ -1,18 +1,18 @@
 import {
-    BetterEmbed,
     generateStackTrace,
 } from '../utility/utility';
-import { constants } from '../utility/constants';
 import {
     FileOptions,
     SnowflakeUtil,
 } from 'discord.js';
-import { Log } from '../utility/Log';
 import { i18n } from '../locales/i18n';
+import { Log } from '../utility/Log';
+import { Sentry } from './Sentry';
 
 export class BaseErrorHandler<E> {
     readonly error: E;
     readonly incidentID: string;
+    readonly sentry: Sentry;
     readonly stackAttachment: FileOptions;
     i18n: i18n;
 
@@ -22,6 +22,8 @@ export class BaseErrorHandler<E> {
         this.i18n = new i18n();
 
         this.incidentID = SnowflakeUtil.generate();
+
+        this.sentry = new Sentry();
 
         Object.defineProperty(error, 'fullStack', {
             value: generateStackTrace(),
@@ -39,20 +41,6 @@ export class BaseErrorHandler<E> {
                 ? `${error.name}.txt`
                 : 'error.txt',
         };
-    }
-
-    baseErrorEmbed() {
-        return new BetterEmbed({ text: this.incidentID })
-            .setColor(constants.colors.error);
-    }
-
-    errorEmbed() {
-        return this.baseErrorEmbed()
-            .setTitle(
-                this.error instanceof Error
-                    ? this.error.name
-                    : this.i18n.getMessage('errorsGeneralError'),
-            );
     }
 
     log(...text: unknown[]) {

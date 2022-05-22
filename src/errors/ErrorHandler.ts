@@ -1,7 +1,4 @@
-import type { WebhookConfig } from '../@types/client';
 import { BaseErrorHandler } from './BaseErrorHandler';
-import { sendWebHook } from '../utility/utility';
-import process from 'node:process';
 
 export class ErrorHandler<E> extends BaseErrorHandler<E> {
     data: string[];
@@ -11,27 +8,15 @@ export class ErrorHandler<E> extends BaseErrorHandler<E> {
         this.data = data;
     }
 
-    static async init<T>(error: T, ...data: string[]) {
-        const handler = new ErrorHandler(error, ...data);
-        handler.errorLog();
-        await handler.systemNotify();
-    }
-
-    private errorLog() {
+    init() {
         this.log(this.error);
 
         if (this.data.length > 0) {
             this.log(...this.data);
         }
-    }
 
-    async systemNotify() {
-        await sendWebHook({
-            content: `<@${(JSON.parse(process.env.OWNERS!)).join('><@')}>`,
-            embeds: [this.errorEmbed()],
-            files: [this.stackAttachment],
-            webhook: JSON.parse(process.env.WEBHOOK_FATAL!) as WebhookConfig,
-            suppressError: true,
-        });
+        this.sentry
+            .captureException(this.error)
+            .captureMessage(...this.data);
     }
 }

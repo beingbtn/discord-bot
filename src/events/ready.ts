@@ -13,15 +13,15 @@ export const properties: ClientEvent['properties'] = {
 export const execute: ClientEvent['execute'] = async (client: Client) => {
     Log.log(`Logged in as ${client?.user?.tag}!`);
 
-    await set();
+    set();
 
     setInterval(set, constants.ms.hour);
 
-    async function set() {
+    function set() {
         try {
             setPresence(client);
         } catch (error) {
-            await ErrorHandler.init(error);
+            new ErrorHandler(error).init();
         }
     }
 

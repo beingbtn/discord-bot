@@ -1,6 +1,9 @@
 import { XMLParser } from 'fast-xml-parser';
 import Turndown from 'turndown';
 
+//Temp
+/* eslint-disable complexity */
+
 export type rssJSON = {
     title: string;
     description: string;

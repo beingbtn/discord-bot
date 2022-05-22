@@ -1,9 +1,5 @@
-import type { WebhookConfig } from '../@types/client';
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
-import {
-    BetterEmbed,
-    sendWebHook,
-} from '../utility/utility';
+import { BetterEmbed } from '../utility/utility';
 import {
     ColorResolvable,
     CommandInteraction,
@@ -11,7 +7,7 @@ import {
 import { constants } from '../utility/constants';
 import { ConstraintError } from './ConstraintError';
 import { ErrorHandler } from './ErrorHandler';
-import process from 'node:process';
+import { Severity } from '@sentry/node';
 
 export class CommandConstraintErrorHandler
     extends BaseInteractionErrorHandler<ConstraintError> {
@@ -25,18 +21,22 @@ export class CommandConstraintErrorHandler
         this.interaction = interaction;
     }
 
-    static async init(
-        error: ConstraintError,
-        interaction: CommandInteraction,
-    ) {
-        const handler =
-            new CommandConstraintErrorHandler(error, interaction);
-
+    init() {
         try {
-            handler.errorLog();
-            await handler.systemNotify();
-        } catch (error2) {
-            await ErrorHandler.init(error2, handler.incidentID);
+            this.log(this.i18n.getMessage(
+                'errorsInteractionConstraintLog',
+                [
+                    this.interaction.user.id,
+                    this.error.message,
+                ],
+            ));
+
+            this.sentry
+                .setSeverity(Severity.Warning)
+                .interactionConstraintContext(this.error.message)
+                .captureMessage(this.error.message);
+        } catch (error) {
+            new ErrorHandler(error, this.incidentID).init();
         }
     }
 
@@ -53,37 +53,6 @@ export class CommandConstraintErrorHandler
 
         await interaction.editReply({
             embeds: [embed],
-        });
-    }
-
-    private errorLog() {
-        this.log(this.i18n.getMessage(
-            'errorsInteractionConstraintLog',
-            [
-                this.interaction.user.id,
-                this.error.message,
-            ],
-        ));
-    }
-
-    private async systemNotify() {
-        const embeds = [this.interactionErrorEmbed()];
-
-        embeds[0]
-            .setTitle(this.i18n.getMessage('errorsInteractionConstraintSystemTitle'))
-            .setDescription(this.i18n.getMessage(
-                'errorsInteractionConstraintSystemDescription',
-                [
-                    this.error.message,
-                ],
-            ));
-
-        await sendWebHook({
-            embeds: embeds,
-            webhook: JSON.parse(
-                process.env.WEBHOOK_NON_FATAL!,
-            ) as WebhookConfig,
-            suppressError: true,
         });
     }
 }
