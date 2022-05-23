@@ -12,6 +12,7 @@ import { Core } from '../core/Core';
 import { Pool } from 'pg';
 import { slashCommandResolver } from '../utility/utility';
 import * as SentryClient from '@sentry/node';
+import { HTTPError } from './HTTPError';
 
 export class Sentry {
     scope: Scope;
@@ -106,6 +107,12 @@ export class Sentry {
             nextTimeoutGeneric: core.errors.generic.timeout,
             nextTimeoutHTTP: core.errors.http.timeout,
             uses: core.uses,
+            status: error instanceof HTTPError
+                ? error.status
+                : null,
+            statusText: error instanceof HTTPError
+                ? error.statusText
+                : null,
         });
 
         return this;
