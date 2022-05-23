@@ -1,7 +1,5 @@
 import type { ClientCommand } from '../@types/client';
-import {
-    BetterEmbed,
-} from '../utility/utility';
+import { BetterEmbed } from '../utility/BetterEmbed';
 import {
     ChannelTypes,
     MessageButtonStyles,

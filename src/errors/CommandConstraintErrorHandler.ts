@@ -1,5 +1,5 @@
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
-import { BetterEmbed } from '../utility/utility';
+import { BetterEmbed } from '../utility/BetterEmbed';
 import {
     ColorResolvable,
     CommandInteraction,

@@ -8,7 +8,7 @@ import {
     Interaction,
     TextChannel,
 } from 'discord.js';
-import { Core } from '../core/core';
+import { Core } from '../core/Core';
 import { Pool } from 'pg';
 import { slashCommandResolver } from '../utility/utility';
 import * as SentryClient from '@sentry/node';
@@ -41,14 +41,14 @@ export class Sentry {
             guildName: guild?.name,
             guildOwnerID: guild?.ownerId,
             guildMemberCount: guild?.memberCount,
-            guildPermissions: guild?.me?.permissions.bitfield,
+            guildPermissions: guild?.me?.permissions.bitfield.toString(),
             channelID: channel?.id,
             channelType: channel?.type,
             channelName: channel instanceof TextChannel
                 ? channel.name
                 : null,
             channelPermissions: channel instanceof GuildChannel
-                ? guild?.me?.permissionsIn(channel).bitfield
+                ? guild?.me?.permissionsIn(channel).bitfield.toString()
                 : null,
             ping: client.ws.ping,
         });

@@ -2,11 +2,9 @@ import {
     AwaitMessageCollectorOptionsParams,
     Client,
     CommandInteraction,
-    EmbedFieldData,
     Formatters,
     MessageActionRow,
     MessageComponentTypeResolvable,
-    MessageEmbed,
     TextBasedChannel,
 } from 'discord.js';
 import { constants } from './constants';
@@ -45,50 +43,6 @@ export function disableComponents(messageActionRows: MessageActionRow[]) {
     return actionRows;
 }
 
-type Footer =
-    | {
-        text: string,
-        iconURL?: string,
-      }
-    | CommandInteraction;
-
-export class BetterEmbed extends MessageEmbed {
-    constructor(footer?: Footer) {
-        super();
-        this.setTimestamp();
-
-        if (footer instanceof CommandInteraction) {
-            const interaction = footer;
-            const avatar = interaction.user.displayAvatarURL({ dynamic: true });
-            this.setFooter({ text: `/${interaction.commandName}`, iconURL: avatar });
-        } else if (footer !== undefined) {
-            this.setFooter({ text: footer.text, iconURL: footer.iconURL });
-        }
-    }
-
-    setField(name: string, value: string, inline?: boolean | undefined): this {
-        this.setFields({ name: name, value: value, inline: inline });
-
-        return this;
-    }
-
-    unshiftField(
-        name: string,
-        value: string,
-        inline?: boolean | undefined,
-    ): this {
-        this.unshiftFields({ name: name, value: value, inline: inline });
-
-        return this;
-    }
-
-    unshiftFields(...fields: EmbedFieldData[] | EmbedFieldData[][]): this {
-        this.fields.unshift(...MessageEmbed.normalizeFields(...fields));
-
-        return this;
-    }
-}
-
 export function cleanDate(ms: number | Date): string | null {
     const newDate = new Date(ms);
     if (
@@ -98,11 +52,17 @@ export function cleanDate(ms: number | Date): string | null {
         return null;
     }
 
-    const day = newDate.getDate(),
-        month = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(
-            newDate,
-        ),
-        year = newDate.getFullYear();
+    const day = newDate.getDate();
+
+    const month = new Intl.DateTimeFormat(
+        'en-US',
+        { month: 'short' },
+    ).format(
+        newDate,
+    );
+
+    const year = newDate.getFullYear();
+
     return `${month} ${day}, ${year}`;
 }
 
@@ -128,6 +88,7 @@ export function cleanLength(
     const minutes = Math.floor(newMS / constants.ms.minute);
     newMS -= minutes * constants.ms.minute;
     const seconds = Math.floor(newMS / constants.ms.second);
+
     return days > 0
         ? `${days}d ${hours}h ${minutes}m ${seconds}s`
         : hours > 0
@@ -148,10 +109,11 @@ export function createOffset(date = new Date()): string {
         return value < 10 ? `0${value}` : value;
     }
 
-    const sign = date.getTimezoneOffset() > 0 ? '-' : '+',
-        offset = Math.abs(date.getTimezoneOffset()),
-        hours = pad(Math.floor(offset / 60)),
-        minutes = pad(offset % 60);
+    const sign = date.getTimezoneOffset() > 0 ? '-' : '+';
+    const offset = Math.abs(date.getTimezoneOffset());
+    const hours = pad(Math.floor(offset / 60));
+    const minutes = pad(offset % 60);
+
     return `${sign + hours}:${minutes}`;
 }
 
@@ -172,9 +134,20 @@ export function formattedUnix({
         return null;
     }
 
-    return `${utc === true ? `UTC${createOffset()} ` : ''
-        }${newDate.toLocaleTimeString('en-IN', { hour12: true })}${date === true ? `, ${cleanDate(ms)}` : ''
-        }`;
+    const utcString = utc === true
+        ? `UTC${createOffset()} `
+        : '';
+
+    const timeString = newDate.toLocaleTimeString(
+        'en-IN',
+        { hour12: true },
+    );
+
+    const dateString = date === true
+        ? `, ${cleanDate(ms)}`
+        : '';
+
+    return `${utcString}${timeString}${dateString}`;
 }
 
 export function generateStackTrace() {

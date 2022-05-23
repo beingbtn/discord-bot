@@ -2,7 +2,7 @@ import type { Client } from 'discord.js';
 import { HTTPError } from '../errors/HTTPError';
 import { Request } from '../utility/Request';
 
-export class CoreRequest {
+export class CoreRequests {
     client: Client;
 
     constructor(client: Client) {

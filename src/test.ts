@@ -1,6 +1,6 @@
 import { XMLParser } from 'fast-xml-parser';
 import Turndown from 'turndown';
-import { rssJSON } from './core/format';
+import { rssJSON } from './core/CoreFormat';
 
 const xml = `
 <?xml version="1.0" encoding="utf-8"?>

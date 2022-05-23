@@ -3,7 +3,7 @@ import {
     ColorResolvable,
     Message,
 } from 'discord.js';
-import { BetterEmbed } from '../utility/utility';
+import { BetterEmbed } from '../utility/BetterEmbed';
 import { constants } from '../utility/constants';
 import { Log } from '../utility/Log';
 

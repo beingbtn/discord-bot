@@ -1,6 +1,6 @@
 import type { ClientCommand } from '../@types/client';
+import { BetterEmbed } from '../utility/BetterEmbed';
 import {
-    BetterEmbed,
     cleanLength,
     cleanRound,
 } from '../utility/utility';

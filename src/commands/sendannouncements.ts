@@ -1,9 +1,9 @@
 import type { ClientCommand } from '../@types/client';
 import {
     awaitComponent,
-    BetterEmbed,
     disableComponents,
 } from '../utility/utility';
+import { BetterEmbed } from '../utility/BetterEmbed';
 import { constants } from '../utility/constants';
 import {
     Constants as DiscordConstants,

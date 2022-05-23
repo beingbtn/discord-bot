@@ -4,7 +4,7 @@ import type {
     Collection,
     CommandInteraction,
 } from 'discord.js';
-import type { Core } from '../core/core';
+import type { Core } from '../core/Core';
 import { i18n } from '../locales/i18n';
 
 export interface ClientCommand {

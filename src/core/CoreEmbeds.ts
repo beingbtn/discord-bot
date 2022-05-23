@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
-import { rssJSON } from './format';
+import { rssJSON } from './CoreFormat';
 
-export class CoreEmbed {
+export class CoreEmbeds {
     static create(data: rssJSON) {
         const posts: MessageEmbed[] = [];
 

@@ -1,5 +1,5 @@
 import type { ClientCommand } from '../@types/client';
-import { BetterEmbed } from '../utility/utility';
+import { BetterEmbed } from '../utility/BetterEmbed';
 import { constants } from '../utility/constants';
 import { Log } from '../utility/Log';
 import { REST } from '@discordjs/rest';

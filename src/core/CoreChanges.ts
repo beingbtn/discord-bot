@@ -1,4 +1,4 @@
-import type { rssJSON } from './format';
+import type { rssJSON } from './CoreFormat';
 import { Database } from '../utility/Database';
 
 export class CoreChanges {

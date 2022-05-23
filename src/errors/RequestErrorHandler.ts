@@ -1,6 +1,6 @@
 import { AbortError } from './AbortError';
 import { BaseErrorHandler } from './BaseErrorHandler';
-import { Core } from '../core/core';
+import { Core } from '../core/Core';
 import { ErrorHandler } from './ErrorHandler';
 import { HTTPError } from './HTTPError';
 import { Severity } from '@sentry/node';

@@ -12,7 +12,7 @@ import {
     Options,
     Sweepers,
 } from 'discord.js';
-import { Core } from './core/core';
+import { Core } from './core/Core';
 import { Database } from './utility/Database';
 import { ErrorHandler } from './errors/ErrorHandler';
 import { i18n } from './locales/i18n';

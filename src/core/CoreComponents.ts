@@ -4,7 +4,7 @@ import {
     MessageActionRow,
     MessageButton,
 } from 'discord.js';
-import { rssJSON } from './format';
+import { rssJSON } from './CoreFormat';
 
 export class CoreComponents {
     static create(data: rssJSON) {

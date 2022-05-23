@@ -2,7 +2,7 @@ import type {
     ClientEvent,
     ClientCommand,
 } from '../@types/client';
-import { BetterEmbed } from '../utility/utility';
+import { BetterEmbed } from '../utility/BetterEmbed';
 import { CommandInteraction } from 'discord.js';
 import { constants } from '../utility/constants';
 import { Log } from '../utility/Log';

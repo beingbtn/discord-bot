@@ -4,11 +4,9 @@ import type {
     ExcludeEnum,
     PresenceStatusData,
 } from 'discord.js';
-import {
-    BetterEmbed,
-    setPresence,
-} from '../utility/utility';
+import { BetterEmbed } from '../utility/BetterEmbed';
 import { constants } from '../utility/constants';
+import { setPresence } from '../utility/utility';
 
 export const properties: ClientCommand['properties'] = {
     name: 'presence',
