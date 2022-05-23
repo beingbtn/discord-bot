@@ -99,9 +99,9 @@ export class Sentry {
                 ? error.name
                 : null,
             resumingIn: core.errors.getTimeout(),
-            lastMinuteAbort: core.errors.abort.lastMinute,
-            lastMinuteGeneric: core.errors.generic.lastMinute,
-            lastMinuteHTTP: core.errors.http.lastMinute,
+            lastHourAbort: core.errors.abort.lastHour,
+            lastHourGeneric: core.errors.generic.lastHour,
+            lastHourHTTP: core.errors.http.lastHour,
             nextTimeoutAbort: core.errors.abort.timeout,
             nextTimeoutGeneric: core.errors.generic.timeout,
             nextTimeoutHTTP: core.errors.http.timeout,

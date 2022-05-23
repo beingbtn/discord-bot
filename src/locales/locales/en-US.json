@@ -59,10 +59,10 @@
     "commandsAPIStatsResumeName": {
         "message": "Resuming In"
     },
-    "commandsAPIStatsLastMinuteName": {
-        "message": "Last Minute Statistic"
+    "commandsAPIStatsLastHourName": {
+        "message": "Last Hour Statistic"
     },
-    "commandsAPIStatsLastMinuteValue": {
+    "commandsAPIStatsLastHourValue": {
         "message": "Aborts: $1\nGeneric Errors: $2\nHTTP: $3"
     },
     "commandsAPIStatsNextTimeoutsName": {
@@ -356,42 +356,6 @@
     "coreCoreLogFinishedPosts": {
         "message": "Finished dispatching messages from $1"
     },
-    "errorsCoreRequestStatusTitle": {
-        "message": "Degraded Performance"
-    },
-    "errorsCoreRequestStatusType": {
-        "message": "Type"
-    },
-    "errorsCoreRequestStatusResumeName": {
-        "message": "Resuming In"
-    },
-    "errorsCoreRequestStatusLastMinuteName": {
-        "message": "Last Minute Statistic"
-    },
-    "errorsCoreRequestStatusLastMinuteValue": {
-        "message": "Aborts: $1\nGeneric Errors: $2\nHTTP: $3"
-    },
-    "errorsCoreRequestStatusNextTimeoutsName": {
-        "message": "Next Timeout Lengths"
-    },
-    "errorsCoreRequestStatusNextTimeoutsValue": {
-        "message": "May not be accurate\nAbort Errors: $1\nGeneric Errors: $2\nHTTP Errors: $3"
-    },
-    "errorsCoreRequestStatusUsesName": {
-        "message": "Uses"
-    },
-    "errorsCoreRequestSystemAbortErrorErrorDescription": {
-        "message": "A timeout has been applied."
-    },
-    "errorsCoreRequestSystemHTTPErrorErrorDescription": {
-        "message": "A timeout has been applied."
-    },
-    "errorsCoreRequestSystemHTTPErrorErrorStatusName": {
-        "message": "Status"
-    },
-    "errorsCoreRequestSystemFetchErrorDescription": {
-        "message": "A timeout has been applied."
-    },
     "errorsDatabasePool": {
         "message": "PostgreSQL Pool Error | Total Clients: $1 Idle Clients: $2 Waiting Clients: $3"
     },
@@ -451,42 +415,6 @@
     },
     "errorsInteractionConstraintLog": {
         "message": "$1 failed the constraint $2"
-    },
-    "errorsInteractionConstraintSystemTitle": {
-        "message": "User Failed Constraint"
-    },
-    "errorsInteractionConstraintSystemDescription": {
-        "message": "Constraint: $1"
-    },
-    "errorsInteractionInformationUserName": {
-        "message": "User"
-    },
-    "errorsInteractionInformationUserValue": {
-        "message": "Tag: $1\nID: $2"
-    },
-    "errorsInteractionInformationInteractionName": {
-        "message": "Interaction"
-    },
-    "errorsInteractionInformationInteractionValue": {
-        "message": "ID: $1\nCommand: $2\nCreated At: $3"
-    },
-    "errorsInteractionInformationGuildName": {
-        "message": "Guild"
-    },
-    "errorsInteractionInformationGuildValue": {
-        "message": "Guild ID: $1\nGuild Name: $2\nOwner ID: $3\nGuild Member Count: $4\nPermissions: $5"
-    },
-    "errorsInteractionInformationChannelName": {
-        "message": "Channel"
-    },
-    "errorsInteractionInformationChannelValue": {
-        "message": "Channel ID: $1\nChannel Type: $2\nName: $3\nPermissions: $4"
-    },
-    "errorsInteractionInformationOtherName": {
-        "message": "Other"
-    },
-    "errorsInteractionInformationOtherValue": {
-        "message": "Websocket Ping: $1"
     },
     "errorsInteractionReplyTitle": {
         "message": "Oops"

@@ -15,7 +15,7 @@ type TimeoutOptions = {
 export class Timeout {
     private baseTimeout: number;
     private clearTimeout: number | undefined;
-    lastMinute: number;
+    lastHour: number;
     private maxTimeout: number;
     pauseFor: number;
     resumeAfter: number;
@@ -31,8 +31,8 @@ export class Timeout {
         //eslint-disable-next-line no-undefined
         this.clearTimeout = undefined;
 
-        //Number of addError calls in the last minute
-        this.lastMinute = 0;
+        //Number of addError calls in the last hour
+        this.lastHour = 0;
 
         //Upper limit to this.timeout
         this.maxTimeout = options?.maxTimeout ?? constants.ms.day / 2;
@@ -81,11 +81,11 @@ export class Timeout {
             this.timeout = this.baseTimeout;
         }, this.timeout * 1.25) as unknown as number;
 
-        this.lastMinute += 1;
+        this.lastHour += 1;
 
         setTimeout(() => {
-            this.lastMinute -= 1;
-        }, constants.ms.minute);
+            this.lastHour -= 1;
+        }, constants.ms.hour);
     }
 
     getPauseFor() {
