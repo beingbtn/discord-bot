@@ -23,6 +23,7 @@ import process from 'node:process';
 
 Sentry.init({
     dsn: process.env.DSN,
+    environment: process.env.ENVIRONMENT,
     tracesSampleRate: 1.0,
 });
 

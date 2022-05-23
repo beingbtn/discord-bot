@@ -35,7 +35,6 @@ export class Sentry {
                 : null,
             interactionCreatedTimestamp: interaction.createdTimestamp,
             userID: user.id,
-            userTag: user.tag,
             interactionID: interaction.id,
             guildID: guild?.id,
             guildName: guild?.name,
