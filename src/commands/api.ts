@@ -138,7 +138,7 @@ export const execute: ClientCommand['execute'] = async (
 
     async function stats() {
         const { abort, generic, http, getTimeout } =
-            interaction.client.core.error;
+            interaction.client.core.errors;
         const { uses } =
             interaction.client.core;
 
@@ -194,7 +194,7 @@ export const execute: ClientCommand['execute'] = async (
         const type = interaction.options.getString('type', true);
         const value = interaction.options.getNumber('value', true);
 
-        interaction.client.core.error[category][
+        interaction.client.core.errors[category][
             type as TimeoutSettables
         ] = value;
         const setEmbed = new BetterEmbed(interaction)
@@ -216,7 +216,7 @@ export const execute: ClientCommand['execute'] = async (
     async function call() {
         const method = interaction.options.getString('method', true);
 
-        const hypixelModuleErrors = interaction.client.core.error;
+        const hypixelModuleErrors = interaction.client.core.errors;
 
         if (
             method === 'addAbort' ||

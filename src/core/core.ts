@@ -4,7 +4,7 @@ import { CoreChanges } from './changes';
 import { CoreComponents } from './components';
 import { CoreDispatch } from './dispatch';
 import { CoreEmbed } from './embed';
-import { CoreError } from './error';
+import { CoreErrors } from './errors';
 import { CoreFormat } from './format';
 import { CoreRequest } from './request';
 import { ErrorHandler } from '../errors/ErrorHandler';
@@ -24,7 +24,7 @@ export class Core {
         history: Performance[];
     };
     dispatch: CoreDispatch;
-    error: CoreError;
+    errors: CoreErrors;
     request: CoreRequest;
     uses: number;
 
@@ -35,7 +35,7 @@ export class Core {
             history: [],
         };
         this.dispatch = new CoreDispatch(this.client);
-        this.error = new CoreError();
+        this.errors = new CoreErrors();
         this.request = new CoreRequest(this.client);
         this.uses = 0;
     }
@@ -51,8 +51,8 @@ export class Core {
     }
 
     private async checkSystem() {
-        if (this.error.isTimeout()) {
-            await setTimeout(this.error.getTimeout());
+        if (this.errors.isTimeout()) {
+            await setTimeout(this.errors.getTimeout());
         }
 
         if (this.client.config.core === false) {
@@ -127,7 +127,7 @@ export class Core {
                     return;
                 }
 
-                this.error.addGeneric();
+                this.errors.addGeneric();
                 new ErrorHandler(error).init();
                 return;
             }

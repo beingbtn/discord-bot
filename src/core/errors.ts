@@ -1,6 +1,6 @@
 import { Timeout } from '../utility/Timeout';
 
-export class CoreError {
+export class CoreErrors {
     isGlobal: boolean;
 
     readonly abort: Timeout;

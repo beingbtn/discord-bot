@@ -99,13 +99,13 @@ export class Sentry {
             type: error instanceof Error
                 ? error.name
                 : null,
-            resumingIn: core.error.getTimeout(),
-            lastMinuteAbort: core.error.abort.lastMinute,
-            lastMinuteGeneric: core.error.generic.lastMinute,
-            lastMinuteHTTP: core.error.http.lastMinute,
-            nextTimeoutAbort: core.error.abort.timeout,
-            nextTimeoutGeneric: core.error.generic.timeout,
-            nextTimeoutHTTP: core.error.http.timeout,
+            resumingIn: core.errors.getTimeout(),
+            lastMinuteAbort: core.errors.abort.lastMinute,
+            lastMinuteGeneric: core.errors.generic.lastMinute,
+            lastMinuteHTTP: core.errors.http.lastMinute,
+            nextTimeoutAbort: core.errors.abort.timeout,
+            nextTimeoutGeneric: core.errors.generic.timeout,
+            nextTimeoutHTTP: core.errors.http.timeout,
             uses: core.uses,
         });
 

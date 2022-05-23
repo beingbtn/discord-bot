@@ -12,7 +12,7 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
         super(error);
         this.core = core;
 
-        const { error: coreErrors } = this.core;
+        const { errors: coreErrors } = this.core;
 
         if (this.error instanceof AbortError) {
             coreErrors.addAbort();
