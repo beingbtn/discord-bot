@@ -124,11 +124,20 @@ export class Core {
             } catch (error) {
                 if (error instanceof HTTPError) {
                     new RequestErrorHandler(error, this).init();
-                    return;
+                } else {
+                    this.errors.addGeneric();
+                    new ErrorHandler(error).init();
                 }
 
-                this.errors.addGeneric();
-                new ErrorHandler(error).init();
+                const regularInterval = (
+                    this.client.config.interval /
+                    constants.urls.rss.length
+                );
+
+                if (regularInterval > this.errors.getTimeout()) {
+                    await setTimeout(regularInterval);
+                }
+
                 return;
             }
 
