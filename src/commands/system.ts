@@ -43,7 +43,7 @@ export const execute: ClientCommand['execute'] = async (
         .addFields(
             {
                 name: i18n.getMessage('commandsSystemUptimeName'),
-                value: String(cleanLength(process.uptime() * 1000)),
+                value: cleanLength(process.uptime() * 1000)!,
             },
             {
                 name: i18n.getMessage('commandsSystemMemoryName'),

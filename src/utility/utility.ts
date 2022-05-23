@@ -66,20 +66,13 @@ export function cleanDate(ms: number | Date): string | null {
     return `${month} ${day}, ${year}`;
 }
 
-export function cleanLength(
-    ms: number | null,
-    rejectZero?: boolean,
-): string | null {
+export function cleanLength(ms: number | null): string | null {
     if (!isNumber(ms)) {
         return null;
     }
 
     let newMS = Math.floor(ms / constants.ms.second) *
         constants.ms.second;
-
-    if (rejectZero ? newMS <= 0 : newMS < 0) {
-        return null;
-    }
 
     const days = Math.floor(newMS / constants.ms.day);
     newMS -= days * constants.ms.day;
