@@ -15,6 +15,7 @@ import {
 import { Core } from './core/Core';
 import { Database } from './utility/Database';
 import { ErrorHandler } from './errors/ErrorHandler';
+import { ExtraErrorData } from '@sentry/integrations';
 import { i18n } from './locales/i18n';
 import { Log } from './utility/Log';
 import * as Sentry from '@sentry/node';
@@ -24,6 +25,7 @@ import process from 'node:process';
 Sentry.init({
     dsn: process.env.DSN,
     environment: process.env.ENVIRONMENT,
+    integrations: [new ExtraErrorData()],
     tracesSampleRate: 1.0,
 });
 

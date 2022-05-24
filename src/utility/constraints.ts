@@ -1,6 +1,6 @@
 import type { ClientCommand } from '../@types/client';
 import { cleanRound } from './utility';
-import { CommandConstraintErrorHandler } from '../errors/CommandConstraintErrorHandler';
+import { CommandConstraintErrorHandler } from '../errors/CommandInteractionConstraintErrorHandler';
 import {
     CommandInteraction,
     Collection,

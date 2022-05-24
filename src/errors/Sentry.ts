@@ -9,10 +9,10 @@ import {
     TextChannel,
 } from 'discord.js';
 import { Core } from '../core/Core';
+import { HTTPError } from './HTTPError';
 import { Pool } from 'pg';
 import { slashCommandResolver } from '../utility/utility';
 import * as SentryClient from '@sentry/node';
-import { HTTPError } from './HTTPError';
 
 export class Sentry {
     scope: Scope;
@@ -86,7 +86,7 @@ export class Sentry {
         return this;
     }
 
-    interactionConstraintContext(constraint: string) {
+    commandInteractionConstraintContext(constraint: string) {
         this.scope.setTags({
             constraint: constraint,
         });

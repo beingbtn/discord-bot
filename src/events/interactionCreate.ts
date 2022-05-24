@@ -7,7 +7,7 @@ import {
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
-import { CommandConstraintErrorHandler } from '../errors/CommandConstraintErrorHandler';
+import { CommandConstraintErrorHandler } from '../errors/CommandInteractionConstraintErrorHandler';
 import {
     devModeConstraint,
     ownerConstraint,
@@ -16,7 +16,7 @@ import {
     dmConstraint,
     cooldownConstraint,
 } from '../utility/constraints';
-import { InteractionErrorHandler } from '../errors/CommandErrorHandler';
+import { InteractionErrorHandler } from '../errors/InteractionErrorHandler';
 import { constants } from '../utility/constants';
 import { ConstraintError } from '../errors/ConstraintError';
 import { i18n } from '../locales/i18n';
