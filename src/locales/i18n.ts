@@ -1,7 +1,7 @@
 import { constants } from '../utility/constants';
 import { locales } from './locales/export';
 
-//Simple implementation of chrome's/firefox's i18n
+//Simple implementation of Chrome's/Firefox's i18n
 export class i18n {
     locale: typeof locales[keyof typeof locales];
     localeName: string;
