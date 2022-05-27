@@ -7,8 +7,6 @@ import { BetterEmbed } from '../utility/BetterEmbed';
 import { constants } from '../utility/constants';
 
 export default class implements CommandStatic {
-    static command = 'help';
-    static description = 'Displays helpful information and available commands.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;
@@ -113,7 +111,7 @@ export default class implements CommandStatic {
             );
 
             commandSearchEmbed.setDescription(
-                command.description,
+                command.structure.description,
             );
 
             commandSearchEmbed.addFields({
@@ -151,9 +149,9 @@ export default class implements CommandStatic {
             for (const command of commandsCollection.values()) {
                 allCommandsEmbed.addFields({
                     name: i18n.getMessage('commandsHelpAllName', [
-                        command.command,
+                        command.structure.description,
                     ]),
-                    value: command.description,
+                    value: command.structure.description,
                 });
             }
 

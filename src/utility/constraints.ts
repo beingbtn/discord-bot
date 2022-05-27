@@ -184,11 +184,11 @@ export async function cooldownConstraint(
 ) {
     const { client: { cooldowns }, user } = interaction;
 
-    const timestamps = cooldowns.get(command.command);
+    const timestamps = cooldowns.get(command.structure.name);
 
     if (typeof timestamps === 'undefined') {
-        cooldowns.set(command.command, new Collection());
-        cooldowns.get(command.command)!.set(user.id, Date.now());
+        cooldowns.set(command.structure.name, new Collection());
+        cooldowns.get(command.structure.name)!.set(user.id, Date.now());
         return;
     }
 
@@ -219,7 +219,7 @@ export async function cooldownConstraint(
             ),
             interaction.i18n.getMessage(
                 'errorsInteractionConstraintCooldownCooldownOverDescription', [
-                    command.command,
+                    command.structure.name,
             ]),
             constants.colors.on,
         );

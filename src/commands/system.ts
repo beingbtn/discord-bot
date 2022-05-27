@@ -9,8 +9,6 @@ import { constants } from '../utility/constants';
 import process from 'node:process';
 
 export default class implements CommandStatic {
-    static command = 'system';
-    static description = 'View system information.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;

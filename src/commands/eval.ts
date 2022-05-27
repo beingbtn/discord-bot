@@ -8,8 +8,6 @@ import {
 import { Log } from '../utility/Log';
 
 export default class implements CommandStatic {
-    static command = 'eval';
-    static description = 'Evaluates a string.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;

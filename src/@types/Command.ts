@@ -10,8 +10,6 @@ import type {
 
 //Main typings
 export interface Command {
-    command: string,
-    description: string,
     cooldown: number,
     ephemeral: boolean,
     noDM: boolean,
@@ -32,8 +30,6 @@ export interface Command {
 
 //Static typings
 export class CommandStatic {
-    static command: string;
-    static description: string;
     static cooldown: number;
     static ephemeral: boolean;
     static noDM: boolean;

@@ -2,8 +2,6 @@ import type { CommandInteraction } from 'discord.js';
 import type { CommandStatic } from '../@types/Command';
 
 export default class implements CommandStatic {
-    static command = 'test';
-    static description = 'Does Stuff.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;

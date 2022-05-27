@@ -9,8 +9,6 @@ import { Database } from '../utility/Database';
 import { Log } from '../utility/Log';
 
 export default class implements CommandStatic {
-    static command = 'config';
-    static description = 'Configure and change settings.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;

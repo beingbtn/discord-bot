@@ -9,8 +9,6 @@ import { constants } from '../utility/constants';
 import { Log } from '../utility/Log';
 
 export default class implements CommandStatic {
-    static command = 'ping';
-    static description = 'Ping!';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;

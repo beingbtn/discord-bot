@@ -134,9 +134,7 @@ export const client = new Client({
 
             const command: Command = file.default;
 
-            console.log(command);
-
-            client.commands.set(command.command, command);
+            client.commands.set(command.structure.name, command);
         }),
         ...folders[1].map(async eventFile => {
             const file = await import(

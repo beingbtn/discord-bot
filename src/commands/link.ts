@@ -5,8 +5,6 @@ import { constants } from '../utility/constants';
 import { Database } from '../utility/Database';
 
 export default class implements CommandStatic {
-    static command = 'link';
-    static description = 'Links/unlinks a message ID to an ID.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;

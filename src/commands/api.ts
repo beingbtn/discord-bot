@@ -10,8 +10,6 @@ type errorTypes = 'abort' | 'generic' | 'http';
 type TimeoutSettables = 'timeout' | 'resumeAfter';
 
 export default class implements CommandStatic {
-    static command = 'config';
-    static description = 'Configure the bot.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;

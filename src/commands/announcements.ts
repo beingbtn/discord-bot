@@ -13,8 +13,6 @@ import { Log } from '../utility/Log';
 import process from 'node:process';
 
 export default class implements CommandStatic {
-    static command = 'announcements';
-    static description = 'Configure what announcements you want to receive.';
     static cooldown = 5_000;
     static ephemeral = true;
     static noDM = true;
@@ -126,8 +124,7 @@ export default class implements CommandStatic {
                 .setDescription(i18n.getMessage(
                     'commandsAnnouncementsBotMissingPermissionDescription', [
                     botHasPermission.join(', '),
-                ],
-                ));
+                ]));
 
             Log.interaction(interaction, 'Bot missing permission(s)');
 
@@ -170,8 +167,8 @@ export default class implements CommandStatic {
                 i18n.getMessage('commandsAnnouncementsRemoveLog', [
                     type,
                     channel.id,
-                ],
-                ));
+                ]),
+            );
 
             await interaction.editReply({ embeds: [removeEmbed] });
         } else {
@@ -202,16 +199,16 @@ export default class implements CommandStatic {
                     i18n.getMessage('commandsAnnouncementsAddDescription', [
                         type,
                         Formatters.channelMention(channel.id),
-                    ],
-                    ));
+                    ]),
+                );
 
             Log.interaction(
                 interaction,
                 i18n.getMessage('commandsAnnouncementsAddLog', [
                     type,
                     channel.id,
-                ],
-                ));
+                ]),
+            );
 
             await interaction.editReply({ embeds: [addEmbed] });
         }

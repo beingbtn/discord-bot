@@ -16,8 +16,6 @@ import {
 import { Log } from '../utility/Log';
 
 export default class implements CommandStatic {
-    static command = 'editannouncements';
-    static description = 'Edit announcements.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = true;

@@ -9,8 +9,6 @@ import fs from 'node:fs/promises';
 import process from 'node:process';
 
 export default class implements CommandStatic {
-    static command = 'deploy';
-    static description = 'Deploy command.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;
@@ -86,16 +84,15 @@ export default class implements CommandStatic {
         const userCommands: object[] = [];
         const ownerCommands: object[] = [];
 
-        for (const file of commandFiles) {
-            const {
-                ownerOnly,
-                structure,
-            }: Command = await import(`${__dirname}/${file}`); // eslint-disable-line no-await-in-loop
+        for (const commandFile of commandFiles) {
+            const file = await import(`${__dirname}/${commandFile}`); // eslint-disable-line no-await-in-loop
 
-            if (ownerOnly === false) {
-                userCommands.push(structure);
+            const command: Command = file.default;
+
+            if (command.ownerOnly === false) {
+                userCommands.push(command.structure);
             } else {
-                ownerCommands.push(structure);
+                ownerCommands.push(command.structure);
             }
         }
 

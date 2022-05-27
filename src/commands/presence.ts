@@ -10,8 +10,6 @@ import { constants } from '../utility/constants';
 import { setPresence } from '../utility/utility';
 
 export default class implements CommandStatic {
-    static command = 'presence';
-    static description = 'Set a custom presence for the bot.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;

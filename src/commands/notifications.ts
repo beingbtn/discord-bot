@@ -14,11 +14,9 @@ import {
 } from 'discord.js';
 
 export default class implements CommandStatic {
-    static command = 'notifications';
-    static description = 'Add a notifications selector to a channel.';
     static cooldown = 0;
     static ephemeral = true;
-    static noDM = false;
+    static noDM = true;
     static ownerOnly = true;
     static permissions = {
         bot: {

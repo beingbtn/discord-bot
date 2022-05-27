@@ -16,8 +16,6 @@ try {
 }
 
 export default class implements CommandStatic {
-    static command = 'reload';
-    static description = 'Reloads all imports or a single import.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;
@@ -173,7 +171,7 @@ export default class implements CommandStatic {
 
 async function commandRefresh(interaction: CommandInteraction, item: string) {
     const refreshed = await reload<Command>(`${item}`);
-    interaction.client.commands.set(refreshed.command, refreshed);
+    interaction.client.commands.set(refreshed.structure.name, refreshed);
 }
 
 async function eventRefresh(interaction: CommandInteraction, item: string) {

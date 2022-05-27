@@ -4,8 +4,6 @@ import { constants } from '../utility/constants';
 import { BetterEmbed } from '../utility/BetterEmbed';
 
 export default class implements CommandStatic {
-    static command = 'performance';
-    static description = 'View system performance.';
     static cooldown = 0;
     static ephemeral = true;
     static noDM = false;
