@@ -1,4 +1,4 @@
-import type { ClientCommand } from '../@types/main';
+import type { ClientCommand } from '../@types/Module';
 import type { EventStatic } from '../@types/Event';
 import {
     CommandInteraction,

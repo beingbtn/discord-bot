@@ -1,5 +1,5 @@
 import type { ActivityTypes } from 'discord.js/typings/enums';
-import type { ClientCommand } from '../@types/main';
+import type { ClientCommand } from '../@types/Module';
 import type {
     ExcludeEnum,
     PresenceStatusData,

@@ -1,10 +1,8 @@
 import 'dotenv/config';
 import '@sentry/tracing';
-import type {
-    ClientCommand,
-    Config,
-} from './@types/main';
-import type { EventType } from './@types/Event';
+import type { ClientCommand } from './@types/Module';
+import type { Config } from './@types/Config';
+import type { Event } from './@types/Event';
 import {
     Client,
     Collection,
@@ -140,7 +138,7 @@ export const client = new Client({
                 `${__dirname}/events/${eventFile}`
             );
 
-            const event: EventType = file.Event;
+            const event: Event = file.Event;
 
             client.events.set(event.event, event);
         }),

@@ -1,6 +1,6 @@
 import type {
     ClientCommand,
-} from '../@types/main';
+} from '../@types/Module';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { CommandInteraction } from 'discord.js';
 import { constants } from '../utility/constants';

@@ -1,4 +1,4 @@
-import type { ClientCommand } from '../@types/main';
+import type { ClientCommand } from '../@types/Module';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
 import { constants } from '../utility/constants';
