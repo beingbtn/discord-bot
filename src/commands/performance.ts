@@ -1,4 +1,4 @@
-import type { ClientCommand } from '../@types/client';
+import type { ClientCommand } from '../@types/main';
 import { constants } from '../utility/constants';
 import { BetterEmbed } from '../utility/BetterEmbed';
 

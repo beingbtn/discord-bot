@@ -1,4 +1,4 @@
-import type { ClientCommand } from '../@types/client';
+import type { ClientCommand } from '../@types/main';
 import { CommandInteraction } from 'discord.js';
 
 export const properties: ClientCommand['properties'] = {

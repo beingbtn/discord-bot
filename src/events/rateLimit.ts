@@ -1,22 +1,22 @@
-import type { ClientEvent } from '../@types/client';
 import type { RateLimitData } from 'discord.js';
-import { client } from '../main';
 import { Log } from '../utility/Log';
 import { Sentry } from '../errors/Sentry';
 import { Severity } from '@sentry/node';
+import { EventStatic } from '../@types/Event';
+import { client } from '../main';
 
-export const properties: ClientEvent['properties'] = {
-    name: 'rateLimit',
-    once: false,
-};
+export class Event implements EventStatic {
+    static event = 'rateLimit';
+    static once = false;
 
-export const execute: ClientEvent['execute'] = (rateLimitInfo: RateLimitData): void => {
-    Log.error(
-        client.i18n.getMessage('eventsRateLimit'),
-        rateLimitInfo,
-    );
+    static execute(rateLimitInfo: RateLimitData) {
+        Log.error(
+            client.i18n.getMessage('eventsRateLimit'),
+            rateLimitInfo,
+        );
 
-    new Sentry()
-        .setSeverity(Severity.Warning)
-        .captureException(rateLimitInfo);
-};
+        new Sentry()
+            .setSeverity(Severity.Warning)
+            .captureException(rateLimitInfo);
+    }
+}

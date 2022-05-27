@@ -1,4 +1,4 @@
-import type { ClientCommand } from '../@types/client';
+import type { ClientCommand } from '../@types/main';
 import type { WebhookEditMessageOptions } from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { constants } from '../utility/constants';

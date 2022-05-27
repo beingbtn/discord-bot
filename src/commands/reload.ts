@@ -1,7 +1,6 @@
 import type {
-    ClientEvent,
     ClientCommand,
-} from '../@types/client';
+} from '../@types/main';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { CommandInteraction } from 'discord.js';
 import { constants } from '../utility/constants';
@@ -151,8 +150,10 @@ export const execute: ClientCommand['execute'] = async (
         }
 
         if (typeName === 'commands') {
+            //@ts-expect-error testing
             commandRefresh(interaction, selected.properties.name);
         } else if (typeName === 'events') {
+            //@ts-expect-error testing
             eventRefresh(interaction, selected.properties.name);
         }
 
@@ -182,6 +183,7 @@ async function commandRefresh(interaction: CommandInteraction, item: string) {
 }
 
 async function eventRefresh(interaction: CommandInteraction, item: string) {
+    //@ts-expect-error testing
     const refreshed = await reload<ClientEvent>(`../events/${item}`);
     interaction.client.events.set(refreshed.properties.name, refreshed);
 }

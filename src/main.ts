@@ -2,9 +2,9 @@ import 'dotenv/config';
 import '@sentry/tracing';
 import type {
     ClientCommand,
-    ClientEvent,
     Config,
-} from './@types/client';
+} from './@types/main';
+import type { EventType } from './@types/Event';
 import {
     Client,
     Collection,
@@ -136,21 +136,23 @@ export const client = new Client({
             client.commands.set(command.properties.name, command);
         }),
         ...folders[1].map(async eventFile => {
-            const event: ClientEvent = await import(
+            const file = await import(
                 `${__dirname}/events/${eventFile}`
             );
 
-            client.events.set(event.properties.name, event);
+            const event: EventType = file.Event;
+
+            client.events.set(event.event, event);
         }),
     ]);
 
-    for (const { properties } of client.events.values()) {
+    for (const { event, once } of client.events.values()) {
         client[
-            properties.once === false ? 'on' : 'once'
+            once === false ? 'on' : 'once'
         ](
-            properties.name,
+            event,
             (...parameters: unknown[]) =>
-                client.events.get(properties.name)!.execute(...parameters),
+                client.events.get(event)!.execute(...parameters),
         );
     }
 

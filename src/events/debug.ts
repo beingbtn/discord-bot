@@ -1,22 +1,22 @@
-import type { ClientEvent } from '../@types/client';
+import type { EventStatic } from '../@types/Event';
 import { client } from '../main';
 import { Log } from '../utility/Log';
 import { Sentry } from '../errors/Sentry';
 import { Severity } from '@sentry/node';
 
-export const properties: ClientEvent['properties'] = {
-    name: 'debug',
-    once: false,
-};
+export class Event implements EventStatic {
+    static event = 'debug';
+    static once = false;
 
-export const execute: ClientEvent['execute'] = (info: string): void => {
-    return;
-    Log.error(
-        client.i18n.getMessage('eventsDebug'),
-        info,
-    );
+    static execute(info: string) {
+        return;
+        Log.error(
+            client.i18n.getMessage('eventsDebug'),
+            info,
+        );
 
-    new Sentry()
-        .setSeverity(Severity.Debug)
-        .captureException(info);
-};
+        new Sentry()
+            .setSeverity(Severity.Debug)
+            .captureException(info);
+    }
+}

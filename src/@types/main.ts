@@ -5,7 +5,8 @@ import type {
     CommandInteraction,
 } from 'discord.js';
 import type { Core } from '../core/Core';
-import { i18n } from '../locales/i18n';
+import type { i18n } from '../locales/i18n';
+import type { EventType } from './Event';
 
 export interface ClientCommand {
     properties: {
@@ -32,25 +33,12 @@ export interface ClientCommand {
     },
 }
 
-export interface ClientEvent {
-    properties: {
-        name: string,
-        once: boolean
-    },
-    execute(...parameters: unknown[]): Promise<void> | void,
-}
-
 export interface Config {
     core: boolean,
     devMode: boolean,
     interval: number,
     restRequestTimeout: number,
     retryLimit: number,
-}
-
-export interface WebhookConfig {
-    id: string,
-    token: string,
 }
 
 declare module 'discord.js' {
@@ -60,7 +48,7 @@ declare module 'discord.js' {
         cooldowns: Collection<string, Collection<string, number>>,
         core: Core,
         customPresence: PresenceData | null,
-        events: Collection<string, ClientEvent>,
+        events: Collection<string, EventType>,
         i18n: i18n,
     }
 

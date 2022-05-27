@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import type { ClientCommand } from './@types/client';
+import type { ClientCommand } from './@types/main';
 import { i18n } from './locales/i18n';
 import { Log } from './utility/Log';
 import { REST } from '@discordjs/rest';

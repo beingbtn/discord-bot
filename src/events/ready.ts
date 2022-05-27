@@ -1,29 +1,29 @@
 import type { Client } from 'discord.js';
-import type { ClientEvent } from '../@types/client';
+import type { EventStatic } from '../@types/Event';
 import { constants } from '../utility/constants';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { Log } from '../utility/Log';
 import { setPresence } from '../utility/utility';
 
-export const properties: ClientEvent['properties'] = {
-    name: 'ready',
-    once: true,
-};
+export class Event implements EventStatic {
+    static event = 'ready';
+    static once = true;
 
-export const execute: ClientEvent['execute'] = async (client: Client) => {
-    Log.log(`Logged in as ${client?.user?.tag}!`);
+    static async execute(client: Client) {
+        Log.log(`Logged in as ${client?.user?.tag}!`);
 
-    set();
+        set();
 
-    setInterval(set, constants.ms.hour);
+        setInterval(set, constants.ms.hour);
 
-    function set() {
-        try {
-            setPresence(client);
-        } catch (error) {
-            new ErrorHandler(error).init();
+        function set() {
+            try {
+                setPresence(client);
+            } catch (error) {
+                new ErrorHandler(error).init();
+            }
         }
-    }
 
-    await client.core.init();
-};
+        await client.core.init();
+    }
+}
