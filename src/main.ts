@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import '@sentry/tracing';
+import type { Command } from './@types/Command';
 import type { Config } from './@types/Config';
 import type { Event } from './@types/Event';
 import {
@@ -18,7 +19,6 @@ import { Log } from './utility/Log';
 import * as Sentry from '@sentry/node';
 import fs from 'node:fs/promises';
 import process from 'node:process';
-import { Command } from './@types/Command';
 
 Sentry.init({
     dsn: process.env.DSN,
