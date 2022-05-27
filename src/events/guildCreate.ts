@@ -5,7 +5,7 @@ import { Log } from '../utility/Log';
 import { setPresence } from '../utility/utility';
 
 
-export class Event implements EventStatic {
+export default class implements EventStatic {
     static event = 'guildCreate';
     static once = false;
 

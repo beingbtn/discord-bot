@@ -1,19 +1,28 @@
-import type {
-    ClientCommand,
-} from '../@types/Module';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { CommandInteraction } from 'discord.js';
 import { constants } from '../utility/constants';
 import { Log } from '../utility/Log';
+import type { Command, CommandStatic } from '../@types/Command';
+import { Event } from '../@types/Event';
 
-export const properties: ClientCommand['properties'] = {
-    name: 'reload',
-    description: 'Reloads all imports or a single import.',
-    cooldown: 0,
-    ephemeral: true,
-    noDM: false,
-    ownerOnly: true,
-    permissions: {
+//Determines if the runtime is using .js or ts-node
+let extension: string;
+
+try {
+    require('../main.js');
+    extension = '.js';
+} catch {
+    extension = '.ts';
+}
+
+export default class implements CommandStatic {
+    static command = 'reload';
+    static description = 'Reloads all imports or a single import.';
+    static cooldown = 0;
+    static ephemeral = true;
+    static noDM = false;
+    static ownerOnly = true;
+    static permissions = {
         bot: {
             global: [],
             local: [],
@@ -22,10 +31,10 @@ export const properties: ClientCommand['properties'] = {
             global: [],
             local: [],
         },
-    },
-    structure: {
+    };
+    static structure = {
         name: 'reload',
-        description: 'Reload',
+        description: 'Reloads all imports or a single import',
         options: [
             {
                 name: 'all',
@@ -66,132 +75,121 @@ export const properties: ClientCommand['properties'] = {
                 ],
             },
         ],
-    },
-};
+    };
 
-//Determines if the runtime is using .js or ts-node
-let extension: string;
+    static async execute(interaction: CommandInteraction) {
+        const { i18n } = interaction;
 
-try {
-    require('../main.js');
-    extension = '.js';
-} catch {
-    extension = '.ts';
-}
-
-export const execute: ClientCommand['execute'] = async (
-    interaction,
-): Promise<void> => {
-    const { i18n } = interaction;
-
-    switch (interaction.options.getSubcommand()) {
-        case 'all': await reloadAll();
-        break;
-        case 'single': await reloadSingle();
-        break;
-        //no default
-    }
-
-    async function reloadAll() {
-        const now = Date.now();
-        const promises: Promise<void>[] = [];
-
-        for (const [command] of interaction.client.commands) {
-            promises.push(commandRefresh(interaction, command));
+        switch (interaction.options.getSubcommand()) {
+            case 'all': await reloadAll();
+                break;
+            case 'single': await reloadSingle();
+                break;
+            //no default
         }
 
-        for (const [event] of interaction.client.events) {
-            promises.push(eventRefresh(interaction, event));
+        async function reloadAll() {
+            const now = Date.now();
+            const promises: Promise<void>[] = [];
+
+            for (const [command] of interaction.client.commands) {
+                promises.push(commandRefresh(interaction, command));
+            }
+
+            for (const [event] of interaction.client.events) {
+                promises.push(eventRefresh(interaction, event));
+            }
+
+            await Promise.all(promises);
+
+            const reloadedEmbed = new BetterEmbed(interaction)
+                .setColor(constants.colors.normal)
+                .setTitle(i18n.getMessage('commandsReloadAllTitle'))
+                .setDescription(i18n.getMessage('commandsReloadAllDescription', [
+                    promises.length,
+                    Date.now() - now,
+                ]));
+
+            Log.interaction(interaction, `All imports have been reloaded after ${Date.now() - now
+                } milliseconds.`);
+
+            await interaction.editReply({ embeds: [reloadedEmbed] });
         }
 
-        await Promise.all(promises);
-
-        const reloadedEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
-            .setTitle(i18n.getMessage('commandsReloadAllTitle'))
-            .setDescription(i18n.getMessage('commandsReloadAllDescription', [
-                promises.length,
-                Date.now() - now,
-            ]));
-
-        Log.interaction(interaction, `All imports have been reloaded after ${
-            Date.now() - now
-        } milliseconds.`);
-
-        await interaction.editReply({ embeds: [reloadedEmbed] });
-    }
-
-    async function reloadSingle() {
-        const now = Date.now();
-        const typeName = interaction.options.getString('type', true);
-        const type =
-            interaction.client[
+        async function reloadSingle() {
+            const now = Date.now();
+            const typeName = interaction.options.getString('type', true);
+            const type =
+                interaction.client[
                 typeName as keyof Pick<
                     typeof interaction.client,
                     'commands' | 'events'
                 >
-            ];
-        const item = interaction.options.getString('item')!;
-        const selected = type.get(item);
+                ];
+            const item = interaction.options.getString('item')!;
+            const selected = type.get(item);
 
-        if (typeof selected === 'undefined') {
-            const undefinedSelected = new BetterEmbed(interaction)
-                .setColor(constants.colors.warning)
-                .setTitle(i18n.getMessage('commandsReloadSingleUnknownTitle'))
+            if (typeof selected === 'undefined') {
+                const undefinedSelected = new BetterEmbed(interaction)
+                    .setColor(constants.colors.warning)
+                    .setTitle(i18n.getMessage('commandsReloadSingleUnknownTitle'))
+                    .setDescription(
+                        i18n.getMessage('commandsReloadSingleUnknownDescription', [
+                            typeName,
+                            item,
+                        ],
+                        ));
+
+                await interaction.editReply({ embeds: [undefinedSelected] });
+                return;
+            }
+
+            if (typeName === 'commands') {
+                //@ts-expect-error testing
+                commandRefresh(interaction, selected.properties.name);
+            } else if (typeName === 'events') {
+                //@ts-expect-error testing
+                eventRefresh(interaction, selected.properties.name);
+            }
+
+            const reloadedEmbed = new BetterEmbed(interaction)
+                .setColor(constants.colors.normal)
+                .setTitle(i18n.getMessage('commandsReloadSingleSuccessTitle'))
                 .setDescription(
-                    i18n.getMessage('commandsReloadSingleUnknownDescription', [
+                    i18n.getMessage('commandsReloadSingleSuccessDescription', [
                         typeName,
                         item,
+                        Date.now() - now,
                     ],
-                ));
+                    ));
 
-            await interaction.editReply({ embeds: [undefinedSelected] });
-            return;
+            Log.interaction(interaction, `${typeName}.${item} was successfully reloaded after ${Date.now() - now
+                } milliseconds.`);
+
+            await interaction.editReply({ embeds: [reloadedEmbed] });
         }
-
-        if (typeName === 'commands') {
-            //@ts-expect-error testing
-            commandRefresh(interaction, selected.properties.name);
-        } else if (typeName === 'events') {
-            //@ts-expect-error testing
-            eventRefresh(interaction, selected.properties.name);
-        }
-
-        const reloadedEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
-            .setTitle(i18n.getMessage('commandsReloadSingleSuccessTitle'))
-            .setDescription(
-                i18n.getMessage('commandsReloadSingleSuccessDescription', [
-                    typeName,
-                    item,
-                    Date.now() - now,
-                ],
-            ));
-
-        Log.interaction(interaction, `${typeName}.${item} was successfully reloaded after ${
-            Date.now() - now
-        } milliseconds.`);
-
-        await interaction.editReply({ embeds: [reloadedEmbed] });
     }
-};
-
+}
 
 async function commandRefresh(interaction: CommandInteraction, item: string) {
-    const refreshed = await reload<ClientCommand>(`${item}`);
-    interaction.client.commands.set(refreshed.properties.name, refreshed);
+    const refreshed = await reload<Command>(`${item}`);
+    interaction.client.commands.set(refreshed.command, refreshed);
 }
 
 async function eventRefresh(interaction: CommandInteraction, item: string) {
-    //@ts-expect-error testing
-    const refreshed = await reload<ClientEvent>(`../events/${item}`);
-    interaction.client.events.set(refreshed.properties.name, refreshed);
+    const refreshed = await reload<Event>(`../events/${item}`);
+    interaction.client.events.set(refreshed.event, refreshed);
 }
 
 function reload<Type>(path: string) {
     return new Promise<Type>(resolve => {
         delete require.cache[require.resolve(`${__dirname}/${path}${extension}`)];
-        const refreshed: Type = require(`${__dirname}/${path}${extension}`); //eslint-disable-line @typescript-eslint/no-var-requires
+
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const refreshed: Type = require(
+            `${__dirname}/${path}${extension}`,
+        ).default;
+
         resolve(refreshed);
     });
 }

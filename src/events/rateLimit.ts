@@ -5,7 +5,7 @@ import { Severity } from '@sentry/node';
 import { EventStatic } from '../@types/Event';
 import { client } from '../main';
 
-export class Event implements EventStatic {
+export default class implements EventStatic {
     static event = 'rateLimit';
     static once = false;
 

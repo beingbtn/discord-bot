@@ -1,16 +1,17 @@
-import type { ClientCommand } from '../@types/Module';
+import type { CommandInteraction } from 'discord.js';
+import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { constants } from '../utility/constants';
 import { Database } from '../utility/Database';
 
-export const properties: ClientCommand['properties'] = {
-    name: 'link',
-    description: 'Edit announcements.',
-    cooldown: 0,
-    ephemeral: true,
-    noDM: true,
-    ownerOnly: true,
-    permissions: {
+export default class implements CommandStatic {
+    static command = 'link';
+    static description = 'Links/unlinks a message ID to an ID.';
+    static cooldown = 0;
+    static ephemeral = true;
+    static noDM = false;
+    static ownerOnly = true;
+    static permissions = {
         bot: {
             global: [],
             local: [],
@@ -19,10 +20,10 @@ export const properties: ClientCommand['properties'] = {
             global: [],
             local: [],
         },
-    },
-    structure: {
+    };
+    static structure = {
         name: 'link',
-        description: 'Edit announcements',
+        description: 'Links/unlinks a message ID to an ID',
         options: [
             {
                 name: 'link',
@@ -97,38 +98,36 @@ export const properties: ClientCommand['properties'] = {
                 ],
             },
         ],
-    },
-};
+    };
 
-export const execute: ClientCommand['execute'] = async (
-    interaction,
-): Promise<void> => {
-    const { i18n } = interaction;
+    static async execute(interaction: CommandInteraction) {
+        const { i18n } = interaction;
 
-    const category = interaction.options.getString('category', true);
-    const id = interaction.options.getString('id', true);
-    const message = interaction.options.getString('message', false);
+        const category = interaction.options.getString('category', true);
+        const id = interaction.options.getString('id', true);
+        const message = interaction.options.getString('message', false);
 
-    await Database.query(
-        `UPDATE "${category}" SET message = $1 WHERE id = $2`,
-        [message, id],
-    );
-
-    const linkEmbed = new BetterEmbed(interaction)
-        .setColor(constants.colors.normal)
-        .setTitle(interaction.options.getSubcommand() === 'link'
-            ? i18n.getMessage('commandsLinkLinkedTitle')
-            : i18n.getMessage('commandsLinkUnlinkedTitle'),
-        )
-        .setDescription(interaction.options.getSubcommand() === 'link'
-            ? i18n.getMessage('commandsLinkLinkedDescription', [
-                id,
-                message!,
-            ])
-            : i18n.getMessage('commandsLinkUnlinkedDescription', [
-                id,
-            ]),
+        await Database.query(
+            `UPDATE "${category}" SET message = $1 WHERE id = $2`,
+            [message, id],
         );
 
-    await interaction.editReply({ embeds: [linkEmbed] });
-};
+        const linkEmbed = new BetterEmbed(interaction)
+            .setColor(constants.colors.normal)
+            .setTitle(interaction.options.getSubcommand() === 'link'
+                ? i18n.getMessage('commandsLinkLinkedTitle')
+                : i18n.getMessage('commandsLinkUnlinkedTitle'),
+            )
+            .setDescription(interaction.options.getSubcommand() === 'link'
+                ? i18n.getMessage('commandsLinkLinkedDescription', [
+                    id,
+                    message!,
+                ])
+                : i18n.getMessage('commandsLinkUnlinkedDescription', [
+                    id,
+                ]),
+            );
+
+        await interaction.editReply({ embeds: [linkEmbed] });
+    }
+}

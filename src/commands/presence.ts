@@ -1,6 +1,7 @@
 import type { ActivityTypes } from 'discord.js/typings/enums';
-import type { ClientCommand } from '../@types/Module';
+import type { CommandStatic } from '../@types/Command';
 import type {
+    CommandInteraction,
     ExcludeEnum,
     PresenceStatusData,
 } from 'discord.js';
@@ -8,14 +9,14 @@ import { BetterEmbed } from '../utility/BetterEmbed';
 import { constants } from '../utility/constants';
 import { setPresence } from '../utility/utility';
 
-export const properties: ClientCommand['properties'] = {
-    name: 'presence',
-    description: 'Set a custom presence.',
-    cooldown: 0,
-    ephemeral: true,
-    noDM: false,
-    ownerOnly: true,
-    permissions: {
+export default class implements CommandStatic {
+    static command = 'presence';
+    static description = 'Set a custom presence for the bot.';
+    static cooldown = 0;
+    static ephemeral = true;
+    static noDM = false;
+    static ownerOnly = true;
+    static permissions = {
         bot: {
             global: [],
             local: [],
@@ -24,8 +25,8 @@ export const properties: ClientCommand['properties'] = {
             global: [],
             local: [],
         },
-    },
-    structure: {
+    };
+    static structure = {
         name: 'presence',
         description: 'Set a custom presence for the bot',
         options: [
@@ -106,73 +107,73 @@ export const properties: ClientCommand['properties'] = {
                 ],
             },
         ],
-    },
-};
+    };
 
-export const execute: ClientCommand['execute'] = async (
-    interaction,
-): Promise<void> => {
-    const { i18n } = interaction;
+    static async execute(interaction: CommandInteraction) {
+        const { i18n } = interaction;
 
-    const responseEmbed = new BetterEmbed(interaction)
-        .setColor(constants.colors.normal);
+        const responseEmbed = new BetterEmbed(interaction)
+            .setColor(constants.colors.normal);
 
-    if (interaction.options.getSubcommand() === 'set') {
-        const type = interaction.options.getString('type', false);
-        const name = interaction.options.getString('name', false);
-        const url = interaction.options.getString('url', false);
-        const status = interaction.options.getString('status', false);
+        if (interaction.options.getSubcommand() === 'set') {
+            const type = interaction.options.getString('type', false);
+            const name = interaction.options.getString('name', false);
+            const url = interaction.options.getString('url', false);
+            const status = interaction.options.getString('status', false);
 
-        const currentPresence = interaction.client.user!.presence;
-        const currentActivity = currentPresence.activities[0];
+            const currentPresence = interaction.client.user!.presence;
+            const currentActivity = currentPresence.activities[0];
 
-        interaction.client.customPresence = {
-            activities: [{
-                type: (type ?? currentActivity.type) as ExcludeEnum<typeof ActivityTypes, 'CUSTOM'>,
-                name: name ?? currentActivity.name,
-                // eslint-disable-next-line no-undefined
-                url: url ?? currentActivity.url ?? undefined,
-            }],
-            status: (status ?? currentPresence.status) as PresenceStatusData,
-        };
+            interaction.client.customPresence = {
+                activities: [{
+                    type: (type ?? currentActivity.type) as ExcludeEnum<typeof ActivityTypes, 'CUSTOM'>,
+                    name: name ?? currentActivity.name,
+                    // eslint-disable-next-line no-undefined
+                    url: url ?? currentActivity.url ?? undefined,
+                }],
+                status: (
+                    status ?? currentPresence.status
+                ) as PresenceStatusData,
+            };
 
-        responseEmbed
-            .setTitle(i18n.getMessage('commandsPresenceSetTitle'))
-            .addFields([
-                {
-                    name: i18n.getMessage('commandsPresenceSetStatusName'),
-                    value: status ??
-                        currentPresence.status ??
-                        i18n.getMessage('null'),
-                },
-                {
-                    name: i18n.getMessage('commandsPresenceSetTypeName'),
-                    value: type ??
-                        currentActivity.type ??
-                        i18n.getMessage('null'),
-                },
-                {
-                    name: i18n.getMessage('commandsPresenceSetNameName'),
-                    value: name ??
-                        currentActivity.name ??
-                        i18n.getMessage('null'),
-                },
-                {
-                    name: i18n.getMessage('commandsPresenceSetURLName'),
-                    value: url ??
-                        currentActivity.url ??
-                        i18n.getMessage('null'),
-                },
-            ]);
-    } else {
-        responseEmbed
-            .setTitle(i18n.getMessage('commandsPresenceClearTitle'))
-            .setDescription(i18n.getMessage('commandsPresenceClearTitle'));
+            responseEmbed
+                .setTitle(i18n.getMessage('commandsPresenceSetTitle'))
+                .addFields([
+                    {
+                        name: i18n.getMessage('commandsPresenceSetStatusName'),
+                        value: status ??
+                            currentPresence.status ??
+                            i18n.getMessage('null'),
+                    },
+                    {
+                        name: i18n.getMessage('commandsPresenceSetTypeName'),
+                        value: type ??
+                            currentActivity.type ??
+                            i18n.getMessage('null'),
+                    },
+                    {
+                        name: i18n.getMessage('commandsPresenceSetNameName'),
+                        value: name ??
+                            currentActivity.name ??
+                            i18n.getMessage('null'),
+                    },
+                    {
+                        name: i18n.getMessage('commandsPresenceSetURLName'),
+                        value: url ??
+                            currentActivity.url ??
+                            i18n.getMessage('null'),
+                    },
+                ]);
+        } else {
+            responseEmbed
+                .setTitle(i18n.getMessage('commandsPresenceClearTitle'))
+                .setDescription(i18n.getMessage('commandsPresenceClearTitle'));
 
-        interaction.client.customPresence = null;
+            interaction.client.customPresence = null;
+        }
+
+        setPresence(interaction.client);
+
+        await interaction.editReply({ embeds: [responseEmbed] });
     }
-
-    setPresence(interaction.client);
-
-    await interaction.editReply({ embeds: [responseEmbed] });
-};
+}

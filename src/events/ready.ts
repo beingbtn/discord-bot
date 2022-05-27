@@ -5,7 +5,7 @@ import { ErrorHandler } from '../errors/ErrorHandler';
 import { Log } from '../utility/Log';
 import { setPresence } from '../utility/utility';
 
-export class Event implements EventStatic {
+export default class implements EventStatic {
     static event = 'ready';
     static once = true;
 

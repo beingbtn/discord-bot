@@ -1,4 +1,4 @@
-import type { ClientCommand } from '../@types/Module';
+import type { Command } from '../@types/Command';
 import type { EventStatic } from '../@types/Event';
 import {
     CommandInteraction,
@@ -23,7 +23,7 @@ import { Log } from '../utility/Log';
 import { slashCommandResolver } from '../utility/utility';
 import process from 'node:process';
 
-export class Event implements EventStatic {
+export default class implements EventStatic {
     static event = 'interactionCreate';
     static once = false;
 
@@ -32,7 +32,7 @@ export class Event implements EventStatic {
             interaction.i18n = new i18n(interaction.locale);
 
             if (interaction.isCommand()) {
-                const command: ClientCommand | undefined =
+                const command: Command | undefined =
                     client.commands.get(interaction.commandName);
 
                 if (typeof command === 'undefined') {
@@ -42,7 +42,7 @@ export class Event implements EventStatic {
                 Log.interaction(interaction, slashCommandResolver(interaction));
 
                 await interaction.deferReply({
-                    ephemeral: command.properties.ephemeral &&
+                    ephemeral: command.ephemeral &&
                         interaction.inGuild(),
                 });
 

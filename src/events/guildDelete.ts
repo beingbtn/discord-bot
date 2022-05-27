@@ -7,7 +7,7 @@ import {
 } from '../utility/utility';
 import { Log } from '../utility/Log';
 
-export class Event implements EventStatic {
+export default class implements EventStatic {
     static event = 'guildDelete';
     static once = false;
 

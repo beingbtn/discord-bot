@@ -1,18 +1,21 @@
-import type { ClientCommand } from '../@types/Module';
-import type { WebhookEditMessageOptions } from 'discord.js';
+import type { CommandStatic } from '../@types/Command';
+import type {
+    CommandInteraction,
+    WebhookEditMessageOptions,
+} from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { constants } from '../utility/constants';
 import { Database } from '../utility/Database';
 import { Log } from '../utility/Log';
 
-export const properties: ClientCommand['properties'] = {
-    name: 'config',
-    description: 'Configure the bot.',
-    cooldown: 0,
-    ephemeral: true,
-    noDM: false,
-    ownerOnly: true,
-    permissions: {
+export default class implements CommandStatic {
+    static command = 'config';
+    static description = 'Configure and change settings.';
+    static cooldown = 0;
+    static ephemeral = true;
+    static noDM = false;
+    static ownerOnly = true;
+    static permissions = {
         bot: {
             global: [],
             local: [],
@@ -21,10 +24,10 @@ export const properties: ClientCommand['properties'] = {
             global: [],
             local: [],
         },
-    },
-    structure: {
+    };
+    static structure = {
         name: 'config',
-        description: 'Toggles dynamic settings',
+        description: 'Configure and change settings',
         options: [
             {
                 name: 'core',
@@ -87,187 +90,185 @@ export const properties: ClientCommand['properties'] = {
                 type: 1,
             },
         ],
-    },
-};
+    };
 
-export const execute: ClientCommand['execute'] = async (
-    interaction,
-): Promise<void> => {
-    const { i18n } = interaction;
+    static async execute(interaction: CommandInteraction) {
+        const { i18n } = interaction;
 
-    const payload: WebhookEditMessageOptions = {};
+        const payload: WebhookEditMessageOptions = {};
 
-    const client = interaction.client;
+        const client = interaction.client;
 
-    switch (interaction.options.getSubcommand()) {
-        case 'core':
-            await coreCommand();
-            break;
-        case 'devmode':
-            await devModeCommand();
-            break;
-        case 'interval':
-            await interval();
-            break;
-        case 'restrequesttimeout':
-            await restRequestTimeoutCommand();
-            break;
-        case 'retrylimit':
-            await retryLimitCommand();
-            break;
-        case 'view':
-            viewCommand();
-            break;
-        //no default
-    }
+        switch (interaction.options.getSubcommand()) {
+            case 'core':
+                await coreCommand();
+                break;
+            case 'devmode':
+                await devModeCommand();
+                break;
+            case 'interval':
+                await interval();
+                break;
+            case 'restrequesttimeout':
+                await restRequestTimeoutCommand();
+                break;
+            case 'retrylimit':
+                await retryLimitCommand();
+                break;
+            case 'view':
+                viewCommand();
+                break;
+            //no default
+        }
 
-    async function coreCommand() {
-        client.config.core = !client.config.core;
+        async function coreCommand() {
+            client.config.core = !client.config.core;
 
-        await Database.query(
-            'UPDATE config SET "core" = $1 WHERE index = 0',
-            [client.config.core],
-        );
-
-        const coreEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
-            .setTitle(i18n.getMessage('commandsConfigCoreTitle'))
-            .setDescription(
-                i18n.getMessage('commandsConfigCoreDescription', [
-                    client.config.core === true
-                        ? i18n.getMessage('on')
-                        : i18n.getMessage('off'),
-                ]),
+            await Database.query(
+                'UPDATE config SET "core" = $1 WHERE index = 0',
+                [client.config.core],
             );
 
-        payload.embeds = [coreEmbed];
+            const coreEmbed = new BetterEmbed(interaction)
+                .setColor(constants.colors.normal)
+                .setTitle(i18n.getMessage('commandsConfigCoreTitle'))
+                .setDescription(
+                    i18n.getMessage('commandsConfigCoreDescription', [
+                        client.config.core === true
+                            ? i18n.getMessage('on')
+                            : i18n.getMessage('off'),
+                    ]),
+                );
 
-        Log.interaction(interaction, coreEmbed.description);
-    }
+            payload.embeds = [coreEmbed];
 
-    async function devModeCommand() {
-        client.config.devMode = !client.config.devMode;
+            Log.interaction(interaction, coreEmbed.description);
+        }
 
-        await Database.query(
-            'UPDATE config SET "devMode" = $1 WHERE index = 0',
-            [client.config.devMode],
-        );
+        async function devModeCommand() {
+            client.config.devMode = !client.config.devMode;
 
-        const devModeEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
-            .setTitle(i18n.getMessage('commandsConfigDevModeTitle'))
-            .setDescription(
-                i18n.getMessage('commandsConfigDevModeDescription', [
-                    client.config.devMode === true
-                        ? i18n.getMessage('on')
-                        : i18n.getMessage('off'),
-                ]),
+            await Database.query(
+                'UPDATE config SET "devMode" = $1 WHERE index = 0',
+                [client.config.devMode],
             );
 
-        payload.embeds = [devModeEmbed];
+            const devModeEmbed = new BetterEmbed(interaction)
+                .setColor(constants.colors.normal)
+                .setTitle(i18n.getMessage('commandsConfigDevModeTitle'))
+                .setDescription(
+                    i18n.getMessage('commandsConfigDevModeDescription', [
+                        client.config.devMode === true
+                            ? i18n.getMessage('on')
+                            : i18n.getMessage('off'),
+                    ]),
+                );
 
-        Log.interaction(interaction, devModeEmbed.description);
-    }
+            payload.embeds = [devModeEmbed];
 
-    async function interval() {
-        const milliseconds = interaction.options.getInteger(
-            'milliseconds',
-            true,
-        );
+            Log.interaction(interaction, devModeEmbed.description);
+        }
 
-        client.config.interval = milliseconds;
-
-        await Database.query(
-            'UPDATE config SET "interval" = $1 WHERE index = 0',
-            [client.config.interval],
-        );
-
-        const intervalEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
-            .setTitle(i18n.getMessage('commandsConfigIntervalTitle'))
-            .setDescription(
-                i18n.getMessage('commandsConfigIntervalDescription', [
-                    milliseconds,
-                ]),
+        async function interval() {
+            const milliseconds = interaction.options.getInteger(
+                'milliseconds',
+                true,
             );
 
-        payload.embeds = [intervalEmbed];
+            client.config.interval = milliseconds;
 
-        Log.interaction(interaction, intervalEmbed.description);
-    }
-
-    async function restRequestTimeoutCommand() {
-        const milliseconds = interaction.options.getInteger(
-            'milliseconds',
-            true,
-        );
-
-        client.config.restRequestTimeout = milliseconds;
-
-        await Database.query(
-            'UPDATE config SET "restRequestTimeout" = $1 WHERE index = 0',
-            [client.config.restRequestTimeout],
-        );
-
-        const keyPercentageEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
-            .setTitle(i18n.getMessage('commandsConfigRestRequestTimeoutTitle'))
-            .setDescription(
-                i18n.getMessage('commandsConfigRestRequestTimeoutDescription', [
-                    milliseconds,
-                ]),
+            await Database.query(
+                'UPDATE config SET "interval" = $1 WHERE index = 0',
+                [client.config.interval],
             );
 
-        payload.embeds = [keyPercentageEmbed];
+            const intervalEmbed = new BetterEmbed(interaction)
+                .setColor(constants.colors.normal)
+                .setTitle(i18n.getMessage('commandsConfigIntervalTitle'))
+                .setDescription(
+                    i18n.getMessage('commandsConfigIntervalDescription', [
+                        milliseconds,
+                    ]),
+                );
 
-        Log.interaction(interaction, keyPercentageEmbed.description);
-    }
+            payload.embeds = [intervalEmbed];
 
-    async function retryLimitCommand() {
-        const limit = interaction.options.getInteger(
-            'limit',
-            true,
-        );
+            Log.interaction(interaction, intervalEmbed.description);
+        }
 
-        client.config.retryLimit = limit;
-
-        await Database.query(
-            'UPDATE config SET "retryLimit" = $1 WHERE index = 0',
-            [client.config.retryLimit],
-        );
-
-        const keyPercentageEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
-            .setTitle(i18n.getMessage('commandsConfigRetryLimitTitle'))
-            .setDescription(
-                i18n.getMessage('commandsConfigRetryLimitDescription', [limit]),
+        async function restRequestTimeoutCommand() {
+            const milliseconds = interaction.options.getInteger(
+                'milliseconds',
+                true,
             );
 
-        payload.embeds = [keyPercentageEmbed];
+            client.config.restRequestTimeout = milliseconds;
 
-        Log.interaction(interaction, keyPercentageEmbed.description);
-    }
-
-    function viewCommand() {
-        const viewEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
-            .setTitle(i18n.getMessage('commandsConfigViewTitle'))
-            .setDescription(
-                i18n.getMessage('commandsConfigViewDescription', [
-                    client.config.core === true
-                        ? i18n.getMessage('on')
-                        : i18n.getMessage('off'),
-                    client.config.devMode === true
-                        ? i18n.getMessage('on')
-                        : i18n.getMessage('off'),
-                    client.config.interval,
-                    client.config.restRequestTimeout,
-                    client.config.retryLimit,
-                ]),
+            await Database.query(
+                'UPDATE config SET "restRequestTimeout" = $1 WHERE index = 0',
+                [client.config.restRequestTimeout],
             );
 
-        payload.embeds = [viewEmbed];
-    }
+            const keyPercentageEmbed = new BetterEmbed(interaction)
+                .setColor(constants.colors.normal)
+                .setTitle(i18n.getMessage('commandsConfigRestRequestTimeoutTitle'))
+                .setDescription(
+                    i18n.getMessage('commandsConfigRestRequestTimeoutDescription', [
+                        milliseconds,
+                    ]),
+                );
 
-    await interaction.editReply(payload);
-};
+            payload.embeds = [keyPercentageEmbed];
+
+            Log.interaction(interaction, keyPercentageEmbed.description);
+        }
+
+        async function retryLimitCommand() {
+            const limit = interaction.options.getInteger(
+                'limit',
+                true,
+            );
+
+            client.config.retryLimit = limit;
+
+            await Database.query(
+                'UPDATE config SET "retryLimit" = $1 WHERE index = 0',
+                [client.config.retryLimit],
+            );
+
+            const keyPercentageEmbed = new BetterEmbed(interaction)
+                .setColor(constants.colors.normal)
+                .setTitle(i18n.getMessage('commandsConfigRetryLimitTitle'))
+                .setDescription(
+                    i18n.getMessage('commandsConfigRetryLimitDescription', [limit]),
+                );
+
+            payload.embeds = [keyPercentageEmbed];
+
+            Log.interaction(interaction, keyPercentageEmbed.description);
+        }
+
+        function viewCommand() {
+            const viewEmbed = new BetterEmbed(interaction)
+                .setColor(constants.colors.normal)
+                .setTitle(i18n.getMessage('commandsConfigViewTitle'))
+                .setDescription(
+                    i18n.getMessage('commandsConfigViewDescription', [
+                        client.config.core === true
+                            ? i18n.getMessage('on')
+                            : i18n.getMessage('off'),
+                        client.config.devMode === true
+                            ? i18n.getMessage('on')
+                            : i18n.getMessage('off'),
+                        client.config.interval,
+                        client.config.restRequestTimeout,
+                        client.config.retryLimit,
+                    ]),
+                );
+
+            payload.embeds = [viewEmbed];
+        }
+
+        await interaction.editReply(payload);
+    }
+}

@@ -1,4 +1,4 @@
-import type { ClientCommand } from '../@types/Module';
+import type { Command } from '../@types/Command';
 import { cleanRound } from './utility';
 import { CommandConstraintErrorHandler } from '../errors/CommandInteractionConstraintErrorHandler';
 import {
@@ -36,12 +36,10 @@ export async function devModeConstraint(
 
 export async function ownerConstraint(
     interaction: CommandInteraction,
-    command: ClientCommand,
+    command: Command,
 ) {
-    const { ownerOnly } = command.properties;
-
     if (
-        ownerOnly === true &&
+        command.ownerOnly === true &&
         owners.includes(interaction.user.id) === false
     ) {
         await CommandConstraintErrorHandler.resolveConstraint(
@@ -60,12 +58,10 @@ export async function ownerConstraint(
 
 export async function dmConstraint(
     interaction: CommandInteraction,
-    command: ClientCommand,
+    command: Command,
 ) {
-    const { noDM } = command.properties;
-
     if (
-        noDM === true &&
+        command.noDM === true &&
         !interaction.inCachedGuild()
     ) {
         await CommandConstraintErrorHandler.resolveConstraint(
@@ -84,13 +80,13 @@ export async function dmConstraint(
 
 export async function userPermissionsConstraint(
     interaction: CommandInteraction,
-    command: ClientCommand,
+    command: Command,
 ) {
     if (!interaction.inCachedGuild()) {
         return;
     }
 
-    const permissions = command.properties.permissions.user;
+    const permissions = command.permissions.user;
 
     const global = interaction.member.permissions.missing(
         permissions.global,
@@ -133,13 +129,13 @@ export async function userPermissionsConstraint(
 
 export async function botPermissionsConstraint(
     interaction: CommandInteraction,
-    command: ClientCommand,
+    command: Command,
 ) {
     if (!interaction.inCachedGuild()) {
         return;
     }
 
-    const permissions = command.properties.permissions.bot;
+    const permissions = command.permissions.bot;
 
     const global = interaction.guild.me!.permissions.missing(
         permissions.global,
@@ -184,20 +180,19 @@ export async function botPermissionsConstraint(
 
 export async function cooldownConstraint(
     interaction: CommandInteraction,
-    command: ClientCommand,
+    command: Command,
 ) {
     const { client: { cooldowns }, user } = interaction;
-    const { name, cooldown } = command.properties;
 
-    const timestamps = cooldowns.get(name);
+    const timestamps = cooldowns.get(command.command);
 
     if (typeof timestamps === 'undefined') {
-        cooldowns.set(name, new Collection());
-        cooldowns.get(name)!.set(user.id, Date.now());
+        cooldowns.set(command.command, new Collection());
+        cooldowns.get(command.command)!.set(user.id, Date.now());
         return;
     }
 
-    const expireTime = Number(timestamps.get(user.id)) + cooldown;
+    const expireTime = Number(timestamps.get(user.id)) + command.cooldown;
     const isCooldown = expireTime > (constants.ms.second * 2.5) + Date.now();
     const timeLeft = expireTime - Date.now();
 
@@ -209,7 +204,7 @@ export async function cooldownConstraint(
             ),
             interaction.i18n.getMessage(
                 'errorsInteractionConstraintCooldownWaitingDescription', [
-                    command?.properties.cooldown / 1000,
+                    command?.cooldown / 1000,
                     cleanRound(timeLeft / 1000, 1),
                 ],
             ),
@@ -224,7 +219,7 @@ export async function cooldownConstraint(
             ),
             interaction.i18n.getMessage(
                 'errorsInteractionConstraintCooldownCooldownOverDescription', [
-                    command.properties.name,
+                    command.command,
             ]),
             constants.colors.on,
         );

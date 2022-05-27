@@ -1,14 +1,14 @@
-import type { ClientCommand } from '../@types/Module';
-import { CommandInteraction } from 'discord.js';
+import type { CommandInteraction } from 'discord.js';
+import type { CommandStatic } from '../@types/Command';
 
-export const properties: ClientCommand['properties'] = {
-    name: 'test',
-    description: 'Does stuff.',
-    cooldown: 0,
-    ephemeral: true,
-    noDM: false,
-    ownerOnly: true,
-    permissions: {
+export default class implements CommandStatic {
+    static command = 'test';
+    static description = 'Does Stuff.';
+    static cooldown = 0;
+    static ephemeral = true;
+    static noDM = false;
+    static ownerOnly = true;
+    static permissions = {
         bot: {
             global: [],
             local: [],
@@ -17,8 +17,8 @@ export const properties: ClientCommand['properties'] = {
             global: [],
             local: [],
         },
-    },
-    structure: {
+    };
+    static structure = {
         name: 'test',
         description: 'Does stuff',
         options: [
@@ -44,14 +44,10 @@ export const properties: ClientCommand['properties'] = {
                 ],
             },
         ],
-    },
-};
+    };
 
-/* eslint-disable no-await-in-loop */
-
-export const execute: ClientCommand['execute'] = async (
-    interaction: CommandInteraction,
-): Promise<void> => {
-    await interaction.followUp({ content: 'e' });
-    throw new TypeError();
-};
+    static async execute(interaction: CommandInteraction) {
+        await interaction.followUp({ content: 'e' });
+        throw new TypeError();
+    }
+}

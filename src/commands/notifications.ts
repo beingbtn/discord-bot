@@ -1,4 +1,4 @@
-import type { ClientCommand } from '../@types/Module';
+import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
     ChannelTypes,
@@ -6,20 +6,21 @@ import {
 } from 'discord.js/typings/enums';
 import { constants } from '../utility/constants';
 import {
+    CommandInteraction,
     MessageActionRow,
     MessageButton,
     MessageEmbed,
     TextChannel,
 } from 'discord.js';
 
-export const properties: ClientCommand['properties'] = {
-    name: 'notifications',
-    description: 'Add a notifications selector to a channel.',
-    cooldown: 0,
-    ephemeral: true,
-    noDM: false,
-    ownerOnly: true,
-    permissions: {
+export default class implements CommandStatic {
+    static command = 'notifications';
+    static description = 'Add a notifications selector to a channel.';
+    static cooldown = 0;
+    static ephemeral = true;
+    static noDM = false;
+    static ownerOnly = true;
+    static permissions = {
         bot: {
             global: [],
             local: [],
@@ -28,8 +29,8 @@ export const properties: ClientCommand['properties'] = {
             global: [],
             local: [],
         },
-    },
-    structure: {
+    };
+    static structure = {
         name: 'notifications',
         description: 'Add a notifications selector to a channel',
         options: [
@@ -41,52 +42,50 @@ export const properties: ClientCommand['properties'] = {
                 required: true,
             },
         ],
-    },
-};
-
-export const execute: ClientCommand['execute'] = async (
-    interaction,
-): Promise<void> => {
-    const { i18n } = interaction;
-
-    const notificationsEmbed = new MessageEmbed()
-        .setColor(constants.colors.normal)
-        .setTitle(
-            i18n.getMessage('commandsNotificationsPublicTitle'),
-        )
-        .setDescription(
-            i18n.getMessage('commandsNotificationsPublicDescription'),
-        );
-
-    const announcements = JSON.parse(process.env.ANNOUNCEMENTS!) as {
-        [key: string]: {
-            id: string,
-        }
     };
 
-    const actionRow = new MessageActionRow()
-        .setComponents(
-            Object.entries(announcements).map(
-                ([key]) => new MessageButton()
-                    .setCustomId(key)
-                    .setLabel(key)
-                    .setStyle(MessageButtonStyles.PRIMARY),
-            ),
-        );
+    static async execute(interaction: CommandInteraction) {
+        const { i18n } = interaction;
 
-    const channel = interaction.options.getChannel(
-        'channel',
-        true,
-    ) as TextChannel;
+        const notificationsEmbed = new MessageEmbed()
+            .setColor(constants.colors.normal)
+            .setTitle(
+                i18n.getMessage('commandsNotificationsPublicTitle'),
+            )
+            .setDescription(
+                i18n.getMessage('commandsNotificationsPublicDescription'),
+            );
 
-    await channel.send({
-        embeds: [notificationsEmbed],
-        components: [actionRow],
-    });
+        const announcements = JSON.parse(process.env.ANNOUNCEMENTS!) as {
+            [key: string]: {
+                id: string,
+            }
+        };
 
-    const embed = new BetterEmbed(interaction)
-        .setColor(constants.colors.normal)
-        .setTitle(i18n.getMessage('commandsNotificationsPrivateTitle'));
+        const actionRow = new MessageActionRow()
+            .setComponents(
+                Object.entries(announcements).map(
+                    ([key]) => new MessageButton()
+                        .setCustomId(key)
+                        .setLabel(key)
+                        .setStyle(MessageButtonStyles.PRIMARY),
+                ),
+            );
 
-    await interaction.editReply({ embeds: [embed] });
-};
+        const channel = interaction.options.getChannel(
+            'channel',
+            true,
+        ) as TextChannel;
+
+        await channel.send({
+            embeds: [notificationsEmbed],
+            components: [actionRow],
+        });
+
+        const embed = new BetterEmbed(interaction)
+            .setColor(constants.colors.normal)
+            .setTitle(i18n.getMessage('commandsNotificationsPrivateTitle'));
+
+        await interaction.editReply({ embeds: [embed] });
+    }
+}

@@ -4,7 +4,7 @@ import { Log } from '../utility/Log';
 import { Sentry } from '../errors/Sentry';
 import { Severity } from '@sentry/node';
 
-export class Event implements EventStatic {
+export default class implements EventStatic {
     static event = 'error';
     static once = false;
 

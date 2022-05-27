@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import '@sentry/tracing';
-import type { ClientCommand } from './@types/Module';
 import type { Config } from './@types/Config';
 import type { Event } from './@types/Event';
 import {
@@ -19,6 +18,7 @@ import { Log } from './utility/Log';
 import * as Sentry from '@sentry/node';
 import fs from 'node:fs/promises';
 import process from 'node:process';
+import { Command } from './@types/Command';
 
 Sentry.init({
     dsn: process.env.DSN,
@@ -128,17 +128,22 @@ export const client = new Client({
 
     await Promise.all([
         ...folders[0].map(async commandFile => {
-            const command: ClientCommand = await import(
+            const file = await import(
                 `${__dirname}/commands/${commandFile}`
             );
-            client.commands.set(command.properties.name, command);
+
+            const command: Command = file.default;
+
+            console.log(command);
+
+            client.commands.set(command.command, command);
         }),
         ...folders[1].map(async eventFile => {
             const file = await import(
                 `${__dirname}/events/${eventFile}`
             );
 
-            const event: Event = file.Event;
+            const event: Event = file.default;
 
             client.events.set(event.event, event);
         }),

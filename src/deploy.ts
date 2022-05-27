@@ -1,10 +1,10 @@
 import 'dotenv/config';
-import type { ClientCommand } from './@types/Module';
 import { i18n } from './locales/i18n';
 import { Log } from './utility/Log';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import process from 'node:process';
+import { Command } from './@types/Command';
 
 (async () => {
     //Determines if the runtime is using .js or ts-node
@@ -19,8 +19,10 @@ import process from 'node:process';
 
     try {
         const deployCommand = (
-            (await import(`${__dirname}/commands/deploy${extension}`)) as ClientCommand
-        ).properties.structure;
+            (await import(
+                `${__dirname}/commands/deploy${extension}`
+            )).default as Command
+        ).structure;
 
         await new REST({ version: '9' })
             .setToken(process.env.DISCORD_TOKEN!)
