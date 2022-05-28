@@ -17,6 +17,6 @@ export default class implements EventStatic {
 
         new Sentry()
             .setSeverity(Severity.Debug)
-            .captureException(info);
+            .captureMessages(info);
     }
 }

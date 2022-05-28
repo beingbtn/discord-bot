@@ -4,7 +4,7 @@ import {
     disableComponents,
 } from '../utility/utility';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import {
     CommandInteraction,
     Constants as DiscordConstants,
@@ -116,7 +116,7 @@ export default class implements CommandStatic {
         );
 
         const previewEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
+            .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsEditAnnouncementsPreviewTitle'))
             .setDescription(
                 i18n.getMessage('commandsEditAnnouncementsPreviewDescription'),
@@ -137,7 +137,7 @@ export default class implements CommandStatic {
         const previewButton = await awaitComponent(interaction.channel!, {
             componentType: 'BUTTON',
             filter: componentFilter,
-            idle: constants.ms.second * 30,
+            idle: Constants.ms.second * 30,
         });
 
         if (previewButton === null) {
@@ -171,7 +171,7 @@ export default class implements CommandStatic {
         );
 
         const successEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
+            .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsEditAnnouncementsSuccessTitle'))
             .setDescription(
                 i18n.getMessage('commandsEditAnnouncementsSuccessDescription'),

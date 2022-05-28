@@ -5,7 +5,7 @@ import {
     Message,
 } from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { Log } from '../utility/Log';
 
 export default class implements CommandStatic {
@@ -32,7 +32,7 @@ export default class implements CommandStatic {
         const { i18n } = interaction;
 
         const initialPingEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
+            .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsPingLoadingTitle'));
 
         const sentReply = await interaction.editReply({
@@ -48,10 +48,10 @@ export default class implements CommandStatic {
 
         const embedColor: ColorResolvable =
             interaction.client.ws.ping < 80 && roundTripDelay < 160
-                ? constants.colors.on
+                ? Constants.colors.on
                 : interaction.client.ws.ping < 100 && roundTripDelay < 250
-                    ? constants.colors.ok
-                    : constants.colors.warning;
+                    ? Constants.colors.ok
+                    : Constants.colors.warning;
 
         const pingEmbed = new BetterEmbed(interaction)
             .setColor(embedColor)

@@ -2,7 +2,7 @@ import type { CommandInteraction } from 'discord.js';
 import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { cleanLength } from '../utility/utility';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { Log } from '../utility/Log';
 
 type errorTypes = 'abort' | 'generic' | 'http';
@@ -137,11 +137,11 @@ export default class implements CommandStatic {
                 interaction.client.core;
 
             const statsEmbed = new BetterEmbed(interaction)
-                .setColor(constants.colors.normal)
+                .setColor(Constants.colors.normal)
                 .setDescription(
                     JSON.stringify(
                         interaction.client.core.performance,
-                    ).slice(0, constants.limits.embedDescription),
+                    ).slice(0, Constants.limits.embedDescription),
                 )
                 .addFields(
                     {
@@ -194,7 +194,7 @@ export default class implements CommandStatic {
                 type as TimeoutSettables
             ] = value;
             const setEmbed = new BetterEmbed(interaction)
-                .setColor(constants.colors.normal)
+                .setColor(Constants.colors.normal)
                 .setTitle(i18n.getMessage('commandsAPISetTitle'))
                 .setDescription(i18n.getMessage('commandsAPISetDescription', [
                     category,
@@ -223,7 +223,7 @@ export default class implements CommandStatic {
             }
 
             const callEmbed = new BetterEmbed(interaction)
-                .setColor(constants.colors.normal)
+                .setColor(Constants.colors.normal)
                 .setTitle(i18n.getMessage('commandsAPICallTitle'))
                 .setDescription(i18n.getMessage('commandsAPICallDescription', [
                     method,

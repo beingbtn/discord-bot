@@ -5,7 +5,7 @@ import {
     cleanLength,
     cleanRound,
 } from '../utility/utility';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import process from 'node:process';
 
 export default class implements CommandStatic {
@@ -34,7 +34,7 @@ export default class implements CommandStatic {
         const memoryMegaBytes = process.memoryUsage.rss() / (2 ** 20);
 
         const responseEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
+            .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsSystemTitle'))
             .addFields(
                 {

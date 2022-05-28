@@ -4,7 +4,7 @@ import {
     ColorResolvable,
     CommandInteraction,
 } from 'discord.js';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { ConstraintError } from './ConstraintError';
 import { ErrorHandler } from './ErrorHandler';
 import { Severity } from '@sentry/node';
@@ -47,7 +47,7 @@ export class CommandConstraintErrorHandler
         color?: ColorResolvable,
     ) {
         const embed = new BetterEmbed(interaction)
-            .setColor(color ?? constants.colors.warning)
+            .setColor(color ?? Constants.colors.warning)
             .setTitle(title)
             .setDescription(description);
 

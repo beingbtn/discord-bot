@@ -1,5 +1,5 @@
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { ErrorHandler } from './ErrorHandler';
 import {
     MessageComponentInteraction,
@@ -43,7 +43,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
 
     private async userNotify() {
         const embed = new MessageEmbed()
-            .setColor(constants.colors.error)
+            .setColor(Constants.colors.error)
             .setTitle(this.i18n.getMessage('errorsInteractionReplyTitle'))
             .setDescription(
                 this.i18n.getMessage('errorsInteractionReplyDescription',

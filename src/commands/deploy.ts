@@ -1,7 +1,7 @@
 import type { CommandInteraction } from 'discord.js';
 import type { Command, CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { Log } from '../utility/Log';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
@@ -125,12 +125,12 @@ export default class implements CommandStatic {
         }
 
         const successEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
+            .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsDeployTitle'))
             .setDescription(
                 JSON.stringify(commands).slice(
                     0,
-                    constants.limits.embedDescription,
+                    Constants.limits.embedDescription,
                 ) ?? i18n.getMessage('commandsDeployNone'),
             );
 

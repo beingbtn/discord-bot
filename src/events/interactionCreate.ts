@@ -1,4 +1,3 @@
-import type { Command } from '../@types/Command';
 import type { EventStatic } from '../@types/Event';
 import {
     CommandInteraction,
@@ -7,7 +6,7 @@ import {
 } from 'discord.js';
 import { client } from '../main';
 import { CommandConstraintErrorHandler } from '../errors/CommandInteractionConstraintErrorHandler';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { ConstraintError } from '../errors/ConstraintError';
 import {
     devModeConstraint,
@@ -32,8 +31,7 @@ export default class implements EventStatic {
             interaction.i18n = new i18n(interaction.locale);
 
             if (interaction.isCommand()) {
-                const command: Command | undefined =
-                    client.commands.get(interaction.commandName);
+                const command = client.commands.get(interaction.commandName);
 
                 if (typeof command === 'undefined') {
                     return;
@@ -80,7 +78,7 @@ export default class implements EventStatic {
                 const hasRole = memberRoles.cache.has(announcement.role);
 
                 const notificationsEmbed = new MessageEmbed()
-                    .setColor(constants.colors.normal);
+                    .setColor(Constants.colors.normal);
 
                 if (hasRole) {
                     await memberRoles.remove(announcement.role);

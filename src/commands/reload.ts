@@ -1,9 +1,12 @@
+import type {
+    Command,
+    CommandStatic,
+} from '../@types/Command';
+import type { Event } from '../@types/Event';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { CommandInteraction } from 'discord.js';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { Log } from '../utility/Log';
-import type { Command, CommandStatic } from '../@types/Command';
-import { Event } from '../@types/Event';
 
 //Determines if the runtime is using .js or ts-node
 let extension: string;
@@ -101,7 +104,7 @@ export default class implements CommandStatic {
             await Promise.all(promises);
 
             const reloadedEmbed = new BetterEmbed(interaction)
-                .setColor(constants.colors.normal)
+                .setColor(Constants.colors.normal)
                 .setTitle(i18n.getMessage('commandsReloadAllTitle'))
                 .setDescription(i18n.getMessage('commandsReloadAllDescription', [
                     promises.length,
@@ -129,7 +132,7 @@ export default class implements CommandStatic {
 
             if (typeof selected === 'undefined') {
                 const undefinedSelected = new BetterEmbed(interaction)
-                    .setColor(constants.colors.warning)
+                    .setColor(Constants.colors.warning)
                     .setTitle(i18n.getMessage('commandsReloadSingleUnknownTitle'))
                     .setDescription(
                         i18n.getMessage('commandsReloadSingleUnknownDescription', [
@@ -151,7 +154,7 @@ export default class implements CommandStatic {
             }
 
             const reloadedEmbed = new BetterEmbed(interaction)
-                .setColor(constants.colors.normal)
+                .setColor(Constants.colors.normal)
                 .setTitle(i18n.getMessage('commandsReloadSingleSuccessTitle'))
                 .setDescription(
                     i18n.getMessage('commandsReloadSingleSuccessDescription', [

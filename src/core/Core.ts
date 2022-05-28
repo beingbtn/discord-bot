@@ -1,5 +1,5 @@
 import { Client } from 'discord.js';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { CoreChanges } from './CoreChanges';
 import { CoreComponents } from './CoreComponents';
 import { CoreDispatch } from './CoreDispatch';
@@ -15,7 +15,7 @@ import { setTimeout } from 'node:timers/promises';
 
 /* eslint-disable no-await-in-loop */
 
-export type Performance = typeof constants.defaults.performance;
+export type Performance = typeof Constants.defaults.performance;
 
 export class Core {
     client: Client;
@@ -60,7 +60,7 @@ export class Core {
             return;
         }
 
-        const urls = constants.urls.rss;
+        const urls = Constants.urls.rss;
 
         if (urls.length === 0) {
             await setTimeout(2500);
@@ -73,7 +73,7 @@ export class Core {
     private async refresh(urls: string[]) {
         for (const url of urls) {
             const performance = {
-                ...constants.defaults.performance,
+                ...Constants.defaults.performance,
                 start: Date.now(),
                 uses: this.uses,
             };
@@ -131,7 +131,7 @@ export class Core {
 
                 const regularInterval = (
                     this.client.config.interval /
-                    constants.urls.rss.length
+                    Constants.urls.rss.length
                 );
 
                 if (regularInterval > this.errors.getTimeout()) {
@@ -143,7 +143,7 @@ export class Core {
 
             await setTimeout(
                 this.client.config.interval /
-                constants.urls.rss.length,
+                Constants.urls.rss.length,
             );
         }
     }
@@ -160,10 +160,10 @@ export class Core {
 
         const { history } = this.performance;
 
-        if (history[0]?.start + constants.ms.hour > Date.now()) return;
+        if (history[0]?.start + Constants.ms.hour > Date.now()) return;
 
         history.unshift(performance);
 
-        history.splice(constants.limits.performanceHistory);
+        history.splice(Constants.limits.performanceHistory);
     }
 }

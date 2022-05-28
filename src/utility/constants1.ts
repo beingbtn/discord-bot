@@ -3,7 +3,7 @@ import {
     PresenceData,
 } from 'discord.js';
 
-export const constants = {
+export const Constants = {
     colors: {
         hypixel: 0xDCAF4E as ColorResolvable,
         error: 0xAA0000 as ColorResolvable,
@@ -40,7 +40,6 @@ export const constants = {
         embedDescription: 4096,
         embedField: 1024,
         performanceHistory: 50,
-        userAPIDataHistory: 1000,
     },
     ms: {
         day: 86_400_000,

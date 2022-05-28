@@ -1,6 +1,6 @@
 import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import {
     CommandInteraction,
     Formatters,
@@ -52,17 +52,17 @@ export default class implements CommandStatic {
             const end = Date.now();
             const timeTaken = end - start;
             const outputMaxLength = (
-                output?.length >= constants.limits.embedField
+                output?.length >= Constants.limits.embedField
             );
 
-            evalEmbed.setColor(constants.colors.normal).addFields(
+            evalEmbed.setColor(Constants.colors.normal).addFields(
                 {
                     name: i18n.getMessage('commandsEvalOutputName'),
                     value: Formatters.codeBlock(
                         'javascript',
                         output?.toString()?.slice(
                             0,
-                            constants.limits.embedField,
+                            Constants.limits.embedField,
                         ),
                     ),
                 },
@@ -93,10 +93,10 @@ export default class implements CommandStatic {
             const timeTaken = end - start;
 
             const outputMaxLength = Boolean(
-                (error as Error).message.length >= constants.limits.embedField,
+                (error as Error).message.length >= Constants.limits.embedField,
             );
 
-            evalEmbed.setColor(constants.colors.normal).addFields(
+            evalEmbed.setColor(Constants.colors.normal).addFields(
                 {
                     name: i18n.getMessage('commandsEvalTimeTakenName'),
                     value: Formatters.codeBlock(

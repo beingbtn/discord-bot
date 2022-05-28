@@ -1,5 +1,5 @@
 import { AbortError } from '../errors/AbortError';
-import { constants } from './constants';
+import { Constants } from './constants1';
 import fetch, {
     RequestInit,
     Response,
@@ -21,7 +21,7 @@ export class Request {
         this.i18n = new i18n();
 
         this.restRequestTimeout = config?.restRequestTimeout ??
-            constants.defaults.request.restRequestTimeout;
+            Constants.defaults.request.restRequestTimeout;
 
         this.try = 0;
 

@@ -4,7 +4,7 @@ import {
     ChannelTypes,
     MessageButtonStyles,
 } from 'discord.js/typings/enums';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import {
     CommandInteraction,
     MessageActionRow,
@@ -46,7 +46,7 @@ export default class implements CommandStatic {
         const { i18n } = interaction;
 
         const notificationsEmbed = new MessageEmbed()
-            .setColor(constants.colors.normal)
+            .setColor(Constants.colors.normal)
             .setTitle(
                 i18n.getMessage('commandsNotificationsPublicTitle'),
             )
@@ -81,7 +81,7 @@ export default class implements CommandStatic {
         });
 
         const embed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
+            .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsNotificationsPrivateTitle'));
 
         await interaction.editReply({ embeds: [embed] });

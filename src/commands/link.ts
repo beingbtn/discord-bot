@@ -1,7 +1,7 @@
 import type { CommandInteraction } from 'discord.js';
 import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { Database } from '../utility/Database';
 
 export default class implements CommandStatic {
@@ -111,7 +111,7 @@ export default class implements CommandStatic {
         );
 
         const linkEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
+            .setColor(Constants.colors.normal)
             .setTitle(interaction.options.getSubcommand() === 'link'
                 ? i18n.getMessage('commandsLinkLinkedTitle')
                 : i18n.getMessage('commandsLinkUnlinkedTitle'),

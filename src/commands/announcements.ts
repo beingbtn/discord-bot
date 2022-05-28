@@ -1,7 +1,7 @@
 import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import {
     CommandInteraction,
     Formatters,
@@ -93,7 +93,7 @@ export default class implements CommandStatic {
 
         if (userHasPermission === false) {
             const missingPermission = new BetterEmbed(interaction)
-                .setColor(constants.colors.warning)
+                .setColor(Constants.colors.warning)
                 .setTitle(i18n.getMessage(
                     'commandsAnnouncementsUserMissingPermissionTitle',
                 ))
@@ -117,7 +117,7 @@ export default class implements CommandStatic {
 
         if (botHasPermission.length > 0) {
             const missingPermission = new BetterEmbed(interaction)
-                .setColor(constants.colors.warning)
+                .setColor(Constants.colors.warning)
                 .setTitle(i18n.getMessage(
                     'commandsAnnouncementsBotMissingPermissionTitle',
                 ))
@@ -153,7 +153,7 @@ export default class implements CommandStatic {
             await existingAnnouncementWebhook.delete();
 
             const removeEmbed = new BetterEmbed(interaction)
-                .setColor(constants.colors.normal)
+                .setColor(Constants.colors.normal)
                 .setTitle(i18n.getMessage('commandsAnnouncementsRemoveTitle', [
                     type,
                 ]))
@@ -191,7 +191,7 @@ export default class implements CommandStatic {
             });
 
             const addEmbed = new BetterEmbed(interaction)
-                .setColor(constants.colors.normal)
+                .setColor(Constants.colors.normal)
                 .setTitle(i18n.getMessage('commandsAnnouncementsAddTitle', [
                     type,
                 ]))

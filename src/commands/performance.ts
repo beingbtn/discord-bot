@@ -1,6 +1,6 @@
 import type { CommandInteraction } from 'discord.js';
 import type { CommandStatic } from '../@types/Command';
-import { constants } from '../utility/constants';
+import { Constants } from '../utility/constants1';
 import { BetterEmbed } from '../utility/BetterEmbed';
 
 export default class implements CommandStatic {
@@ -35,7 +35,7 @@ export default class implements CommandStatic {
         } = interaction.client.core.performance.latest!;
 
         const responseEmbed = new BetterEmbed(interaction)
-            .setColor(constants.colors.normal)
+            .setColor(Constants.colors.normal)
             .setTitle(i18n.getMessage('commandsPerformanceTitle'))
             .addFields({
                 name: i18n.getMessage('commandsPerformanceLatestName'),
