@@ -4,7 +4,6 @@ import {
     ChannelTypes,
     MessageButtonStyles,
 } from 'discord.js/typings/enums';
-import { Constants } from '../utility/constants1';
 import {
     CommandInteraction,
     MessageActionRow,
@@ -12,6 +11,7 @@ import {
     MessageEmbed,
     TextChannel,
 } from 'discord.js';
+import { Options } from '../utility/Options';
 
 export default class implements CommandStatic {
     static cooldown = 0;
@@ -46,7 +46,7 @@ export default class implements CommandStatic {
         const { i18n } = interaction;
 
         const notificationsEmbed = new MessageEmbed()
-            .setColor(Constants.colors.normal)
+            .setColor(Options.colorsNormal)
             .setTitle(
                 i18n.getMessage('commandsNotificationsPublicTitle'),
             )
@@ -81,7 +81,7 @@ export default class implements CommandStatic {
         });
 
         const embed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(Options.colorsNormal)
             .setTitle(i18n.getMessage('commandsNotificationsPrivateTitle'));
 
         await interaction.editReply({ embeds: [embed] });

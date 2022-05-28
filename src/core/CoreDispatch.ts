@@ -7,6 +7,7 @@ import {
     NewsChannel,
 } from 'discord.js';
 import { Database } from '../utility/Database';
+import { Options } from '../utility/Options';
 import { setTimeout } from 'node:timers/promises';
 import process from 'node:process';
 
@@ -106,7 +107,7 @@ export class CoreDispatch {
                 await message.edit(payload);
             }
 
-            await setTimeout(2500);
+            await setTimeout(Options.coreDispatchTimeout);
         }
     }
 }

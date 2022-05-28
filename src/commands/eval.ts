@@ -1,11 +1,12 @@
 import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { Constants } from '../utility/constants1';
+import { Constants } from '../utility/Constants';
 import {
     CommandInteraction,
     Formatters,
 } from 'discord.js';
 import { Log } from '../utility/Log';
+import { Options } from '../utility/Options';
 
 export default class implements CommandStatic {
     static cooldown = 0;
@@ -52,17 +53,17 @@ export default class implements CommandStatic {
             const end = Date.now();
             const timeTaken = end - start;
             const outputMaxLength = (
-                output?.length >= Constants.limits.embedField
+                output?.length >= Constants.limitEmbedField
             );
 
-            evalEmbed.setColor(Constants.colors.normal).addFields(
+            evalEmbed.setColor(Options.colorsNormal).addFields(
                 {
                     name: i18n.getMessage('commandsEvalOutputName'),
                     value: Formatters.codeBlock(
                         'javascript',
                         output?.toString()?.slice(
                             0,
-                            Constants.limits.embedField,
+                            Constants.limitEmbedField,
                         ),
                     ),
                 },
@@ -93,10 +94,10 @@ export default class implements CommandStatic {
             const timeTaken = end - start;
 
             const outputMaxLength = Boolean(
-                (error as Error).message.length >= Constants.limits.embedField,
+                (error as Error).message.length >= Constants.limitEmbedField,
             );
 
-            evalEmbed.setColor(Constants.colors.normal).addFields(
+            evalEmbed.setColor(Options.colorsNormal).addFields(
                 {
                     name: i18n.getMessage('commandsEvalTimeTakenName'),
                     value: Formatters.codeBlock(

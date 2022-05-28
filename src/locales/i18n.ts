@@ -1,5 +1,5 @@
-import { Constants } from '../utility/constants1';
-import { locales } from './locales/export';
+import { locales } from './locales/main';
+import { Options } from '../utility/Options';
 
 //Simple implementation of Chrome's/Firefox's i18n
 export class i18n {
@@ -9,7 +9,7 @@ export class i18n {
     constructor(locale?: string) {
         this.localeName = locale && locales[locale as keyof typeof locales]
             ? locale
-            : Constants.defaults.language;
+            : Options.defaultLocale;
 
         this.locale = locales[this.localeName as keyof typeof locales];
 

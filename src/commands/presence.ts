@@ -6,7 +6,7 @@ import type {
     PresenceStatusData,
 } from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { Constants } from '../utility/constants1';
+import { Options } from '../utility/Options';
 import { setPresence } from '../utility/utility';
 
 export default class implements CommandStatic {
@@ -111,7 +111,7 @@ export default class implements CommandStatic {
         const { i18n } = interaction;
 
         const responseEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal);
+            .setColor(Options.colorsNormal);
 
         if (interaction.options.getSubcommand() === 'set') {
             const type = interaction.options.getString('type', false);

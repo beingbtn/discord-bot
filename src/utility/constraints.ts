@@ -5,8 +5,9 @@ import {
     CommandInteraction,
     Collection,
 } from 'discord.js';
-import { Constants } from './constants1';
+import { Constants } from './Constants';
 import { ConstraintError } from '../errors/ConstraintError';
+import { Options } from './Options';
 import { setTimeout } from 'node:timers/promises';
 
 const owners = JSON.parse(process.env.OWNERS!) as string[];
@@ -193,7 +194,7 @@ export async function cooldownConstraint(
     }
 
     const expireTime = Number(timestamps.get(user.id)) + command.cooldown;
-    const isCooldown = expireTime > (Constants.ms.second * 2.5) + Date.now();
+    const isCooldown = expireTime > Options.cooldownMinimum + Date.now();
     const timeLeft = expireTime - Date.now();
 
     if (isCooldown === true) {
@@ -204,8 +205,8 @@ export async function cooldownConstraint(
             ),
             interaction.i18n.getMessage(
                 'errorsInteractionConstraintCooldownWaitingDescription', [
-                    command?.cooldown / 1000,
-                    cleanRound(timeLeft / 1000, 1),
+                    command?.cooldown / Constants.msSecond,
+                    cleanRound(timeLeft / Constants.msSecond, 1),
                 ],
             ),
         );
@@ -221,7 +222,7 @@ export async function cooldownConstraint(
                 'errorsInteractionConstraintCooldownCooldownOverDescription', [
                     command.structure.name,
             ]),
-            Constants.colors.on,
+            Options.colorsOn,
         );
 
         throw new ConstraintError('cooldown');

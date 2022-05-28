@@ -6,7 +6,6 @@ import {
 } from 'discord.js';
 import { client } from '../main';
 import { CommandConstraintErrorHandler } from '../errors/CommandInteractionConstraintErrorHandler';
-import { Constants } from '../utility/constants1';
 import { ConstraintError } from '../errors/ConstraintError';
 import {
     devModeConstraint,
@@ -19,6 +18,7 @@ import {
 import { InteractionErrorHandler } from '../errors/InteractionErrorHandler';
 import { i18n } from '../locales/i18n';
 import { Log } from '../utility/Log';
+import { Options } from '../utility/Options';
 import { slashCommandResolver } from '../utility/utility';
 import process from 'node:process';
 
@@ -78,7 +78,7 @@ export default class implements EventStatic {
                 const hasRole = memberRoles.cache.has(announcement.role);
 
                 const notificationsEmbed = new MessageEmbed()
-                    .setColor(Constants.colors.normal);
+                    .setColor(Options.colorsNormal);
 
                 if (hasRole) {
                     await memberRoles.remove(announcement.role);

@@ -5,8 +5,8 @@ import {
     Message,
 } from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { Constants } from '../utility/constants1';
 import { Log } from '../utility/Log';
+import { Options } from '../utility/Options';
 
 export default class implements CommandStatic {
     static cooldown = 0;
@@ -32,26 +32,28 @@ export default class implements CommandStatic {
         const { i18n } = interaction;
 
         const initialPingEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(Options.colorsNormal)
             .setTitle(i18n.getMessage('commandsPingLoadingTitle'));
 
         const sentReply = await interaction.editReply({
             embeds: [initialPingEmbed],
         });
 
-        const roundTripDelay =
-            (
-                sentReply instanceof Message
-                    ? sentReply.createdTimestamp
-                    : Date.parse(sentReply.timestamp)
-            ) - interaction.createdTimestamp;
+        const roundTripDelay = (
+            sentReply instanceof Message
+                ? sentReply.createdTimestamp
+                : Date.parse(sentReply.timestamp)
+        ) - interaction.createdTimestamp;
 
-        const embedColor: ColorResolvable =
-            interaction.client.ws.ping < 80 && roundTripDelay < 160
-                ? Constants.colors.on
-                : interaction.client.ws.ping < 100 && roundTripDelay < 250
-                    ? Constants.colors.ok
-                    : Constants.colors.warning;
+        const mixedPing = (
+            interaction.client.ws.ping + roundTripDelay
+        ) / 2;
+
+        const embedColor: ColorResolvable = mixedPing < Options.pingOnMinimum
+            ? Options.colorsOn
+            : mixedPing < Options.pingOkMinimum
+            ? Options.colorsOk
+            : Options.colorsWarning;
 
         const pingEmbed = new BetterEmbed(interaction)
             .setColor(embedColor)

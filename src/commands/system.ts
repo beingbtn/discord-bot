@@ -5,7 +5,8 @@ import {
     cleanLength,
     cleanRound,
 } from '../utility/utility';
-import { Constants } from '../utility/constants1';
+import { Constants } from '../utility/Constants';
+import { Options } from '../utility/Options';
 import process from 'node:process';
 
 export default class implements CommandStatic {
@@ -31,15 +32,16 @@ export default class implements CommandStatic {
     static async execute(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
-        const memoryMegaBytes = process.memoryUsage.rss() / (2 ** 20);
+        const memoryMegaBytes = process.memoryUsage.rss() /
+            Constants.bytesToMegaBytes;
 
         const responseEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(Options.colorsNormal)
             .setTitle(i18n.getMessage('commandsSystemTitle'))
             .addFields(
                 {
                     name: i18n.getMessage('commandsSystemUptimeName'),
-                    value: cleanLength(process.uptime() * 1000)!,
+                    value: cleanLength(process.uptime() * Constants.msSecond)!,
                 },
                 {
                     name: i18n.getMessage('commandsSystemMemoryName'),

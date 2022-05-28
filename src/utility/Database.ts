@@ -4,11 +4,12 @@ import {
     PoolClient,
 } from 'pg';
 import { client } from '../main';
+import { Options } from './Options';
 import { Sentry } from '../errors/Sentry';
 import { Severity } from '@sentry/node';
 
 const pool = new Pool({
-    idleTimeoutMillis: 300_000,
+    idleTimeoutMillis: Options.postgresqlIdleTimeoutMillis,
 });
 
 pool.on('error', error => {

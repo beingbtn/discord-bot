@@ -5,7 +5,7 @@ import {
 } from '../utility/utility';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
-import { Constants } from '../utility/constants1';
+import { Constants } from '../utility/Constants';
 import {
     CommandInteraction,
     Constants as DiscordConstants,
@@ -17,6 +17,7 @@ import {
     NewsChannel,
 } from 'discord.js';
 import { Log } from '../utility/Log';
+import { Options } from '../utility/Options';
 
 export default class implements CommandStatic {
     static cooldown = 0;
@@ -134,7 +135,7 @@ export default class implements CommandStatic {
         );
 
         const previewEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(Options.colorsNormal)
             .setTitle(i18n.getMessage('commandsSendAnnouncementsPreviewTitle'))
             .setDescription(
                 i18n.getMessage('commandsSendAnnouncementsPreviewDescription'),
@@ -155,7 +156,7 @@ export default class implements CommandStatic {
         const previewButton = await awaitComponent(interaction.channel!, {
             componentType: 'BUTTON',
             filter: componentFilter,
-            idle: Constants.ms.second * 30,
+            idle: Constants.msMinute,
         });
 
         if (previewButton === null) {
@@ -197,7 +198,7 @@ export default class implements CommandStatic {
         );
 
         const successEmbed = new BetterEmbed(interaction)
-            .setColor(Constants.colors.normal)
+            .setColor(Options.colorsNormal)
             .setTitle(i18n.getMessage('commandsSendAnnouncementsSuccessTitle'))
             .setDescription(
                 i18n.getMessage('commandsSendAnnouncementsSuccessDescription'),

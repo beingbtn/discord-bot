@@ -7,7 +7,8 @@ import {
     MessageComponentTypeResolvable,
     TextBasedChannel,
 } from 'discord.js';
-import { Constants } from './constants1';
+import { Constants } from './Constants';
+import { Options } from './Options';
 
 export async function awaitComponent<T extends MessageComponentTypeResolvable>(
     channel: TextBasedChannel,
@@ -71,16 +72,16 @@ export function cleanLength(ms: number | null): string | null {
         return null;
     }
 
-    let newMS = Math.floor(ms / Constants.ms.second) *
-        Constants.ms.second;
+    let newMS = Math.floor(ms / Constants.msSecond) *
+        Constants.msSecond;
 
-    const days = Math.floor(newMS / Constants.ms.day);
-    newMS -= days * Constants.ms.day;
-    const hours = Math.floor(newMS / Constants.ms.hour);
-    newMS -= hours * Constants.ms.hour;
-    const minutes = Math.floor(newMS / Constants.ms.minute);
-    newMS -= minutes * Constants.ms.minute;
-    const seconds = Math.floor(newMS / Constants.ms.second);
+    const days = Math.floor(newMS / Constants.msDay);
+    newMS -= days * Constants.msDay;
+    const hours = Math.floor(newMS / Constants.msHour);
+    newMS -= hours * Constants.msHour;
+    const minutes = Math.floor(newMS / Constants.msMinute);
+    newMS -= minutes * Constants.msMinute;
+    const seconds = Math.floor(newMS / Constants.msSecond);
 
     return days > 0
         ? `${days}d ${hours}h ${minutes}m ${seconds}s`
@@ -157,7 +158,7 @@ export function setPresence(client: Client) {
     let presence = client.customPresence;
 
     if (presence === null) {
-        presence = structuredClone(Constants.defaults.presence);
+        presence = structuredClone(Options.presence);
     }
 
     client.user?.setPresence(presence!);

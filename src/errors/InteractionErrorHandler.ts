@@ -1,11 +1,11 @@
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
-import { Constants } from '../utility/constants1';
 import { ErrorHandler } from './ErrorHandler';
 import {
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
 import { Severity } from '@sentry/node';
+import { Options } from '../utility/Options';
 
 export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
     readonly interaction: MessageComponentInteraction;
@@ -43,7 +43,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
 
     private async userNotify() {
         const embed = new MessageEmbed()
-            .setColor(Constants.colors.error)
+            .setColor(Options.colorsError)
             .setTitle(this.i18n.getMessage('errorsInteractionReplyTitle'))
             .setDescription(
                 this.i18n.getMessage('errorsInteractionReplyDescription',

@@ -1,6 +1,6 @@
 import type { Client } from 'discord.js';
 import type { EventStatic } from '../@types/Event';
-import { Constants } from '../utility/constants1';
+import { Constants } from '../utility/Constants';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { Log } from '../utility/Log';
 import { setPresence } from '../utility/utility';
@@ -14,7 +14,7 @@ export default class implements EventStatic {
 
         set();
 
-        setInterval(set, Constants.ms.hour);
+        setInterval(set, Constants.msHour);
 
         function set() {
             try {

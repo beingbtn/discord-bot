@@ -1,5 +1,5 @@
 import { Client } from 'discord.js';
-import { Constants } from '../utility/constants1';
+import { Constants } from '../utility/Constants';
 import { CoreChanges } from './CoreChanges';
 import { CoreComponents } from './CoreComponents';
 import { CoreDispatch } from './CoreDispatch';
@@ -10,12 +10,21 @@ import { CoreRequests } from './CoreRequests';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { HTTPError } from '../errors/HTTPError';
 import { Log } from '../utility/Log';
+import { Options } from '../utility/Options';
 import { RequestErrorHandler } from '../errors/RequestErrorHandler';
 import { setTimeout } from 'node:timers/promises';
 
 /* eslint-disable no-await-in-loop */
 
-export type Performance = typeof Constants.defaults.performance;
+export type Performance = {
+    start: number;
+    uses: number;
+    total: number;
+    fetch: number;
+    parse: number;
+    check: number;
+    send: number;
+};
 
 export class Core {
     client: Client;
@@ -56,14 +65,14 @@ export class Core {
         }
 
         if (this.client.config.core === false) {
-            await setTimeout(2500);
+            await setTimeout(Options.coreDisabledTimeout);
             return;
         }
 
-        const urls = Constants.urls.rss;
+        const urls = Constants.rss;
 
         if (urls.length === 0) {
-            await setTimeout(2500);
+            await setTimeout(Options.coreDisabledTimeout);
             return;
         }
 
@@ -72,10 +81,14 @@ export class Core {
 
     private async refresh(urls: string[]) {
         for (const url of urls) {
-            const performance = {
-                ...Constants.defaults.performance,
+            const performance: Performance = {
                 start: Date.now(),
                 uses: this.uses,
+                total: NaN,
+                fetch: NaN,
+                parse: NaN,
+                check: NaN,
+                send: NaN,
             };
 
             try {
@@ -131,7 +144,7 @@ export class Core {
 
                 const regularInterval = (
                     this.client.config.interval /
-                    Constants.urls.rss.length
+                    Constants.rss.length
                 );
 
                 if (regularInterval > this.errors.getTimeout()) {
@@ -143,7 +156,7 @@ export class Core {
 
             await setTimeout(
                 this.client.config.interval /
-                Constants.urls.rss.length,
+                Constants.rss.length,
             );
         }
     }
@@ -160,10 +173,10 @@ export class Core {
 
         const { history } = this.performance;
 
-        if (history[0]?.start + Constants.ms.hour > Date.now()) return;
+        if (history[0]?.start + Constants.msHour > Date.now()) return;
 
         history.unshift(performance);
 
-        history.splice(Constants.limits.performanceHistory);
+        history.splice(Options.performanceHistory);
     }
 }

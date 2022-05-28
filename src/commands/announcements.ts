@@ -1,7 +1,6 @@
 import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
-import { Constants } from '../utility/constants1';
 import {
     CommandInteraction,
     Formatters,
@@ -10,6 +9,7 @@ import {
     TextChannel,
 } from 'discord.js';
 import { Log } from '../utility/Log';
+import { Options } from '../utility/Options';
 import process from 'node:process';
 
 export default class implements CommandStatic {
@@ -93,7 +93,7 @@ export default class implements CommandStatic {
 
         if (userHasPermission === false) {
             const missingPermission = new BetterEmbed(interaction)
-                .setColor(Constants.colors.warning)
+                .setColor(Options.colorsWarning)
                 .setTitle(i18n.getMessage(
                     'commandsAnnouncementsUserMissingPermissionTitle',
                 ))
@@ -117,7 +117,7 @@ export default class implements CommandStatic {
 
         if (botHasPermission.length > 0) {
             const missingPermission = new BetterEmbed(interaction)
-                .setColor(Constants.colors.warning)
+                .setColor(Options.colorsWarning)
                 .setTitle(i18n.getMessage(
                     'commandsAnnouncementsBotMissingPermissionTitle',
                 ))
@@ -153,7 +153,7 @@ export default class implements CommandStatic {
             await existingAnnouncementWebhook.delete();
 
             const removeEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.normal)
+                .setColor(Options.colorsNormal)
                 .setTitle(i18n.getMessage('commandsAnnouncementsRemoveTitle', [
                     type,
                 ]))
@@ -191,7 +191,7 @@ export default class implements CommandStatic {
             });
 
             const addEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.normal)
+                .setColor(Options.colorsNormal)
                 .setTitle(i18n.getMessage('commandsAnnouncementsAddTitle', [
                     type,
                 ]))

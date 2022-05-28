@@ -4,9 +4,9 @@ import type {
     WebhookEditMessageOptions,
 } from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { Constants } from '../utility/constants1';
 import { Database } from '../utility/Database';
 import { Log } from '../utility/Log';
+import { Options } from '../utility/Options';
 
 export default class implements CommandStatic {
     static cooldown = 0;
@@ -128,7 +128,7 @@ export default class implements CommandStatic {
             );
 
             const coreEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.normal)
+                .setColor(Options.colorsNormal)
                 .setTitle(i18n.getMessage('commandsConfigCoreTitle'))
                 .setDescription(
                     i18n.getMessage('commandsConfigCoreDescription', [
@@ -152,7 +152,7 @@ export default class implements CommandStatic {
             );
 
             const devModeEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.normal)
+                .setColor(Options.colorsNormal)
                 .setTitle(i18n.getMessage('commandsConfigDevModeTitle'))
                 .setDescription(
                     i18n.getMessage('commandsConfigDevModeDescription', [
@@ -181,7 +181,7 @@ export default class implements CommandStatic {
             );
 
             const intervalEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.normal)
+                .setColor(Options.colorsNormal)
                 .setTitle(i18n.getMessage('commandsConfigIntervalTitle'))
                 .setDescription(
                     i18n.getMessage('commandsConfigIntervalDescription', [
@@ -208,7 +208,7 @@ export default class implements CommandStatic {
             );
 
             const keyPercentageEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.normal)
+                .setColor(Options.colorsNormal)
                 .setTitle(i18n.getMessage('commandsConfigRestRequestTimeoutTitle'))
                 .setDescription(
                     i18n.getMessage('commandsConfigRestRequestTimeoutDescription', [
@@ -235,7 +235,7 @@ export default class implements CommandStatic {
             );
 
             const keyPercentageEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.normal)
+                .setColor(Options.colorsNormal)
                 .setTitle(i18n.getMessage('commandsConfigRetryLimitTitle'))
                 .setDescription(
                     i18n.getMessage('commandsConfigRetryLimitDescription', [limit]),
@@ -248,7 +248,7 @@ export default class implements CommandStatic {
 
         function viewCommand() {
             const viewEmbed = new BetterEmbed(interaction)
-                .setColor(Constants.colors.normal)
+                .setColor(Options.colorsNormal)
                 .setTitle(i18n.getMessage('commandsConfigViewTitle'))
                 .setDescription(
                     i18n.getMessage('commandsConfigViewDescription', [

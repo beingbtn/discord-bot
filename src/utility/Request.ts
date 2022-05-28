@@ -1,5 +1,4 @@
 import { AbortError } from '../errors/AbortError';
-import { Constants } from './constants1';
 import fetch, {
     RequestInit,
     Response,
@@ -7,12 +6,13 @@ import fetch, {
 import { i18n } from '../locales/i18n';
 import { Log } from './Log';
 import { setTimeout } from 'node:timers';
+import { Options } from './Options';
 
 export class Request {
     readonly i18n: i18n;
     readonly restRequestTimeout: number;
-    private try: number;
-    readonly tryLimit: number;
+    private retry: number;
+    readonly retryLimit: number;
 
     constructor(config?: {
         retryLimit?: number,
@@ -21,16 +21,14 @@ export class Request {
         this.i18n = new i18n();
 
         this.restRequestTimeout = config?.restRequestTimeout ??
-            Constants.defaults.request.restRequestTimeout;
+            Options.restRequestTimeout;
 
-        this.try = 0;
+        this.retry = 0;
 
-        this.tryLimit = (config?.retryLimit ?? 2) + 1;
+        this.retryLimit = config?.retryLimit ?? Options.retryLimit;
     }
 
     async request(url: string, fetchOptions?: RequestInit): Promise<Response> {
-        this.try += 1;
-
         const controller = new AbortController();
         const abortTimeout = setTimeout(
             () => controller.abort(),
@@ -45,7 +43,7 @@ export class Request {
 
 
             if (response.ok === true) {
-                if (this.try > 1) {
+                if (this.retry >= 1) {
                     Log.request(
                         this.i18n.getMessage('errorsRequestSuccessAfterRetry'),
                     );
@@ -55,7 +53,7 @@ export class Request {
             }
 
             if (
-                this.try < this.tryLimit &&
+                this.retry < this.retryLimit &&
                 response.status >= 500 &&
                 response.status < 600
             ) {
@@ -63,13 +61,16 @@ export class Request {
                     response.status,
                 ]));
 
+                this.retry += 1;
+
                 return this.request(url, fetchOptions);
             }
 
             return response;
         } catch (error) {
-            if (this.try < this.tryLimit) {
+            if (this.retry < this.retryLimit) {
                 Log.request(this.i18n.getMessage('errorsRequestAbort'));
+                this.retry += 1;
                 return this.request(url, fetchOptions);
             }
 
