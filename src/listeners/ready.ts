@@ -1,16 +1,20 @@
 import type { Client } from 'discord.js';
-import type { EventStatic } from '../@types/Event';
 import { Constants } from '../utility/Constants';
 import { ErrorHandler } from '../errors/ErrorHandler';
-import { Log } from '../utility/Log';
+import { Listener } from '@sapphire/framework';
 import { setPresence } from '../utility/utility';
 
-export default class implements EventStatic {
-    static event = 'ready';
-    static once = true;
+export class ReadyListener extends Listener {
+    public constructor(context: Listener.Context, options: Listener.Options) {
+        super(context, {
+            ...options,
+            once: true,
+            event: 'ready',
+        });
+    }
 
-    static async execute(client: Client) {
-        Log.log(`Logged in as ${client?.user?.tag}!`);
+    public async run(client: Client) {
+        this.container.logger.info(`Logged in as ${client?.user?.tag}!`);
 
         set();
 

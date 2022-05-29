@@ -1,20 +1,15 @@
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
-import { BetterEmbed } from '../utility/BetterEmbed';
-import {
-    ColorResolvable,
-    CommandInteraction,
-} from 'discord.js';
-import { ConstraintError } from './ConstraintError';
+import { CommandInteraction } from 'discord.js';
 import { ErrorHandler } from './ErrorHandler';
 import { Severity } from '@sentry/node';
-import { Options } from '../utility/Options';
+import { UserError } from '@sapphire/framework';
 
 export class CommandConstraintErrorHandler
-    extends BaseInteractionErrorHandler<ConstraintError> {
+    extends BaseInteractionErrorHandler<UserError> {
     readonly interaction: CommandInteraction;
 
     constructor(
-        error: ConstraintError,
+        error: UserError,
         interaction: CommandInteraction,
     ) {
         super(error, interaction);
@@ -38,21 +33,5 @@ export class CommandConstraintErrorHandler
         } catch (error) {
             new ErrorHandler(error, this.incidentID).init();
         }
-    }
-
-    static async resolveConstraint(
-        interaction: CommandInteraction,
-        title: string,
-        description: string,
-        color?: ColorResolvable,
-    ) {
-        const embed = new BetterEmbed(interaction)
-            .setColor(color ?? Options.colorsWarning)
-            .setTitle(title)
-            .setDescription(description);
-
-        await interaction.editReply({
-            embeds: [embed],
-        });
     }
 }

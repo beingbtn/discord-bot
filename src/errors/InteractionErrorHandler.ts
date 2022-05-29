@@ -1,6 +1,7 @@
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
 import { ErrorHandler } from './ErrorHandler';
 import {
+    CommandInteraction,
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
@@ -8,11 +9,11 @@ import { Severity } from '@sentry/node';
 import { Options } from '../utility/Options';
 
 export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
-    readonly interaction: MessageComponentInteraction;
+    readonly interaction: CommandInteraction | MessageComponentInteraction;
 
     constructor(
         error: E,
-        interaction: MessageComponentInteraction,
+        interaction: CommandInteraction | MessageComponentInteraction,
     ) {
         super(error, interaction);
 
@@ -21,7 +22,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
 
     static async init<T>(
         error: T,
-        interaction: MessageComponentInteraction,
+        interaction: CommandInteraction | MessageComponentInteraction,
     ) {
         const handler = new InteractionErrorHandler(error, interaction);
 

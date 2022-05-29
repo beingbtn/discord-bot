@@ -1,35 +1,40 @@
-import type { CommandStatic } from '../@types/Command';
-import type { CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
     cleanLength,
     cleanRound,
 } from '../utility/utility';
+import { Command } from '@sapphire/framework';
 import { Constants } from '../utility/Constants';
 import { Options } from '../utility/Options';
 import process from 'node:process';
 
-export default class implements CommandStatic {
-    static cooldown = 0;
-    static ephemeral = true;
-    static noDM = false;
-    static ownerOnly = true;
-    static permissions = {
-        bot: {
-            global: [],
-            local: [],
-        },
-        user: {
-            global: [],
-            local: [],
-        },
-    };
-    static structure = {
-        name: 'system',
-        description: 'View system information',
-    };
+export class SystemCommand extends Command {
+    public constructor(context: Command.Context, options: Command.Options) {
+        super(context, {
+            ...options,
+            name: 'system',
+            description: 'View system information',
+            chatInputCommand: {
+                register: true,
+            },
+            cooldownDelay: 0,
+            preconditions: [
+                'DevMode',
+                'OwnerOnly',
+            ],
+            requiredUserPermissions: [],
+            requiredClientPermissions: [],
+        });
+    }
 
-    static async execute(interaction: CommandInteraction) {
+    public override registerApplicationCommands(registry: Command.Registry) {
+        registry.registerChatInputCommand({
+            name: 'system',
+            description: 'View system information',
+        });
+    }
+
+    public async chatInputCommand(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
 
         const memoryMegaBytes = process.memoryUsage.rss() /

@@ -1,23 +1,11 @@
 import 'dotenv/config';
 import '@sentry/tracing';
-import type { Command } from './@types/Command';
-import type { Config } from './@types/Config';
-import type { Event } from './@types/Event';
-import {
-    Client,
-    Collection,
-    Intents,
-    Options,
-    Sweepers,
-} from 'discord.js';
-import { Core } from './core/Core';
+import { Client } from './client';
 import { Database } from './utility/Database';
 import { ErrorHandler } from './errors/ErrorHandler';
 import { ExtraErrorData } from '@sentry/integrations';
-import { i18n } from './locales/i18n';
 import { Log } from './utility/Log';
 import * as Sentry from '@sentry/node';
-import fs from 'node:fs/promises';
 import process from 'node:process';
 
 Sentry.init({
@@ -50,112 +38,4 @@ process.on('uncaughtException', error => {
     process.exit(1);
 });
 
-export const client = new Client({
-    allowedMentions: {
-        parse: ['users'],
-        repliedUser: true,
-    },
-    failIfNotExists: false,
-    intents: [Intents.FLAGS.GUILDS],
-    makeCache: Options.cacheWithLimits({
-        GuildBanManager: 0,
-        GuildInviteManager: 0,
-        GuildMemberManager: 25,
-        GuildEmojiManager: 0,
-        GuildScheduledEventManager: 0,
-        GuildStickerManager: 0,
-        MessageManager: 50,
-        PresenceManager: 0,
-        ReactionManager: 0,
-        ReactionUserManager: 0,
-        StageInstanceManager: 0,
-        ThreadManager: 0,
-        ThreadMemberManager: 0,
-        VoiceStateManager: 0,
-    }),
-    presence: {
-        status: 'online',
-    },
-    sweepers: {
-        guildMembers: {
-            interval: 600,
-            filter: Sweepers.filterByLifetime({
-                lifetime: 60,
-            }),
-        },
-        messages: {
-            interval: 600,
-            lifetime: 60,
-        },
-        threadMembers: {
-            interval: 600,
-            filter: Sweepers.filterByLifetime({
-                lifetime: 1,
-            }),
-        },
-        threads: {
-            interval: 600,
-            lifetime: 30,
-        },
-        users: {
-            interval: 3600,
-            filter: Sweepers.filterByLifetime({
-                lifetime: 3600,
-            }),
-        },
-    },
-});
-
-(async () => {
-    client.commands = new Collection();
-
-    client.config = (
-        await Database.query(
-            'SELECT * FROM config WHERE index = 0',
-        )
-    ).rows[0] as Config;
-
-    client.cooldowns = new Collection();
-    client.core = new Core(client);
-    client.customPresence = null;
-    client.events = new Collection();
-    client.i18n = new i18n();
-
-    const folders = await Promise.all([
-        fs.readdir(`${__dirname}/commands`),
-        fs.readdir(`${__dirname}/events`),
-    ]);
-
-    await Promise.all([
-        ...folders[0].map(async commandFile => {
-            const file = await import(
-                `${__dirname}/commands/${commandFile}`
-            );
-
-            const command: Command = file.default;
-
-            client.commands.set(command.structure.name, command);
-        }),
-        ...folders[1].map(async eventFile => {
-            const file = await import(
-                `${__dirname}/events/${eventFile}`
-            );
-
-            const event: Event = file.default;
-
-            client.events.set(event.event, event);
-        }),
-    ]);
-
-    for (const { event, once } of client.events.values()) {
-        client[
-            once === false ? 'on' : 'once'
-        ](
-            event,
-            (...parameters: unknown[]) =>
-                client.events.get(event)!.execute(...parameters),
-        );
-    }
-
-    await client.login();
-})();
+new Client().init();

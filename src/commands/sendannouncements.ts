@@ -1,13 +1,12 @@
-import type { CommandStatic } from '../@types/Command';
 import {
     awaitComponent,
     disableComponents,
 } from '../utility/utility';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
+import { Command } from '@sapphire/framework';
 import { Constants } from '../utility/Constants';
 import {
-    CommandInteraction,
     Constants as DiscordConstants,
     Formatters,
     MessageActionRow,
@@ -19,75 +18,82 @@ import {
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
-export default class implements CommandStatic {
-    static cooldown = 0;
-    static ephemeral = true;
-    static noDM = true;
-    static ownerOnly = true;
-    static permissions = {
-        bot: {
-            global: [],
-            local: [],
-        },
-        user: {
-            global: [],
-            local: [],
-        },
-    };
-    static structure = {
-        name: 'sendannouncements',
-        description: 'Manually send announcements',
-        options: [
-            {
-                name: 'channel',
-                description: 'The channel to send the announcement to',
-                type: 7,
-                channel_types: [
-                    ChannelTypes.GUILD_NEWS,
-                    ChannelTypes.GUILD_TEXT,
-                ],
-                required: true,
+export class SendAnnouncementsCommand extends Command {
+    public constructor(context: Command.Context, options: Command.Options) {
+        super(context, {
+            ...options,
+            name: 'sendannouncements',
+            description: 'Manually send announcements',
+            chatInputCommand: {
+                register: true,
             },
-            {
-                name: 'title',
-                description: 'The title for the embed',
-                type: 3,
-                required: true,
-            },
-            {
-                name: 'description',
-                description: 'The description for the embed',
-                type: 3,
-                required: true,
-            },
-            {
-                name: 'image',
-                description: 'The image for the embed',
-                type: 3,
-                required: false,
-            },
-            {
-                name: 'url',
-                description: 'The url for the embed',
-                type: 3,
-                required: false,
-            },
-            {
-                name: 'role',
-                description: 'The role to mention with the announcement',
-                type: 8,
-                required: false,
-            },
-            {
-                name: 'crosspost',
-                description: 'Whether to crosspost the announcement (default to true)',
-                type: 5,
-                required: false,
-            },
-        ],
-    };
+            cooldownDelay: 0,
+            preconditions: [
+                'DevMode',
+                'OwnerOnly',
+                'GuildOnly',
+            ],
+            requiredUserPermissions: [],
+            requiredClientPermissions: [],
+        });
+    }
 
-    static async execute(interaction: CommandInteraction) {
+    public override registerApplicationCommands(registry: Command.Registry) {
+        registry.registerChatInputCommand({
+            name: 'sendannouncements',
+            description: 'Manually send announcements',
+            options: [
+                {
+                    name: 'channel',
+                    description: 'The channel to send the announcement to',
+                    type: 7,
+                    channel_types: [
+                        ChannelTypes.GUILD_NEWS,
+                        ChannelTypes.GUILD_TEXT,
+                    ],
+                    required: true,
+                },
+                {
+                    name: 'title',
+                    description: 'The title for the embed',
+                    type: 3,
+                    required: true,
+                },
+                {
+                    name: 'description',
+                    description: 'The description for the embed',
+                    type: 3,
+                    required: true,
+                },
+                {
+                    name: 'image',
+                    description: 'The image for the embed',
+                    type: 3,
+                    required: false,
+                },
+                {
+                    name: 'url',
+                    description: 'The url for the embed',
+                    type: 3,
+                    required: false,
+                },
+                {
+                    name: 'role',
+                    description: 'The role to mention with the announcement',
+                    type: 8,
+                    required: false,
+                },
+                {
+                    name: 'crosspost',
+                    description: 'Whether to crosspost the announcement (default to true)',
+                    type: 5,
+                    required: false,
+                },
+            ],
+        });
+    }
+
+    public async chatInputCommand(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
 
         const channel = interaction.options.getChannel(
