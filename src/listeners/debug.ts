@@ -1,4 +1,7 @@
-import { Listener } from '@sapphire/framework';
+import {
+    Events,
+    Listener,
+} from '@sapphire/framework';
 import { Sentry } from '../errors/Sentry';
 import { Severity } from '@sentry/node';
 
@@ -7,7 +10,7 @@ export class RateLimitListener extends Listener {
         super(context, {
             ...options,
             once: false,
-            event: 'debug',
+            event: Events.Debug,
         });
     }
 

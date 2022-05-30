@@ -1,7 +1,10 @@
 import type { Client } from 'discord.js';
 import { Constants } from '../utility/Constants';
 import { ErrorHandler } from '../errors/ErrorHandler';
-import { Listener } from '@sapphire/framework';
+import {
+    Events,
+    Listener,
+} from '@sapphire/framework';
 import { setPresence } from '../utility/utility';
 
 export class ReadyListener extends Listener {
@@ -9,7 +12,7 @@ export class ReadyListener extends Listener {
         super(context, {
             ...options,
             once: true,
-            event: 'ready',
+            event: Events.ClientReady,
         });
     }
 
@@ -22,12 +25,12 @@ export class ReadyListener extends Listener {
 
         function set() {
             try {
-                setPresence(client);
+                setPresence();
             } catch (error) {
                 new ErrorHandler(error).init();
             }
         }
 
-        await client.core.init();
+        await this.container.core.init();
     }
 }

@@ -3,7 +3,10 @@ import {
     cleanLength,
     cleanRound,
 } from '../utility/utility';
-import { Command } from '@sapphire/framework';
+import {
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
 import { Constants } from '../utility/Constants';
 import { Options } from '../utility/Options';
 import process from 'node:process';
@@ -14,11 +17,10 @@ export class SystemCommand extends Command {
             ...options,
             name: 'system',
             description: 'View system information',
-            chatInputCommand: {
-                register: true,
-            },
             cooldownDelay: 0,
             preconditions: [
+                'i18n',
+                'DeferReply',
                 'DevMode',
                 'OwnerOnly',
             ],
@@ -31,10 +33,16 @@ export class SystemCommand extends Command {
         registry.registerChatInputCommand({
             name: 'system',
             description: 'View system information',
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
     }
 
-    public async chatInputCommand(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
 
         const memoryMegaBytes = process.memoryUsage.rss() /

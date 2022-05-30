@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js';
-import { client } from '../main';
+import { container } from '@sapphire/framework';
 import { formattedUnix } from './utility';
 
 export class Log {
@@ -8,19 +8,19 @@ export class Log {
         return `${time} [${type}]`;
     }
 
-    static error(...text: unknown[]) {
-        console.error(
+    static core(...text: unknown[]) {
+        container.logger.info(
             this.base(
-                client.i18n.getMessage('logError'),
+                container.i18n.getMessage('logCore'),
             ),
             ...text,
         );
     }
 
     static interaction(interaction: CommandInteraction, ...text: unknown[]) {
-        console.log(
+        container.logger.info(
             this.base(
-                client.i18n.getMessage('logInteraction'),
+                container.i18n.getMessage('logInteraction'),
             ),
             interaction.id,
             interaction.user.id,
@@ -28,19 +28,10 @@ export class Log {
         );
     }
 
-    static log(...text: unknown[]) {
-        console.log(
-            this.base(
-                client.i18n.getMessage('logLog'),
-            ),
-            ...text,
-        );
-    }
-
     static request(...text: unknown[]) {
-        console.log(
+        container.logger.warn(
             this.base(
-                client.i18n.getMessage('logRequest'),
+                container.i18n.getMessage('logRequest'),
             ),
             ...text,
         );

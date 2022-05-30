@@ -1,29 +1,42 @@
-import type { CommandInteraction } from 'discord.js';
-import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
+import {
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
 import { Options } from '../utility/Options';
 
-export default class implements CommandStatic {
-    static cooldown = 0;
-    static ephemeral = true;
-    static noDM = false;
-    static ownerOnly = true;
-    static permissions = {
-        bot: {
-            global: [],
-            local: [],
-        },
-        user: {
-            global: [],
-            local: [],
-        },
-    };
-    static structure = {
-        name: 'performance',
-        description: 'View system performance',
-    };
+export class TestCommand extends Command {
+    public constructor(context: Command.Context, options: Command.Options) {
+        super(context, {
+            ...options,
+            name: 'performance',
+            description: 'View system performance',
+            cooldownDelay: 0,
+            preconditions: [
+                'i18n',
+                'DeferReply',
+                'DevMode',
+                'OwnerOnly',
+            ],
+            requiredUserPermissions: [],
+            requiredClientPermissions: [],
+        });
+    }
 
-    static async execute(interaction: CommandInteraction) {
+    public override registerApplicationCommands(registry: Command.Registry) {
+        registry.registerChatInputCommand({
+            name: 'performance',
+            description: 'View system performance',
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+        });
+    }
+
+    public async chatInputRun(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
 
         const {
@@ -32,7 +45,7 @@ export default class implements CommandStatic {
             check: checkPerformance,
             send: sendPerformance,
             total,
-        } = interaction.client.core.performance.latest!;
+        } = this.container.core.performance.latest!;
 
         const responseEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)

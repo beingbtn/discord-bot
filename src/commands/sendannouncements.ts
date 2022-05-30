@@ -4,7 +4,10 @@ import {
 } from '../utility/utility';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
-import { Command } from '@sapphire/framework';
+import {
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
 import { Constants } from '../utility/Constants';
 import {
     Constants as DiscordConstants,
@@ -24,11 +27,10 @@ export class SendAnnouncementsCommand extends Command {
             ...options,
             name: 'sendannouncements',
             description: 'Manually send announcements',
-            chatInputCommand: {
-                register: true,
-            },
             cooldownDelay: 0,
             preconditions: [
+                'i18n',
+                'DeferReply',
                 'DevMode',
                 'OwnerOnly',
                 'GuildOnly',
@@ -90,10 +92,16 @@ export class SendAnnouncementsCommand extends Command {
                     required: false,
                 },
             ],
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
     }
 
-    public async chatInputCommand(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
 
         const channel = interaction.options.getChannel(

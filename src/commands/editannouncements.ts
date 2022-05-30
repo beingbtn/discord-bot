@@ -1,12 +1,14 @@
-import type { CommandStatic } from '../@types/Command';
 import {
     awaitComponent,
     disableComponents,
 } from '../utility/utility';
 import { BetterEmbed } from '../utility/BetterEmbed';
+import {
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
 import { Constants } from '../utility/Constants';
 import {
-    CommandInteraction,
     Constants as DiscordConstants,
     MessageActionRow,
     MessageButton,
@@ -16,65 +18,77 @@ import {
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
-export default class implements CommandStatic {
-    static cooldown = 0;
-    static ephemeral = true;
-    static noDM = true;
-    static ownerOnly = true;
-    static permissions = {
-        bot: {
-            global: [],
-            local: [],
-        },
-        user: {
-            global: [],
-            local: [],
-        },
-    };
-    static structure = {
-        name: 'editannouncements',
-        description: 'Edit announcements',
-        options: [
-            {
-                name: 'message',
-                description: 'The message to target',
-                type: 3,
-                required: true,
-            },
-            {
-                name: 'title',
-                description: 'The new title for the embed',
-                type: 3,
-                required: false,
-            },
-            {
-                name: 'description',
-                description: 'The new description for the embed',
-                type: 3,
-                required: false,
-            },
-            {
-                name: 'image',
-                description: 'The new image for the embed',
-                type: 3,
-                required: false,
-            },
-            {
-                name: 'url',
-                description: 'The new url for the embed',
-                type: 3,
-                required: false,
-            },
-            {
-                name: 'crosspost',
-                description: 'Whether to crosspost the announcement, if not already (defaults to true)',
-                type: 5,
-                required: false,
-            },
-        ],
-    };
+export class TestCommand extends Command {
+    public constructor(context: Command.Context, options: Command.Options) {
+        super(context, {
+            ...options,
+            name: 'editannouncements',
+            description: 'Edit announcements',
+            cooldownDelay: 0,
+            preconditions: [
+                'i18n',
+                'DeferReply',
+                'DevMode',
+                'OwnerOnly',
+                'GuildOnly',
+            ],
+            requiredUserPermissions: [],
+            requiredClientPermissions: [],
+        });
+    }
 
-    static async execute(interaction: CommandInteraction) {
+    public override registerApplicationCommands(registry: Command.Registry) {
+        registry.registerChatInputCommand({
+            name: 'editannouncements',
+            description: 'Edit announcements',
+            options: [
+                {
+                    name: 'message',
+                    description: 'The message to target',
+                    type: 3,
+                    required: true,
+                },
+                {
+                    name: 'title',
+                    description: 'The new title for the embed',
+                    type: 3,
+                    required: false,
+                },
+                {
+                    name: 'description',
+                    description: 'The new description for the embed',
+                    type: 3,
+                    required: false,
+                },
+                {
+                    name: 'image',
+                    description: 'The new image for the embed',
+                    type: 3,
+                    required: false,
+                },
+                {
+                    name: 'url',
+                    description: 'The new url for the embed',
+                    type: 3,
+                    required: false,
+                },
+                {
+                    name: 'crosspost',
+                    description: 'Whether to crosspost the announcement, if not already (defaults to true)',
+                    type: 5,
+                    required: false,
+                },
+            ],
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+        });
+    }
+
+    public async chatInputRun(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
 
         const messageID = interaction.options.getString('message', true);

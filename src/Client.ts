@@ -1,8 +1,17 @@
-import { container, SapphireClient } from '@sapphire/framework';
-import { Intents, Options, Sweepers } from 'discord.js';
+import {
+    container,
+    SapphireClient,
+} from '@sapphire/framework';
+import {
+    Intents,
+    Options,
+    PresenceData,
+    Sweepers,
+} from 'discord.js';
 import { Config } from './@types/Config';
-import { i18n } from './locales/i18n';
+import { Core } from './core/Core';
 import { Database } from './utility/Database';
+import { i18n } from './locales/i18n';
 
 export class Client extends SapphireClient {
     public constructor() {
@@ -72,11 +81,8 @@ export class Client extends SapphireClient {
         ).rows[0] as Config;
 
         container.database = Database;
-
-        //container.commands = new Collection();
-        //container.cooldowns = new Collection();
-        //container.core = new Core(client);
-        //container.customPresence = null;
+        container.core = new Core();
+        container.customPresence = null;
         container.i18n = new i18n();
 
         await super.login();
@@ -85,11 +91,9 @@ export class Client extends SapphireClient {
 
 declare module '@sapphire/pieces' {
     interface Container {
-        //commands: Collection<string, Command>,
         config: Config,
-        //cooldowns: Collection<string, Collection<string, number>>,
-        //core: Core,
-        //customPresence: PresenceData | null,
+        core: Core,
+        customPresence: PresenceData | null,
         database: Database;
         i18n: i18n,
     }

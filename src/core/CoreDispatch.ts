@@ -1,12 +1,12 @@
 import type { rssJSON } from './CoreFormat';
+import { container } from '@sapphire/framework';
+import { Database } from '../utility/Database';
 import {
-    Client,
     Formatters,
     MessageActionRow,
     MessageEmbed,
     NewsChannel,
 } from 'discord.js';
-import { Database } from '../utility/Database';
 import { Options } from '../utility/Options';
 import { setTimeout } from 'node:timers/promises';
 import process from 'node:process';
@@ -21,11 +21,9 @@ export class CoreDispatch {
             role: string,
         }
     };
-    client: Client;
 
-    constructor(client: Client) {
+    constructor() {
         this.announcements = JSON.parse(process.env.ANNOUNCEMENTS!);
-        this.client = client;
     }
 
     static async postsGet(data: rssJSON, editedThreadIDs: string[]): Promise<{
@@ -54,7 +52,7 @@ export class CoreDispatch {
         data: rssJSON,
     ) {
         const announcement = this.announcements[data.title];
-        const channel = await this.client.channels.fetch(
+        const channel = await container.client.channels.fetch(
             announcement.id,
         ) as NewsChannel;
 

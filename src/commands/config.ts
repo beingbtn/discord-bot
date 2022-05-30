@@ -1,272 +1,286 @@
-import type { CommandStatic } from '../@types/Command';
-import type {
-    CommandInteraction,
-    WebhookEditMessageOptions,
-} from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
+import {
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
 import { Database } from '../utility/Database';
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
-export default class implements CommandStatic {
-    static cooldown = 0;
-    static ephemeral = true;
-    static noDM = false;
-    static ownerOnly = true;
-    static permissions = {
-        bot: {
-            global: [],
-            local: [],
-        },
-        user: {
-            global: [],
-            local: [],
-        },
-    };
-    static structure = {
-        name: 'config',
-        description: 'Configure and change settings',
-        options: [
-            {
-                name: 'core',
-                type: 1,
-                description: 'Toggle the core',
-            },
-            {
-                name: 'devmode',
-                type: 1,
-                description: 'Toggle Developer Mode',
-            },
-            {
-                name: 'interval',
-                description: 'Set the RSS fetch interval',
-                type: 1,
-                options: [
-                    {
-                        name: 'milliseconds',
-                        type: 4,
-                        description: 'The interval in milliseconds',
-                        required: true,
-                        minValue: 60,
-                        maxValue: 3600000,
-                    },
-                ],
-            },
-            {
-                name: 'restrequesttimeout',
-                description: 'Set the request timeout before an abort error is thrown',
-                type: 1,
-                options: [
-                    {
-                        name: 'milliseconds',
-                        type: 4,
-                        description: 'The timeout in milliseconds',
-                        required: true,
-                        minValue: 0,
-                        maxValue: 100000,
-                    },
-                ],
-            },
-            {
-                name: 'retrylimit',
-                description: 'Set the number of request retries before throwing',
-                type: 1,
-                options: [
-                    {
-                        name: 'limit',
-                        type: 4,
-                        description: 'The number of retries',
-                        required: true,
-                        minValue: 0,
-                        maxValue: 100,
-                    },
-                ],
-            },
-            {
-                name: 'view',
-                description: 'View the current configuration',
-                type: 1,
-            },
-        ],
-    };
+export class TestCommand extends Command {
+    public constructor(context: Command.Context, options: Command.Options) {
+        super(context, {
+            ...options,
+            name: 'config',
+            description: 'Configure and change settings',
+            cooldownDelay: 0,
+            preconditions: [
+                'i18n',
+                'DeferReply',
+                'DevMode',
+                'OwnerOnly',
+            ],
+            requiredUserPermissions: [],
+            requiredClientPermissions: [],
+        });
+    }
 
-    static async execute(interaction: CommandInteraction) {
-        const { i18n } = interaction;
+    public override registerApplicationCommands(registry: Command.Registry) {
+        registry.registerChatInputCommand({
+            name: 'config',
+            description: 'Configure and change settings',
+            options: [
+                {
+                    name: 'core',
+                    type: 1,
+                    description: 'Toggle the core',
+                },
+                {
+                    name: 'devmode',
+                    type: 1,
+                    description: 'Toggle Developer Mode',
+                },
+                {
+                    name: 'interval',
+                    description: 'Set the RSS fetch interval',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'milliseconds',
+                            type: 4,
+                            description: 'The interval in milliseconds',
+                            required: true,
+                            minValue: 60,
+                            maxValue: 3600000,
+                        },
+                    ],
+                },
+                {
+                    name: 'restrequesttimeout',
+                    description: 'Set the request timeout before an abort error is thrown',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'milliseconds',
+                            type: 4,
+                            description: 'The timeout in milliseconds',
+                            required: true,
+                            minValue: 0,
+                            maxValue: 100000,
+                        },
+                    ],
+                },
+                {
+                    name: 'retrylimit',
+                    description: 'Set the number of request retries before throwing',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'limit',
+                            type: 4,
+                            description: 'The number of retries',
+                            required: true,
+                            minValue: 0,
+                            maxValue: 100,
+                        },
+                    ],
+                },
+                {
+                    name: 'view',
+                    description: 'View the current configuration',
+                    type: 1,
+                },
+            ],
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+        });
+    }
 
-        const payload: WebhookEditMessageOptions = {};
-
-        const client = interaction.client;
-
+    public async chatInputRun(interaction: Command.ChatInputInteraction) {
         switch (interaction.options.getSubcommand()) {
             case 'core':
-                await coreCommand();
+                await this.core(interaction);
                 break;
             case 'devmode':
-                await devModeCommand();
+                await this.devModeCommand(interaction);
                 break;
             case 'interval':
-                await interval();
+                await this.interval(interaction);
                 break;
             case 'restrequesttimeout':
-                await restRequestTimeoutCommand();
+                await this.restRequestTimeout(interaction);
                 break;
             case 'retrylimit':
-                await retryLimitCommand();
+                await this.retryLimit(interaction);
                 break;
             case 'view':
-                viewCommand();
+                await this.view(interaction);
                 break;
             //no default
         }
+    }
 
-        async function coreCommand() {
-            client.config.core = !client.config.core;
+    public async core(interaction: Command.ChatInputInteraction) {
+        const { i18n } = interaction;
 
-            await Database.query(
-                'UPDATE config SET "core" = $1 WHERE index = 0',
-                [client.config.core],
+        this.container.config.core = !this.container.config.core;
+
+        await Database.query(
+            'UPDATE config SET "core" = $1 WHERE index = 0',
+            [this.container.config.core],
+        );
+
+        const coreEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal)
+            .setTitle(i18n.getMessage('commandsConfigCoreTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigCoreDescription', [
+                    this.container.config.core === true
+                        ? i18n.getMessage('on')
+                        : i18n.getMessage('off'),
+                ]),
             );
 
-            const coreEmbed = new BetterEmbed(interaction)
-                .setColor(Options.colorsNormal)
-                .setTitle(i18n.getMessage('commandsConfigCoreTitle'))
-                .setDescription(
-                    i18n.getMessage('commandsConfigCoreDescription', [
-                        client.config.core === true
-                            ? i18n.getMessage('on')
-                            : i18n.getMessage('off'),
-                    ]),
-                );
+        await interaction.editReply({ embeds: [coreEmbed] });
 
-            payload.embeds = [coreEmbed];
+        Log.interaction(interaction, coreEmbed.description);
+    }
 
-            Log.interaction(interaction, coreEmbed.description);
-        }
+    public async devModeCommand(interaction: Command.ChatInputInteraction) {
+        const { i18n } = interaction;
 
-        async function devModeCommand() {
-            client.config.devMode = !client.config.devMode;
+        this.container.config.devMode = !this.container.config.devMode;
 
-            await Database.query(
-                'UPDATE config SET "devMode" = $1 WHERE index = 0',
-                [client.config.devMode],
+        await Database.query(
+            'UPDATE config SET "devMode" = $1 WHERE index = 0',
+            [this.container.config.devMode],
+        );
+
+        const devModeEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal)
+            .setTitle(i18n.getMessage('commandsConfigDevModeTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigDevModeDescription', [
+                    this.container.config.devMode === true
+                        ? i18n.getMessage('on')
+                        : i18n.getMessage('off'),
+                ]),
             );
 
-            const devModeEmbed = new BetterEmbed(interaction)
-                .setColor(Options.colorsNormal)
-                .setTitle(i18n.getMessage('commandsConfigDevModeTitle'))
-                .setDescription(
-                    i18n.getMessage('commandsConfigDevModeDescription', [
-                        client.config.devMode === true
-                            ? i18n.getMessage('on')
-                            : i18n.getMessage('off'),
-                    ]),
-                );
+        await interaction.editReply({ embeds: [devModeEmbed] });
 
-            payload.embeds = [devModeEmbed];
+        Log.interaction(interaction, devModeEmbed.description);
+    }
 
-            Log.interaction(interaction, devModeEmbed.description);
-        }
+    public async interval(interaction: Command.ChatInputInteraction) {
+        const { i18n } = interaction;
 
-        async function interval() {
-            const milliseconds = interaction.options.getInteger(
-                'milliseconds',
-                true,
+        const milliseconds = interaction.options.getInteger(
+            'milliseconds',
+            true,
+        );
+
+        this.container.config.interval = milliseconds;
+
+        await Database.query(
+            'UPDATE config SET "interval" = $1 WHERE index = 0',
+            [this.container.config.interval],
+        );
+
+        const intervalEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal)
+            .setTitle(i18n.getMessage('commandsConfigIntervalTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigIntervalDescription', [
+                    milliseconds,
+                ]),
             );
 
-            client.config.interval = milliseconds;
+        await interaction.editReply({ embeds: [intervalEmbed] });
 
-            await Database.query(
-                'UPDATE config SET "interval" = $1 WHERE index = 0',
-                [client.config.interval],
+        Log.interaction(interaction, intervalEmbed.description);
+    }
+
+    public async restRequestTimeout(interaction: Command.ChatInputInteraction) {
+        const { i18n } = interaction;
+
+        const milliseconds = interaction.options.getInteger(
+            'milliseconds',
+            true,
+        );
+
+        this.container.config.restRequestTimeout = milliseconds;
+
+        await Database.query(
+            'UPDATE config SET "restRequestTimeout" = $1 WHERE index = 0',
+            [this.container.config.restRequestTimeout],
+        );
+
+        const restRequestTimeoutEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal)
+            .setTitle(i18n.getMessage('commandsConfigRestRequestTimeoutTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigRestRequestTimeoutDescription', [
+                    milliseconds,
+                ]),
             );
 
-            const intervalEmbed = new BetterEmbed(interaction)
-                .setColor(Options.colorsNormal)
-                .setTitle(i18n.getMessage('commandsConfigIntervalTitle'))
-                .setDescription(
-                    i18n.getMessage('commandsConfigIntervalDescription', [
-                        milliseconds,
-                    ]),
-                );
+        await interaction.editReply({ embeds: [restRequestTimeoutEmbed] });
 
-            payload.embeds = [intervalEmbed];
+        Log.interaction(interaction, restRequestTimeoutEmbed.description);
+    }
 
-            Log.interaction(interaction, intervalEmbed.description);
-        }
+    public async retryLimit(interaction: Command.ChatInputInteraction) {
+        const { i18n } = interaction;
 
-        async function restRequestTimeoutCommand() {
-            const milliseconds = interaction.options.getInteger(
-                'milliseconds',
-                true,
+        const limit = interaction.options.getInteger(
+            'limit',
+            true,
+        );
+
+        this.container.config.retryLimit = limit;
+
+        await Database.query(
+            'UPDATE config SET "retryLimit" = $1 WHERE index = 0',
+            [this.container.config.retryLimit],
+        );
+
+        const retryLimitEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal)
+            .setTitle(i18n.getMessage('commandsConfigRetryLimitTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigRetryLimitDescription', [limit]),
             );
 
-            client.config.restRequestTimeout = milliseconds;
+        await interaction.editReply({ embeds: [retryLimitEmbed] });
 
-            await Database.query(
-                'UPDATE config SET "restRequestTimeout" = $1 WHERE index = 0',
-                [client.config.restRequestTimeout],
+        Log.interaction(interaction, retryLimitEmbed.description);
+    }
+
+    public async view(interaction: Command.ChatInputInteraction) {
+        const { i18n } = interaction;
+
+        const viewEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal)
+            .setTitle(i18n.getMessage('commandsConfigViewTitle'))
+            .setDescription(
+                i18n.getMessage('commandsConfigViewDescription', [
+                    this.container.config.core === true
+                        ? i18n.getMessage('on')
+                        : i18n.getMessage('off'),
+                    this.container.config.devMode === true
+                        ? i18n.getMessage('on')
+                        : i18n.getMessage('off'),
+                    this.container.config.interval,
+                    this.container.config.restRequestTimeout,
+                    this.container.config.retryLimit,
+                ]),
             );
 
-            const keyPercentageEmbed = new BetterEmbed(interaction)
-                .setColor(Options.colorsNormal)
-                .setTitle(i18n.getMessage('commandsConfigRestRequestTimeoutTitle'))
-                .setDescription(
-                    i18n.getMessage('commandsConfigRestRequestTimeoutDescription', [
-                        milliseconds,
-                    ]),
-                );
-
-            payload.embeds = [keyPercentageEmbed];
-
-            Log.interaction(interaction, keyPercentageEmbed.description);
-        }
-
-        async function retryLimitCommand() {
-            const limit = interaction.options.getInteger(
-                'limit',
-                true,
-            );
-
-            client.config.retryLimit = limit;
-
-            await Database.query(
-                'UPDATE config SET "retryLimit" = $1 WHERE index = 0',
-                [client.config.retryLimit],
-            );
-
-            const keyPercentageEmbed = new BetterEmbed(interaction)
-                .setColor(Options.colorsNormal)
-                .setTitle(i18n.getMessage('commandsConfigRetryLimitTitle'))
-                .setDescription(
-                    i18n.getMessage('commandsConfigRetryLimitDescription', [limit]),
-                );
-
-            payload.embeds = [keyPercentageEmbed];
-
-            Log.interaction(interaction, keyPercentageEmbed.description);
-        }
-
-        function viewCommand() {
-            const viewEmbed = new BetterEmbed(interaction)
-                .setColor(Options.colorsNormal)
-                .setTitle(i18n.getMessage('commandsConfigViewTitle'))
-                .setDescription(
-                    i18n.getMessage('commandsConfigViewDescription', [
-                        client.config.core === true
-                            ? i18n.getMessage('on')
-                            : i18n.getMessage('off'),
-                        client.config.devMode === true
-                            ? i18n.getMessage('on')
-                            : i18n.getMessage('off'),
-                        client.config.interval,
-                        client.config.restRequestTimeout,
-                        client.config.retryLimit,
-                    ]),
-                );
-
-            payload.embeds = [viewEmbed];
-        }
-
-        await interaction.editReply(payload);
+        await interaction.editReply({ embeds: [viewEmbed] });
     }
 }

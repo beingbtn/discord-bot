@@ -1,4 +1,7 @@
-import { Command } from '@sapphire/framework';
+import {
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
 
 export class TestCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -6,11 +9,10 @@ export class TestCommand extends Command {
             ...options,
             name: 'test',
             description: 'Does stuff',
-            chatInputCommand: {
-                register: true,
-            },
             cooldownDelay: 0,
             preconditions: [
+                'i18n',
+                'DeferReply',
                 'DevMode',
                 'OwnerOnly',
             ],
@@ -46,6 +48,12 @@ export class TestCommand extends Command {
                     ],
                 },
             ],
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
     }
 

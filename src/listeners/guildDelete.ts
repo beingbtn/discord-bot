@@ -4,14 +4,17 @@ import {
     formattedUnix,
     setPresence,
 } from '../utility/utility';
-import { Listener } from '@sapphire/framework';
+import {
+    Events,
+    Listener,
+} from '@sapphire/framework';
 
 export class RateLimitListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
         super(context, {
             ...options,
             once: false,
-            event: 'guildDelete',
+            event: Events.GuildDelete,
         });
     }
 
@@ -42,7 +45,7 @@ export class RateLimitListener extends Listener {
         );
 
         try {
-            setPresence(guild.client);
+            setPresence();
         } catch (error) {
             new ErrorHandler(error).init();
         }

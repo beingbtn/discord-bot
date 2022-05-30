@@ -1,9 +1,9 @@
-import { client } from '../main';
 import {
     Constants,
     MessageActionRow,
     MessageButton,
 } from 'discord.js';
+import { container } from '@sapphire/framework';
 import { rssJSON } from './CoreFormat';
 
 export class CoreComponents {
@@ -12,7 +12,7 @@ export class CoreComponents {
 
         for (const item of data.items) {
             const button = new MessageButton()
-                .setLabel(client.i18n.getMessage(
+                .setLabel(container.i18n.getMessage(
                     'coreComponentsButtonsReadMoreLabel',
                 ))
                 .setStyle(Constants.MessageButtonStyles.LINK)

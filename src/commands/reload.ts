@@ -2,6 +2,7 @@ import { BetterEmbed } from '../utility/BetterEmbed';
 import {
     Command,
     Listener,
+    RegisterBehavior,
 } from '@sapphire/framework';
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
@@ -12,13 +13,12 @@ export class TestCommand extends Command {
             ...options,
             name: 'reload',
             description: 'Reloads all imports or a single import',
-            chatInputCommand: {
-                register: true,
-            },
             cooldownDelay: 0,
             preconditions: [
-                'DevMode',
+                'i18n',
+                'DeferReply',
                 'OwnerOnly',
+                'DevMode',
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -69,10 +69,16 @@ export class TestCommand extends Command {
                     ],
                 },
             ],
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
     }
 
-    public async chatInputCommand(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: Command.ChatInputInteraction) {
         switch (interaction.options.getSubcommand()) {
             case 'all': await this.all(interaction);
                 break;
@@ -168,6 +174,6 @@ export class TestCommand extends Command {
     }
 
     private async reloadItem(item: Command | Listener) {
-        await item.reloadTemp();
+        await item.reload();
     }
 }

@@ -1,4 +1,8 @@
-import { ChatInputCommandErrorPayload, Listener } from '@sapphire/framework';
+import {
+    ChatInputCommandErrorPayload,
+    Events,
+    Listener,
+} from '@sapphire/framework';
 import { InteractionErrorHandler } from '../errors/InteractionErrorHandler';
 
 export class CommandErrorListener extends Listener {
@@ -6,7 +10,7 @@ export class CommandErrorListener extends Listener {
         super(context, {
             ...options,
             once: false,
-            event: 'chatInputCommandError',
+            event: Events.ChatInputCommandError,
         });
     }
 

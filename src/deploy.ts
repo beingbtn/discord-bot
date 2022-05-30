@@ -1,37 +1,27 @@
 import 'dotenv/config';
 import { i18n } from './locales/i18n';
-import { Log } from './utility/Log';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import process from 'node:process';
-import { Command } from './@types/Command';
 
 (async () => {
-    //Determines if the runtime is using .js or ts-node
-    let extension: string;
-
     try {
-        require('./main.js');
-        extension = '.js';
-    } catch {
-        extension = '.ts';
-    }
-
-    try {
-        const deployCommand = (
-            (await import(
-                `${__dirname}/commands/deploy${extension}`
-            )).default as Command
-        ).structure;
-
-        await new REST({ version: '9' })
+        await new REST({ version: '10' })
             .setToken(process.env.DISCORD_TOKEN!)
             .put(Routes.applicationCommands(process.env.CLIENT_ID!), {
-                body: [deployCommand],
+                body: [],
             });
 
-        Log.log(new i18n().getMessage('commandsDeployTitle'));
+        await new REST({ version: '10' })
+            .setToken(process.env.DISCORD_TOKEN!)
+            .put(Routes.applicationGuildCommands(
+                process.env.CLIENT_ID!,
+                '873000534955667496'), {
+                body: [],
+            });
+
+        console.log(new i18n().getMessage('commandsDeployTitle'));
     } catch (error) {
-        Log.error(error);
+        console.error(error);
     }
 })();

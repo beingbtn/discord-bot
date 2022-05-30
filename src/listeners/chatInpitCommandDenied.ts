@@ -1,4 +1,9 @@
-import { ChatInputCommandDeniedPayload, Listener, UserError } from '@sapphire/framework';
+import {
+    ChatInputCommandDeniedPayload,
+    Events,
+    Listener,
+    UserError,
+} from '@sapphire/framework';
 import { CommandConstraintErrorHandler } from '../errors/CommandInteractionConstraintErrorHandler';
 
 export class CommandErrorListener extends Listener {
@@ -6,12 +11,12 @@ export class CommandErrorListener extends Listener {
         super(context, {
             ...options,
             once: false,
-            event: 'chatInputCommandDenied',
+            event: Events.ChatInputCommandDenied,
         });
     }
 
-    public run(error: UserError, payload: ChatInputCommandDeniedPayload) {
-        new CommandConstraintErrorHandler(
+    public async run(error: UserError, payload: ChatInputCommandDeniedPayload) {
+        await new CommandConstraintErrorHandler(
             error,
             payload.interaction,
         ).init();

@@ -1,5 +1,5 @@
-import { Client } from 'discord.js';
 import { Constants } from '../utility/Constants';
+import { container } from '@sapphire/framework';
 import { CoreChanges } from './CoreChanges';
 import { CoreComponents } from './CoreComponents';
 import { CoreDispatch } from './CoreDispatch';
@@ -27,7 +27,6 @@ export type Performance = {
 };
 
 export class Core {
-    client: Client;
     performance: {
         latest: Performance | null;
         history: Performance[];
@@ -37,15 +36,14 @@ export class Core {
     request: CoreRequests;
     uses: number;
 
-    constructor(client: Client) {
-        this.client = client;
+    constructor() {
         this.performance = {
             latest: null,
             history: [],
         };
-        this.dispatch = new CoreDispatch(this.client);
+        this.dispatch = new CoreDispatch();
         this.errors = new CoreErrors();
-        this.request = new CoreRequests(this.client);
+        this.request = new CoreRequests();
         this.uses = 0;
     }
 
@@ -64,7 +62,7 @@ export class Core {
             await setTimeout(this.errors.getTimeout());
         }
 
-        if (this.client.config.core === false) {
+        if (container.config.core === false) {
             await setTimeout(Options.coreDisabledTimeout);
             return;
         }
@@ -110,12 +108,12 @@ export class Core {
                         item => item.edited === true,
                     );
 
-                    Log.log(this.client.i18n.getMessage('coreCoreLogNewPosts', [
+                    Log.core(container.i18n.getMessage('coreCoreLogNewPosts', [
                         newPosts.length,
                         newPosts.map(post => post.link).join(', '),
                     ]));
 
-                    Log.log(this.client.i18n.getMessage('coreCoreLogEditedPosts', [
+                    Log.core(container.i18n.getMessage('coreCoreLogEditedPosts', [
                         editedPosts.length,
                         editedPosts.map(post => post.link).join(', '),
                     ]));
@@ -124,7 +122,7 @@ export class Core {
                     const components = CoreComponents.create(changes);
                     await this.dispatch.dispatch(embeds, components, changes);
 
-                    Log.log(this.client.i18n.getMessage('coreCoreLogFinishedPosts', [
+                    Log.core(container.i18n.getMessage('coreCoreLogFinishedPosts', [
                         changes.title,
                     ]));
                 }
@@ -143,7 +141,7 @@ export class Core {
                 }
 
                 const regularInterval = (
-                    this.client.config.interval /
+                    container.config.interval /
                     Constants.rss.length
                 );
 
@@ -155,7 +153,7 @@ export class Core {
             }
 
             await setTimeout(
-                this.client.config.interval /
+                container.config.interval /
                 Constants.rss.length,
             );
         }

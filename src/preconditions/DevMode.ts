@@ -1,5 +1,6 @@
 import type { CommandInteraction } from 'discord.js';
 import { Precondition } from '@sapphire/framework';
+import { Preconditions as PreconditionsEnum } from '../enums/Preconditions';
 
 const developers = JSON.parse(process.env.OWNERS!) as string[];
 
@@ -11,7 +12,9 @@ export class DevModePrecondition extends Precondition {
     private checkDeveloper(userId: string) {
         return developers.includes(userId)
             ? this.ok()
-            : this.error({ message: 'Only the bot owner can use this command!' });
+            : this.error({
+                identifier: PreconditionsEnum.DevMode,
+            });
     }
 }
 

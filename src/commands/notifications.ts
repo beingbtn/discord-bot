@@ -1,11 +1,13 @@
-import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
     ChannelTypes,
     MessageButtonStyles,
 } from 'discord.js/typings/enums';
 import {
-    CommandInteraction,
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
+import {
     MessageActionRow,
     MessageButton,
     MessageEmbed,
@@ -13,36 +15,48 @@ import {
 } from 'discord.js';
 import { Options } from '../utility/Options';
 
-export default class implements CommandStatic {
-    static cooldown = 0;
-    static ephemeral = true;
-    static noDM = true;
-    static ownerOnly = true;
-    static permissions = {
-        bot: {
-            global: [],
-            local: [],
-        },
-        user: {
-            global: [],
-            local: [],
-        },
-    };
-    static structure = {
-        name: 'notifications',
-        description: 'Add a notifications selector to a channel',
-        options: [
-            {
-                name: 'channel',
-                description: 'The channel to add the selector to',
-                type: 7,
-                channel_types: [ChannelTypes.GUILD_TEXT],
-                required: true,
-            },
-        ],
-    };
+export class TestCommand extends Command {
+    public constructor(context: Command.Context, options: Command.Options) {
+        super(context, {
+            ...options,
+            name: 'notifications',
+            description: 'Add a notifications selector to a channel',
+            cooldownDelay: 0,
+            preconditions: [
+                'i18n',
+                'DeferReply',
+                'DevMode',
+                'OwnerOnly',
+                'GuildTextOnly',
+            ],
+            requiredUserPermissions: [],
+            requiredClientPermissions: [],
+        });
+    }
 
-    static async execute(interaction: CommandInteraction) {
+    public override registerApplicationCommands(registry: Command.Registry) {
+        registry.registerChatInputCommand({
+            name: 'notifications',
+            description: 'Add a notifications selector to a channel',
+            options: [
+                {
+                    name: 'channel',
+                    description: 'The channel to add the selector to',
+                    type: 7,
+                    channel_types: [ChannelTypes.GUILD_TEXT],
+                    required: true,
+                },
+            ],
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+        });
+    }
+
+    public async chatInputRun(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
 
         const notificationsEmbed = new MessageEmbed()

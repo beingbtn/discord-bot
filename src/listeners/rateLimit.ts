@@ -1,4 +1,7 @@
-import { Listener } from '@sapphire/framework';
+import {
+    Events,
+    Listener,
+} from '@sapphire/framework';
 import { Sentry } from '../errors/Sentry';
 import { Severity } from '@sentry/node';
 
@@ -7,12 +10,12 @@ export class RateLimitListener extends Listener {
         super(context, {
             ...options,
             once: false,
-            event: 'rateLimit',
+            event: Events.RateLimit,
         });
     }
 
     public run(rateLimitInfo: string) {
-        this.container.logger.debug(
+        this.container.logger.warn(
             this.container.i18n.getMessage('eventsRateLimit'),
             rateLimitInfo,
         );

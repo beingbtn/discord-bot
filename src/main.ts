@@ -4,9 +4,9 @@ import { Client } from './client';
 import { Database } from './utility/Database';
 import { ErrorHandler } from './errors/ErrorHandler';
 import { ExtraErrorData } from '@sentry/integrations';
-import { Log } from './utility/Log';
 import * as Sentry from '@sentry/node';
 import process from 'node:process';
+import { container } from '@sapphire/framework';
 
 Sentry.init({
     dsn: process.env.DSN,
@@ -16,7 +16,7 @@ Sentry.init({
 });
 
 process.on('exit', code => {
-    Log.log(code);
+    container.logger.info(code);
     Database.close();
 });
 

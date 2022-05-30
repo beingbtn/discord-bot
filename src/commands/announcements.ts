@@ -1,8 +1,10 @@
-import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
 import {
-    CommandInteraction,
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
+import {
     Formatters,
     NewsChannel,
     Permissions,
@@ -12,71 +14,81 @@ import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 import process from 'node:process';
 
-export default class implements CommandStatic {
-    static cooldown = 5_000;
-    static ephemeral = true;
-    static noDM = true;
-    static ownerOnly = false;
-    static permissions = {
-        bot: {
-            global: [],
-            local: [],
-        },
-        user: {
-            global: [],
-            local: [],
-        },
-    };
-    static structure = {
-        name: 'announcements',
-        description: 'Configure what announcements you want to receive',
-        options: [
-            {
-                name: 'general',
-                description: 'General Hypixel News and Announcements',
-                type: 1,
-                options: [
-                    {
-                        name: 'channel',
-                        type: 7,
-                        channel_types: [ChannelTypes.GUILD_TEXT],
-                        description: 'The channel where Hypixel News and Announcements should be toggled',
-                        required: true,
-                    },
-                ],
-            },
-            {
-                name: 'skyblock',
-                description: 'SkyBlock Patch Notes',
-                type: 1,
-                options: [
-                    {
-                        name: 'channel',
-                        type: 7,
-                        channel_types: [ChannelTypes.GUILD_TEXT],
-                        description: 'The channel where SkyBlock Patch Notes should be toggled',
-                        required: true,
-                    },
-                ],
-            },
-            {
-                name: 'moderation',
-                description: 'Moderation Information and Changes',
-                type: 1,
-                options: [
-                    {
-                        name: 'channel',
-                        type: 7,
-                        channel_types: [ChannelTypes.GUILD_TEXT],
-                        description: 'The channel where Moderation Information and Changes should be toggled',
-                        required: true,
-                    },
-                ],
-            },
-        ],
-    };
+export class TestCommand extends Command {
+    public constructor(context: Command.Context, options: Command.Options) {
+        super(context, {
+            ...options,
+            name: 'announcements',
+            description: 'Configure what announcements you want to receive',
+            cooldownDelay: 5000,
+            preconditions: [
+                'i18n',
+                'DeferReply',
+                'DevMode',
+                'OwnerOnly',
+                'GuildOnly',
+            ],
+        });
+    }
 
-    static async execute(interaction: CommandInteraction) {
+    public override registerApplicationCommands(registry: Command.Registry) {
+        registry.registerChatInputCommand({
+            name: 'announcements',
+            description: 'Configure what announcements you want to receive',
+            options: [
+                {
+                    name: 'general',
+                    description: 'General Hypixel News and Announcements',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'channel',
+                            type: 7,
+                            channel_types: [ChannelTypes.GUILD_TEXT],
+                            description: 'The channel where Hypixel News and Announcements should be toggled',
+                            required: true,
+                        },
+                    ],
+                },
+                {
+                    name: 'skyblock',
+                    description: 'SkyBlock Patch Notes',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'channel',
+                            type: 7,
+                            channel_types: [ChannelTypes.GUILD_TEXT],
+                            description: 'The channel where SkyBlock Patch Notes should be toggled',
+                            required: true,
+                        },
+                    ],
+                },
+                {
+                    name: 'moderation',
+                    description: 'Moderation Information and Changes',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'channel',
+                            type: 7,
+                            channel_types: [ChannelTypes.GUILD_TEXT],
+                            description: 'The channel where Moderation Information and Changes should be toggled',
+                            required: true,
+                        },
+                    ],
+                },
+            ],
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+        });
+    }
+
+    public async chatInputRun(interaction: Command.ChatInputInteraction) {
         if (!interaction.inCachedGuild()) {
             return;
         }

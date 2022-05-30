@@ -1,6 +1,9 @@
 import type { Guild } from 'discord.js';
 import { ErrorHandler } from '../errors/ErrorHandler';
-import { Listener } from '@sapphire/framework';
+import {
+    Events,
+    Listener,
+} from '@sapphire/framework';
 import { setPresence } from '../utility/utility';
 
 export class RateLimitListener extends Listener {
@@ -8,7 +11,7 @@ export class RateLimitListener extends Listener {
         super(context, {
             ...options,
             once: false,
-            event: 'guildCreate',
+            event: Events.GuildCreate,
         });
     }
 
@@ -32,7 +35,7 @@ export class RateLimitListener extends Listener {
         );
 
         try {
-            setPresence(guild.client);
+            setPresence();
         } catch (error) {
             new ErrorHandler(error).init();
         }

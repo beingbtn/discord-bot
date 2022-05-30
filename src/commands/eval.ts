@@ -1,42 +1,53 @@
-import type { CommandStatic } from '../@types/Command';
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { Constants } from '../utility/Constants';
 import {
-    CommandInteraction,
-    Formatters,
-} from 'discord.js';
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
+import { Constants } from '../utility/Constants';
+import { Formatters } from 'discord.js';
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
-export default class implements CommandStatic {
-    static cooldown = 0;
-    static ephemeral = true;
-    static noDM = false;
-    static ownerOnly = true;
-    static permissions = {
-        bot: {
-            global: [],
-            local: [],
-        },
-        user: {
-            global: [],
-            local: [],
-        },
-    };
-    static structure = {
-        name: 'eval',
-        description: 'Evaluates a string',
-        options: [
-            {
-                name: 'string',
-                type: 3,
-                description: 'Code',
-                required: true,
-            },
-        ],
-    };
+export class TestCommand extends Command {
+    public constructor(context: Command.Context, options: Command.Options) {
+        super(context, {
+            ...options,
+            name: 'eval',
+            description: 'Evaluates a string',
+            cooldownDelay: 0,
+            preconditions: [
+                'i18n',
+                'DeferReply',
+                'DevMode',
+                'OwnerOnly',
+            ],
+            requiredUserPermissions: [],
+            requiredClientPermissions: [],
+        });
+    }
 
-    static async execute(interaction: CommandInteraction) {
+    public override registerApplicationCommands(registry: Command.Registry) {
+        registry.registerChatInputCommand({
+            name: 'eval',
+            description: 'Evaluates a string',
+            options: [
+                {
+                    name: 'string',
+                    type: 3,
+                    description: 'Code',
+                    required: true,
+                },
+            ],
+        }, {
+            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                : undefined, // eslint-disable-line no-undefined
+            registerCommandIfMissing: true,
+            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+        });
+    }
+
+    public async chatInputRun(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
 
         const input = interaction.options.getString('string', true);

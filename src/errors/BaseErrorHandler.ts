@@ -6,8 +6,8 @@ import {
     SnowflakeUtil,
 } from 'discord.js';
 import { i18n } from '../locales/i18n';
-import { Log } from '../utility/Log';
 import { Sentry } from './Sentry';
+import { container } from '@sapphire/framework';
 
 export class BaseErrorHandler<E> {
     readonly error: E;
@@ -46,6 +46,6 @@ export class BaseErrorHandler<E> {
     log(...text: unknown[]) {
         const id = `${this.incidentID} |`;
 
-        Log.error(id, ...text);
+        container.logger.error(id, ...text);
     }
 }

@@ -1,5 +1,4 @@
 import type { CommandInteraction } from 'discord.js';
-import { i18n } from '../locales/i18n';
 import { Precondition } from '@sapphire/framework';
 
 //Hack to add i18n to all interactions
@@ -8,20 +7,15 @@ export class i18nPrecondition extends Precondition {
         return this.i18n(interaction);
     }
 
-    private i18n(interaction: CommandInteraction) {
-        interaction.i18n = new i18n(interaction.locale);
+    private async i18n(interaction: CommandInteraction) {
+        await interaction.deferReply({ ephemeral: true });
+        this.container.logger.debug('deferred');
         return this.ok();
     }
 }
 
 declare module '@sapphire/framework' {
     interface Preconditions {
-        i18n: never;
-    }
-}
-
-declare module 'discord.js' {
-    interface Interaction {
-        i18n: i18n,
+        DeferReply: never;
     }
 }

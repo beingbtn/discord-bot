@@ -1,6 +1,5 @@
 import {
     AwaitMessageCollectorOptionsParams,
-    Client,
     CommandInteraction,
     Formatters,
     MessageActionRow,
@@ -8,6 +7,7 @@ import {
     TextBasedChannel,
 } from 'discord.js';
 import { Constants } from './Constants';
+import { container } from '@sapphire/framework';
 import { Options } from './Options';
 
 export async function awaitComponent<T extends MessageComponentTypeResolvable>(
@@ -154,14 +154,14 @@ export function generateStackTrace() {
     return cleanStack;
 }
 
-export function setPresence(client: Client) {
-    let presence = client.customPresence;
+export function setPresence() {
+    let presence = container.customPresence;
 
     if (presence === null) {
         presence = structuredClone(Options.presence);
     }
 
-    client.user?.setPresence(presence!);
+    container.client.user?.setPresence(presence!);
 }
 
 export const slashCommandResolver = (interaction: CommandInteraction) => {

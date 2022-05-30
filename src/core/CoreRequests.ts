@@ -1,17 +1,11 @@
-import type { Client } from 'discord.js';
+import { container } from '@sapphire/framework';
 import { HTTPError } from '../errors/HTTPError';
 import { Request } from '../utility/Request';
 
 export class CoreRequests {
-    client: Client;
-
-    constructor(client: Client) {
-        this.client = client;
-    }
-
     async request(url: string) {
         const response = await new Request(
-            this.client.config,
+            container.config,
         ).request(url);
 
         if (response.ok === false) {
