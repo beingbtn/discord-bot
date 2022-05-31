@@ -4,6 +4,7 @@ import {
     MessageButtonStyles,
 } from 'discord.js/typings/enums';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
@@ -21,10 +22,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'notifications',
             description: 'Add a notifications selector to a channel',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
                 'GuildTextOnly',

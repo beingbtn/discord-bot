@@ -1,16 +1,22 @@
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { cleanLength } from '../utility/utility';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { Constants } from '../utility/Constants';
+import { Limits } from '../enums/Limits';
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
-type errorTypes = 'abort' | 'generic' | 'http';
+type errorTypes =
+    | 'abort'
+    | 'generic'
+    | 'http';
 
-type TimeoutSettables = 'timeout' | 'resumeAfter';
+type TimeoutSettables =
+    | 'timeout'
+    | 'resumeAfter';
 
 export class TestCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -18,10 +24,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'test',
             description: 'Does stuff',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
             ],
@@ -160,7 +167,7 @@ export class TestCommand extends Command {
             .setDescription(
                 JSON.stringify(
                     this.container.core.performance,
-                ).slice(0, Constants.limitEmbedDescription),
+                ).slice(0, Limits.EmbedDescription),
             )
             .addFields(
                 {
@@ -222,7 +229,7 @@ export class TestCommand extends Command {
                 value,
             ]));
 
-        Log.interaction(interaction, setEmbed.description);
+        Log.command(interaction, setEmbed.description);
 
         await interaction.editReply({
             embeds: [setEmbed],
@@ -250,7 +257,7 @@ export class TestCommand extends Command {
                 method,
             ]));
 
-        Log.interaction(interaction, callEmbed.description);
+        Log.command(interaction, callEmbed.description);
 
         await this.stats(interaction);
         await interaction.followUp({

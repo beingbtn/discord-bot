@@ -1,26 +1,34 @@
-import type { UserError } from '@sapphire/framework';
+import type {
+    Command,
+    UserError,
+} from '@sapphire/framework';
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
+    BaseCommandInteraction,
     ColorResolvable,
-    CommandInteraction,
 } from 'discord.js';
+import { cleanRound } from '../utility/utility';
 import { ErrorHandler } from './ErrorHandler';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 import { Severity } from '@sentry/node';
 import { setTimeout } from 'timers/promises';
+import { Time } from '../enums/Time';
 
-export class CommandConstraintErrorHandler
+export class BaseCommandInteractionPreconditionErrorHandler
     extends BaseInteractionErrorHandler<UserError> {
-    readonly interaction: CommandInteraction;
+    readonly interaction: BaseCommandInteraction;
+    readonly command: Command;
 
     constructor(
         error: UserError,
-        interaction: CommandInteraction,
+        interaction: BaseCommandInteraction,
+        command: Command,
     ) {
         super(error, interaction);
         this.interaction = interaction;
+        this.command = command;
     }
 
     async init() {
@@ -29,14 +37,14 @@ export class CommandConstraintErrorHandler
                 'errorsPreconditionLog',
                 [
                     this.interaction.user.id,
-                    this.error.message,
+                    this.error.identifier,
                 ],
             ));
 
             this.sentry
                 .setSeverity(Severity.Warning)
-                .commandInteractionConstraintContext(this.error.message)
-                .captureMessages(this.error.message);
+                .baseInteractionPreconditionContext(this.error.identifier)
+                .captureMessages(this.error.identifier);
 
             switch (this.error.identifier) {
                 case Preconditions.DevMode: await this.resolveConstraint(
@@ -78,7 +86,15 @@ export class CommandConstraintErrorHandler
                         'errorsPreconditionCooldownWaitingTitle',
                     ),
                     this.interaction.i18n.getMessage(
-                        'errorsPreconditionCooldownWaitingTitle',
+                        'errorsPreconditionCooldownWaitingDescription', [
+                            this.command.options.cooldownLimit!,
+                            this.command.options.cooldownDelay! / Time.Second,
+                            cleanRound(
+                                (this.error.context as {
+                                    remaining: number,
+                                }).remaining,
+                            ) / Time.Second,
+                        ],
                     ),
                     Options.colorsWarning,
                 );
@@ -92,12 +108,14 @@ export class CommandConstraintErrorHandler
                 await this.resolveConstraint(
                     this.interaction,
                     this.interaction.i18n.getMessage(
-                        'errorsPreconditionCooldownWaitingTitle',
+                        'errorsPreconditionCooldownCooldownOverTitle',
                     ),
                     this.interaction.i18n.getMessage(
-                        'errorsPreconditionCooldownWaitingTitle',
+                        'errorsPreconditionCooldownCooldownOverDescription', [
+                            this.interaction.commandName,
+                        ],
                     ),
-                    Options.colorsOk,
+                    Options.colorsOn,
                 );
                 break;
 
@@ -110,7 +128,7 @@ export class CommandConstraintErrorHandler
     }
 
     private async resolveConstraint(
-        interaction: CommandInteraction,
+        interaction: BaseCommandInteraction,
         title: string,
         description: string,
         color: ColorResolvable,

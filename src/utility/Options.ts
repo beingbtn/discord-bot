@@ -5,6 +5,7 @@ import type {
 import { ActivityTypes } from 'discord.js/typings/enums';
 import { locales } from '../locales/locales/main';
 import { PresenceUpdateStatus } from 'discord-api-types/v10';
+import { Time } from '../enums/Time';
 
 export class Options {
     static colorsError: ColorResolvable = 0xAA0000;
@@ -13,10 +14,10 @@ export class Options {
     static colorsOk: ColorResolvable = 0xFFAA00;
     static colorsOn: ColorResolvable = 0x00AA00;
 
-    static cooldownMinimum = 1000 * 2.5;
+    static cooldownMinimum = Time.Second * 2.5;
 
-    static coreDisabledTimeout = 1000 * 2.5;
-    static coreDispatchTimeout = 1000 * 2.5;
+    static coreDisabledTimeout = Time.Second * 2.5;
+    static coreDispatchTimeout = Time.Second * 2.5;
 
     static defaultLocale: keyof typeof locales = 'en-US';
     static performanceHistory = 50;
@@ -24,7 +25,7 @@ export class Options {
     static pingOkMinimum = 300;
     static pingOnMinimum = 150;
 
-    static postgresqlIdleTimeoutMillis = 1000 * 60 * 5;
+    static postgresqlIdleTimeoutMillis = Time.Minute * 5;
     static presence: PresenceData = {
         activities: [{
             name: 'Hypixel News',
@@ -33,9 +34,9 @@ export class Options {
         status: PresenceUpdateStatus.Online,
     };
 
-    static restRequestTimeout = 1000 * 5;
+    static restRequestTimeout = Time.Second * 5;
     static retryLimit = 2;
 
-    static timeoutBaseTimeout = 1000 * 60;
-    static timeoutMaxTimeout = 1000 * 60 * 60 * 12;
+    static timeoutBaseTimeout = Time.Minute;
+    static timeoutMaxTimeout = Time.Day / 2;
 }

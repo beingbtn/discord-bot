@@ -20,6 +20,14 @@ export class Sentry {
         this.scope = new SentryClient.Scope();
     }
 
+    baseErrorContext(incidentID: string) {
+        this.scope.setTags({
+            incidentID: incidentID,
+        });
+
+        return this;
+    }
+
     baseInteractionContext(interaction: Interaction) {
         const {
             user,
@@ -86,9 +94,9 @@ export class Sentry {
         return this;
     }
 
-    commandInteractionConstraintContext(constraint: string) {
+    baseInteractionPreconditionContext(precondition: string) {
         this.scope.setTags({
-            constraint: constraint,
+            precondition: precondition,
         });
 
         return this;

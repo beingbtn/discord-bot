@@ -1,10 +1,10 @@
+import { BaseCommandInteractionPreconditionErrorHandler } from '../errors/BaseCommandInteractionPreconditionErrorHandler';
 import {
     ChatInputCommandDeniedPayload,
     Events,
     Listener,
     UserError,
 } from '@sapphire/framework';
-import { CommandConstraintErrorHandler } from '../errors/CommandInteractionConstraintErrorHandler';
 
 export class CommandErrorListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
@@ -16,9 +16,10 @@ export class CommandErrorListener extends Listener {
     }
 
     public async run(error: UserError, payload: ChatInputCommandDeniedPayload) {
-        await new CommandConstraintErrorHandler(
+        await new BaseCommandInteractionPreconditionErrorHandler(
             error,
             payload.interaction,
+            payload.command,
         ).init();
     }
 }

@@ -1,10 +1,11 @@
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { Constants } from '../utility/Constants';
 import { Formatters } from 'discord.js';
+import { Limits } from '../enums/Limits';
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
@@ -14,10 +15,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'eval',
             description: 'Evaluates a string',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
             ],
@@ -64,7 +66,7 @@ export class TestCommand extends Command {
             const end = Date.now();
             const timeTaken = end - start;
             const outputMaxLength = (
-                output?.length >= Constants.limitEmbedField
+                output?.length >= Limits.EmbedField
             );
 
             evalEmbed.setColor(Options.colorsNormal).addFields(
@@ -74,7 +76,7 @@ export class TestCommand extends Command {
                         'javascript',
                         output?.toString()?.slice(
                             0,
-                            Constants.limitEmbedField,
+                            Limits.EmbedField,
                         ),
                     ),
                 },
@@ -97,7 +99,7 @@ export class TestCommand extends Command {
                 });
             }
 
-            Log.interaction(interaction, 'Output: ', output);
+            Log.command(interaction, 'Output: ', output);
 
             await interaction.editReply({ embeds: [evalEmbed] });
         } catch (error) {
@@ -105,7 +107,7 @@ export class TestCommand extends Command {
             const timeTaken = end - start;
 
             const outputMaxLength = Boolean(
-                (error as Error).message.length >= Constants.limitEmbedField,
+                (error as Error).message.length >= Limits.EmbedField,
             );
 
             evalEmbed.setColor(Options.colorsNormal).addFields(

@@ -1,11 +1,11 @@
 import type { Client } from 'discord.js';
-import { Constants } from '../utility/Constants';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import {
     Events,
     Listener,
 } from '@sapphire/framework';
 import { setPresence } from '../utility/utility';
+import { Time } from '../enums/Time';
 
 export class ReadyListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
@@ -17,11 +17,16 @@ export class ReadyListener extends Listener {
     }
 
     public async run(client: Client) {
-        this.container.logger.info(`Logged in as ${client?.user?.tag}!`);
+        this.container.logger.info(
+            this.container.i18n.getMessage(
+                'eventsReady', [
+                client!.user!.tag!,
+            ]),
+        );
 
         set();
 
-        setInterval(set, Constants.msHour);
+        setInterval(set, Time.Hour);
 
         function set() {
             try {

@@ -4,11 +4,13 @@ import {
     cleanRound,
 } from '../utility/utility';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
 import { Constants } from '../utility/Constants';
 import { Options } from '../utility/Options';
+import { Time } from '../enums/Time';
 import process from 'node:process';
 
 export class SystemCommand extends Command {
@@ -17,10 +19,11 @@ export class SystemCommand extends Command {
             ...options,
             name: 'system',
             description: 'View system information',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
             ],
@@ -54,7 +57,7 @@ export class SystemCommand extends Command {
             .addFields(
                 {
                     name: i18n.getMessage('commandsSystemUptimeName'),
-                    value: cleanLength(process.uptime() * Constants.msSecond)!,
+                    value: cleanLength(process.uptime() * Time.Second)!,
                 },
                 {
                     name: i18n.getMessage('commandsSystemMemoryName'),

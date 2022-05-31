@@ -1,5 +1,6 @@
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
@@ -12,10 +13,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'link',
             description: 'Links/unlinks a message ID to an ID',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
             ],

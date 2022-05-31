@@ -423,7 +423,7 @@
         "message": "Cooldown"
     },
     "errorsPreconditionCooldownWaitingDescription": {
-        "message": "You are executing commands too quickly! The cooldown of this command is $1 seconds. This message will turn green in $2 seconds once the cooldown expires."
+        "message": "You are executing commands too quickly! The cooldown of this command allows $1 executions in $2 seconds. This message will turn green in $3 seconds once the cooldown expires."
     },
     "errorsPreconditionCooldownCooldownOverTitle": {
         "message": "Cooldown Over"
@@ -432,7 +432,7 @@
         "message": "The cooldown has expired! You can now execute the command **/$1**!"
     },
     "errorsPreconditionLog": {
-        "message": "$1 failed the constraint $2"
+        "message": "$1 failed $2"
     },
     "errorsRequestSuccessAfterRetry": {
         "message": "Successfully fetched after a retry"
@@ -458,17 +458,20 @@
     "eventsRateLimit": {
         "message": "Discord.js RateLimit:"
     },
+    "eventsReady": {
+        "message": "Logged in as $1"
+    },
     "eventsWarn": {
         "message": "Discord.js Warning:"
     },
     "logCore": {
-        "message": "CORE"
+        "message": "Core:"
     },
-    "logInteraction": {
-        "message": "INTERACTION"
+    "logCommand": {
+        "message": "Command: ID $1: User $2:"
     },
     "logRequest": {
-        "message": "REQUEST"
+        "message": "Request:"
     },
     "notificationsLabel": {
         "message": "Notifications"

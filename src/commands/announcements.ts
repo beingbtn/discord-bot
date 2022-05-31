@@ -1,9 +1,10 @@
 import { BetterEmbed } from '../utility/BetterEmbed';
-import { ChannelTypes } from 'discord.js/typings/enums';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { ChannelTypes } from 'discord.js/typings/enums';
 import {
     Formatters,
     NewsChannel,
@@ -20,12 +21,12 @@ export class TestCommand extends Command {
             ...options,
             name: 'announcements',
             description: 'Configure what announcements you want to receive',
-            cooldownDelay: 5000,
+            cooldownLimit: 3,
+            cooldownDelay: 10000,
+            cooldownScope: BucketScope.Guild,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
-                'OwnerOnly',
                 'GuildOnly',
             ],
         });
@@ -113,7 +114,7 @@ export class TestCommand extends Command {
                     'commandsAnnouncementsUserMissingPermissionDescription',
                 ));
 
-            Log.interaction(interaction, 'User missing permission');
+            Log.command(interaction, 'User missing permission');
 
             await interaction.editReply({ embeds: [missingPermission] });
 
@@ -138,7 +139,7 @@ export class TestCommand extends Command {
                     botHasPermission.join(', '),
                 ]));
 
-            Log.interaction(interaction, 'Bot missing permission(s)');
+            Log.command(interaction, 'Bot missing permission(s)');
 
             await interaction.editReply({ embeds: [missingPermission] });
 
@@ -174,7 +175,7 @@ export class TestCommand extends Command {
                     Formatters.channelMention(channel.id),
                 ]));
 
-            Log.interaction(
+            Log.command(
                 interaction,
                 i18n.getMessage('commandsAnnouncementsRemoveLog', [
                     type,
@@ -214,7 +215,7 @@ export class TestCommand extends Command {
                     ]),
                 );
 
-            Log.interaction(
+            Log.command(
                 interaction,
                 i18n.getMessage('commandsAnnouncementsAddLog', [
                     type,

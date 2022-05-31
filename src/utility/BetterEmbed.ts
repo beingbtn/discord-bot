@@ -1,7 +1,7 @@
 import {
-    CommandInteraction,
     MessageEmbed,
     EmbedFieldData,
+    BaseCommandInteraction,
 } from 'discord.js';
 
 type Footer =
@@ -9,14 +9,14 @@ type Footer =
         text: string,
         iconURL?: string,
       }
-    | CommandInteraction;
+    | BaseCommandInteraction;
 
 export class BetterEmbed extends MessageEmbed {
     constructor(footer?: Footer) {
         super();
         this.setTimestamp();
 
-        if (footer instanceof CommandInteraction) {
+        if (footer instanceof BaseCommandInteraction) {
             const interaction = footer;
             const avatar = interaction.user.displayAvatarURL({
                 dynamic: true,

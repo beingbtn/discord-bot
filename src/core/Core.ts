@@ -13,6 +13,7 @@ import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 import { RequestErrorHandler } from '../errors/RequestErrorHandler';
 import { setTimeout } from 'node:timers/promises';
+import { Time } from '../enums/Time';
 
 /* eslint-disable no-await-in-loop */
 
@@ -171,7 +172,7 @@ export class Core {
 
         const { history } = this.performance;
 
-        if (history[0]?.start + Constants.msHour > Date.now()) return;
+        if (history[0]?.start + Time.Hour > Date.now()) return;
 
         history.unshift(performance);
 

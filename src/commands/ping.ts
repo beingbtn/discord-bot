@@ -4,6 +4,7 @@ import {
 } from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
@@ -16,10 +17,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'ping',
             description: 'Ping!',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
             ],
@@ -76,7 +78,7 @@ export class TestCommand extends Command {
                 roundTripDelay,
             ]));
 
-        Log.interaction(interaction, `WS: ${interaction.client.ws.ping}ms | RT: ${roundTripDelay}ms`);
+        Log.command(interaction, `WS: ${interaction.client.ws.ping}ms | RT: ${roundTripDelay}ms`);
 
         await interaction.editReply({ embeds: [pingEmbed] });
     }

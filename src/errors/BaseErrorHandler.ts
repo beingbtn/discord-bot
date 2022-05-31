@@ -23,7 +23,7 @@ export class BaseErrorHandler<E> {
 
         this.incidentID = SnowflakeUtil.generate();
 
-        this.sentry = new Sentry();
+        this.sentry = new Sentry().baseErrorContext(this.incidentID);
 
         Object.defineProperty(error, 'fullStack', {
             value: generateStackTrace(),

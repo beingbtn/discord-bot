@@ -6,9 +6,9 @@ import {
     MessageComponentTypeResolvable,
     TextBasedChannel,
 } from 'discord.js';
-import { Constants } from './Constants';
 import { container } from '@sapphire/framework';
 import { Options } from './Options';
+import { Time } from '../enums/Time';
 
 export async function awaitComponent<T extends MessageComponentTypeResolvable>(
     channel: TextBasedChannel,
@@ -72,16 +72,16 @@ export function cleanLength(ms: number | null): string | null {
         return null;
     }
 
-    let newMS = Math.floor(ms / Constants.msSecond) *
-        Constants.msSecond;
+    let newMS = Math.floor(ms / Time.Second) *
+        Time.Second;
 
-    const days = Math.floor(newMS / Constants.msDay);
-    newMS -= days * Constants.msDay;
-    const hours = Math.floor(newMS / Constants.msHour);
-    newMS -= hours * Constants.msHour;
-    const minutes = Math.floor(newMS / Constants.msMinute);
-    newMS -= minutes * Constants.msMinute;
-    const seconds = Math.floor(newMS / Constants.msSecond);
+    const days = Math.floor(newMS / Time.Day);
+    newMS -= days * Time.Day;
+    const hours = Math.floor(newMS / Time.Hour);
+    newMS -= hours * Time.Hour;
+    const minutes = Math.floor(newMS / Time.Minute);
+    newMS -= minutes * Time.Minute;
+    const seconds = Math.floor(newMS / Time.Second);
 
     return days > 0
         ? `${days}d ${hours}h ${minutes}m ${seconds}s`

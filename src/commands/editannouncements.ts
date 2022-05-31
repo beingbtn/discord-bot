@@ -4,10 +4,10 @@ import {
 } from '../utility/utility';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { Constants } from '../utility/Constants';
 import {
     Constants as DiscordConstants,
     MessageActionRow,
@@ -17,6 +17,7 @@ import {
 } from 'discord.js';
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
+import { Time } from '../enums/Time';
 
 export class TestCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -24,10 +25,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'editannouncements',
             description: 'Edit announcements',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
                 'GuildOnly',
@@ -152,7 +154,7 @@ export class TestCommand extends Command {
         const previewButton = await awaitComponent(interaction.channel!, {
             componentType: 'BUTTON',
             filter: componentFilter,
-            idle: Constants.msSecond * 30,
+            idle: Time.Minute,
         });
 
         if (previewButton === null) {
@@ -163,7 +165,7 @@ export class TestCommand extends Command {
             return;
         }
 
-        Log.interaction(
+        Log.command(
             interaction,
             i18n.getMessage('commandsEditAnnouncementsLogEditing'),
         );
@@ -180,7 +182,7 @@ export class TestCommand extends Command {
             await editedAnnouncement.crosspost();
         }
 
-        Log.interaction(
+        Log.command(
             interaction,
             i18n.getMessage('commandsEditAnnouncementsLogPublished'),
         );

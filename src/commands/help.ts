@@ -1,10 +1,11 @@
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { Constants } from '../utility/Constants';
 import { Options } from '../utility/Options';
+import { Time } from '../enums/Time';
 
 export class TestCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -12,10 +13,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'help',
             description: 'Displays helpful information and available commands',
-            cooldownDelay: 0,
+            cooldownLimit: 1,
+            cooldownDelay: 10000,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
             ],
             requiredUserPermissions: [],
@@ -135,7 +137,7 @@ export class TestCommand extends Command {
         commandSearchEmbed.addFields({
             name: i18n.getMessage('commandsHelpSpecificCooldownName'),
             value: i18n.getMessage('commandsHelpSpecificCooldownValue', [
-                command.options.cooldownDelay! / Constants.msSecond,
+                command.options.cooldownDelay! / Time.Second,
             ]),
         });
 
@@ -168,21 +170,24 @@ export class TestCommand extends Command {
         const { i18n } = interaction;
 
         const commandsCollection = this.container.stores
-            .get('commands');
+            .get('commands')
+            .filter(command =>
+                typeof command.options.preconditions?.find(
+                    condition => condition === 'OwnerOnly',
+                ) === 'undefined',
+            );
 
         const allCommandsEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
             .setTitle(i18n.getMessage('commandsHelpAllTitle'));
 
         for (const command of commandsCollection.values()) {
-            if (command.preconditions.entries) {
-                allCommandsEmbed.addFields({
-                    name: i18n.getMessage('commandsHelpAllName', [
-                        command.name,
-                    ]),
-                    value: command.description,
-                });
-            }
+            allCommandsEmbed.addFields({
+                name: i18n.getMessage('commandsHelpAllName', [
+                    command.name,
+                ]),
+                value: command.description,
+            });
         }
 
         await interaction.editReply({ embeds: [allCommandsEmbed] });

@@ -1,22 +1,26 @@
 import type { CommandInteraction } from 'discord.js';
-import { i18n } from '../locales/i18n';
 import { Precondition } from '@sapphire/framework';
+import { slashCommandResolver } from '../utility/utility';
+import { Log } from '../utility/Log';
+import { i18n } from '../locales/i18n';
 
-//Hack to add i18n to all interactions
-export class i18nPrecondition extends Precondition {
+export class BasePrecondition extends Precondition {
     public override chatInputRun(interaction: CommandInteraction) {
-        return this.i18n(interaction);
+        return this.Base(interaction);
     }
 
-    private i18n(interaction: CommandInteraction) {
+    private async Base(interaction: CommandInteraction) {
         interaction.i18n = new i18n(interaction.locale);
+        await interaction.deferReply({ ephemeral: true });
+        Log.command(interaction, slashCommandResolver(interaction));
+
         return this.ok();
     }
 }
 
 declare module '@sapphire/framework' {
     interface Preconditions {
-        i18n: never;
+        Base: never;
     }
 }
 

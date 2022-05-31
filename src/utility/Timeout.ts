@@ -2,8 +2,8 @@ import {
     clearTimeout,
     setTimeout,
 } from 'node:timers';
-import { Constants } from './Constants';
 import { Options } from './Options';
+import { Time } from '../enums/Time';
 
 /* eslint-disable no-unused-vars */
 
@@ -86,7 +86,7 @@ export class Timeout {
 
         setTimeout(() => {
             this.lastHour -= 1;
-        }, Constants.msHour);
+        }, Time.Hour);
     }
 
     getPauseFor() {

@@ -1,5 +1,6 @@
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
+    BucketScope,
     Command,
     Listener,
     RegisterBehavior,
@@ -13,10 +14,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'reload',
             description: 'Reloads all imports or a single import',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'OwnerOnly',
                 'DevMode',
             ],
@@ -112,7 +114,7 @@ export class TestCommand extends Command {
                 Date.now() - now,
             ]));
 
-        Log.interaction(
+        Log.command(
             interaction,
             `All imports have been reloaded after ${
                 Date.now() - now
@@ -163,7 +165,7 @@ export class TestCommand extends Command {
                 ]),
             );
 
-        Log.interaction(
+        Log.command(
             interaction,
             `${typeName}.${item} was successfully reloaded after ${
                 Date.now() - now

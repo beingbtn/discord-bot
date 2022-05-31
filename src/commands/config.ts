@@ -1,5 +1,6 @@
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
@@ -13,10 +14,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'config',
             description: 'Configure and change settings',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
             ],
@@ -147,7 +149,7 @@ export class TestCommand extends Command {
 
         await interaction.editReply({ embeds: [coreEmbed] });
 
-        Log.interaction(interaction, coreEmbed.description);
+        Log.command(interaction, coreEmbed.description);
     }
 
     public async devModeCommand(interaction: Command.ChatInputInteraction) {
@@ -173,7 +175,7 @@ export class TestCommand extends Command {
 
         await interaction.editReply({ embeds: [devModeEmbed] });
 
-        Log.interaction(interaction, devModeEmbed.description);
+        Log.command(interaction, devModeEmbed.description);
     }
 
     public async interval(interaction: Command.ChatInputInteraction) {
@@ -202,7 +204,7 @@ export class TestCommand extends Command {
 
         await interaction.editReply({ embeds: [intervalEmbed] });
 
-        Log.interaction(interaction, intervalEmbed.description);
+        Log.command(interaction, intervalEmbed.description);
     }
 
     public async restRequestTimeout(interaction: Command.ChatInputInteraction) {
@@ -231,7 +233,7 @@ export class TestCommand extends Command {
 
         await interaction.editReply({ embeds: [restRequestTimeoutEmbed] });
 
-        Log.interaction(interaction, restRequestTimeoutEmbed.description);
+        Log.command(interaction, restRequestTimeoutEmbed.description);
     }
 
     public async retryLimit(interaction: Command.ChatInputInteraction) {
@@ -258,7 +260,7 @@ export class TestCommand extends Command {
 
         await interaction.editReply({ embeds: [retryLimitEmbed] });
 
-        Log.interaction(interaction, retryLimitEmbed.description);
+        Log.command(interaction, retryLimitEmbed.description);
     }
 
     public async view(interaction: Command.ChatInputInteraction) {

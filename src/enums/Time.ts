@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 
 export const enum Time {
-    second = 1000,
-    minute = 60_000,
-    hour = 3_600_000,
-    day = 86_400_000,
+    Second = 1000,
+    Minute = 1000 * 60,
+    Hour = 1000 * 60 * 60,
+    Day = 1000 * 60 * 60 * 24,
 }

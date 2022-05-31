@@ -5,10 +5,10 @@ import {
 import { BetterEmbed } from '../utility/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { Constants } from '../utility/Constants';
 import {
     Constants as DiscordConstants,
     Formatters,
@@ -20,6 +20,7 @@ import {
 } from 'discord.js';
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
+import { Time } from '../enums/Time';
 
 export class SendAnnouncementsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -27,10 +28,11 @@ export class SendAnnouncementsCommand extends Command {
             ...options,
             name: 'sendannouncements',
             description: 'Manually send announcements',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
                 'GuildOnly',
@@ -170,7 +172,7 @@ export class SendAnnouncementsCommand extends Command {
         const previewButton = await awaitComponent(interaction.channel!, {
             componentType: 'BUTTON',
             filter: componentFilter,
-            idle: Constants.msMinute,
+            idle: Time.Minute,
         });
 
         if (previewButton === null) {
@@ -181,7 +183,7 @@ export class SendAnnouncementsCommand extends Command {
             return;
         }
 
-        Log.interaction(
+        Log.command(
             interaction,
             i18n.getMessage('commandsSendAnnouncementsLogSending'),
         );
@@ -206,7 +208,7 @@ export class SendAnnouncementsCommand extends Command {
             await sentAnnouncement.crosspost();
         }
 
-        Log.interaction(
+        Log.command(
             interaction,
             i18n.getMessage('commandsSendAnnouncementsLogPublished'),
         );

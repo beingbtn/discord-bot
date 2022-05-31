@@ -5,6 +5,7 @@ import type {
 } from 'discord.js';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
+    BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
@@ -17,10 +18,11 @@ export class TestCommand extends Command {
             ...options,
             name: 'presence',
             description: 'Set a custom presence for the bot',
+            cooldownLimit: 0,
             cooldownDelay: 0,
+            cooldownScope: BucketScope.User,
             preconditions: [
-                'i18n',
-                'DeferReply',
+                'Base',
                 'DevMode',
                 'OwnerOnly',
             ],
