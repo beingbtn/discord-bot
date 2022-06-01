@@ -95,7 +95,9 @@ export class SendAnnouncementsCommand extends Command {
                 },
             ],
         }, {
-            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+            guildIds: this.options.preconditions?.find(
+                    condition => condition === 'OwnerOnly',
+                )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,

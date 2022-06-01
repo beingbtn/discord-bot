@@ -40,7 +40,7 @@ export class TestCommand extends Command {
                 {
                     name: 'single',
                     type: 1,
-                    description: 'Refresh a single command',
+                    description: 'Refresh a single item',
                     options: [
                         {
                             name: 'type',
@@ -53,12 +53,8 @@ export class TestCommand extends Command {
                                     value: 'commands',
                                 },
                                 {
-                                    name: 'events',
-                                    value: 'events',
-                                },
-                                {
-                                    name: 'modules',
-                                    value: 'modules',
+                                    name: 'listeners',
+                                    value: 'listeners',
                                 },
                             ],
                         },
@@ -72,7 +68,9 @@ export class TestCommand extends Command {
                 },
             ],
         }, {
-            guildIds: this.options.preconditions?.find(condition => condition === 'OwnerOnly')
+            guildIds: this.options.preconditions?.find(
+                    condition => condition === 'OwnerOnly',
+                )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
