@@ -3,6 +3,7 @@ import {
     ChannelTypes,
     MessageButtonStyles,
 } from 'discord.js/typings/enums';
+import { CustomID } from '../@types/Persistent';
 import {
     BucketScope,
     Command,
@@ -15,6 +16,7 @@ import {
     TextChannel,
 } from 'discord.js';
 import { Options } from '../utility/Options';
+import { Events } from '../enums/Events';
 
 export class TestCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -82,7 +84,10 @@ export class TestCommand extends Command {
             .setComponents(
                 Object.entries(announcements).map(
                     ([key]) => new MessageButton()
-                        .setCustomId(key)
+                        .setCustomId(JSON.stringify({
+                            event: Events.PersistentNotification,
+                            value: key,
+                        } as CustomID))
                         .setLabel(key)
                         .setStyle(MessageButtonStyles.PRIMARY),
                 ),

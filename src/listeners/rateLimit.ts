@@ -1,7 +1,5 @@
-import {
-    Events,
-    Listener,
-} from '@sapphire/framework';
+import { Events } from '../enums/Events';
+import { Listener } from '@sapphire/framework';
 import { Sentry } from '../errors/Sentry';
 import { Severity } from '@sentry/node';
 

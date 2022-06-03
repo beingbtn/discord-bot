@@ -1,8 +1,8 @@
 import {
     ChatInputCommandErrorPayload,
-    Events,
     Listener,
 } from '@sapphire/framework';
+import { Events } from '../enums/Events';
 import { InteractionErrorHandler } from '../errors/InteractionErrorHandler';
 
 export class CommandErrorListener extends Listener {

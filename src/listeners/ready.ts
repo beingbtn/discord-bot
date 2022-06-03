@@ -1,9 +1,7 @@
 import type { Client } from 'discord.js';
 import { ErrorHandler } from '../errors/ErrorHandler';
-import {
-    Events,
-    Listener,
-} from '@sapphire/framework';
+import { Events } from '../enums/Events';
+import { Listener } from '@sapphire/framework';
 import { setPresence } from '../utility/utility';
 import { Time } from '../enums/Time';
 

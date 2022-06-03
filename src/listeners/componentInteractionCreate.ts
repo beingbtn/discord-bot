@@ -1,8 +1,7 @@
 import type { Interaction } from 'discord.js';
-import {
-    Events,
-    Listener,
-} from '@sapphire/framework';
+import { CustomID } from '../@types/Persistent';
+import { Events } from '../enums/Events';
+import { Listener } from '@sapphire/framework';
 
 export class ComponentInteractionCreateListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
@@ -20,7 +19,13 @@ export class ComponentInteractionCreateListener extends Listener {
             interaction.message.flags.has('EPHEMERAL') === false &&
             interaction.message.type === 'DEFAULT' //test
         ) {
-            
+            const customID = JSON.parse(interaction.customId) as CustomID;
+
+            this.container.client.emit(
+                customID.event,
+                interaction,
+                customID,
+            );
         }
     }
 }

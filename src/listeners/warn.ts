@@ -1,9 +1,7 @@
+import { Events } from '../enums/Events';
+import { Listener } from '@sapphire/framework';
 import { Sentry } from '../errors/Sentry';
 import { Severity } from '@sentry/node';
-import {
-    Events,
-    Listener,
-} from '@sapphire/framework';
 
 export class WarnListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
