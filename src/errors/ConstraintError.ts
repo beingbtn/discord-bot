@@ -1,5 +1,5 @@
 export class ConstraintError extends Error {
-    constructor(
+    public constructor(
         message:
             | 'devMode'
             | 'owner'

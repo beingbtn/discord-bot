@@ -18,8 +18,9 @@ export class ReadyListener extends Listener {
         this.container.logger.info(
             this.container.i18n.getMessage(
                 'eventsReady', [
-                client!.user!.tag!,
-            ]),
+                    client!.user!.tag!,
+                ],
+            ),
         );
 
         set();

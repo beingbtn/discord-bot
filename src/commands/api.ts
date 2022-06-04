@@ -18,7 +18,7 @@ type TimeoutSettables =
     | 'timeout'
     | 'resumeAfter';
 
-export class TestCommand extends Command {
+export class APICommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -188,19 +188,23 @@ export class TestCommand extends Command {
                 },
                 {
                     name: i18n.getMessage('commandsAPIStatsLastHourName'),
-                    value: i18n.getMessage('commandsAPIStatsLastHourValue', [
-                        abort.lastHour,
-                        generic.lastHour,
-                        http.lastHour,
-                    ]),
+                    value: i18n.getMessage(
+                        'commandsAPIStatsLastHourValue', [
+                            abort.lastHour,
+                            generic.lastHour,
+                            http.lastHour,
+                        ],
+                    ),
                 },
                 {
                     name: i18n.getMessage('commandsAPIStatsNextTimeoutsName'),
-                    value: i18n.getMessage('commandsAPIStatsNextTimeoutsValue', [
-                        cleanLength(abort.timeout) ?? i18n.getMessage('null'),
-                        cleanLength(generic.timeout) ?? i18n.getMessage('null'),
-                        cleanLength(http.timeout) ?? i18n.getMessage('null'),
-                    ]),
+                    value: i18n.getMessage(
+                        'commandsAPIStatsNextTimeoutsValue', [
+                            cleanLength(abort.timeout) ?? i18n.getMessage('null'),
+                            cleanLength(generic.timeout) ?? i18n.getMessage('null'),
+                            cleanLength(http.timeout) ?? i18n.getMessage('null'),
+                        ],
+                    ),
                 },
                 {
                     name: i18n.getMessage('commandsAPIStatsUsesName'),
@@ -224,12 +228,20 @@ export class TestCommand extends Command {
         ] = value;
         const setEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsAPISetTitle'))
-            .setDescription(i18n.getMessage('commandsAPISetDescription', [
-                category,
-                type,
-                value,
-            ]));
+            .setTitle(
+                i18n.getMessage(
+                    'commandsAPISetTitle',
+                ),
+            )
+            .setDescription(
+                i18n.getMessage(
+                    'commandsAPISetDescription', [
+                        category,
+                        type,
+                        value,
+                    ],
+                ),
+            );
 
         Log.command(interaction, setEmbed.description);
 
@@ -254,10 +266,18 @@ export class TestCommand extends Command {
 
         const callEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsAPICallTitle'))
-            .setDescription(i18n.getMessage('commandsAPICallDescription', [
-                method,
-            ]));
+            .setTitle(
+                i18n.getMessage(
+                    'commandsAPICallTitle',
+                ),
+            )
+            .setDescription(
+                i18n.getMessage(
+                    'commandsAPICallDescription', [
+                        method,
+                    ],
+                ),
+            );
 
         Log.command(interaction, callEmbed.description);
 

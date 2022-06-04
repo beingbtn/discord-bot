@@ -44,33 +44,45 @@ export class PersistentNotificationListener extends Listener {
                 await memberRoles.remove(announcement.role);
 
                 notificationsEmbed
-                    .setTitle(interaction.i18n.getMessage(
-                        'notificationsRemoveTitle', [
-                        category,
-                    ]))
-                    .setDescription(interaction.i18n.getMessage(
-                        'notificationsRemoveDescription', [
-                        category,
-                    ]));
+                    .setTitle(
+                        interaction.i18n.getMessage(
+                            'persistentNotificationRemoveTitle', [
+                                category,
+                            ],
+                        ),
+                    )
+                    .setDescription(
+                        interaction.i18n.getMessage(
+                            'persistentNotificationRemoveDescription', [
+                                category,
+                            ],
+                        ),
+                    );
             } else {
                 await memberRoles.add(announcement.role);
 
                 notificationsEmbed
-                    .setTitle(interaction.i18n.getMessage(
-                        'notificationsAddTitle', [
-                        category,
-                    ]))
-                    .setDescription(interaction.i18n.getMessage(
-                        'notificationsAddDescription', [
-                        category,
-                    ]));
+                    .setTitle(
+                        interaction.i18n.getMessage(
+                            'persistentNotificationAddTitle', [
+                                category,
+                            ],
+                        ),
+                    )
+                    .setDescription(
+                        interaction.i18n.getMessage(
+                            'persistentNotificationAddDescription', [
+                                category,
+                            ],
+                        ),
+                    );
             }
 
             await interaction.member.fetch();
 
             notificationsEmbed
                 .addFields([{
-                    name: interaction.i18n.getMessage('notificationsCurrentName'),
+                    name: interaction.i18n.getMessage('persistentNotificationCurrentName'),
                     value: Object.entries(announcements).filter(
                         ([, value]) => memberRoles.cache.has(value.role),
                     ).map(([key]) => key).join(', ') ||

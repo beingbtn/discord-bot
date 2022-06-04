@@ -7,14 +7,16 @@ import { container } from '@sapphire/framework';
 import { rssJSON } from './CoreFormat';
 
 export class CoreComponents {
-    static create(data: rssJSON) {
+    public create(data: rssJSON) {
         const rows: MessageActionRow[] = [];
 
         for (const item of data.items) {
             const button = new MessageButton()
-                .setLabel(container.i18n.getMessage(
-                    'coreComponentsButtonsReadMoreLabel',
-                ))
+                .setLabel(
+                    container.i18n.getMessage(
+                        'coreComponentsButtonsReadMoreLabel',
+                    ),
+                )
                 .setStyle(Constants.MessageButtonStyles.LINK)
                 .setURL(item.link);
 

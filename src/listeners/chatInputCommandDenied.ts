@@ -6,7 +6,7 @@ import {
 } from '@sapphire/framework';
 import { Events } from '../enums/Events';
 
-export class CommandErrorListener extends Listener {
+export class ChatInputErrorListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
         super(context, {
             ...options,

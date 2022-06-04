@@ -1,5 +1,8 @@
-import type { Interaction } from 'discord.js';
 import { CustomID } from '../@types/Persistent';
+import {
+    Interaction,
+    MessageFlags,
+} from 'discord.js';
 import { Events } from '../enums/Events';
 import { Listener } from '@sapphire/framework';
 
@@ -16,7 +19,7 @@ export class ComponentInteractionCreateListener extends Listener {
         if (
             interaction.isMessageComponent() &&
             interaction.inCachedGuild() &&
-            interaction.message.flags.has('EPHEMERAL') === false &&
+            interaction.message.flags.has(MessageFlags.FLAGS.EPHEMERAL) === false &&
             interaction.message.type === 'DEFAULT' //test
         ) {
             const customID = JSON.parse(interaction.customId) as CustomID;

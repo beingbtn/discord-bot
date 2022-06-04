@@ -473,22 +473,19 @@
     "logRequest": {
         "message": "Request:"
     },
-    "notificationsLabel": {
-        "message": "Notifications"
-    },
-    "notificationsAddTitle": {
+    "persistentNotificationAddTitle": {
         "message": "Added $1 Notifications"
     },
-    "notificationsAddDescription": {
+    "persistentNotificationAddDescription": {
         "message": "You will now be notified whenever **$1** are published!"
     },
-    "notificationsRemoveTitle": {
+    "persistentNotificationRemoveTitle": {
         "message": "Removed $1 Notifications"
     },
-    "notificationsRemoveDescription": {
+    "persistentNotificationRemoveDescription": {
         "message": "You will no longer be notified whenever new **$1** are posted!"
     },
-    "notificationsCurrentName": {
+    "persistentNotificationCurrentName": {
         "message": "Your Notifications"
     }
 }

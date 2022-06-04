@@ -11,7 +11,7 @@ import {
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
-export class TestCommand extends Command {
+export class PingCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -50,7 +50,11 @@ export class TestCommand extends Command {
 
         const initialPingEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsPingLoadingTitle'));
+            .setTitle(
+                i18n.getMessage(
+                    'commandsPingLoadingTitle',
+                ),
+            );
 
         const sentReply = await interaction.editReply({
             embeds: [initialPingEmbed],
@@ -74,14 +78,31 @@ export class TestCommand extends Command {
 
         const pingEmbed = new BetterEmbed(interaction)
             .setColor(embedColor)
-            .setTitle(i18n.getMessage('commandsPingTitle'))
-            .setDescription(i18n.getMessage('commandsPingDescription', [
-                interaction.client.ws.ping,
-                roundTripDelay,
-            ]));
+            .setTitle(
+                i18n.getMessage(
+                    'commandsPingTitle',
+                ),
+            )
+            .setDescription(
+                i18n.getMessage(
+                    'commandsPingDescription', [
+                        interaction.client.ws.ping,
+                        roundTripDelay,
+                    ],
+                ),
+            );
 
-        Log.command(interaction, `WS: ${interaction.client.ws.ping}ms | RT: ${roundTripDelay}ms`);
+        Log.command(
+            interaction,
+            `WS: ${
+                interaction.client.ws.ping
+            }ms | RT: ${
+                roundTripDelay
+            }ms`,
+        );
 
-        await interaction.editReply({ embeds: [pingEmbed] });
+        await interaction.editReply({
+            embeds: [pingEmbed],
+        });
     }
 }

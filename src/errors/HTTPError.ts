@@ -6,7 +6,7 @@ export class HTTPError extends Error {
     readonly statusText: string | null;
     readonly url: string;
 
-    constructor({
+    public constructor({
         message,
         response,
         url,

@@ -15,7 +15,7 @@ import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 import process from 'node:process';
 
-export class TestCommand extends Command {
+export class AnnouncementsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -109,16 +109,25 @@ export class TestCommand extends Command {
         if (userHasPermission === false) {
             const missingPermission = new BetterEmbed(interaction)
                 .setColor(Options.colorsWarning)
-                .setTitle(i18n.getMessage(
-                    'commandsAnnouncementsUserMissingPermissionTitle',
-                ))
-                .setDescription(i18n.getMessage(
-                    'commandsAnnouncementsUserMissingPermissionDescription',
-                ));
+                .setTitle(
+                    i18n.getMessage(
+                        'commandsAnnouncementsUserMissingPermissionTitle',
+                    ),
+                )
+                .setDescription(
+                    i18n.getMessage(
+                        'commandsAnnouncementsUserMissingPermissionDescription',
+                    ),
+                );
 
-            Log.command(interaction, 'User missing permission');
+            Log.command(
+                interaction,
+                'User missing permission',
+            );
 
-            await interaction.editReply({ embeds: [missingPermission] });
+            await interaction.editReply({
+                embeds: [missingPermission],
+            });
 
             return;
         }
@@ -133,17 +142,24 @@ export class TestCommand extends Command {
         if (botHasPermission.length > 0) {
             const missingPermission = new BetterEmbed(interaction)
                 .setColor(Options.colorsWarning)
-                .setTitle(i18n.getMessage(
-                    'commandsAnnouncementsBotMissingPermissionTitle',
-                ))
-                .setDescription(i18n.getMessage(
-                    'commandsAnnouncementsBotMissingPermissionDescription', [
-                    botHasPermission.join(', '),
-                ]));
+                .setTitle(
+                    i18n.getMessage(
+                        'commandsAnnouncementsBotMissingPermissionTitle',
+                    ),
+                )
+                .setDescription(
+                    i18n.getMessage(
+                        'commandsAnnouncementsBotMissingPermissionDescription', [
+                            botHasPermission.join(', '),
+                        ],
+                    ),
+                );
 
             Log.command(interaction, 'Bot missing permission(s)');
 
-            await interaction.editReply({ embeds: [missingPermission] });
+            await interaction.editReply({
+                embeds: [missingPermission],
+            });
 
             return;
         }
@@ -169,20 +185,30 @@ export class TestCommand extends Command {
 
             const removeEmbed = new BetterEmbed(interaction)
                 .setColor(Options.colorsNormal)
-                .setTitle(i18n.getMessage('commandsAnnouncementsRemoveTitle', [
-                    type,
-                ]))
-                .setDescription(i18n.getMessage('commandsAnnouncementsRemoveDescription', [
-                    type,
-                    Formatters.channelMention(channel.id),
-                ]));
+                .setTitle(
+                    i18n.getMessage(
+                        'commandsAnnouncementsRemoveTitle', [
+                            type,
+                        ],
+                    ),
+                )
+                .setDescription(
+                    i18n.getMessage(
+                        'commandsAnnouncementsRemoveDescription', [
+                            type,
+                            Formatters.channelMention(channel.id),
+                        ],
+                    ),
+                );
 
             Log.command(
                 interaction,
-                i18n.getMessage('commandsAnnouncementsRemoveLog', [
-                    type,
-                    channel.id,
-                ]),
+                i18n.getMessage(
+                    'commandsAnnouncementsRemoveLog', [
+                        type,
+                        channel.id,
+                    ],
+                ),
             );
 
             await interaction.editReply({ embeds: [removeEmbed] });
@@ -207,22 +233,29 @@ export class TestCommand extends Command {
 
             const addEmbed = new BetterEmbed(interaction)
                 .setColor(Options.colorsNormal)
-                .setTitle(i18n.getMessage('commandsAnnouncementsAddTitle', [
-                    type,
-                ]))
-                .setDescription(
-                    i18n.getMessage('commandsAnnouncementsAddDescription', [
+                .setTitle(
+                    i18n.getMessage(
+                        'commandsAnnouncementsAddTitle', [
                         type,
-                        Formatters.channelMention(channel.id),
                     ]),
+                )
+                .setDescription(
+                    i18n.getMessage(
+                        'commandsAnnouncementsAddDescription', [
+                            type,
+                            Formatters.channelMention(channel.id),
+                        ],
+                    ),
                 );
 
             Log.command(
                 interaction,
-                i18n.getMessage('commandsAnnouncementsAddLog', [
-                    type,
-                    channel.id,
-                ]),
+                i18n.getMessage(
+                    'commandsAnnouncementsAddLog', [
+                        type,
+                        channel.id,
+                    ],
+                ),
             );
 
             await interaction.editReply({ embeds: [addEmbed] });

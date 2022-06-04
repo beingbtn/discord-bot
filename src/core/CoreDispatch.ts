@@ -22,31 +22,11 @@ export class CoreDispatch {
         }
     };
 
-    constructor() {
+    public constructor() {
         this.announcements = JSON.parse(process.env.ANNOUNCEMENTS!);
     }
 
-    static async postsGet(data: rssJSON, editedThreadIDs: string[]): Promise<{
-        id: string,
-        message: string,
-    }[]> {
-        const posts = await Database.query(
-            `SELECT id, message FROM "${data.title}" WHERE id IN (${
-                editedThreadIDs.join(', ')
-            })`,
-        );
-
-        return posts.rows;
-    }
-
-    static async postSet(data: rssJSON, id: string, messageID: string) {
-        await Database.query(
-            `UPDATE "${data.title}" SET message = $1 WHERE id = $2`,
-            [messageID, id],
-        );
-    }
-
-    async dispatch(
+    public async dispatch(
         embeds: MessageEmbed[],
         components: MessageActionRow[],
         data: rssJSON,
@@ -63,7 +43,7 @@ export class CoreDispatch {
         );
 
         const editedPosts = editedThreadIDs.length > 0
-            ? await CoreDispatch.postsGet(data, editedThreadIDs)
+            ? await this.postsGet(data, editedThreadIDs)
             : [];
 
         if (data.items.some(item => item.edited === false)) {
@@ -96,7 +76,7 @@ export class CoreDispatch {
                     await message.crosspost();
                 }
 
-                await CoreDispatch.postSet(data, item.id, message.id);
+                await this.postSet(data, item.id, message.id);
             } else {
                 const message = await channel.messages.fetch(
                     editedPost!.message,
@@ -107,5 +87,29 @@ export class CoreDispatch {
 
             await setTimeout(Options.coreDispatchTimeout);
         }
+    }
+
+    private async postsGet(data: rssJSON, editedThreadIDs: string[]) {
+        const posts = await Database.query(
+            `SELECT id, message FROM "${
+                data.title
+            }" WHERE id IN (${
+                editedThreadIDs.join(', ')
+            })`,
+        );
+
+        return posts.rows as {
+            id: string,
+            message: string,
+        }[];
+    }
+
+    private async postSet(data: rssJSON, id: string, messageID: string) {
+        await Database.query(
+            `UPDATE "${
+                data.title
+            }" SET message = $1 WHERE id = $2`,
+            [messageID, id],
+        );
     }
 }

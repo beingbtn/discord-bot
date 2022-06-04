@@ -20,7 +20,7 @@ export class Sentry {
         this.scope = new SentryClient.Scope();
     }
 
-    baseErrorContext(incidentID: string) {
+    public baseErrorContext(incidentID: string) {
         this.scope.setTags({
             incidentID: incidentID,
         });
@@ -28,7 +28,7 @@ export class Sentry {
         return this;
     }
 
-    baseInteractionContext(interaction: Interaction) {
+    public baseInteractionContext(interaction: Interaction) {
         const {
             user,
             guild,

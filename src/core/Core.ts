@@ -32,23 +32,35 @@ export class Core {
         latest: Performance | null;
         history: Performance[];
     };
+
+    changes: CoreChanges;
+    components: CoreComponents;
     dispatch: CoreDispatch;
+    embeds: CoreEmbeds;
     errors: CoreErrors;
+    format: CoreFormat;
     request: CoreRequests;
+
     uses: number;
 
-    constructor() {
+    public constructor() {
         this.performance = {
             latest: null,
             history: [],
         };
+
+        this.changes = new CoreChanges();
+        this.components = new CoreComponents();
         this.dispatch = new CoreDispatch();
+        this.embeds = new CoreEmbeds();
         this.errors = new CoreErrors();
+        this.format = new CoreFormat();
         this.request = new CoreRequests();
+
         this.uses = 0;
     }
 
-    async init() {
+    public async init() {
         while (true) {
             try {
                 await this.checkSystem();
@@ -94,10 +106,10 @@ export class Core {
                 const xmlString = await this.request.request(url);
                 performance.fetch = Date.now();
 
-                const rssJSON = CoreFormat.parse(xmlString);
+                const rssJSON = this.format.parse(xmlString);
                 performance.parse = Date.now();
 
-                const changes = await CoreChanges.check(rssJSON);
+                const changes = await this.changes.check(rssJSON);
                 performance.check = Date.now();
 
                 if (changes.items.length > 0) {
@@ -109,23 +121,32 @@ export class Core {
                         item => item.edited === true,
                     );
 
-                    Log.core(container.i18n.getMessage('coreCoreLogNewPosts', [
-                        newPosts.length,
-                        newPosts.map(post => post.link).join(', '),
-                    ]));
+                    Log.core(
+                        container.i18n.getMessage(
+                            'coreCoreLogNewPosts', [
+                            newPosts.length,
+                            newPosts.map(post => post.link).join(', '),
+                        ],
+                    ));
 
-                    Log.core(container.i18n.getMessage('coreCoreLogEditedPosts', [
-                        editedPosts.length,
-                        editedPosts.map(post => post.link).join(', '),
-                    ]));
+                    Log.core(
+                        container.i18n.getMessage(
+                            'coreCoreLogEditedPosts', [
+                            editedPosts.length,
+                            editedPosts.map(post => post.link).join(', '),
+                        ],
+                    ));
 
-                    const embeds = CoreEmbeds.create(changes);
-                    const components = CoreComponents.create(changes);
+                    const embeds = this.embeds.create(changes);
+                    const components = this.components.create(changes);
                     await this.dispatch.dispatch(embeds, components, changes);
 
-                    Log.core(container.i18n.getMessage('coreCoreLogFinishedPosts', [
-                        changes.title,
-                    ]));
+                    Log.core(
+                        container.i18n.getMessage(
+                            'coreCoreLogFinishedPosts', [
+                            changes.title,
+                        ],
+                    ));
                 }
 
                 performance.send = Date.now();

@@ -9,7 +9,7 @@ import { Limits } from '../enums/Limits';
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
-export class TestCommand extends Command {
+export class EvalCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -89,7 +89,11 @@ export class TestCommand extends Command {
                 {
                     name: i18n.getMessage('commandsEvalTimeTakenName'),
                     value: Formatters.codeBlock(
-                        i18n.getMessage('commandsEvalTimeTakenValue', [timeTaken]),
+                        i18n.getMessage(
+                            'commandsEvalTimeTakenValue', [
+                                timeTaken,
+                            ],
+                        ),
                     ),
                 },
             );
@@ -101,7 +105,11 @@ export class TestCommand extends Command {
                 });
             }
 
-            Log.command(interaction, 'Output: ', output);
+            Log.command(
+                interaction,
+                'Output: ',
+                output,
+            );
 
             await interaction.editReply({ embeds: [evalEmbed] });
         } catch (error) {
@@ -116,9 +124,11 @@ export class TestCommand extends Command {
                 {
                     name: i18n.getMessage('commandsEvalTimeTakenName'),
                     value: Formatters.codeBlock(
-                        i18n.getMessage('commandsEvalTimeTakenValue', [
-                            timeTaken,
-                        ]),
+                        i18n.getMessage(
+                            'commandsEvalTimeTakenValue', [
+                                timeTaken,
+                            ],
+                        ),
                     ),
                 },
             );

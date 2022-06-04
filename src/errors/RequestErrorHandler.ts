@@ -8,7 +8,7 @@ import { Severity } from '@sentry/node';
 export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
     readonly core: Core;
 
-    constructor(error: E, core: Core) {
+    public constructor(error: E, core: Core) {
         super(error);
         this.core = core;
 
@@ -23,7 +23,7 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
         }
     }
 
-    init() {
+    public init() {
         try {
             if (this.error instanceof AbortError) {
                 this.log(this.error.name);

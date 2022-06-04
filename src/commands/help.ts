@@ -7,7 +7,7 @@ import {
 import { Options } from '../utility/Options';
 import { Time } from '../enums/Time';
 
-export class TestCommand extends Command {
+export class HelpCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -116,20 +116,29 @@ export class TestCommand extends Command {
         if (typeof command === 'undefined') {
             commandSearchEmbed
                 .setColor(Options.colorsWarning)
-                .setTitle(i18n.getMessage('commandsHelpSpecificInvalidTitle'))
-                .setDescription(i18n.getMessage(
-                    'commandsHelpSpecificInvalidDescription', [
-                    commandArg,
-                ]));
+                .setTitle(
+                    i18n.getMessage(
+                        'commandsHelpSpecificInvalidTitle',
+                    ),
+                )
+                .setDescription(
+                    i18n.getMessage(
+                        'commandsHelpSpecificInvalidDescription', [
+                            commandArg,
+                        ],
+                    ),
+                );
 
             await interaction.editReply({ embeds: [commandSearchEmbed] });
             return;
         }
 
         commandSearchEmbed.setTitle(
-            i18n.getMessage('commandsHelpSpecificTitle', [
-                commandArg,
-            ]),
+            i18n.getMessage(
+                'commandsHelpSpecificTitle', [
+                    commandArg,
+                ],
+            ),
         );
 
         commandSearchEmbed.setDescription(
@@ -138,9 +147,11 @@ export class TestCommand extends Command {
 
         commandSearchEmbed.addFields({
             name: i18n.getMessage('commandsHelpSpecificCooldownName'),
-            value: i18n.getMessage('commandsHelpSpecificCooldownValue', [
-                command.options.cooldownDelay! / Time.Second,
-            ]),
+            value: i18n.getMessage(
+                'commandsHelpSpecificCooldownValue', [
+                    command.options.cooldownDelay! / Time.Second,
+                ],
+            ),
         });
 
         const GuildOnly = command.options.preconditions?.find(
@@ -181,13 +192,19 @@ export class TestCommand extends Command {
 
         const allCommandsEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsHelpAllTitle'));
+            .setTitle(
+                i18n.getMessage(
+                    'commandsHelpAllTitle',
+                ),
+            );
 
         for (const command of commandsCollection.values()) {
             allCommandsEmbed.addFields({
-                name: i18n.getMessage('commandsHelpAllName', [
-                    command.name,
-                ]),
+                name: i18n.getMessage(
+                    'commandsHelpAllName', [
+                        command.name,
+                    ],
+                ),
                 value: command.description,
             });
         }

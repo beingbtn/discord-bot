@@ -8,7 +8,7 @@ import {
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
-export class TestCommand extends Command {
+export class ReloadCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -106,11 +106,19 @@ export class TestCommand extends Command {
 
         const reloadedEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsReloadAllTitle'))
-            .setDescription(i18n.getMessage('commandsReloadAllDescription', [
-                promises.length,
-                Date.now() - now,
-            ]));
+            .setTitle(
+                i18n.getMessage(
+                    'commandsReloadAllTitle',
+                ),
+            )
+            .setDescription(
+                i18n.getMessage(
+                    'commandsReloadAllDescription', [
+                        promises.length,
+                        Date.now() - now,
+                    ],
+                ),
+            );
 
         Log.command(
             interaction,
@@ -132,19 +140,26 @@ export class TestCommand extends Command {
                 | 'commands'
                 | 'listeners',
         );
+
         const item = interaction.options.getString('item')!;
         const selected = type.get(item);
 
         if (typeof selected === 'undefined') {
             const undefinedSelected = new BetterEmbed(interaction)
                 .setColor(Options.colorsWarning)
-                .setTitle(i18n.getMessage('commandsReloadSingleUnknownTitle'))
+                .setTitle(
+                    i18n.getMessage(
+                        'commandsReloadSingleUnknownTitle',
+                    ),
+                )
                 .setDescription(
-                    i18n.getMessage('commandsReloadSingleUnknownDescription', [
-                        typeName,
-                        item,
-                    ],
-                    ));
+                    i18n.getMessage(
+                        'commandsReloadSingleUnknownDescription', [
+                            typeName,
+                            item,
+                        ],
+                    ),
+                );
 
             await interaction.editReply({ embeds: [undefinedSelected] });
             return;
@@ -154,23 +169,35 @@ export class TestCommand extends Command {
 
         const reloadedEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsReloadSingleSuccessTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsReloadSingleSuccessTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsReloadSingleSuccessDescription', [
-                    typeName,
-                    item,
-                    Date.now() - now,
-                ]),
+                i18n.getMessage(
+                    'commandsReloadSingleSuccessDescription', [
+                        typeName,
+                        item,
+                        Date.now() - now,
+                    ],
+                ),
             );
 
         Log.command(
             interaction,
-            `${typeName}.${item} was successfully reloaded after ${
+            `${
+                typeName
+            }.${
+                item
+            } was successfully reloaded after ${
                 Date.now() - now
             } milliseconds.`,
         );
 
-        await interaction.editReply({ embeds: [reloadedEmbed] });
+        await interaction.editReply({
+            embeds: [reloadedEmbed],
+        });
     }
 
     private async reloadItem(item: Command | Listener) {

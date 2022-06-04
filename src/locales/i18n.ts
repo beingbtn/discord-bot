@@ -6,7 +6,7 @@ export class i18n {
     locale: typeof locales[keyof typeof locales];
     localeName: string;
 
-    constructor(locale?: string) {
+    public constructor(locale?: string) {
         this.localeName = locale && locales[locale as keyof typeof locales]
             ? locale
             : Options.defaultLocale;
@@ -17,7 +17,7 @@ export class i18n {
         this.getMessage = this.getMessage.bind(this);
     }
 
-    getMessage(
+    public getMessage(
         string: keyof typeof this.locale,
         options?: (string | number | bigint)[],
     ) {

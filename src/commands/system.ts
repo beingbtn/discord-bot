@@ -8,7 +8,7 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { Constants } from '../utility/Constants';
+import { Bytes } from '../enums/Bytes';
 import { Options } from '../utility/Options';
 import { Time } from '../enums/Time';
 import process from 'node:process';
@@ -50,8 +50,7 @@ export class SystemCommand extends Command {
     public async chatInputRun(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
 
-        const memoryMegaBytes = process.memoryUsage.rss() /
-            Constants.bytesToMegaBytes;
+        const memoryMegaBytes = process.memoryUsage.rss() / Bytes.MegaByte;
 
         const responseEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)

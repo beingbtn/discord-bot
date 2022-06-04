@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js';
 import { rssJSON } from './CoreFormat';
 
 export class CoreEmbeds {
-    static create(data: rssJSON) {
+    public create(data: rssJSON) {
         const posts: MessageEmbed[] = [];
 
         for (const item of data.items) {

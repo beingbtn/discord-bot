@@ -11,8 +11,15 @@ export class BasePrecondition extends Precondition {
 
     private async Base(interaction: CommandInteraction) {
         interaction.i18n = new i18n(interaction.locale);
-        await interaction.deferReply({ ephemeral: true });
-        Log.command(interaction, slashCommandResolver(interaction));
+
+        await interaction.deferReply({
+            ephemeral: true,
+        });
+
+        Log.command(
+            interaction,
+            slashCommandResolver(interaction),
+        );
 
         return this.ok();
     }

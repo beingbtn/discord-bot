@@ -7,7 +7,7 @@ export class CoreErrors {
     readonly http: Timeout;
     readonly generic: Timeout;
 
-    constructor() {
+    public constructor() {
         this.isGlobal = false;
 
         this.abort = new Timeout({ baseTimeout: 0 });
@@ -21,19 +21,19 @@ export class CoreErrors {
         this.getTimeout = this.getTimeout.bind(this);
     }
 
-    addAbort() {
+    public addAbort() {
         this.abort.addError();
     }
 
-    addGeneric() {
+    public addGeneric() {
         this.generic.addError();
     }
 
-    addHTTP() {
+    public addHTTP() {
         this.http.addError();
     }
 
-    isTimeout() {
+    public isTimeout() {
         return (
             this.abort.isTimeout() ||
             this.generic.isTimeout() ||
@@ -41,7 +41,7 @@ export class CoreErrors {
         );
     }
 
-    getTimeout() {
+    public getTimeout() {
         return this.isTimeout()
             ? Math.max(
                 this.abort.pauseFor,

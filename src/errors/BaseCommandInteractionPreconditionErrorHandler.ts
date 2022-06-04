@@ -21,7 +21,7 @@ export class BaseCommandInteractionPreconditionErrorHandler
     readonly interaction: BaseCommandInteraction;
     readonly command: Command;
 
-    constructor(
+    public constructor(
         error: UserError,
         interaction: BaseCommandInteraction,
         command: Command,
@@ -31,11 +31,10 @@ export class BaseCommandInteractionPreconditionErrorHandler
         this.command = command;
     }
 
-    async init() {
+    public async init() {
         try {
             this.log(this.i18n.getMessage(
-                'errorsPreconditionLog',
-                [
+                'errorsPreconditionLog', [
                     this.interaction.user.id,
                     this.error.identifier,
                 ],

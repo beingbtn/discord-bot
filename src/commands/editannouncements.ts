@@ -19,7 +19,7 @@ import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 import { Time } from '../enums/Time';
 
-export class TestCommand extends Command {
+export class EditAnnouncementsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -136,9 +136,15 @@ export class TestCommand extends Command {
 
         const previewEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsEditAnnouncementsPreviewTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsEditAnnouncementsPreviewTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsEditAnnouncementsPreviewDescription'),
+                i18n.getMessage(
+                    'commandsEditAnnouncementsPreviewDescription',
+                ),
             );
 
         const reply = await interaction.followUp({
@@ -169,7 +175,9 @@ export class TestCommand extends Command {
 
         Log.command(
             interaction,
-            i18n.getMessage('commandsEditAnnouncementsLogEditing'),
+            i18n.getMessage(
+                'commandsEditAnnouncementsLogEditing',
+            ),
         );
 
         const editedAnnouncement = await message.edit({
@@ -186,14 +194,22 @@ export class TestCommand extends Command {
 
         Log.command(
             interaction,
-            i18n.getMessage('commandsEditAnnouncementsLogPublished'),
+            i18n.getMessage(
+                'commandsEditAnnouncementsLogPublished',
+            ),
         );
 
         const successEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsEditAnnouncementsSuccessTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsEditAnnouncementsSuccessTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsEditAnnouncementsSuccessDescription'),
+                i18n.getMessage(
+                    'commandsEditAnnouncementsSuccessDescription',
+                ),
             );
 
         await previewButton.update({

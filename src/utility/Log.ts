@@ -4,10 +4,12 @@ import { container } from '@sapphire/framework';
 export class Log {
     static command(interaction: CommandInteraction, ...text: unknown[]) {
         container.logger.info(
-            container.i18n.getMessage('logCommand', [
-                interaction.id,
-                interaction.user.id,
-            ]),
+            container.i18n.getMessage(
+                'logCommand', [
+                    interaction.id,
+                    interaction.user.id,
+                ],
+            ),
             ...text,
         );
     }

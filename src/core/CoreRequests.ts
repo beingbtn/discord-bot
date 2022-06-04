@@ -3,7 +3,7 @@ import { HTTPError } from '../errors/HTTPError';
 import { Request } from '../utility/Request';
 
 export class CoreRequests {
-    async request(url: string) {
+    public async request(url: string) {
         const response = await new Request(
             container.config,
         ).request(url);

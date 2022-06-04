@@ -1,13 +1,13 @@
-import {
-    generateStackTrace,
-} from '../utility/utility';
+import { container } from '@sapphire/framework';
 import {
     FileOptions,
     SnowflakeUtil,
 } from 'discord.js';
+import {
+    generateStackTrace,
+} from '../utility/utility';
 import { i18n } from '../locales/i18n';
 import { Sentry } from './Sentry';
-import { container } from '@sapphire/framework';
 
 export class BaseErrorHandler<E> {
     readonly error: E;
@@ -16,7 +16,7 @@ export class BaseErrorHandler<E> {
     readonly stackAttachment: FileOptions;
     i18n: i18n;
 
-    constructor(error: E) {
+    public constructor(error: E) {
         this.error = error;
 
         this.i18n = new i18n();
@@ -25,9 +25,12 @@ export class BaseErrorHandler<E> {
 
         this.sentry = new Sentry().baseErrorContext(this.incidentID);
 
-        Object.defineProperty(error, 'fullStack', {
-            value: generateStackTrace(),
-        });
+        Object.defineProperty(
+            error,
+            'fullStack', {
+                value: generateStackTrace(),
+            },
+        );
 
         this.stackAttachment = {
             attachment: Buffer.from(
@@ -43,7 +46,7 @@ export class BaseErrorHandler<E> {
         };
     }
 
-    log(...text: unknown[]) {
+    public log(...text: unknown[]) {
         const id = `${this.incidentID} |`;
 
         container.logger.error(id, ...text);

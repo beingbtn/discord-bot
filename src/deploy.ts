@@ -17,8 +17,9 @@ import process from 'node:process';
             .put(Routes.applicationGuildCommands(
                 process.env.CLIENT_ID!,
                 '873000534955667496'), {
-                body: [],
-            });
+                    body: [],
+                },
+            );
 
         console.log(new i18n().getMessage('commandsDeployTitle'));
     } catch (error) {

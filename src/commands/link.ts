@@ -7,7 +7,7 @@ import {
 import { Database } from '../utility/Database';
 import { Options } from '../utility/Options';
 
-export class TestCommand extends Command {
+export class LinkCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -134,13 +134,17 @@ export class TestCommand extends Command {
                 : i18n.getMessage('commandsLinkUnlinkedTitle'),
             )
             .setDescription(interaction.options.getSubcommand() === 'link'
-                ? i18n.getMessage('commandsLinkLinkedDescription', [
-                    id,
-                    message!,
-                ])
-                : i18n.getMessage('commandsLinkUnlinkedDescription', [
-                    id,
-                ]),
+                ? i18n.getMessage(
+                    'commandsLinkLinkedDescription', [
+                        id,
+                        message!,
+                    ],
+                )
+                : i18n.getMessage(
+                    'commandsLinkUnlinkedDescription', [
+                        id,
+                    ],
+                ),
             );
 
         await interaction.editReply({ embeds: [linkEmbed] });

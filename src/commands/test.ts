@@ -41,8 +41,7 @@ export class TestCommand extends Command {
                                 {
                                     name: 'command',
                                     type: 3,
-                                    description:
-                                        'A command to get info about. This parameter is completely optional',
+                                    description: 'A command to get info about. This parameter is completely optional',
                                     required: false,
                                 },
                             ],
@@ -62,7 +61,10 @@ export class TestCommand extends Command {
     }
 
     public async chatInputCommand(interaction: Command.ChatInputInteraction) {
-        await interaction.followUp({ content: 'e' });
+        await interaction.followUp({
+            content: 'e',
+        });
+
         throw new TypeError();
     }
 }

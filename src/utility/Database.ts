@@ -1,9 +1,9 @@
 import { container } from '@sapphire/framework';
+import { Options } from './Options';
 import {
     Pool,
     PoolClient,
 } from 'pg';
-import { Options } from './Options';
 import { Sentry } from '../errors/Sentry';
 import { Severity } from '@sentry/node';
 
@@ -18,11 +18,13 @@ pool.on('error', error => {
         .captureException(error);
 
     container.logger.error(
-        container.i18n.getMessage('errorsDatabasePool', [
-            pool.totalCount,
-            pool.idleCount,
-            pool.waitingCount,
-        ]),
+        container.i18n.getMessage(
+            'errorsDatabasePool', [
+                pool.totalCount,
+                pool.idleCount,
+                pool.waitingCount,
+            ],
+        ),
         error.stack,
     );
 });

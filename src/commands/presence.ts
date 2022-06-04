@@ -12,7 +12,7 @@ import {
 import { Options } from '../utility/Options';
 import { setPresence } from '../utility/utility';
 
-export class TestCommand extends Command {
+export class PresenceCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -155,7 +155,11 @@ export class TestCommand extends Command {
             };
 
             responseEmbed
-                .setTitle(i18n.getMessage('commandsPresenceSetTitle'))
+                .setTitle(
+                    i18n.getMessage(
+                        'commandsPresenceSetTitle',
+                    ),
+                )
                 .addFields([
                     {
                         name: i18n.getMessage('commandsPresenceSetStatusName'),
@@ -184,14 +188,24 @@ export class TestCommand extends Command {
                 ]);
         } else {
             responseEmbed
-                .setTitle(i18n.getMessage('commandsPresenceClearTitle'))
-                .setDescription(i18n.getMessage('commandsPresenceClearTitle'));
+                .setTitle(
+                    i18n.getMessage(
+                        'commandsPresenceClearTitle',
+                    ),
+                )
+                .setDescription(
+                    i18n.getMessage(
+                        'commandsPresenceClearTitle',
+                    ),
+                );
 
             this.container.customPresence = null;
         }
 
         setPresence();
 
-        await interaction.editReply({ embeds: [responseEmbed] });
+        await interaction.editReply({
+            embeds: [responseEmbed],
+        });
     }
 }

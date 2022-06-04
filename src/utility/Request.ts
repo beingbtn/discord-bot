@@ -14,7 +14,7 @@ export class Request {
     private retry: number;
     readonly retryLimit: number;
 
-    constructor(config?: {
+    public constructor(config?: {
         retryLimit?: number,
         restRequestTimeout?: number,
     }) {
@@ -28,7 +28,7 @@ export class Request {
         this.retryLimit = config?.retryLimit ?? Options.retryLimit;
     }
 
-    async request(url: string, fetchOptions?: RequestInit): Promise<Response> {
+    public async request(url: string, fetchOptions?: RequestInit): Promise<Response> {
         const controller = new AbortController();
         const abortTimeout = setTimeout(
             () => controller.abort(),
@@ -45,7 +45,9 @@ export class Request {
             if (response.ok === true) {
                 if (this.retry >= 1) {
                     Log.request(
-                        this.i18n.getMessage('errorsRequestSuccessAfterRetry'),
+                        this.i18n.getMessage(
+                            'errorsRequestSuccessAfterRetry',
+                        ),
                     );
                 }
 
@@ -57,9 +59,13 @@ export class Request {
                 response.status >= 500 &&
                 response.status < 600
             ) {
-                Log.request(this.i18n.getMessage('errorsRequest500_600', [
-                    response.status,
-                ]));
+                Log.request(
+                    this.i18n.getMessage(
+                        'errorsRequest500_600', [
+                            response.status,
+                        ],
+                    ),
+                );
 
                 this.retry += 1;
 
@@ -69,8 +75,14 @@ export class Request {
             return response;
         } catch (error) {
             if (this.retry < this.retryLimit) {
-                Log.request(this.i18n.getMessage('errorsRequestAbort'));
+                Log.request(
+                    this.i18n.getMessage(
+                        'errorsRequestAbort',
+                    ),
+                );
+
                 this.retry += 1;
+
                 return this.request(url, fetchOptions);
             }
 
@@ -83,7 +95,7 @@ export class Request {
         }
     }
 
-    static tryParse<Type>(
+    static async tryParse<Type>(
         response: Response,
     ): Promise<Type | null> {
         return response

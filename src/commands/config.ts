@@ -8,7 +8,7 @@ import { Database } from '../utility/Database';
 import { Log } from '../utility/Log';
 import { Options } from '../utility/Options';
 
-export class TestCommand extends Command {
+export class ConfigCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -142,14 +142,18 @@ export class TestCommand extends Command {
             .setColor(Options.colorsNormal)
             .setTitle(i18n.getMessage('commandsConfigCoreTitle'))
             .setDescription(
-                i18n.getMessage('commandsConfigCoreDescription', [
-                    this.container.config.core === true
-                        ? i18n.getMessage('on')
-                        : i18n.getMessage('off'),
-                ]),
+                i18n.getMessage(
+                    'commandsConfigCoreDescription', [
+                        this.container.config.core === true
+                            ? i18n.getMessage('on')
+                            : i18n.getMessage('off'),
+                    ],
+                ),
             );
 
-        await interaction.editReply({ embeds: [coreEmbed] });
+        await interaction.editReply({
+            embeds: [coreEmbed],
+        });
 
         Log.command(interaction, coreEmbed.description);
     }
@@ -166,13 +170,19 @@ export class TestCommand extends Command {
 
         const devModeEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsConfigDevModeTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsConfigDevModeTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsConfigDevModeDescription', [
-                    this.container.config.devMode === true
-                        ? i18n.getMessage('on')
-                        : i18n.getMessage('off'),
-                ]),
+                i18n.getMessage(
+                    'commandsConfigDevModeDescription', [
+                        this.container.config.devMode === true
+                            ? i18n.getMessage('on')
+                            : i18n.getMessage('off'),
+                    ],
+                ),
             );
 
         await interaction.editReply({ embeds: [devModeEmbed] });
@@ -197,11 +207,17 @@ export class TestCommand extends Command {
 
         const intervalEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsConfigIntervalTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsConfigIntervalTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsConfigIntervalDescription', [
-                    milliseconds,
-                ]),
+                i18n.getMessage(
+                    'commandsConfigIntervalDescription', [
+                        milliseconds,
+                    ],
+                ),
             );
 
         await interaction.editReply({ embeds: [intervalEmbed] });
@@ -226,16 +242,27 @@ export class TestCommand extends Command {
 
         const restRequestTimeoutEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsConfigRestRequestTimeoutTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsConfigRestRequestTimeoutTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsConfigRestRequestTimeoutDescription', [
-                    milliseconds,
-                ]),
+                i18n.getMessage(
+                    'commandsConfigRestRequestTimeoutDescription', [
+                        milliseconds,
+                    ],
+                ),
             );
 
-        await interaction.editReply({ embeds: [restRequestTimeoutEmbed] });
+        await interaction.editReply({
+            embeds: [restRequestTimeoutEmbed],
+        });
 
-        Log.command(interaction, restRequestTimeoutEmbed.description);
+        Log.command(
+            interaction,
+            restRequestTimeoutEmbed.description,
+        );
     }
 
     public async retryLimit(interaction: Command.ChatInputInteraction) {
@@ -255,9 +282,17 @@ export class TestCommand extends Command {
 
         const retryLimitEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsConfigRetryLimitTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsConfigRetryLimitTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsConfigRetryLimitDescription', [limit]),
+                i18n.getMessage(
+                    'commandsConfigRetryLimitDescription', [
+                        limit,
+                    ],
+                ),
             );
 
         await interaction.editReply({ embeds: [retryLimitEmbed] });
@@ -270,19 +305,25 @@ export class TestCommand extends Command {
 
         const viewEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsConfigViewTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsConfigViewTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsConfigViewDescription', [
-                    this.container.config.core === true
-                        ? i18n.getMessage('on')
-                        : i18n.getMessage('off'),
-                    this.container.config.devMode === true
-                        ? i18n.getMessage('on')
-                        : i18n.getMessage('off'),
-                    this.container.config.interval,
-                    this.container.config.restRequestTimeout,
-                    this.container.config.retryLimit,
-                ]),
+                i18n.getMessage(
+                    'commandsConfigViewDescription', [
+                        this.container.config.core === true
+                            ? i18n.getMessage('on')
+                            : i18n.getMessage('off'),
+                        this.container.config.devMode === true
+                            ? i18n.getMessage('on')
+                            : i18n.getMessage('off'),
+                        this.container.config.interval,
+                        this.container.config.restRequestTimeout,
+                        this.container.config.retryLimit,
+                    ],
+                ),
             );
 
         await interaction.editReply({ embeds: [viewEmbed] });

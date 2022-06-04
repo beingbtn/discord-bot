@@ -4,12 +4,12 @@ import { Severity } from '@sentry/node';
 export class ErrorHandler<E> extends BaseErrorHandler<E> {
     data: string[];
 
-    constructor(error: E, ...data: string[]) {
+    public constructor(error: E, ...data: string[]) {
         super(error);
         this.data = data;
     }
 
-    init(severity?: Severity) {
+    public init(severity?: Severity) {
         this.log(this.error);
 
         if (this.data.length > 0) {

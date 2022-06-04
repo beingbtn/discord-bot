@@ -154,9 +154,15 @@ export class SendAnnouncementsCommand extends Command {
 
         const previewEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsSendAnnouncementsPreviewTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsSendAnnouncementsPreviewTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsSendAnnouncementsPreviewDescription'),
+                i18n.getMessage(
+                    'commandsSendAnnouncementsPreviewDescription',
+                ),
             );
 
         const reply = await interaction.followUp({
@@ -187,7 +193,9 @@ export class SendAnnouncementsCommand extends Command {
 
         Log.command(
             interaction,
-            i18n.getMessage('commandsSendAnnouncementsLogSending'),
+            i18n.getMessage(
+                'commandsSendAnnouncementsLogSending',
+            ),
         );
 
         const role = interaction.options.getRole('role', false);
@@ -212,14 +220,22 @@ export class SendAnnouncementsCommand extends Command {
 
         Log.command(
             interaction,
-            i18n.getMessage('commandsSendAnnouncementsLogPublished'),
+            i18n.getMessage(
+                'commandsSendAnnouncementsLogPublished',
+            ),
         );
 
         const successEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsSendAnnouncementsSuccessTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsSendAnnouncementsSuccessTitle',
+                ),
+            )
             .setDescription(
-                i18n.getMessage('commandsSendAnnouncementsSuccessDescription'),
+                i18n.getMessage(
+                    'commandsSendAnnouncementsSuccessDescription',
+                ),
             );
 
         await previewButton.update({

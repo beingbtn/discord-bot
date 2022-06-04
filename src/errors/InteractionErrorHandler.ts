@@ -1,17 +1,17 @@
 import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
-import { ErrorHandler } from './ErrorHandler';
 import {
     CommandInteraction,
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
+import { ErrorHandler } from './ErrorHandler';
 import { Severity } from '@sentry/node';
 import { Options } from '../utility/Options';
 
 export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
     readonly interaction: CommandInteraction | MessageComponentInteraction;
 
-    constructor(
+    private constructor(
         error: E,
         interaction: CommandInteraction | MessageComponentInteraction,
     ) {
@@ -45,10 +45,16 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
     private async userNotify() {
         const embed = new MessageEmbed()
             .setColor(Options.colorsError)
-            .setTitle(this.i18n.getMessage('errorsInteractionReplyTitle'))
+            .setTitle(
+                this.i18n.getMessage(
+                    'errorsInteractionReplyTitle',
+                ),
+            )
             .setDescription(
-                this.i18n.getMessage('errorsInteractionReplyDescription',
-            ))
+                this.i18n.getMessage(
+                    'errorsInteractionReplyDescription',
+                ),
+            )
             .addFields({
                 name: this.i18n.getMessage(
                     'errorsInteractionReplyIncidentName',
@@ -56,7 +62,10 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
                 value: this.incidentID,
             });
 
-        const payLoad = { embeds: [embed], ephemeral: true };
+        const payLoad = {
+            embeds: [embed],
+            ephemeral: true,
+        };
 
         try {
             if (

@@ -2,41 +2,12 @@ import type { rssJSON } from './CoreFormat';
 import { Database } from '../utility/Database';
 
 export class CoreChanges {
-    static async get(data: rssJSON): Promise<{
-        id: string,
-        title: string,
-        content: string,
-        message: string | null,
-    }[]> {
-        const ids = data.items.map(item => `'${item.id}'`).join(', ');
-
-        const links = await Database.query(
-            `SELECT id, title, content, message FROM "${data.title}" WHERE id IN (${ids})`,
-        );
-
-        return links.rows;
-    }
-
-    static async insert(data: rssJSON, item: rssJSON['items'][number]) {
-        await Database.query(
-            `INSERT INTO "${data.title}" (id, title, content) VALUES ($1, $2, $3)`,
-            [item.id, item.title, item.content],
-        );
-    }
-
-    static async update(data: rssJSON, item: rssJSON['items'][number]) {
-        await Database.query(
-            `UPDATE "${data.title}" SET title = $1, content = $2 WHERE id = $3`,
-            [item.title, item.content, item.id],
-        );
-    }
-
-    static async check(data: rssJSON): Promise<rssJSON> {
+    public async check(data: rssJSON): Promise<rssJSON> {
         const maxComments = JSON.parse(
             process.env.ANNOUNCEMENTS!,
         )[data.title].maxComments;
 
-        const knownThreads = await CoreChanges.get(data);
+        const knownThreads = await this.get(data);
 
         const knownIDs = knownThreads.map(thread => thread.id);
 
@@ -50,7 +21,7 @@ export class CoreChanges {
 
         await Promise.all(
             potentiallyNewThreads.map(
-                thread => CoreChanges.insert(data, thread),
+                thread => this.insert(data, thread),
             ),
         );
 
@@ -72,7 +43,7 @@ export class CoreChanges {
 
         await Promise.all(
             editedThreads.map(
-                thread => CoreChanges.update(data, thread),
+                thread => this.update(data, thread),
             ),
         );
 
@@ -82,5 +53,42 @@ export class CoreChanges {
                 ...editedThreads,
             ],
         });
+    }
+
+    private async get(data: rssJSON): Promise<{
+        id: string,
+        title: string,
+        content: string,
+        message: string | null,
+    }[]> {
+        const ids = data.items.map(item => `'${item.id}'`).join(', ');
+
+        const links = await Database.query(
+            `SELECT id, title, content, message FROM "${
+                data.title
+            }" WHERE id IN (${
+                ids
+            })`,
+        );
+
+        return links.rows;
+    }
+
+    private async insert(data: rssJSON, item: rssJSON['items'][number]) {
+        await Database.query(
+            `INSERT INTO "${
+                data.title
+            }" (id, title, content) VALUES ($1, $2, $3)`,
+            [item.id, item.title, item.content],
+        );
+    }
+
+    private async update(data: rssJSON, item: rssJSON['items'][number]) {
+        await Database.query(
+            `UPDATE "${
+                data.title
+            }" SET title = $1, content = $2 WHERE id = $3`,
+            [item.title, item.content, item.id],
+        );
     }
 }

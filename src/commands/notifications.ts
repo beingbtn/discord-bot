@@ -1,14 +1,15 @@
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
-    ChannelTypes,
-    MessageButtonStyles,
-} from 'discord.js/typings/enums';
-import { CustomID } from '../@types/Persistent';
-import {
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import {
+    ChannelTypes,
+    MessageButtonStyles,
+} from 'discord.js/typings/enums';
+import { CustomID } from '../@types/Persistent';
+import { Events } from '../enums/Events';
 import {
     MessageActionRow,
     MessageButton,
@@ -16,9 +17,8 @@ import {
     TextChannel,
 } from 'discord.js';
 import { Options } from '../utility/Options';
-import { Events } from '../enums/Events';
 
-export class TestCommand extends Command {
+export class NotificationsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -68,10 +68,14 @@ export class TestCommand extends Command {
         const notificationsEmbed = new MessageEmbed()
             .setColor(Options.colorsNormal)
             .setTitle(
-                i18n.getMessage('commandsNotificationsPublicTitle'),
+                i18n.getMessage(
+                    'commandsNotificationsPublicTitle',
+                ),
             )
             .setDescription(
-                i18n.getMessage('commandsNotificationsPublicDescription'),
+                i18n.getMessage(
+                    'commandsNotificationsPublicDescription',
+                ),
             );
 
         const announcements = JSON.parse(process.env.ANNOUNCEMENTS!) as {
@@ -105,8 +109,14 @@ export class TestCommand extends Command {
 
         const embed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsNotificationsPrivateTitle'));
+            .setTitle(
+                i18n.getMessage(
+                    'commandsNotificationsPrivateTitle',
+                ),
+            );
 
-        await interaction.editReply({ embeds: [embed] });
+        await interaction.editReply({
+            embeds: [embed],
+        });
     }
 }

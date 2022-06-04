@@ -6,7 +6,7 @@ import {
 } from '@sapphire/framework';
 import { Options } from '../utility/Options';
 
-export class TestCommand extends Command {
+export class PerformanceCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
@@ -53,16 +53,22 @@ export class TestCommand extends Command {
 
         const responseEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsPerformanceTitle'))
+            .setTitle(
+                i18n.getMessage(
+                    'commandsPerformanceTitle',
+                ),
+            )
             .addFields({
                 name: i18n.getMessage('commandsPerformanceLatestName'),
-                value: i18n.getMessage('commandsPerformanceLatestValue', [
-                    fetchPerformance,
-                    parsePerformance,
-                    checkPerformance,
-                    sendPerformance,
-                    total,
-                ]),
+                value: i18n.getMessage(
+                    'commandsPerformanceLatestValue', [
+                        fetchPerformance,
+                        parsePerformance,
+                        checkPerformance,
+                        sendPerformance,
+                        total,
+                    ],
+                ),
             });
 
         await interaction.editReply({
