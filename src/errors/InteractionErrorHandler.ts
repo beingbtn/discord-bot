@@ -1,4 +1,4 @@
-import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
+import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import {
     CommandInteraction,
     MessageComponentInteraction,

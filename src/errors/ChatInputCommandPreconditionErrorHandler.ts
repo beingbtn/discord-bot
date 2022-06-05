@@ -2,7 +2,7 @@ import type {
     Command,
     UserError,
 } from '@sapphire/framework';
-import { BaseInteractionErrorHandler } from './BaseCommandErrorHandler';
+import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import { BetterEmbed } from '../utility/BetterEmbed';
 import {
     BaseCommandInteraction,
@@ -16,7 +16,7 @@ import { Severity } from '@sentry/node';
 import { setTimeout } from 'timers/promises';
 import { Time } from '../enums/Time';
 
-export class BaseCommandInteractionPreconditionErrorHandler
+export class ChatInputCommandPreconditionErrorHandler
     extends BaseInteractionErrorHandler<UserError> {
     readonly interaction: BaseCommandInteraction;
     readonly command: Command;

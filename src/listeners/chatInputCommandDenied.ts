@@ -1,9 +1,9 @@
-import { BaseCommandInteractionPreconditionErrorHandler } from '../errors/BaseCommandInteractionPreconditionErrorHandler';
 import {
     ChatInputCommandDeniedPayload,
     Listener,
     UserError,
 } from '@sapphire/framework';
+import { ChatInputCommandPreconditionErrorHandler } from '../errors/ChatInputCommandPreconditionErrorHandler';
 import { Events } from '../enums/Events';
 
 export class ChatInputErrorListener extends Listener {
@@ -16,7 +16,7 @@ export class ChatInputErrorListener extends Listener {
     }
 
     public async run(error: UserError, payload: ChatInputCommandDeniedPayload) {
-        await new BaseCommandInteractionPreconditionErrorHandler(
+        await new ChatInputCommandPreconditionErrorHandler(
             error,
             payload.interaction,
             payload.command,
