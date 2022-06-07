@@ -83,13 +83,13 @@ export function cleanLength(ms: number | null): string | null {
     newMS -= minutes * Time.Minute;
     const seconds = Math.floor(newMS / Time.Second);
 
-    return days > 0
-        ? `${days}d ${hours}h ${minutes}m ${seconds}s`
-        : hours > 0
-            ? `${hours}h ${minutes}m ${seconds}s`
-            : minutes > 0
-                ? `${minutes}m ${seconds}s`
-                : `${seconds}s`;
+    return days === 0
+        ? hours === 0
+            ? minutes === 0
+                ? `${seconds}s`
+                : `${minutes}m ${seconds}s`
+            : `${hours}h ${minutes}m ${seconds}s`
+        : `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 
 export function cleanRound(number: number, decimals?: number) {
