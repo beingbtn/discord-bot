@@ -23,7 +23,7 @@ export class i18n {
     ) {
         let message = this.locale[string]?.message;
 
-        if (message && options) {
+        if (message && typeof options !== 'undefined') {
             let index = options.length;
 
             for (const option of options.reverse()) {

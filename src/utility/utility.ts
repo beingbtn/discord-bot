@@ -170,7 +170,7 @@ export const slashCommandResolver = (interaction: CommandInteraction) => {
     ];
 
     for (let option of interaction.options.data) {
-        if (option.value) {
+        if (typeof option.value !== 'undefined') {
             commandOptions.push(
                 `${option.name}: ${option.value}`,
             );

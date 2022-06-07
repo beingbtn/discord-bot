@@ -12,7 +12,7 @@ export class ErrorHandler<E> extends BaseErrorHandler<E> {
     public init(severity?: Severity) {
         this.log(this.error);
 
-        if (this.data.length > 0) {
+        if (this.data.length !== 0) {
             this.log(...this.data);
         }
 

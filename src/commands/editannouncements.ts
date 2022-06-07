@@ -105,19 +105,19 @@ export class EditAnnouncementsCommand extends Command {
 
         const tempEmbed = new MessageEmbed(message.embeds[0]);
 
-        if (title) {
+        if (title !== null) {
             tempEmbed.setTitle(title);
         }
 
-        if (description) {
+        if (description !== null) {
             tempEmbed.setDescription(description);
         }
 
-        if (image) {
+        if (image !== null) {
             tempEmbed.setImage(image);
         }
 
-        if (url) {
+        if (url !== null) {
             tempEmbed.setURL(url);
         }
 
@@ -186,7 +186,7 @@ export class EditAnnouncementsCommand extends Command {
 
         //Case for when a channel is converted to an announcement channel
         if (
-            editedAnnouncement.crosspostable &&
+            editedAnnouncement.crosspostable === true &&
             interaction.options.getBoolean('crosspost', false) !== false
         ) {
             await editedAnnouncement.crosspost();

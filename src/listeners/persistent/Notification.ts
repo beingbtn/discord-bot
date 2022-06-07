@@ -40,7 +40,7 @@ export class PersistentNotificationListener extends Listener {
             const notificationsEmbed = new MessageEmbed()
                 .setColor(Options.colorsNormal);
 
-            if (hasRole) {
+            if (hasRole === true) {
                 await memberRoles.remove(announcement.role);
 
                 notificationsEmbed

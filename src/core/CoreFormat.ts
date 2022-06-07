@@ -74,7 +74,9 @@ export class CoreFormat {
             ? result.rss.channel
             : result.feed;
 
-        if (Array.isArray(channel)) channel = channel[0];
+        if (Array.isArray(channel)) {
+            channel = channel[0];
+        }
 
         const rss = {
             title: channel.title ?? '',
@@ -92,7 +94,10 @@ export class CoreFormat {
         };
 
         let items = channel.item || channel.entry;
-        if (items && !Array.isArray(items)) items = [items];
+
+        if (items && !Array.isArray(items)) {
+            items = [items];
+        }
 
 
         for (let i = 0; i < items.length; i += 1) {

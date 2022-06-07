@@ -72,7 +72,7 @@ export class CoreDispatch {
             if (item.edited === false) {
                 const message = await channel.send(payload);
 
-                if (message.crosspostable) {
+                if (message.crosspostable === true) {
                     await message.crosspost();
                 }
 

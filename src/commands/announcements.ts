@@ -132,14 +132,14 @@ export class AnnouncementsCommand extends Command {
             return;
         }
 
-        const botHasPermission = channel
+        const BotMissingPermissions = channel
             .permissionsFor(interaction.guild.me!)
             .missing([
                 Permissions.FLAGS.VIEW_CHANNEL,
                 Permissions.FLAGS.MANAGE_WEBHOOKS,
             ]);
 
-        if (botHasPermission.length > 0) {
+        if (BotMissingPermissions.length !== 0) {
             const missingPermission = new BetterEmbed(interaction)
                 .setColor(Options.colorsWarning)
                 .setTitle(
@@ -150,7 +150,7 @@ export class AnnouncementsCommand extends Command {
                 .setDescription(
                     i18n.getMessage(
                         'commandsAnnouncementsBotMissingPermissionDescription', [
-                            botHasPermission.join(', '),
+                            BotMissingPermissions.join(', '),
                         ],
                     ),
                 );
@@ -178,41 +178,7 @@ export class AnnouncementsCommand extends Command {
             .filter(webhook => webhook.sourceChannel?.id === announcementID)
             .first();
 
-        if (existingAnnouncementWebhook) {
-            //Remove webhook
-
-            await existingAnnouncementWebhook.delete();
-
-            const removeEmbed = new BetterEmbed(interaction)
-                .setColor(Options.colorsNormal)
-                .setTitle(
-                    i18n.getMessage(
-                        'commandsAnnouncementsRemoveTitle', [
-                            type,
-                        ],
-                    ),
-                )
-                .setDescription(
-                    i18n.getMessage(
-                        'commandsAnnouncementsRemoveDescription', [
-                            type,
-                            Formatters.channelMention(channel.id),
-                        ],
-                    ),
-                );
-
-            Log.command(
-                interaction,
-                i18n.getMessage(
-                    'commandsAnnouncementsRemoveLog', [
-                        type,
-                        channel.id,
-                    ],
-                ),
-            );
-
-            await interaction.editReply({ embeds: [removeEmbed] });
-        } else {
+        if (typeof existingAnnouncementWebhook === 'undefined') {
             //Add webhook
 
             const newsChannel = await interaction.client.channels.fetch(
@@ -259,6 +225,40 @@ export class AnnouncementsCommand extends Command {
             );
 
             await interaction.editReply({ embeds: [addEmbed] });
+        } else {
+            //Remove webhook
+
+            await existingAnnouncementWebhook.delete();
+
+            const removeEmbed = new BetterEmbed(interaction)
+                .setColor(Options.colorsNormal)
+                .setTitle(
+                    i18n.getMessage(
+                        'commandsAnnouncementsRemoveTitle', [
+                            type,
+                        ],
+                    ),
+                )
+                .setDescription(
+                    i18n.getMessage(
+                        'commandsAnnouncementsRemoveDescription', [
+                            type,
+                            Formatters.channelMention(channel.id),
+                        ],
+                    ),
+                );
+
+            Log.command(
+                interaction,
+                i18n.getMessage(
+                    'commandsAnnouncementsRemoveLog', [
+                        type,
+                        channel.id,
+                    ],
+                ),
+            );
+
+            await interaction.editReply({ embeds: [removeEmbed] });
         }
     }
 }

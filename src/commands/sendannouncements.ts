@@ -133,11 +133,11 @@ export class SendAnnouncementsCommand extends Command {
             })
             .setTitle(title);
 
-        if (image) {
+        if (image !== null) {
             announcement.setImage(image);
         }
 
-        if (url) {
+        if (url !== null) {
             announcement.setURL(url);
         }
 
@@ -200,7 +200,7 @@ export class SendAnnouncementsCommand extends Command {
 
         const role = interaction.options.getRole('role', false);
 
-        if (role) {
+        if (role !== null) {
             await channel.send({
                 content: Formatters.roleMention(role.id),
                 allowedMentions: {
@@ -212,7 +212,7 @@ export class SendAnnouncementsCommand extends Command {
         const sentAnnouncement = await channel.send({ embeds: [announcement] });
 
         if (
-            sentAnnouncement.crosspostable &&
+            sentAnnouncement.crosspostable === true &&
             interaction.options.getBoolean('crosspost', false) !== false
         ) {
             await sentAnnouncement.crosspost();
