@@ -1,4 +1,4 @@
-import { Timeout } from '../utility/Timeout';
+import { Timeout } from '../structures/Timeout';
 
 export class CoreErrors {
     isGlobal: boolean;

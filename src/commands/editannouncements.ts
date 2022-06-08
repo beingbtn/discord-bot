@@ -2,7 +2,7 @@ import {
     awaitComponent,
     disableComponents,
 } from '../utility/utility';
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     BucketScope,
     Command,
@@ -15,7 +15,7 @@ import {
     MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
-import { Log } from '../utility/Log';
+import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { Time } from '../enums/Time';
 

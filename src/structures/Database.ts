@@ -1,5 +1,5 @@
 import { container } from '@sapphire/framework';
-import { Options } from './Options';
+import { Options } from '../utility/Options';
 import {
     Pool,
     PoolClient,

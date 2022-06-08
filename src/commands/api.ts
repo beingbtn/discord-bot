@@ -1,4 +1,4 @@
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { cleanLength } from '../utility/utility';
 import {
     BucketScope,
@@ -6,7 +6,7 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import { Limits } from '../enums/Limits';
-import { Log } from '../utility/Log';
+import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
 type errorTypes =

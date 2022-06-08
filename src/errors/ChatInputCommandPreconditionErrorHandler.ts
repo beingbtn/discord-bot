@@ -3,7 +3,7 @@ import type {
     UserError,
 } from '@sapphire/framework';
 import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     BaseCommandInteraction,
     ColorResolvable,

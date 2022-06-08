@@ -1,7 +1,7 @@
 import type { CommandInteraction } from 'discord.js';
 import { Precondition } from '@sapphire/framework';
 import { slashCommandResolver } from '../utility/utility';
-import { Log } from '../utility/Log';
+import { Log } from '../structures/Log';
 import { i18n } from '../locales/i18n';
 
 export class BasePrecondition extends Precondition {

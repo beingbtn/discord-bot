@@ -2,13 +2,13 @@ import {
     ColorResolvable,
     Message,
 } from 'discord.js';
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { Log } from '../utility/Log';
+import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
 export class PingCommand extends Command {

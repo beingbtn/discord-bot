@@ -1,4 +1,4 @@
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     cleanLength,
     cleanRound,

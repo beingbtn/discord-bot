@@ -8,10 +8,10 @@ import {
     PresenceData,
     Sweepers,
 } from 'discord.js';
-import { Config } from './@types/Config';
-import { Core } from './core/Core';
-import { Database } from './utility/Database';
-import { i18n } from './locales/i18n';
+import { Config } from '../@types/Config';
+import { Core } from '../core/Core';
+import { Database } from './Database';
+import { i18n } from '../locales/i18n';
 
 export class Client extends SapphireClient {
     public constructor() {

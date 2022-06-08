@@ -1,4 +1,4 @@
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     BucketScope,
     Command,
@@ -6,7 +6,7 @@ import {
 } from '@sapphire/framework';
 import { Formatters } from 'discord.js';
 import { Limits } from '../enums/Limits';
-import { Log } from '../utility/Log';
+import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
 export class EvalCommand extends Command {

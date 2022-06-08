@@ -1,4 +1,4 @@
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     BucketScope,
     Command,
@@ -11,7 +11,7 @@ import {
     Permissions,
     TextChannel,
 } from 'discord.js';
-import { Log } from '../utility/Log';
+import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import process from 'node:process';
 

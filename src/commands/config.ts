@@ -1,11 +1,11 @@
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { Database } from '../utility/Database';
-import { Log } from '../utility/Log';
+import { Database } from '../structures/Database';
+import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
 export class ConfigCommand extends Command {

@@ -1,10 +1,10 @@
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { Database } from '../utility/Database';
+import { Database } from '../structures/Database';
 import { Options } from '../utility/Options';
 
 export class LinkCommand extends Command {

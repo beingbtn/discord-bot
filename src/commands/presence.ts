@@ -3,7 +3,7 @@ import type {
     ExcludeEnum,
     PresenceStatusData,
 } from 'discord.js';
-import { BetterEmbed } from '../utility/BetterEmbed';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     BucketScope,
     Command,

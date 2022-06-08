@@ -1,6 +1,6 @@
 import { container } from '@sapphire/framework';
 import { HTTPError } from '../errors/HTTPError';
-import { Request } from '../utility/Request';
+import { Request } from '../structures/Request';
 
 export class CoreRequests {
     public async request(url: string) {

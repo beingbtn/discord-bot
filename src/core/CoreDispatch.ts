@@ -1,6 +1,6 @@
 import type { rssJSON } from './CoreFormat';
 import { container } from '@sapphire/framework';
-import { Database } from '../utility/Database';
+import { Database } from '../structures/Database';
 import {
     Formatters,
     MessageActionRow,

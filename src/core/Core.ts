@@ -9,7 +9,7 @@ import { CoreFormat } from './CoreFormat';
 import { CoreRequests } from './CoreRequests';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { HTTPError } from '../errors/HTTPError';
-import { Log } from '../utility/Log';
+import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { RequestErrorHandler } from '../errors/RequestErrorHandler';
 import { setTimeout } from 'node:timers/promises';
