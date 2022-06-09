@@ -1,8 +1,8 @@
 import type { CommandInteraction } from 'discord.js';
+import { i18n } from '../locales/i18n';
+import { Log } from '../structures/Log';
 import { Precondition } from '@sapphire/framework';
 import { slashCommandResolver } from '../utility/utility';
-import { Log } from '../structures/Log';
-import { i18n } from '../locales/i18n';
 
 export class BasePrecondition extends Precondition {
     public override chatInputRun(interaction: CommandInteraction) {
