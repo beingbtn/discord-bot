@@ -10,8 +10,8 @@ import {
 } from 'discord.js';
 import { cleanRound } from '../utility/utility';
 import { ErrorHandler } from './ErrorHandler';
+import { Identifiers } from '../enums/Preconditions';
 import { Options } from '../utility/Options';
-import { Preconditions } from '../enums/Preconditions';
 import { Severity } from '@sentry/node';
 import { setTimeout } from 'timers/promises';
 import { Time } from '../enums/Time';
@@ -46,7 +46,7 @@ export class ChatInputCommandPreconditionErrorHandler
                 .captureMessages(this.error.identifier);
 
             switch (this.error.identifier) {
-                case Preconditions.DevMode: await this.resolveConstraint(
+                case Identifiers.DevMode: await this.resolveConstraint(
                     this.interaction,
                     this.interaction.i18n.getMessage(
                         'errorsPreconditionDevModeTitle',
@@ -57,7 +57,7 @@ export class ChatInputCommandPreconditionErrorHandler
                     Options.colorsWarning,
                 );
                 break;
-                case Preconditions.OwnerOnly: await this.resolveConstraint(
+                case Identifiers.OwnerOnly: await this.resolveConstraint(
                     this.interaction,
                     this.interaction.i18n.getMessage(
                         'errorsPreconditionOwnerTitle',
@@ -68,7 +68,7 @@ export class ChatInputCommandPreconditionErrorHandler
                     Options.colorsWarning,
                 );
                 break;
-                case Preconditions.GuildOnly: await this.resolveConstraint(
+                case Identifiers.GuildOnly: await this.resolveConstraint(
                     this.interaction,
                     this.interaction.i18n.getMessage(
                         'errorsPreconditionDMTitle',
@@ -79,7 +79,7 @@ export class ChatInputCommandPreconditionErrorHandler
                     Options.colorsWarning,
                 );
                 break;
-                case Preconditions.Cooldown: await this.resolveConstraint(
+                case Identifiers.Cooldown: await this.resolveConstraint(
                     this.interaction,
                     this.interaction.i18n.getMessage(
                         'errorsPreconditionCooldownWaitingTitle',

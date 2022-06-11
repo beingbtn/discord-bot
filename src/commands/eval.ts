@@ -8,6 +8,7 @@ import { Formatters } from 'discord.js';
 import { Limits } from '../enums/Limits';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
+import { Preconditions } from '../enums/Preconditions';
 
 export class EvalCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -19,9 +20,9 @@ export class EvalCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                'Base',
-                'DevMode',
-                'OwnerOnly',
+                Preconditions.Base,
+                Preconditions.DevMode,
+                Preconditions.OwnerOnly,
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -42,7 +43,7 @@ export class EvalCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === 'OwnerOnly',
+                    condition => condition === Preconditions.OwnerOnly,
                 )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

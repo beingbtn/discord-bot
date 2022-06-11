@@ -17,6 +17,7 @@ import {
     TextChannel,
 } from 'discord.js';
 import { Options } from '../utility/Options';
+import { Preconditions } from '../enums/Preconditions';
 
 export class NotificationsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -28,10 +29,10 @@ export class NotificationsCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                'Base',
-                'DevMode',
-                'OwnerOnly',
-                'GuildTextOnly',
+                Preconditions.Base,
+                Preconditions.DevMode,
+                Preconditions.OwnerOnly,
+                Preconditions.GuildTextOnly,
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -53,7 +54,7 @@ export class NotificationsCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === 'OwnerOnly',
+                    condition => condition === Preconditions.OwnerOnly,
                 )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

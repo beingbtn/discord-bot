@@ -5,6 +5,7 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import { Options } from '../utility/Options';
+import { Preconditions } from '../enums/Preconditions';
 
 export class PerformanceCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -16,9 +17,9 @@ export class PerformanceCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                'Base',
-                'DevMode',
-                'OwnerOnly',
+                Preconditions.Base,
+                Preconditions.DevMode,
+                Preconditions.OwnerOnly,
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -31,7 +32,7 @@ export class PerformanceCommand extends Command {
             description: 'View system performance',
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === 'OwnerOnly',
+                    condition => condition === Preconditions.OwnerOnly,
                 )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

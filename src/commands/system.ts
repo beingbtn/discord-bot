@@ -10,6 +10,7 @@ import {
 } from '@sapphire/framework';
 import { Bytes } from '../enums/Bytes';
 import { Options } from '../utility/Options';
+import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
 import process from 'node:process';
 
@@ -23,9 +24,9 @@ export class SystemCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                'Base',
-                'DevMode',
-                'OwnerOnly',
+                Preconditions.Base,
+                Preconditions.DevMode,
+                Preconditions.OwnerOnly,
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -38,7 +39,7 @@ export class SystemCommand extends Command {
             description: 'View system information',
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === 'OwnerOnly',
+                    condition => condition === Preconditions.OwnerOnly,
                 )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

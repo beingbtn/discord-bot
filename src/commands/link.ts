@@ -6,6 +6,7 @@ import {
 } from '@sapphire/framework';
 import { Database } from '../structures/Database';
 import { Options } from '../utility/Options';
+import { Preconditions } from '../enums/Preconditions';
 
 export class LinkCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -17,9 +18,9 @@ export class LinkCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                'Base',
-                'DevMode',
-                'OwnerOnly',
+                Preconditions.Base,
+                Preconditions.DevMode,
+                Preconditions.OwnerOnly,
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -106,7 +107,7 @@ export class LinkCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === 'OwnerOnly',
+                    condition => condition === Preconditions.OwnerOnly,
                 )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

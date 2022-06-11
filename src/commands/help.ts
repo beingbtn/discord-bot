@@ -5,6 +5,7 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import { Options } from '../utility/Options';
+import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
 
 export class HelpCommand extends Command {
@@ -14,11 +15,11 @@ export class HelpCommand extends Command {
             name: 'help',
             description: 'Displays helpful information and available commands',
             cooldownLimit: 1,
-            cooldownDelay: 10000,
+            cooldownDelay: Time.Second * 10,
             cooldownScope: BucketScope.User,
             preconditions: [
-                'Base',
-                'DevMode',
+                Preconditions.Base,
+                Preconditions.DevMode,
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -61,7 +62,7 @@ export class HelpCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === 'OwnerOnly',
+                    condition => condition === Preconditions.OwnerOnly,
                 )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
@@ -154,15 +155,15 @@ export class HelpCommand extends Command {
             ),
         });
 
-        const GuildOnly = command.options.preconditions?.find(
-            condition => condition === 'GuildOnly',
+        const guildOnly = command.options.preconditions?.find(
+            condition => condition === Preconditions.GuildOnly,
         );
 
         const ownerOnly = command.options.preconditions?.find(
-            condition => condition === 'OwnerOnly',
+            condition => condition === Preconditions.OwnerOnly,
         );
 
-        if (typeof GuildOnly !== 'undefined') {
+        if (typeof guildOnly !== 'undefined') {
             commandSearchEmbed.addFields({
                 name: i18n.getMessage('commandsHelpSpecificDMName'),
                 value: i18n.getMessage('commandsHelpSpecificDMValue'),
@@ -186,7 +187,7 @@ export class HelpCommand extends Command {
             .get('commands')
             .filter(command =>
                 typeof command.options.preconditions?.find(
-                    condition => condition === 'OwnerOnly',
+                    condition => condition === Preconditions.OwnerOnly,
                 ) === 'undefined',
             );
 

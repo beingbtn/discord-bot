@@ -7,6 +7,7 @@ import {
 } from '@sapphire/framework';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
+import { Preconditions } from '../enums/Preconditions';
 
 export class ReloadCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -18,9 +19,9 @@ export class ReloadCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                'Base',
-                'OwnerOnly',
-                'DevMode',
+                Preconditions.Base,
+                Preconditions.OwnerOnly,
+                Preconditions.DevMode,
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -69,7 +70,7 @@ export class ReloadCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === 'OwnerOnly',
+                    condition => condition === Preconditions.OwnerOnly,
                 )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

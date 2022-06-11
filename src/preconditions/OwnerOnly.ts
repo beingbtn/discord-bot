@@ -1,6 +1,6 @@
 import type { CommandInteraction } from 'discord.js';
 import { Precondition } from '@sapphire/framework';
-import { Preconditions as PreconditionsEnum } from '../enums/Preconditions';
+import { Identifiers } from '../enums/Preconditions';
 
 const owners = JSON.parse(process.env.OWNERS!) as string[];
 
@@ -13,7 +13,7 @@ export class DevModePrecondition extends Precondition {
         return owners.includes(userId)
             ? this.ok()
             : this.error({
-                identifier: PreconditionsEnum.OwnerOnly,
+                identifier: Identifiers.OwnerOnly,
             });
     }
 }

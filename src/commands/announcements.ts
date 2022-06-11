@@ -14,6 +14,8 @@ import {
 } from 'discord.js';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
+import { Preconditions } from '../enums/Preconditions';
+import { Time } from '../enums/Time';
 import process from 'node:process';
 
 export class AnnouncementsCommand extends Command {
@@ -23,12 +25,12 @@ export class AnnouncementsCommand extends Command {
             name: 'announcements',
             description: 'Configure what announcements you want to receive',
             cooldownLimit: 3,
-            cooldownDelay: 10000,
+            cooldownDelay: Time.Second * 10,
             cooldownScope: BucketScope.Guild,
             preconditions: [
-                'Base',
-                'DevMode',
-                'GuildOnly',
+                Preconditions.Base,
+                Preconditions.DevMode,
+                Preconditions.GuildOnly,
             ],
         });
     }
@@ -83,7 +85,7 @@ export class AnnouncementsCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === 'OwnerOnly',
+                    condition => condition === Preconditions.OwnerOnly,
                 )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

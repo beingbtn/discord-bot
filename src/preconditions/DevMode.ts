@@ -1,6 +1,6 @@
 import type { CommandInteraction } from 'discord.js';
 import { container, Precondition } from '@sapphire/framework';
-import { Preconditions as PreconditionsEnum } from '../enums/Preconditions';
+import { Identifiers } from '../enums/Preconditions';
 
 const developers = JSON.parse(process.env.OWNERS!) as string[];
 
@@ -14,7 +14,7 @@ export class DevModePrecondition extends Precondition {
             developers.includes(userId)
                 ? this.ok()
                 : this.error({
-                    identifier: PreconditionsEnum.DevMode,
+                    identifier: Identifiers.DevMode,
                 });
     }
 }
