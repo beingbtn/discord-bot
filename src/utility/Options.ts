@@ -1,8 +1,8 @@
-import type {
-    ColorResolvable,
-    PresenceData,
-} from 'discord.js';
 import { ActivityTypes } from 'discord.js/typings/enums';
+import {
+    type ColorResolvable,
+    type PresenceData,
+} from 'discord.js';
 import { locales } from '../locales/locales/main';
 import { PresenceUpdateStatus } from 'discord-api-types/v10';
 import { Time } from '../enums/Time';

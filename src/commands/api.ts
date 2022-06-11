@@ -1,10 +1,12 @@
-import { BetterEmbed } from '../structures/BetterEmbed';
-import { cleanLength } from '../utility/utility';
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { cleanLength } from '../utility/utility';
+import { type CommandInteraction } from 'discord.js';
 import { Limits } from '../enums/Limits';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
@@ -38,7 +40,7 @@ export class APICommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'api',
             description: 'Toggles dynamic settings',
@@ -141,7 +143,7 @@ export class APICommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         switch (interaction.options.getSubcommand()) {
             case 'stats': await this.stats(interaction);
                 break;
@@ -153,7 +155,7 @@ export class APICommand extends Command {
         }
     }
 
-    public async stats(interaction: Command.ChatInputInteraction) {
+    public async stats(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const {
@@ -218,7 +220,7 @@ export class APICommand extends Command {
         });
     }
 
-    public async set(interaction: Command.ChatInputInteraction) {
+    public async set(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const category = interaction.options.getString('category', true) as errorTypes;
@@ -253,7 +255,7 @@ export class APICommand extends Command {
         });
     }
 
-    public async call(interaction: Command.ChatInputInteraction) {
+    public async call(interaction: CommandInteraction) {
         const { i18n } = interaction;
         const method = interaction.options.getString('method', true);
 

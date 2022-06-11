@@ -1,6 +1,6 @@
-import type { Interaction } from 'discord.js';
 import { BaseErrorHandler } from './BaseErrorHandler';
 import { i18n } from '../locales/i18n';
+import { type Interaction } from 'discord.js';
 
 export class BaseInteractionErrorHandler<E> extends BaseErrorHandler<E> {
     readonly interaction: Interaction;

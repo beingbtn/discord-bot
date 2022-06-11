@@ -1,13 +1,15 @@
 import {
-    ColorResolvable,
-    Message,
-} from 'discord.js';
-import { BetterEmbed } from '../structures/BetterEmbed';
-import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import {
+    type ColorResolvable,
+    type CommandInteraction,
+    Message,
+} from 'discord.js';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
@@ -31,7 +33,7 @@ export class PingCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'ping',
             description: 'Ping!',
@@ -46,7 +48,7 @@ export class PingCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const initialPingEmbed = new BetterEmbed(interaction)

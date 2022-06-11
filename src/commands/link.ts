@@ -1,9 +1,11 @@
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { type CommandInteraction } from 'discord.js';
 import { Database } from '../structures/Database';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
@@ -27,7 +29,7 @@ export class LinkCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'link',
             description: 'Links/unlinks a message ID to an ID',
@@ -116,7 +118,7 @@ export class LinkCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const category = interaction.options.getString('category', true);

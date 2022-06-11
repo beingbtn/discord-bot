@@ -1,22 +1,24 @@
 import {
+    type ApplicationCommandRegistry,
+    BucketScope,
+    Command,
+    RegisterBehavior,
+} from '@sapphire/framework';
+import {
     awaitComponent,
     disableComponents,
 } from '../utility/utility';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
 import {
-    BucketScope,
-    Command,
-    RegisterBehavior,
-} from '@sapphire/framework';
-import {
+    type CommandInteraction,
     Constants as DiscordConstants,
     Formatters,
     MessageActionRow,
     MessageButton,
-    MessageComponentInteraction,
+    type MessageComponentInteraction,
     MessageEmbed,
-    NewsChannel,
+    type NewsChannel,
 } from 'discord.js';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
@@ -43,7 +45,7 @@ export class SendAnnouncementsCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'sendannouncements',
             description: 'Manually send announcements',
@@ -106,7 +108,7 @@ export class SendAnnouncementsCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const channel = interaction.options.getChannel(

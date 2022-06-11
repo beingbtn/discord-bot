@@ -1,7 +1,8 @@
+import { Base } from '../structures/Base';
 import { MessageEmbed } from 'discord.js';
-import { rssJSON } from './CoreFormat';
+import { type rssJSON } from './Format';
 
-export class CoreEmbeds {
+export class Embeds extends Base {
     public create(data: rssJSON) {
         const posts: MessageEmbed[] = [];
 

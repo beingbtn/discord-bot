@@ -1,12 +1,12 @@
-import { CustomID } from '../../@types/Persistent';
+import { type CustomID } from '../../@types/Persistent';
 import { Events } from '../../enums/Events';
+import { InteractionErrorHandler } from '../../errors/InteractionErrorHandler';
 import { Listener } from '@sapphire/framework';
 import {
-    MessageComponentInteraction,
+    type MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
 import { Options } from '../../utility/Options';
-import { InteractionErrorHandler } from '../../errors/InteractionErrorHandler';
 
 export class PersistentNotificationListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {

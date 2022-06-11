@@ -1,4 +1,4 @@
-import type { Guild } from 'discord.js';
+import { type Guild } from 'discord.js';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { Events } from '../enums/Events';
 import {

@@ -1,5 +1,5 @@
-import type { CommandInteraction } from 'discord.js';
-import { container, Precondition } from '@sapphire/framework';
+import { type CommandInteraction } from 'discord.js';
+import { Precondition } from '@sapphire/framework';
 import { Identifiers } from '../enums/Preconditions';
 
 const developers = JSON.parse(process.env.OWNERS!) as string[];
@@ -10,7 +10,7 @@ export class DevModePrecondition extends Precondition {
     }
 
     private checkDeveloper(userId: string) {
-        return container.config.devMode === false ||
+        return this.container.config.devMode === false ||
             developers.includes(userId)
                 ? this.ok()
                 : this.error({

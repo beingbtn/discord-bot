@@ -1,21 +1,23 @@
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     ChannelTypes,
     MessageButtonStyles,
 } from 'discord.js/typings/enums';
-import { CustomID } from '../@types/Persistent';
-import { Events } from '../enums/Events';
 import {
+    type CommandInteraction,
     MessageActionRow,
     MessageButton,
     MessageEmbed,
-    TextChannel,
+    type TextChannel,
 } from 'discord.js';
+import { CustomID } from '../@types/Persistent';
+import { Events } from '../enums/Events';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 
@@ -39,7 +41,7 @@ export class NotificationsCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'notifications',
             description: 'Add a notifications selector to a channel',
@@ -63,7 +65,7 @@ export class NotificationsCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const notificationsEmbed = new MessageEmbed()

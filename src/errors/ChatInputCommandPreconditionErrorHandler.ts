@@ -1,18 +1,17 @@
-import type {
-    Command,
-    UserError,
-} from '@sapphire/framework';
+import {
+    type BaseCommandInteraction,
+    type ColorResolvable,
+} from 'discord.js';
 import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import {
-    BaseCommandInteraction,
-    ColorResolvable,
-} from 'discord.js';
 import { cleanRound } from '../utility/utility';
+import {
+    type Command,
+    type UserError,
+} from '@sapphire/framework';
 import { ErrorHandler } from './ErrorHandler';
 import { Identifiers } from '../enums/Preconditions';
 import { Options } from '../utility/Options';
-import { Severity } from '@sentry/node';
 import { setTimeout } from 'timers/promises';
 import { Time } from '../enums/Time';
 
@@ -41,7 +40,7 @@ export class ChatInputCommandPreconditionErrorHandler
             ));
 
             this.sentry
-                .setSeverity(Severity.Warning)
+                .setSeverity('warning')
                 .baseInteractionPreconditionContext(this.error.identifier)
                 .captureMessages(this.error.identifier);
 

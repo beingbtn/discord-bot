@@ -1,6 +1,7 @@
+import { BaseCore } from './BaseCore';
 import { Timeout } from '../structures/Timeout';
 
-export class CoreErrors {
+export class Errors extends BaseCore {
     isGlobal: boolean;
 
     readonly abort: Timeout;
@@ -8,6 +9,8 @@ export class CoreErrors {
     readonly generic: Timeout;
 
     public constructor() {
+        super();
+
         this.isGlobal = false;
 
         this.abort = new Timeout({ baseTimeout: 0 });

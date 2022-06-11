@@ -1,4 +1,4 @@
-import type { CommandInteraction } from 'discord.js';
+import { type CommandInteraction } from 'discord.js';
 import { i18n } from '../locales/i18n';
 import { Log } from '../structures/Log';
 import { Precondition } from '@sapphire/framework';

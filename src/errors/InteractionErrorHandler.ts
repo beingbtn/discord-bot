@@ -1,11 +1,10 @@
 import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import {
-    CommandInteraction,
-    MessageComponentInteraction,
+    type CommandInteraction,
+    type MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
 import { ErrorHandler } from './ErrorHandler';
-import { Severity } from '@sentry/node';
 import { Options } from '../utility/Options';
 
 export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
@@ -38,7 +37,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
         this.log(this.error);
 
         this.sentry
-            .setSeverity(Severity.Error)
+            .setSeverity('error')
             .captureException(this.error);
     }
 
@@ -84,7 +83,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
             this.log(message, err);
 
             this.sentry
-                .setSeverity(Severity.Error)
+                .setSeverity('error')
                 .captureException(err);
         }
     }

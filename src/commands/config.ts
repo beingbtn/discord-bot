@@ -1,9 +1,11 @@
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { type CommandInteraction } from 'discord.js';
 import { Database } from '../structures/Database';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
@@ -28,7 +30,7 @@ export class ConfigCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'config',
             description: 'Configure and change settings',
@@ -105,7 +107,7 @@ export class ConfigCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         switch (interaction.options.getSubcommand()) {
             case 'core':
                 await this.core(interaction);
@@ -129,7 +131,7 @@ export class ConfigCommand extends Command {
         }
     }
 
-    public async core(interaction: Command.ChatInputInteraction) {
+    public async core(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         this.container.config.core = !this.container.config.core;
@@ -159,7 +161,7 @@ export class ConfigCommand extends Command {
         Log.command(interaction, coreEmbed.description);
     }
 
-    public async devModeCommand(interaction: Command.ChatInputInteraction) {
+    public async devModeCommand(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         this.container.config.devMode = !this.container.config.devMode;
@@ -191,7 +193,7 @@ export class ConfigCommand extends Command {
         Log.command(interaction, devModeEmbed.description);
     }
 
-    public async interval(interaction: Command.ChatInputInteraction) {
+    public async interval(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const milliseconds = interaction.options.getInteger(
@@ -226,7 +228,7 @@ export class ConfigCommand extends Command {
         Log.command(interaction, intervalEmbed.description);
     }
 
-    public async restRequestTimeout(interaction: Command.ChatInputInteraction) {
+    public async restRequestTimeout(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const milliseconds = interaction.options.getInteger(
@@ -266,7 +268,7 @@ export class ConfigCommand extends Command {
         );
     }
 
-    public async retryLimit(interaction: Command.ChatInputInteraction) {
+    public async retryLimit(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const limit = interaction.options.getInteger(
@@ -301,7 +303,7 @@ export class ConfigCommand extends Command {
         Log.command(interaction, retryLimitEmbed.description);
     }
 
-    public async view(interaction: Command.ChatInputInteraction) {
+    public async view(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const viewEmbed = new BetterEmbed(interaction)

@@ -17,8 +17,14 @@
     "none": {
         "message": "None"
     },
-    "commandsAnnouncementsBotMissingPermissionTitle": {
-        "message": "Missing Permission"
+    "commandsAnnouncementsAddDescription": {
+        "message": "$1 will be sent to $2!"
+    },
+    "commandsAnnouncementsAddLog": {
+        "message": "$1 added to $2"
+    },
+    "commandsAnnouncementsAddTitle": {
+        "message": "Added $1"
     },
     "commandsAnnouncementsBotMissingPermissionDescription": {
         "message": "This bot is unable to use the channel you selected because it is missing permission(s): $1. Grant the bot the listed permissions or select a different channel that the bot can use."
@@ -26,26 +32,8 @@
     "commandsAnnouncementsBotMissingPermissionLog": {
         "message": "Bot missing permission"
     },
-    "commandsAnnouncementsUserMissingPermissionTitle": {
+    "commandsAnnouncementsBotMissingPermissionTitle": {
         "message": "Missing Permission"
-    },
-    "commandsAnnouncementsUserMissingPermissionDescription": {
-        "message": "You must have the **Manage Webhook(s)** permission to use this command. This permission can either be granted server-wide or given through a channel's advanced permissions."
-    },
-    "commandsAnnouncementsUserMissingPermissionLog": {
-        "message": "User missing permission"
-    },
-    "commandsAnnouncementsAddTitle": {
-        "message": "Added $1"
-    },
-    "commandsAnnouncementsAddDescription": {
-        "message": "$1 will be sent to $2!"
-    },
-    "commandsAnnouncementsAddLog": {
-        "message": "$1 added to $2"
-    },
-    "commandsAnnouncementsRemoveTitle": {
-        "message": "Removed $1"
     },
     "commandsAnnouncementsRemoveDescription": {
         "message": "$1 will no longer be sent to $2!"
@@ -53,17 +41,38 @@
     "commandsAnnouncementsRemoveLog": {
         "message": "$1 removed from $2"
     },
-    "commandsAnnouncementsRemoveNotFoundTitle": {
-        "message": "$1 Type Not Found"
-    },
     "commandsAnnouncementsRemoveNotFoundDescription": {
         "message": "The announcement type `$1` isn't added to $2!"
     },
+    "commandsAnnouncementsRemoveNotFoundTitle": {
+        "message": "$1 Type Not Found"
+    },
+    "commandsAnnouncementsRemoveTitle": {
+        "message": "Removed $1"
+    },
+    "commandsAnnouncementsUserMissingPermissionDescription": {
+        "message": "You must have the **Manage Webhook(s)** permission to use this command. This permission can either be granted server-wide or given through a channel's advanced permissions."
+    },
+    "commandsAnnouncementsUserMissingPermissionLog": {
+        "message": "User missing permission"
+    },
+    "commandsAnnouncementsUserMissingPermissionTitle": {
+        "message": "Missing Permission"
+    },
+    "commandsAPICallDescription": {
+        "message": "Executed <CoreErrors>.$1."
+    },
+    "commandsAPICallTitle": {
+        "message": "Executed"
+    },
+    "commandsAPISetDescription": {
+        "message": "<CoreErrors>.$1.$2 is now $3."
+    },
+    "commandsAPISetTitle": {
+        "message": "Updated Value"
+    },
     "commandsAPIStatsEnabledName": {
         "message": "Enabled"
-    },
-    "commandsAPIStatsResumeName": {
-        "message": "Resuming In"
     },
     "commandsAPIStatsLastHourName": {
         "message": "Last Hour Statistic"
@@ -77,62 +86,53 @@
     "commandsAPIStatsNextTimeoutsValue": {
         "message": "May not be accurate\nAbort Errors: $1\nGeneric Errors: $2\nHTTP Errors: $3"
     },
+    "commandsAPIStatsResumeName": {
+        "message": "Resuming In"
+    },
     "commandsAPIStatsUsesName": {
         "message": "Uses"
-    },
-    "commandsAPISetTitle": {
-        "message": "Updated Value"
-    },
-    "commandsAPISetDescription": {
-        "message": "<CoreErrors>.$1.$2 is now $3."
-    },
-    "commandsAPICallTitle": {
-        "message": "Executed"
-    },
-    "commandsAPICallDescription": {
-        "message": "Executed <CoreErrors>.$1."
-    },
-    "commandsConfigCoreTitle": {
-        "message": "Core State Updated"
     },
     "commandsConfigCoreDescription": {
         "message": "The core is now **$1**."
     },
-    "commandsConfigDevModeTitle": {
-        "message": "Developer Mode Updated"
+    "commandsConfigCoreTitle": {
+        "message": "Core State Updated"
     },
     "commandsConfigDevModeDescription": {
         "message": "Developer Mode is now **$1**."
     },
-    "commandsConfigIntervalTitle": {
-        "message": "Interval Updated"
+    "commandsConfigDevModeTitle": {
+        "message": "Developer Mode Updated"
     },
     "commandsConfigIntervalDescription": {
         "message": "The interval is now **$1**ms."
     },
-    "commandsConfigRestRequestTimeoutTitle": {
-        "message": "Rest Request Timeout Updated"
+    "commandsConfigIntervalTitle": {
+        "message": "Interval Updated"
     },
     "commandsConfigRestRequestTimeoutDescription": {
         "message": "The rest request timeout is now **$1**."
     },
-    "commandsConfigRetryLimitTitle": {
-        "message": "Retry Limit Updated"
+    "commandsConfigRestRequestTimeoutTitle": {
+        "message": "Rest Request Timeout Updated"
     },
     "commandsConfigRetryLimitDescription": {
         "message": "The retry limit is now **$1**."
     },
-    "commandsConfigViewTitle": {
-        "message": "Current Configuration"
+    "commandsConfigRetryLimitTitle": {
+        "message": "Retry Limit Updated"
     },
     "commandsConfigViewDescription": {
         "message": "Core: **$1**\nDeveloper Mode: **$2**\nInterval: **$3**ms\nRest Request Timeout: **$4**ms\nRetry Limit: **$5**"
     },
-    "commandsDeployTitle": {
-        "message": "Success"
+    "commandsConfigViewTitle": {
+        "message": "Current Configuration"
     },
     "commandsDeployNone": {
         "message": "None"
+    },
+    "commandsDeployTitle": {
+        "message": "Success"
     },
     "commandsEditAnnouncementsLogEditing": {
         "message": "Sending message..."
@@ -143,26 +143,17 @@
     "commandsEditAnnouncementsPreviewButtonLabel": {
         "message": "Looks Good!"
     },
-    "commandsEditAnnouncementsPreviewTitle": {
-        "message": "Announcement Preview"
-    },
     "commandsEditAnnouncementsPreviewDescription": {
         "message": "This is a preview of the new announcement."
     },
-    "commandsEditAnnouncementsSuccessTitle": {
-        "message": "Announcement Published"
+    "commandsEditAnnouncementsPreviewTitle": {
+        "message": "Announcement Preview"
     },
     "commandsEditAnnouncementsSuccessDescription": {
         "message": "Your edit has been published!"
     },
-    "commandsEvalMaxLengthName": {
-        "message": "Over Max Length"
-    },
-    "commandsEvalMaxLengthValue": {
-        "message": "The error is over 1024 characters long."
-    },
-    "commandsEvalSuccessTitle": {
-        "message": "Executed Eval"
+    "commandsEditAnnouncementsSuccessTitle": {
+        "message": "Announcement Published"
     },
     "commandsEvalFailTitle": {
         "message": "Failed Eval"
@@ -170,17 +161,32 @@
     "commandsEvalInputName": {
         "message": "Input"
     },
+    "commandsEvalMaxLengthName": {
+        "message": "Over Max Length"
+    },
+    "commandsEvalMaxLengthValue": {
+        "message": "The error is over 1024 characters long."
+    },
     "commandsEvalOutputName": {
         "message": "Output"
     },
-    "commandsEvalTypeName": {
-        "message": "Type"
+    "commandsEvalSuccessTitle": {
+        "message": "Executed Eval"
     },
     "commandsEvalTimeTakenName": {
         "message": "Time Taken"
     },
     "commandsEvalTimeTakenValue": {
         "message": "$1ms"
+    },
+    "commandsEvalTypeName": {
+        "message": "Type"
+    },
+    "commandsHelpAllName": {
+        "message": "/$1"
+    },
+    "commandsHelpAllTitle": {
+        "message": "Commands"
     },
     "commandsHelpInformationAboutName": {
         "message": "About"
@@ -194,21 +200,6 @@
     "commandsHelpInformationLegalValue": {
         "message": "By using this service, you agree to our [Privacy Policy](https://attituding.github.io/Hypixel-News/legal/privacy-policy/ \"Privacy Policy\") and our [Terms of Service](https://attituding.github.io/Hypixel-News/legal/terms-of-service/ \"Terms of Service\")."
     },
-    "commandsHelpAllTitle": {
-        "message": "Commands"
-    },
-    "commandsHelpAllName": {
-        "message": "/$1"
-    },
-    "commandsHelpSpecificInvalidTitle": {
-        "message": "Invalid Command"
-    },
-    "commandsHelpSpecificInvalidDescription": {
-        "message": "**/$1** isn't a valid command!"
-    },
-    "commandsHelpSpecificTitle": {
-        "message": "/$1"
-    },
     "commandsHelpSpecificCooldownName": {
         "message": "Command Cooldown"
     },
@@ -221,35 +212,41 @@
     "commandsHelpSpecificDMValue": {
         "message": "This command cannot be used in a DM channel."
     },
+    "commandsHelpSpecificInvalidDescription": {
+        "message": "**/$1** isn't a valid command!"
+    },
+    "commandsHelpSpecificInvalidTitle": {
+        "message": "Invalid Command"
+    },
     "commandsHelpSpecificOwnerName": {
         "message": "Bot Owner"
     },
     "commandsHelpSpecificOwnerValue": {
         "message": "Being an owner is required to execute this command."
     },
-    "commandsLinkLinkedTitle": {
-        "message": "Linked"
+    "commandsHelpSpecificTitle": {
+        "message": "/$1"
     },
     "commandsLinkLinkedDescription": {
         "message": "$1 is now linked to $2."
     },
-    "commandsLinkUnlinkedTitle": {
-        "message": "Unlinked"
+    "commandsLinkLinkedTitle": {
+        "message": "Linked"
     },
     "commandsLinkUnlinkedDescription": {
         "message": "$1 is no longer linked to $1."
     },
-    "commandsNotificationsPublicTitle": {
-        "message": "Announcement Notifications"
-    },
-    "commandsNotificationsPublicDescription": {
-        "message": "Use the buttons below to manage the notifications you want to receive. Clicking on a button will toggle notifications for the selected announcement category."
+    "commandsLinkUnlinkedTitle": {
+        "message": "Unlinked"
     },
     "commandsNotificationsPrivateTitle": {
         "message": "Sent"
     },
-    "commandsPerformanceTitle": {
-        "message": "Performance"
+    "commandsNotificationsPublicDescription": {
+        "message": "Use the buttons below to manage the notifications you want to receive. Clicking on a button will toggle notifications for the selected announcement category."
+    },
+    "commandsNotificationsPublicTitle": {
+        "message": "Announcement Notifications"
     },
     "commandsPerformanceLatestName": {
         "message": "Latest Performance"
@@ -257,59 +254,56 @@
     "commandsPerformanceLatestValue": {
         "message": "Hypixel RSS Fetch: $1ms\nParse Data: $2ms\nCheck Data: $3ms\nSend: $4ms\nTotal: $5ms"
     },
+    "commandsPerformanceTitle": {
+        "message": "Performance"
+    },
+    "commandsPingDescription": {
+        "message": "Websocket heartbeat is $1ms. Roundtrip latency is $2ms."
+    },
     "commandsPingLoadingTitle": {
         "message": "Pinging..."
     },
     "commandsPingTitle": {
         "message": "🏓 Ping"
     },
-    "commandsPingDescription": {
-        "message": "Websocket heartbeat is $1ms. Roundtrip latency is $2ms."
-    },
-    "commandsPresenceSetTitle": {
-        "message": "Presence Set"
-    },
-    "commandsPresenceSetStatusName": {
-        "message": "Status"
-    },
-    "commandsPresenceSetTypeName": {
-        "message": "Type"
-    },
-    "commandsPresenceSetNameName": {
-        "message": "Name"
-    },
-    "commandsPresenceSetURLName": {
-        "message": "URL"
+    "commandsPresenceClearDescription": {
+        "message": "The presence has been reset to the default!"
     },
     "commandsPresenceClearTitle": {
         "message": "Presence Cleared"
     },
-    "commandsPresenceClearDescription": {
-        "message": "The presence has been reset to the default!"
+    "commandsPresenceSetNameName": {
+        "message": "Name"
     },
-    "commandsReloadAllTitle": {
-        "message": "Reloaded Everything"
+    "commandsPresenceSetStatusName": {
+        "message": "Status"
+    },
+    "commandsPresenceSetTitle": {
+        "message": "Presence Set"
+    },
+    "commandsPresenceSetTypeName": {
+        "message": "Type"
+    },
+    "commandsPresenceSetURLName": {
+        "message": "URL"
     },
     "commandsReloadAllDescription": {
         "message": "$1 imports have been reloaded! This action took $2ms."
     },
-    "commandsReloadSingleUnknownTitle": {
-        "message": "Unknown Item"
-    },
-    "commandsReloadSingleUnknownDescription": {
-        "message": "There is no item with the structure $1.$2!"
-    },
-    "commandsReloadSingleSuccessTitle": {
-        "message": "Reloaded"
+    "commandsReloadAllTitle": {
+        "message": "Reloaded Everything"
     },
     "commandsReloadSingleSuccessDescription": {
         "message": "$1.$2 was successfully reloaded! This action took $3 milliseconds."
     },
-    "commandsSendAnnouncementsLogSending": {
-        "message": "Sending message..."
+    "commandsReloadSingleSuccessTitle": {
+        "message": "Reloaded"
     },
-    "commandsSendAnnouncementsLogPublished": {
-        "message": "Published announcement!"
+    "commandsReloadSingleUnknownDescription": {
+        "message": "There is no item with the structure $1.$2!"
+    },
+    "commandsReloadSingleUnknownTitle": {
+        "message": "Unknown Item"
     },
     "commandsSendAnnouncementsEmbedAuthorName": {
         "message": "Hypixel News"
@@ -317,20 +311,35 @@
     "commandsSendAnnouncementsEmbedFooterName": {
         "message": "Special Announcement"
     },
+    "commandsSendAnnouncementsLogPublished": {
+        "message": "Published announcement!"
+    },
+    "commandsSendAnnouncementsLogSending": {
+        "message": "Sending message..."
+    },
     "commandsSendAnnouncementsPreviewButtonLabel": {
         "message": "Looks Good!"
-    },
-    "commandsSendAnnouncementsPreviewTitle": {
-        "message": "Announcement Preview"
     },
     "commandsSendAnnouncementsPreviewDescription": {
         "message": "This is a preview of the announcement."
     },
-    "commandsSendAnnouncementsSuccessTitle": {
-        "message": "Announcement Published"
+    "commandsSendAnnouncementsPreviewTitle": {
+        "message": "Announcement Preview"
     },
     "commandsSendAnnouncementsSuccessDescription": {
         "message": "Your announcement has been published!"
+    },
+    "commandsSendAnnouncementsSuccessTitle": {
+        "message": "Announcement Published"
+    },
+    "commandsSystemMemberValue": {
+        "message": "$1MB"
+    },
+    "commandsSystemMemoryName": {
+        "message": "Memory Usage"
+    },
+    "commandsSystemServersName": {
+        "message": "Servers"
     },
     "commandsSystemTitle": {
         "message": "System"
@@ -338,23 +347,11 @@
     "commandsSystemUptimeName": {
         "message": "Uptime"
     },
-    "commandsSystemMemoryName": {
-        "message": "Memory Usage"
-    },
-    "commandsSystemMemberValue": {
-        "message": "$1MB"
-    },
-    "commandsSystemServersName": {
-        "message": "Servers"
-    },
     "commandsSystemUsersName": {
         "message": "Users"
     },
     "coreComponentsButtonsReadMoreLabel": {
         "message": "Read More"
-    },
-    "coreCoreLogNewPosts": {
-        "message": "New Posts Found: $1 $2"
     },
     "coreCoreLogEditedPosts": {
         "message": "Edited Posts Found: $1 $2"
@@ -362,92 +359,95 @@
     "coreCoreLogFinishedPosts": {
         "message": "Finished dispatching messages from $1"
     },
+    "coreCoreLogNewPosts": {
+        "message": "New Posts Found: $1 $2"
+    },
     "errorsDatabasePool": {
         "message": "PostgreSQL Pool Error | Total Clients: $1 Idle Clients: $2 Waiting Clients: $3"
-    },
-    "errorsInteractionReplyTitle": {
-        "message": "Oops"
-    },
-    "errorsInteractionReplyDescription": {
-        "message": "An error occurred while executing the interaction! This error has been automatically forwarded for review. Sorry."
-    },
-    "errorsInteractionReplyIncidentName": {
-        "message": "Incident ID"
     },
     "errorsGeneralError": {
         "message": "Error"
     },
-    "errorsInteractionReplyFailedNotify": {
-        "message": "An error has occurred and also failed to notify the user"
-    },
     "errorsGeneralUnexpected": {
         "message": "Unexpected Error"
     },
-    "errorsPreconditionDevModeTitle": {
-        "message": "Developer Mode"
+    "errorsInteractionReplyDescription": {
+        "message": "An error occurred while executing the interaction! This error has been automatically forwarded for review. Sorry."
     },
-    "errorsPreconditionDevModeDescription": {
-        "message": "This bot is in developer only mode, likely due to a major issue or an upgrade that is taking place. Please check back later!"
+    "errorsInteractionReplyFailedNotify": {
+        "message": "An error has occurred and also failed to notify the user"
     },
-    "errorsPreconditionOwnerTitle": {
-        "message": "Insufficient Permissions"
+    "errorsInteractionReplyIncidentName": {
+        "message": "Incident ID"
     },
-    "errorsPreconditionOwnerDescription": {
-        "message": "You cannot execute this command without being an owner!"
-    },
-    "errorsPreconditionDMTitle": {
-        "message": "DM Channel"
-    },
-    "errorsPreconditionDMDescription": {
-        "message": "You cannot execute this command in the DM channel! Please switch to a server channel!"
-    },
-    "errorsPreconditionUserGlobalPermissionsTitle": {
-        "message": "Missing Permission(s)"
-    },
-    "errorsPreconditionUserGlobalPermissionsDescription": {
-        "message": "You don't have the required server permission(s) to use this command! Please ensure that you have the following given through your role: $1"
-    },
-    "errorsPreconditionUserLocalPermissionsTitle": {
-        "message": "Missing Permission(s)"
-    },
-    "errorsPreconditionUserLocalPermissionsDescription": {
-        "message": "You don't have the required permission(s) to use this command! Please ensure that you have the following given through your role or through the channel's advanced permissions: $1"
-    },
-    "errorsPreconditionBotGlobalPermissionsTitle": {
-        "message": "Missing Permission(s)"
+    "errorsInteractionReplyTitle": {
+        "message": "Oops"
     },
     "errorsPreconditionBotGlobalPermissionsDescription": {
         "message": "This bot doesn't have the required server permission(s) to use this command! Please ensure that you have given the bot the following through its role: $1"
     },
-    "errorsPreconditionBotLocalPermissionsTitle": {
+    "errorsPreconditionBotGlobalPermissionsTitle": {
         "message": "Missing Permission(s)"
     },
     "errorsPreconditionBotLocalPermissionsDescription": {
         "message": "This bot doesn't have the required permission(s) to use this command! Please ensure that you have given the bot the following through its role or through the channel's advanced permissions: $1"
     },
-    "errorsPreconditionCooldownWaitingTitle": {
-        "message": "Cooldown"
-    },
-    "errorsPreconditionCooldownWaitingDescription": {
-        "message": "You are executing commands too quickly! The cooldown of this command allows $1 executions in $2 seconds. This message will turn green in $3 seconds once the cooldown expires."
-    },
-    "errorsPreconditionCooldownCooldownOverTitle": {
-        "message": "Cooldown Over"
+    "errorsPreconditionBotLocalPermissionsTitle": {
+        "message": "Missing Permission(s)"
     },
     "errorsPreconditionCooldownCooldownOverDescription": {
         "message": "The cooldown has expired! You can now execute the command **/$1**!"
     },
+    "errorsPreconditionCooldownCooldownOverTitle": {
+        "message": "Cooldown Over"
+    },
+    "errorsPreconditionCooldownWaitingDescription": {
+        "message": "You are executing commands too quickly! The cooldown of this command allows $1 executions in $2 seconds. This message will turn green in $3 seconds once the cooldown expires."
+    },
+    "errorsPreconditionCooldownWaitingTitle": {
+        "message": "Cooldown"
+    },
+    "errorsPreconditionDevModeDescription": {
+        "message": "This bot is in developer only mode, likely due to a major issue or an upgrade that is taking place. Please check back later!"
+    },
+    "errorsPreconditionDevModeTitle": {
+        "message": "Developer Mode"
+    },
+    "errorsPreconditionDMDescription": {
+        "message": "You cannot execute this command in the DM channel! Please switch to a server channel!"
+    },
+    "errorsPreconditionDMTitle": {
+        "message": "DM Channel"
+    },
     "errorsPreconditionLog": {
         "message": "$1 failed $2"
     },
-    "errorsRequestSuccessAfterRetry": {
-        "message": "Successfully fetched after a retry"
+    "errorsPreconditionOwnerDescription": {
+        "message": "You cannot execute this command without being an owner!"
+    },
+    "errorsPreconditionOwnerTitle": {
+        "message": "Insufficient Permissions"
+    },
+    "errorsPreconditionUserGlobalPermissionsDescription": {
+        "message": "You don't have the required server permission(s) to use this command! Please ensure that you have the following given through your role: $1"
+    },
+    "errorsPreconditionUserGlobalPermissionsTitle": {
+        "message": "Missing Permission(s)"
+    },
+    "errorsPreconditionUserLocalPermissionsDescription": {
+        "message": "You don't have the required permission(s) to use this command! Please ensure that you have the following given through your role or through the channel's advanced permissions: $1"
+    },
+    "errorsPreconditionUserLocalPermissionsTitle": {
+        "message": "Missing Permission(s)"
     },
     "errorsRequest500_600": {
         "message": "Retrying due to a response between 500 and 600: $1"
     },
     "errorsRequestAbort": {
         "message": "Retrying due to an AbortError"
+    },
+    "errorsRequestSuccessAfterRetry": {
+        "message": "Successfully fetched after a retry"
     },
     "eventsDebug": {
         "message": "Discord.js Debug:"
@@ -470,28 +470,28 @@
     "eventsWarn": {
         "message": "Discord.js Warning:"
     },
-    "logCore": {
-        "message": "Core:"
-    },
     "logCommand": {
         "message": "Command: ID $1: User $2:"
+    },
+    "logCore": {
+        "message": "Core:"
     },
     "logRequest": {
         "message": "Request:"
     },
-    "persistentNotificationAddTitle": {
-        "message": "Added $1 Notifications"
-    },
     "persistentNotificationAddDescription": {
         "message": "You will now be notified whenever **$1** are published!"
     },
-    "persistentNotificationRemoveTitle": {
-        "message": "Removed $1 Notifications"
+    "persistentNotificationAddTitle": {
+        "message": "Added $1 Notifications"
+    },
+    "persistentNotificationCurrentName": {
+        "message": "Your Notifications"
     },
     "persistentNotificationRemoveDescription": {
         "message": "You will no longer be notified whenever new **$1** are posted!"
     },
-    "persistentNotificationCurrentName": {
-        "message": "Your Notifications"
+    "persistentNotificationRemoveTitle": {
+        "message": "Removed $1 Notifications"
     }
 }

@@ -1,10 +1,12 @@
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
-    Listener,
+    type Listener,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { type CommandInteraction } from 'discord.js';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
@@ -28,7 +30,7 @@ export class ReloadCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'reload',
             description: 'Reloads all imports or a single import',
@@ -79,7 +81,7 @@ export class ReloadCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         switch (interaction.options.getSubcommand()) {
             case 'all': await this.all(interaction);
                 break;
@@ -89,7 +91,7 @@ export class ReloadCommand extends Command {
         }
     }
 
-    private async all(interaction: Command.ChatInputInteraction) {
+    private async all(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const now = Date.now();
@@ -131,7 +133,7 @@ export class ReloadCommand extends Command {
         await interaction.editReply({ embeds: [reloadedEmbed] });
     }
 
-    private async single(interaction: Command.ChatInputInteraction) {
+    private async single(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const now = Date.now();

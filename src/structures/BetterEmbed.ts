@@ -1,6 +1,6 @@
 import {
     MessageEmbed,
-    EmbedFieldData,
+    type EmbedFieldData,
     BaseCommandInteraction,
 } from 'discord.js';
 

@@ -1,17 +1,17 @@
+import { Base } from '../structures/Base';
+import { Changes } from './Changes';
+import { Components } from './Components';
 import { Constants } from '../utility/Constants';
-import { container } from '@sapphire/framework';
-import { CoreChanges } from './CoreChanges';
-import { CoreComponents } from './CoreComponents';
-import { CoreDispatch } from './CoreDispatch';
-import { CoreEmbeds } from './CoreEmbeds';
-import { CoreErrors } from './CoreErrors';
-import { CoreFormat } from './CoreFormat';
-import { CoreRequests } from './CoreRequests';
+import { Dispatch } from './Dispatch';
+import { Embeds } from './Embeds';
 import { ErrorHandler } from '../errors/ErrorHandler';
+import { Errors } from './Errors';
+import { Format } from './Format';
 import { HTTPError } from '../errors/HTTPError';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { RequestErrorHandler } from '../errors/RequestErrorHandler';
+import { Requests } from './Requests';
 import { setTimeout } from 'node:timers/promises';
 import { Time } from '../enums/Time';
 
@@ -27,35 +27,37 @@ export type Performance = {
     send: number;
 };
 
-export class Core {
-    performance: {
+export class Core extends Base {
+    readonly performance: {
         latest: Performance | null;
         history: Performance[];
     };
 
-    changes: CoreChanges;
-    components: CoreComponents;
-    dispatch: CoreDispatch;
-    embeds: CoreEmbeds;
-    errors: CoreErrors;
-    format: CoreFormat;
-    request: CoreRequests;
+    readonly changes: Changes;
+    readonly components: Components;
+    readonly dispatch: Dispatch;
+    readonly embeds: Embeds;
+    readonly errors: Errors;
+    readonly format: Format;
+    readonly requests: Requests;
 
     uses: number;
 
     public constructor() {
+        super();
+
         this.performance = {
             latest: null,
             history: [],
         };
 
-        this.changes = new CoreChanges();
-        this.components = new CoreComponents();
-        this.dispatch = new CoreDispatch();
-        this.embeds = new CoreEmbeds();
-        this.errors = new CoreErrors();
-        this.format = new CoreFormat();
-        this.request = new CoreRequests();
+        this.changes = new Changes();
+        this.components = new Components();
+        this.dispatch = new Dispatch();
+        this.embeds = new Embeds();
+        this.errors = new Errors();
+        this.format = new Format();
+        this.requests = new Requests();
 
         this.uses = 0;
     }
@@ -75,7 +77,7 @@ export class Core {
             await setTimeout(this.errors.getTimeout());
         }
 
-        if (container.config.core === false) {
+        if (this.container.config.core === false) {
             await setTimeout(Options.coreDisabledTimeout);
             return;
         }
@@ -103,7 +105,7 @@ export class Core {
             };
 
             try {
-                const xmlString = await this.request.request(url);
+                const xmlString = await this.requests.request(url);
                 performance.fetch = Date.now();
 
                 const rssJSON = this.format.parse(xmlString);
@@ -122,7 +124,7 @@ export class Core {
                     );
 
                     Log.core(
-                        container.i18n.getMessage(
+                        this.container.i18n.getMessage(
                             'coreCoreLogNewPosts', [
                             newPosts.length,
                             newPosts.map(post => post.link).join(', '),
@@ -130,7 +132,7 @@ export class Core {
                     ));
 
                     Log.core(
-                        container.i18n.getMessage(
+                        this.container.i18n.getMessage(
                             'coreCoreLogEditedPosts', [
                             editedPosts.length,
                             editedPosts.map(post => post.link).join(', '),
@@ -142,7 +144,7 @@ export class Core {
                     await this.dispatch.dispatch(embeds, components, changes);
 
                     Log.core(
-                        container.i18n.getMessage(
+                        this.container.i18n.getMessage(
                             'coreCoreLogFinishedPosts', [
                             changes.title,
                         ],
@@ -163,7 +165,7 @@ export class Core {
                 }
 
                 const regularInterval = (
-                    container.config.interval /
+                    this.container.config.interval /
                     Constants.rss.length
                 );
 
@@ -175,7 +177,7 @@ export class Core {
             }
 
             await setTimeout(
-                container.config.interval /
+                this.container.config.interval /
                 Constants.rss.length,
             );
         }

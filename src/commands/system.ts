@@ -1,14 +1,16 @@
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
-    cleanLength,
-    cleanRound,
-} from '../utility/utility';
-import {
+    ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Bytes } from '../enums/Bytes';
+import {
+    cleanLength,
+    cleanRound,
+} from '../utility/utility';
+import { type CommandInteraction } from 'discord.js';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
@@ -33,7 +35,7 @@ export class SystemCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'system',
             description: 'View system information',
@@ -48,7 +50,7 @@ export class SystemCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const memoryMegaBytes = process.memoryUsage.rss() / Bytes.MegaByte;

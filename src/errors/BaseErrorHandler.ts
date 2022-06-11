@@ -1,15 +1,13 @@
-import { container } from '@sapphire/framework';
+import { Base } from '../structures/Base';
 import {
-    FileOptions,
+    type FileOptions,
     SnowflakeUtil,
 } from 'discord.js';
-import {
-    generateStackTrace,
-} from '../utility/utility';
+import { generateStackTrace } from '../utility/utility';
 import { i18n } from '../locales/i18n';
 import { Sentry } from './Sentry';
 
-export class BaseErrorHandler<E> {
+export class BaseErrorHandler<E> extends Base {
     readonly error: E;
     readonly incidentID: string;
     readonly sentry: Sentry;
@@ -17,12 +15,11 @@ export class BaseErrorHandler<E> {
     i18n: i18n;
 
     public constructor(error: E) {
+        super();
+
         this.error = error;
-
         this.i18n = new i18n();
-
         this.incidentID = SnowflakeUtil.generate();
-
         this.sentry = new Sentry().baseErrorContext(this.incidentID);
 
         Object.defineProperty(
@@ -49,6 +46,6 @@ export class BaseErrorHandler<E> {
     public log(...text: unknown[]) {
         const id = `${this.incidentID} |`;
 
-        container.logger.error(id, ...text);
+        this.container.logger.error(id, ...text);
     }
 }

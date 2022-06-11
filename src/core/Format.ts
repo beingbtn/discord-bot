@@ -1,3 +1,4 @@
+import { BaseCore } from './BaseCore';
 import { XMLParser } from 'fast-xml-parser';
 import Turndown from 'turndown';
 
@@ -25,11 +26,13 @@ export type rssJSON = {
     }[];
 }
 
-export class CoreFormat {
+export class Format extends BaseCore {
     turndown: Turndown;
     parser: XMLParser;
 
     public constructor() {
+        super();
+
         this.turndown = new Turndown({
             codeBlockStyle: 'fenced',
         })

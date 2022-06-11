@@ -1,16 +1,18 @@
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { ChannelTypes } from 'discord.js/typings/enums';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Categories } from '../enums/Categories';
+import { ChannelTypes } from 'discord.js/typings/enums';
 import {
+    type CommandInteraction,
     Formatters,
-    NewsChannel,
+    type NewsChannel,
     Permissions,
-    TextChannel,
+    type TextChannel,
 } from 'discord.js';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
@@ -35,7 +37,7 @@ export class AnnouncementsCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'announcements',
             description: 'Configure what announcements you want to receive',
@@ -94,7 +96,7 @@ export class AnnouncementsCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         if (!interaction.inCachedGuild()) {
             return;
         }

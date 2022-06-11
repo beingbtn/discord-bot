@@ -1,4 +1,4 @@
-import type { Client } from 'discord.js';
+import { type Client } from 'discord.js';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { Events } from '../enums/Events';
 import { Listener } from '@sapphire/framework';

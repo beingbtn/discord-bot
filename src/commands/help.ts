@@ -1,9 +1,11 @@
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { type CommandInteraction } from 'discord.js';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
@@ -26,7 +28,7 @@ export class HelpCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'help',
             description: 'Displays helpful information and available commands',
@@ -71,7 +73,7 @@ export class HelpCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         if (interaction.options.getSubcommand() === 'information') {
             await this.information(interaction);
         } else if (interaction.options.getString('command')) {
@@ -81,7 +83,7 @@ export class HelpCommand extends Command {
         }
     }
 
-    public async information(interaction: Command.ChatInputInteraction) {
+    public async information(interaction: CommandInteraction) {
         const { i18n } = interaction;
         const informationEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
@@ -99,7 +101,7 @@ export class HelpCommand extends Command {
         await interaction.editReply({ embeds: [informationEmbed] });
     }
 
-    public async specific(interaction: Command.ChatInputInteraction) {
+    public async specific(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const commandArg = interaction.options.getString(
@@ -180,7 +182,7 @@ export class HelpCommand extends Command {
         await interaction.editReply({ embeds: [commandSearchEmbed] });
     }
 
-    public async commands(interaction: Command.ChatInputInteraction) {
+    public async commands(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const commandsCollection = this.container.stores

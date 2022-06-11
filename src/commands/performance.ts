@@ -1,9 +1,11 @@
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { type CommandInteraction } from 'discord.js';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 
@@ -26,7 +28,7 @@ export class PerformanceCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'performance',
             description: 'View system performance',
@@ -41,7 +43,7 @@ export class PerformanceCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const {

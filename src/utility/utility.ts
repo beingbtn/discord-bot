@@ -1,10 +1,10 @@
 import {
-    AwaitMessageCollectorOptionsParams,
-    CommandInteraction,
+    type AwaitMessageCollectorOptionsParams,
+    type CommandInteraction,
     Formatters,
     MessageActionRow,
-    MessageComponentTypeResolvable,
-    TextBasedChannel,
+    type MessageComponentTypeResolvable,
+    type TextBasedChannel,
 } from 'discord.js';
 import { container } from '@sapphire/framework';
 import { Options } from './Options';

@@ -1,7 +1,8 @@
-import type { rssJSON } from './CoreFormat';
+import { Base } from '../structures/Base';
 import { Database } from '../structures/Database';
+import { type rssJSON } from './Format';
 
-export class CoreChanges {
+export class Changes extends Base {
     public async check(data: rssJSON): Promise<rssJSON> {
         const maxComments = JSON.parse(
             process.env.ANNOUNCEMENTS!,

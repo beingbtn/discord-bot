@@ -25,7 +25,7 @@ process.on('unhandledRejection', error => {
     new ErrorHandler(
         error,
         'unhandledRejection',
-    ).init(Sentry.Severity.Fatal);
+    ).init('fatal');
 
     process.exit(1);
 });
@@ -34,7 +34,7 @@ process.on('uncaughtException', error => {
     new ErrorHandler(
         error,
         'uncaughtException',
-    ).init(Sentry.Severity.Fatal);
+    ).init('fatal');
 
     process.exit(1);
 });

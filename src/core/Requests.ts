@@ -1,11 +1,11 @@
-import { container } from '@sapphire/framework';
+import { BaseCore } from './BaseCore';
 import { HTTPError } from '../errors/HTTPError';
 import { Request } from '../structures/Request';
 
-export class CoreRequests {
+export class Requests extends BaseCore {
     public async request(url: string) {
         const response = await new Request(
-            container.config,
+            this.container.config,
         ).request(url);
 
         if (response.ok === false) {

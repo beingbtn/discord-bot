@@ -5,7 +5,6 @@ import {
     PoolClient,
 } from 'pg';
 import { Sentry } from '../errors/Sentry';
-import { Severity } from '@sentry/node';
 
 const pool = new Pool({
     idleTimeoutMillis: Options.postgresqlIdleTimeoutMillis,
@@ -13,7 +12,7 @@ const pool = new Pool({
 
 pool.on('error', error => {
     new Sentry()
-        .setSeverity(Severity.Warning)
+        .setSeverity('warning')
         .databaseContext(pool)
         .captureException(error);
 

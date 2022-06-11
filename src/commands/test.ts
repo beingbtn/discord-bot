@@ -1,8 +1,10 @@
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { type CommandInteraction } from 'discord.js';
 import { Preconditions } from '../enums/Preconditions';
 
 export class TestCommand extends Command {
@@ -24,7 +26,7 @@ export class TestCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'test',
             description: 'Does stuff',
@@ -61,7 +63,7 @@ export class TestCommand extends Command {
         });
     }
 
-    public async chatInputCommand(interaction: Command.ChatInputInteraction) {
+    public async chatInputCommand(interaction: CommandInteraction) {
         await interaction.followUp({
             content: 'e',
         });

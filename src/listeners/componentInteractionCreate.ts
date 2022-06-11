@@ -1,9 +1,9 @@
-import { CustomID } from '../@types/Persistent';
+import { type CustomID } from '../@types/Persistent';
+import { Events } from '../enums/Events';
 import {
-    Interaction,
+    type Interaction,
     MessageFlags,
 } from 'discord.js';
-import { Events } from '../enums/Events';
 import { Listener } from '@sapphire/framework';
 
 export class ComponentInteractionCreateListener extends Listener {

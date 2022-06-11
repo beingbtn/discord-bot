@@ -1,19 +1,19 @@
-import type { rssJSON } from './CoreFormat';
-import { container } from '@sapphire/framework';
+import { Base } from '../structures/Base';
 import { Database } from '../structures/Database';
 import {
     Formatters,
-    MessageActionRow,
-    MessageEmbed,
-    NewsChannel,
+    type MessageActionRow,
+    type MessageEmbed,
+    type NewsChannel,
 } from 'discord.js';
 import { Options } from '../utility/Options';
+import { type rssJSON } from './Format';
 import { setTimeout } from 'node:timers/promises';
 import process from 'node:process';
 
 /* eslint-disable no-await-in-loop */
 
-export class CoreDispatch {
+export class Dispatch extends Base {
     announcements: {
         [key: string]: {
             id: string
@@ -23,6 +23,8 @@ export class CoreDispatch {
     };
 
     public constructor() {
+        super();
+
         this.announcements = JSON.parse(process.env.ANNOUNCEMENTS!);
     }
 
@@ -32,7 +34,7 @@ export class CoreDispatch {
         data: rssJSON,
     ) {
         const announcement = this.announcements[data.title];
-        const channel = await container.client.channels.fetch(
+        const channel = await this.container.client.channels.fetch(
             announcement.id,
         ) as NewsChannel;
 

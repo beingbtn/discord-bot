@@ -3,8 +3,8 @@ import { Options } from '../utility/Options';
 
 //Simple implementation of Chrome's/Firefox's i18n
 export class i18n {
-    locale: typeof locales[keyof typeof locales];
-    localeName: string;
+    readonly locale: typeof locales[keyof typeof locales];
+    readonly localeName: string;
 
     public constructor(locale?: string) {
         this.localeName = locale && locales[locale as keyof typeof locales]

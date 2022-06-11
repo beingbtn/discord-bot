@@ -1,14 +1,16 @@
-import type { ActivityTypes } from 'discord.js/typings/enums';
-import type {
-    ExcludeEnum,
-    PresenceStatusData,
-} from 'discord.js';
-import { BetterEmbed } from '../structures/BetterEmbed';
+import { ActivityTypes } from 'discord.js/typings/enums';
 import {
+    type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import {
+    type CommandInteraction,
+    type ExcludeEnum,
+    type PresenceStatusData,
+} from 'discord.js';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 import { setPresence } from '../utility/utility';
@@ -32,7 +34,7 @@ export class PresenceCommand extends Command {
         });
     }
 
-    public override registerApplicationCommands(registry: Command.Registry) {
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
             name: 'presence',
             description: 'Set a custom presence for the bot',
@@ -125,7 +127,7 @@ export class PresenceCommand extends Command {
         });
     }
 
-    public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
         const responseEmbed = new BetterEmbed(interaction)

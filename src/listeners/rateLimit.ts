@@ -1,7 +1,6 @@
 import { Events } from '../enums/Events';
 import { Listener } from '@sapphire/framework';
 import { Sentry } from '../errors/Sentry';
-import { Severity } from '@sentry/node';
 
 export class RateLimitListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
@@ -19,7 +18,7 @@ export class RateLimitListener extends Listener {
         );
 
         new Sentry()
-            .setSeverity(Severity.Warning)
+            .setSeverity('warning')
             .captureException(rateLimitInfo);
     }
 }

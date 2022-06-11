@@ -1,9 +1,8 @@
 import { AbortError } from './AbortError';
 import { BaseErrorHandler } from './BaseErrorHandler';
-import { Core } from '../core/Core';
+import { type Core } from '../core/Core';
 import { ErrorHandler } from './ErrorHandler';
 import { HTTPError } from './HTTPError';
-import { Severity } from '@sentry/node';
 
 export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
     readonly core: Core;
@@ -32,7 +31,7 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
             }
 
             this.sentry
-                .setSeverity(Severity.Warning)
+                .setSeverity('warning')
                 .requestContext(this.error, this.core)
                 .captureException(this.error);
         } catch (error) {

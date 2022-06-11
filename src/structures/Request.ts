@@ -1,12 +1,13 @@
 import { AbortError } from '../errors/AbortError';
-import fetch, {
-    RequestInit,
-    Response,
-} from 'node-fetch';
+import { AbortSignal } from 'node-fetch/externals';
 import { i18n } from '../locales/i18n';
 import { Log } from './Log';
 import { setTimeout } from 'node:timers';
 import { Options } from '../utility/Options';
+import fetch, {
+    type RequestInit,
+    type Response,
+} from 'node-fetch';
 
 export class Request {
     readonly i18n: i18n;
@@ -37,7 +38,8 @@ export class Request {
 
         try {
             const response = await fetch(url, {
-                signal: controller.signal,
+                //Coerced due to a Typescript typings update to AbortController
+                signal: controller.signal as AbortSignal,
                 ...fetchOptions,
             });
 

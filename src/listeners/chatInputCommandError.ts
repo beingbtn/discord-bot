@@ -1,5 +1,5 @@
 import {
-    ChatInputCommandErrorPayload,
+    type ChatInputCommandErrorPayload,
     Listener,
 } from '@sapphire/framework';
 import { Events } from '../enums/Events';

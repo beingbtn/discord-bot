@@ -1,4 +1,4 @@
-import type { CommandInteraction } from 'discord.js';
+import { type CommandInteraction } from 'discord.js';
 import { Precondition } from '@sapphire/framework';
 import { Identifiers } from '../enums/Preconditions';
 
