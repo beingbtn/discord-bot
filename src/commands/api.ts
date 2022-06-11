@@ -219,6 +219,7 @@ export class APICommand extends Command {
 
     public async set(interaction: Command.ChatInputInteraction) {
         const { i18n } = interaction;
+
         const category = interaction.options.getString('category', true) as errorTypes;
         const type = interaction.options.getString('type', true);
         const value = interaction.options.getNumber('value', true);

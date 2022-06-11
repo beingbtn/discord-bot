@@ -23,11 +23,17 @@
     "commandsAnnouncementsBotMissingPermissionDescription": {
         "message": "This bot is unable to use the channel you selected because it is missing permission(s): $1. Grant the bot the listed permissions or select a different channel that the bot can use."
     },
+    "commandsAnnouncementsBotMissingPermissionLog": {
+        "message": "Bot missing permission"
+    },
     "commandsAnnouncementsUserMissingPermissionTitle": {
         "message": "Missing Permission"
     },
     "commandsAnnouncementsUserMissingPermissionDescription": {
         "message": "You must have the **Manage Webhook(s)** permission to use this command. This permission can either be granted server-wide or given through a channel's advanced permissions."
+    },
+    "commandsAnnouncementsUserMissingPermissionLog": {
+        "message": "User missing permission"
     },
     "commandsAnnouncementsAddTitle": {
         "message": "Added $1"

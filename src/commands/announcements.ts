@@ -5,6 +5,7 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import { ChannelTypes } from 'discord.js/typings/enums';
+import { Categories } from '../enums/Categories';
 import {
     Formatters,
     NewsChannel,
@@ -122,7 +123,9 @@ export class AnnouncementsCommand extends Command {
 
             Log.command(
                 interaction,
-                'User missing permission',
+                i18n.getMessage(
+                    'commandsAnnouncementsUserMissingPermissionLog',
+                ),
             );
 
             await interaction.editReply({
@@ -132,14 +135,14 @@ export class AnnouncementsCommand extends Command {
             return;
         }
 
-        const BotMissingPermissions = channel
+        const botMissingPermissions = channel
             .permissionsFor(interaction.guild.me!)
             .missing([
                 Permissions.FLAGS.VIEW_CHANNEL,
                 Permissions.FLAGS.MANAGE_WEBHOOKS,
             ]);
 
-        if (BotMissingPermissions.length !== 0) {
+        if (botMissingPermissions.length !== 0) {
             const missingPermission = new BetterEmbed(interaction)
                 .setColor(Options.colorsWarning)
                 .setTitle(
@@ -150,12 +153,17 @@ export class AnnouncementsCommand extends Command {
                 .setDescription(
                     i18n.getMessage(
                         'commandsAnnouncementsBotMissingPermissionDescription', [
-                            BotMissingPermissions.join(', '),
+                            botMissingPermissions.join(', '),
                         ],
                     ),
                 );
 
-            Log.command(interaction, 'Bot missing permission(s)');
+            Log.command(
+                interaction,
+                i18n.getMessage(
+                    'commandsAnnouncementsBotMissingPermissionLog',
+                ),
+            );
 
             await interaction.editReply({
                 embeds: [missingPermission],
@@ -165,10 +173,10 @@ export class AnnouncementsCommand extends Command {
         }
 
         const type = interaction.options.getSubcommand() === 'general'
-            ? 'News and Announcements'
+            ? Categories.NewsAndAnnouncements
             : interaction.options.getSubcommand() === 'skyblock'
-                ? 'SkyBlock Patch Notes'
-                : 'Moderation Information and Changes';
+                ? Categories.SkyBlockPatchNotes
+                : Categories.ModerationInformationAndChanges;
 
         const channels = JSON.parse(process.env.ANNOUNCEMENTS!);
         const announcementID = channels[type].id as string;
