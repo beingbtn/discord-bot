@@ -65,9 +65,11 @@ export class SystemCommand extends Command {
                 },
                 {
                     name: i18n.getMessage('commandsSystemMemoryName'),
-                    value: i18n.getMessage('commandsSystemMemberValue', [
-                        cleanRound(memoryMegaBytes, 1),
-                    ]),
+                    value: i18n.getMessage(
+                        'commandsSystemMemberValue', [
+                            cleanRound(memoryMegaBytes, 1),
+                        ],
+                    ),
                 },
                 {
                     name: i18n.getMessage('commandsSystemServersName'),

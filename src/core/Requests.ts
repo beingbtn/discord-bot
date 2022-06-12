@@ -1,8 +1,8 @@
-import { BaseCore } from './BaseCore';
+import { Base } from '../structures/Base';
 import { HTTPError } from '../errors/HTTPError';
 import { Request } from '../structures/Request';
 
-export class Requests extends BaseCore {
+export class Requests extends Base {
     public async request(url: string) {
         const response = await new Request(
             this.container.config,

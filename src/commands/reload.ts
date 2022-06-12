@@ -204,12 +204,6 @@ export class ReloadCommand extends Command {
     }
 
     private async reloadItem(item: Command | Listener) {
-        //Temp
-
-        if (item instanceof Command) {
-            await item.reload();
-        } else {
-            await item.reloadTemp();
-        }
+        await item.reload();
     }
 }

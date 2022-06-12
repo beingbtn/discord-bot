@@ -1,4 +1,4 @@
-import { BaseCore } from './BaseCore';
+import { Base } from '../structures/Base';
 import { XMLParser } from 'fast-xml-parser';
 import Turndown from 'turndown';
 
@@ -26,7 +26,7 @@ export type rssJSON = {
     }[];
 }
 
-export class Format extends BaseCore {
+export class Format extends Base {
     turndown: Turndown;
     parser: XMLParser;
 

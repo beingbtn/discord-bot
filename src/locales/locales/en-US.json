@@ -60,13 +60,13 @@
         "message": "Missing Permission"
     },
     "commandsAPICallDescription": {
-        "message": "Executed <CoreErrors>.$1."
+        "message": "Executed <Core>.errors.$1."
     },
     "commandsAPICallTitle": {
         "message": "Executed"
     },
     "commandsAPISetDescription": {
-        "message": "<CoreErrors>.$1.$2 is now $3."
+        "message": "<Core>.errors.$1.$2 is now $3."
     },
     "commandsAPISetTitle": {
         "message": "Updated Value"

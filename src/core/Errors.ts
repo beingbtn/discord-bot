@@ -1,7 +1,7 @@
-import { BaseCore } from './BaseCore';
+import { Base } from '../structures/Base';
 import { Timeout } from '../structures/Timeout';
 
-export class Errors extends BaseCore {
+export class Errors extends Base {
     isGlobal: boolean;
 
     readonly abort: Timeout;

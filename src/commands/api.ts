@@ -25,8 +25,8 @@ export class APICommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
         super(context, {
             ...options,
-            name: 'test',
-            description: 'Does stuff',
+            name: 'api',
+            description: 'Toggles dynamic settings',
             cooldownLimit: 0,
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
