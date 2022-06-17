@@ -4,8 +4,10 @@ WORKDIR /usr/src/app
 
 ADD . /usr/src/app
 
-RUN npm install --production
+RUN npm install
 
-RUN npm run prerun
+RUN npm run build
+
+RUN npm prune --production
 
 CMD ["npm","run","docker"]
