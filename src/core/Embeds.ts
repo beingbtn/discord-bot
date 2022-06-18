@@ -1,12 +1,12 @@
-import { Base } from '../structures/Base';
 import { MessageEmbed } from 'discord.js';
-import { type rssJSON } from './Format';
+import { Base } from '../structures/Base';
+import { type RssJSON } from './Format';
 
 export class Embeds extends Base {
-    public create(data: rssJSON) {
+    public create(data: RssJSON) {
         const posts: MessageEmbed[] = [];
 
-        for (const item of data.items) {
+        data.items.forEach((item) => {
             const embed = new MessageEmbed()
                 .setAuthor({
                     name: item.author,
@@ -26,7 +26,7 @@ export class Embeds extends Base {
             }
 
             posts.unshift(embed);
-        }
+        });
 
         return posts;
     }

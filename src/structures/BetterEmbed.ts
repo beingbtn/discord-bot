@@ -8,7 +8,7 @@ type Footer =
     | {
         text: string,
         iconURL?: string,
-      }
+    }
     | BaseCommandInteraction;
 
 export class BetterEmbed extends MessageEmbed {

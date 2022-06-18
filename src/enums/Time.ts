@@ -1,6 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
-
 export const enum Time {
     Second = 1000,
     Minute = 1000 * 60,

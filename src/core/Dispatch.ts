@@ -1,15 +1,15 @@
-import { Base } from '../structures/Base';
-import { Database } from '../structures/Database';
 import {
     Formatters,
     type MessageActionRow,
     type MessageEmbed,
     type NewsChannel,
 } from 'discord.js';
-import { Options } from '../utility/Options';
-import { type rssJSON } from './Format';
 import { setTimeout } from 'node:timers/promises';
 import process from 'node:process';
+import { Base } from '../structures/Base';
+import { Database } from '../structures/Database';
+import { Options } from '../utility/Options';
+import { type RssJSON } from './Format';
 
 /* eslint-disable no-await-in-loop */
 
@@ -31,7 +31,7 @@ export class Dispatch extends Base {
     public async dispatch(
         embeds: MessageEmbed[],
         components: MessageActionRow[],
-        data: rssJSON,
+        data: RssJSON,
     ) {
         const announcement = this.announcements[data.title];
         const channel = await this.container.client.channels.fetch(
@@ -39,16 +39,16 @@ export class Dispatch extends Base {
         ) as NewsChannel;
 
         const editedThreadIDs = data.items.filter(
-            item => item.edited === true,
+            (item) => item.edited === true,
         ).map(
-            item => `'${item.id}'`,
+            (item) => `'${item.id}'`,
         );
 
         const editedPosts = editedThreadIDs.length > 0
             ? await this.postsGet(data, editedThreadIDs)
             : [];
 
-        if (data.items.some(item => item.edited === false)) {
+        if (data.items.some((item) => item.edited === false)) {
             await channel.send({
                 content: Formatters.roleMention(announcement.role),
                 allowedMentions: {
@@ -63,7 +63,7 @@ export class Dispatch extends Base {
             const actionRow = components[index];
 
             const editedPost = editedPosts.find(
-                post => post.id === item.id,
+                (post) => post.id === item.id,
             );
 
             const payload = {
@@ -91,7 +91,7 @@ export class Dispatch extends Base {
         }
     }
 
-    private async postsGet(data: rssJSON, editedThreadIDs: string[]) {
+    private async postsGet(data: RssJSON, editedThreadIDs: string[]) {
         const posts = await Database.query(
             `SELECT id, message FROM "${
                 data.title
@@ -106,7 +106,7 @@ export class Dispatch extends Base {
         }[];
     }
 
-    private async postSet(data: rssJSON, id: string, messageID: string) {
+    private async postSet(data: RssJSON, id: string, messageID: string) {
         await Database.query(
             `UPDATE "${
                 data.title

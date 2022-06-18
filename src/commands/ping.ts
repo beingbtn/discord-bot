@@ -4,12 +4,12 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     type ColorResolvable,
     type CommandInteraction,
     Message,
 } from 'discord.js';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
@@ -39,8 +39,8 @@ export class PingCommand extends Command {
             description: 'Ping!',
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -73,11 +73,15 @@ export class PingCommand extends Command {
             interaction.client.ws.ping + roundTripDelay
         ) / 2;
 
-        const embedColor: ColorResolvable = mixedPing < Options.pingOnMinimum
-            ? Options.colorsOn
-            : mixedPing < Options.pingOkMinimum
-            ? Options.colorsOk
-            : Options.colorsWarning;
+        let embedColor: ColorResolvable;
+
+        if (mixedPing < Options.pingOnMinimum) {
+            embedColor = Options.colorsOn;
+        } else if (mixedPing < Options.pingOkMinimum) {
+            embedColor = Options.colorsOk;
+        } else {
+            embedColor = Options.colorsWarning;
+        }
 
         const pingEmbed = new BetterEmbed(interaction)
             .setColor(embedColor)

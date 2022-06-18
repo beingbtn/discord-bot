@@ -1,18 +1,21 @@
-import { AbortError } from '../errors/AbortError';
 import { AbortSignal } from 'node-fetch/externals';
-import { i18n } from '../locales/i18n';
-import { Log } from './Log';
 import { setTimeout } from 'node:timers';
-import { Options } from '../utility/Options';
 import fetch, {
     type RequestInit,
     type Response,
 } from 'node-fetch';
+import { AbortError } from '../errors/AbortError';
+import { i18n } from '../locales/i18n';
+import { Log } from './Log';
+import { Options } from '../utility/Options';
 
 export class Request {
     readonly i18n: i18n;
+
     readonly restRequestTimeout: number;
+
     private retry: number;
+
     readonly retryLimit: number;
 
     public constructor(config?: {
@@ -21,8 +24,8 @@ export class Request {
     }) {
         this.i18n = new i18n();
 
-        this.restRequestTimeout = config?.restRequestTimeout ??
-            Options.restRequestTimeout;
+        this.restRequestTimeout = config?.restRequestTimeout
+            ?? Options.restRequestTimeout;
 
         this.retry = 0;
 
@@ -38,11 +41,10 @@ export class Request {
 
         try {
             const response = await fetch(url, {
-                //Coerced due to a Typescript typings update to AbortController
+                // Coerced due to a Typescript typings update to AbortController
                 signal: controller.signal as AbortSignal,
                 ...fetchOptions,
             });
-
 
             if (response.ok === true) {
                 if (this.retry >= 1) {
@@ -57,9 +59,9 @@ export class Request {
             }
 
             if (
-                this.retry < this.retryLimit &&
-                response.status >= 500 &&
-                response.status < 600
+                this.retry < this.retryLimit
+                && response.status >= 500
+                && response.status < 600
             ) {
                 Log.request(
                     this.i18n.getMessage(
@@ -71,7 +73,7 @@ export class Request {
 
                 this.retry += 1;
 
-                return this.request(url, fetchOptions);
+                return await this.request(url, fetchOptions);
             }
 
             return response;
@@ -85,7 +87,7 @@ export class Request {
 
                 this.retry += 1;
 
-                return this.request(url, fetchOptions);
+                return await this.request(url, fetchOptions);
             }
 
             throw new AbortError({

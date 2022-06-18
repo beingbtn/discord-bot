@@ -1,6 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
-
 export const enum Events {
     ChannelCreate = 'channelCreate',
     ChannelDelete = 'channelDelete',

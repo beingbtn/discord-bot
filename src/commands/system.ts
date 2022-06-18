@@ -4,17 +4,17 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { type CommandInteraction } from 'discord.js';
+import process from 'node:process';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Bytes } from '../enums/Bytes';
 import {
     cleanLength,
     cleanRound,
 } from '../utility/utility';
-import { type CommandInteraction } from 'discord.js';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
-import process from 'node:process';
 
 export class SystemCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -41,8 +41,8 @@ export class SystemCommand extends Command {
             description: 'View system information',
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,

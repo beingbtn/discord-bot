@@ -4,7 +4,6 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     ChannelTypes,
     MessageButtonStyles,
@@ -16,6 +15,7 @@ import {
     MessageEmbed,
     type TextChannel,
 } from 'discord.js';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { CustomID } from '../@types/Persistent';
 import { Events } from '../enums/Events';
 import { Options } from '../utility/Options';
@@ -56,8 +56,8 @@ export class NotificationsCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,

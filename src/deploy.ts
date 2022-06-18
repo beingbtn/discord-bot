@@ -1,8 +1,8 @@
 import 'dotenv/config';
-import { i18n } from './locales/i18n';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import process from 'node:process';
+import { i18n } from './locales/i18n';
 
 (async () => {
     try {
@@ -14,9 +14,11 @@ import process from 'node:process';
 
         await new REST({ version: '10' })
             .setToken(process.env.DISCORD_TOKEN!)
-            .put(Routes.applicationGuildCommands(
-                process.env.CLIENT_ID!,
-                '873000534955667496'), {
+            .put(
+                Routes.applicationGuildCommands(
+                    process.env.CLIENT_ID!,
+                    '873000534955667496',
+                ), {
                     body: [],
                 },
             );

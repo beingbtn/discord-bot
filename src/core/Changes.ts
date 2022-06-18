@@ -1,50 +1,51 @@
 import { Base } from '../structures/Base';
 import { Database } from '../structures/Database';
-import { type rssJSON } from './Format';
+import { type RssJSON } from './Format';
 
 export class Changes extends Base {
-    public async check(data: rssJSON): Promise<rssJSON> {
-        const maxComments = JSON.parse(
+    public async check(data: RssJSON): Promise<RssJSON> {
+        const { maxComments } = JSON.parse(
             process.env.ANNOUNCEMENTS!,
-        )[data.title].maxComments;
+        )[data.title];
 
         const knownThreads = await this.get(data);
 
-        const knownIDs = knownThreads.map(thread => thread.id);
+        const knownIDs = knownThreads.map((thread) => thread.id);
 
-        const potentiallyNewThreads = data.items.filter(item =>
-            knownIDs.includes(item.id) === false,
+        const potentiallyNewThreads = data.items.filter(
+            (item) => knownIDs.includes(item.id) === false,
         );
 
-        const newThreads = potentiallyNewThreads.filter(item =>
-            item.comments < maxComments,
+        const newThreads = potentiallyNewThreads.filter(
+            (item) => item.comments < maxComments,
         );
 
         await Promise.all(
             potentiallyNewThreads.map(
-                thread => this.insert(data, thread),
+                (thread) => this.insert(data, thread),
             ),
         );
 
-        //Can optimize by filtering out new threads
-        const editedThreads = data.items.filter(item =>
-            typeof knownThreads.find(thread =>
-                thread.id === item.id &&
-                thread.message &&
-                (
-                    thread.content !== item.content ||
-                    thread.title !== item.title
-                ),
+        // Can optimize by filtering out new threads
+        const editedThreads = data.items.filter(
+            (item) => typeof knownThreads.find(
+                (thread) => thread.id === item.id
+                    && thread.message
+                    && (
+                        thread.content !== item.content
+                        || thread.title !== item.title
+                    ),
             ) !== 'undefined',
         );
 
-        for (const editedThread of editedThreads) {
-            editedThread.edited = true;
-        }
+        editedThreads.map((editedThread) => ({
+            ...editedThread,
+            edited: true,
+        }));
 
         await Promise.all(
             editedThreads.map(
-                thread => this.update(data, thread),
+                (thread) => this.update(data, thread),
             ),
         );
 
@@ -56,13 +57,13 @@ export class Changes extends Base {
         });
     }
 
-    private async get(data: rssJSON): Promise<{
+    private async get(data: RssJSON): Promise<{
         id: string,
         title: string,
         content: string,
         message: string | null,
     }[]> {
-        const ids = data.items.map(item => `'${item.id}'`).join(', ');
+        const ids = data.items.map((item) => `'${item.id}'`).join(', ');
 
         const links = await Database.query(
             `SELECT id, title, content, message FROM "${
@@ -75,7 +76,7 @@ export class Changes extends Base {
         return links.rows;
     }
 
-    private async insert(data: rssJSON, item: rssJSON['items'][number]) {
+    private async insert(data: RssJSON, item: RssJSON['items'][number]) {
         await Database.query(
             `INSERT INTO "${
                 data.title
@@ -84,7 +85,7 @@ export class Changes extends Base {
         );
     }
 
-    private async update(data: rssJSON, item: rssJSON['items'][number]) {
+    private async update(data: RssJSON, item: RssJSON['items'][number]) {
         await Database.query(
             `UPDATE "${
                 data.title

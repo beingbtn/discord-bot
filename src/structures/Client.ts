@@ -1,17 +1,17 @@
-import { Config } from '../@types/Config';
 import {
     container,
     SapphireClient,
 } from '@sapphire/framework';
-import { Core } from '../core/Core';
-import { Database } from './Database';
-import { i18n } from '../locales/i18n';
 import {
     Intents,
     Options,
     type PresenceData,
     Sweepers,
 } from 'discord.js';
+import { Config } from '../@types/Config';
+import { Core } from '../core/Core';
+import { Database } from './Database';
+import { i18n } from '../locales/i18n';
 
 export class Client extends SapphireClient {
     public constructor() {

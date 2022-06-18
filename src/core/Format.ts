@@ -1,11 +1,11 @@
-import { Base } from '../structures/Base';
 import { XMLParser } from 'fast-xml-parser';
 import Turndown from 'turndown';
+import { Base } from '../structures/Base';
 
-//Temp
-/* eslint-disable complexity */
+// Temp
+/* eslint-disable no-nested-ternary */
 
-export type rssJSON = {
+export type RssJSON = {
     title: string;
     description: string;
     link: string;
@@ -24,10 +24,11 @@ export type rssJSON = {
         comments: number,
         attachments: string[];
     }[];
-}
+};
 
 export class Format extends Base {
     turndown: Turndown;
+
     parser: XMLParser;
 
     public constructor() {
@@ -36,29 +37,29 @@ export class Format extends Base {
         this.turndown = new Turndown({
             codeBlockStyle: 'fenced',
         })
-        .addRule('horizontal', {
-            filter: [
-                'hr',
-            ],
-            replacement: () => '',
-        })
-        .addRule('header', {
-            filter: [
-                'h1',
-                'h2',
-                'h3',
-                'h4',
-                'h5',
-                'h6',
-            ],
-            replacement: content => `**${content}**`,
-        })
-        .addRule('list', {
-            filter: [
-                'li',
-            ],
-            replacement: content => `• ${content.replaceAll('\n', '')}\n`,
-        });
+            .addRule('horizontal', {
+                filter: [
+                    'hr',
+                ],
+                replacement: () => '',
+            })
+            .addRule('header', {
+                filter: [
+                    'h1',
+                    'h2',
+                    'h3',
+                    'h4',
+                    'h5',
+                    'h6',
+                ],
+                replacement: (content) => `**${content}**`,
+            })
+            .addRule('list', {
+                filter: [
+                    'li',
+                ],
+                replacement: (content) => `• ${content.replaceAll('\n', '')}\n`,
+            });
 
         this.parser = new XMLParser({
             attributeNamePrefix: '',
@@ -68,9 +69,9 @@ export class Format extends Base {
     }
 
     public parse(xml: string) {
-        //Parsing taken and modified from https://github.com/nasa8x/rss-to-json under the MIT License
+        // Parsing taken and modified from https://github.com/nasa8x/rss-to-json under the MIT License
 
-        //&#8203; seems to add a lot of random new lines
+        // &#8203; seems to add a lot of random new lines
         const result = this.parser.parse(xml.replaceAll('&#8203;', ''));
 
         let channel = result.rss && result.rss.channel
@@ -78,7 +79,7 @@ export class Format extends Base {
             : result.feed;
 
         if (Array.isArray(channel)) {
-            channel = channel[0];
+            [channel] = channel;
         }
 
         const rss = {
@@ -90,10 +91,10 @@ export class Format extends Base {
             image: channel.image
                 ? channel.image.url
                 : channel['itunes:image']
-                ? channel['itunes:image'].href
-                : '',
+                    ? channel['itunes:image'].href
+                    : '',
             category: channel.category || [],
-            items: [] as rssJSON['items'],
+            items: [] as RssJSON['items'],
         };
 
         let items = channel.item || channel.entry;
@@ -101,7 +102,6 @@ export class Format extends Base {
         if (items && !Array.isArray(items)) {
             items = [items];
         }
-
 
         for (let i = 0; i < items.length; i += 1) {
             const val = items[i];
@@ -127,15 +127,15 @@ export class Format extends Base {
                 published: val.created
                     ? Date.parse(val.created)
                     : val.pubDate
-                    ? Date.parse(val.pubDate)
-                    : Date.now(),
+                        ? Date.parse(val.pubDate)
+                        : Date.now(),
                 created: val.updated
                     ? Date.parse(val.updated)
                     : val.pubDate
-                    ? Date.parse(val.pubDate)
-                    : val.created
-                    ? Date.parse(val.created)
-                    : Date.now(),
+                        ? Date.parse(val.pubDate)
+                        : val.created
+                            ? Date.parse(val.created)
+                            : Date.now(),
                 edited: false,
                 category: val.category ?? [],
                 comments: val['slash:comments'] ?? 0,
@@ -143,7 +143,7 @@ export class Format extends Base {
                     ? val.content.$text
                     : val['content:encoded'],
                 attachments: [] as string[],
-            } as rssJSON['items'][number];
+            } as RssJSON['items'][number];
 
             obj.attachments = this.matchAttachments(obj.content);
 
@@ -151,32 +151,30 @@ export class Format extends Base {
 
             obj.content = this.contentFix(obj.content);
 
-            //Icon/Emoji handling
+            // Icon/Emoji handling
             obj.content = [
                 ...obj.content.matchAll(/!\[(\S+)\]\(.*?\)/gm),
             ].reduce(
-                (acc, current) =>
-                    acc.replace(current[0], current[1]),
+                (acc, current) => acc.replace(current[0], current[1]),
                 obj.content,
             );
 
             rss.items.push(obj);
         }
 
-
-        return rss as rssJSON;
+        return rss as RssJSON;
     }
 
     private contentFix(content: string): string {
         return content
-            .replace(/^!\[\S*?\]\(.+\)/, '') //Remove the first image at the beginning, if any
-            .replaceAll(/\n!\[\S*?\]/gm, '[Image]') //Replace image hyperlink text with [Image]
-            .replaceAll(/ "\S+\.(png|jpg)"/gm, '') //Replace image descriptions at the end of hyperlinks
-            .replaceAll('  \n', '\n') //Remove weird newlines
-            .replace(/\n{3,}/gm, '\n\n') //Remove extra newlines
-            .replace(/(^\n+|(\n+)+$)/g, '') //Remove newlines at the end and start
-            .replace(/\*\*\n\n•/gm, '**\n•') //Remove weird newlines with lists
-            .replace(/\n\n\[Read more\]\(.+\)/m, ''); //Remove "Read More" text
+            .replace(/^!\[\S*?\]\(.+\)/, '') // Remove the first image at the beginning, if any
+            .replaceAll(/\n!\[\S*?\]/gm, '[Image]') // Replace image hyperlink text with [Image]
+            .replaceAll(/ "\S+\.(png|jpg)"/gm, '') // Replace image descriptions at the end of hyperlinks
+            .replaceAll('  \n', '\n') // Remove weird newlines
+            .replace(/\n{3,}/gm, '\n\n') // Remove extra newlines
+            .replace(/(^\n+|(\n+)+$)/g, '') // Remove newlines at the end and start
+            .replace(/\*\*\n\n•/gm, '**\n•') // Remove weird newlines with lists
+            .replace(/\n\n\[Read more\]\(.+\)/m, ''); // Remove "Read More" text
     }
 
     private matchAttachments(content: string): string[] {
@@ -191,7 +189,7 @@ export class Format extends Base {
                 /https:\/\/hypixel\.net\/attachments\/(\S)*\//gm,
             ),
         ]
-        .sort((primary, secondary) => primary.index! - secondary.index!)
-        .map(array => array?.[0]);
+            .sort((primary, secondary) => primary.index! - secondary.index!)
+            .map((array) => array?.[0]);
     }
 }

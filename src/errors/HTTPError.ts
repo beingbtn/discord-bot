@@ -2,8 +2,11 @@ import { type Response } from 'node-fetch';
 
 export class HTTPError extends Error {
     readonly response: Response | null;
+
     readonly status: number;
+
     readonly statusText: string | null;
+
     readonly url: string;
 
     public constructor({
@@ -16,9 +19,9 @@ export class HTTPError extends Error {
         url: string;
     }) {
         super(
-            message ??
-            response?.statusText ??
-            String(response?.status),
+            message
+            ?? response?.statusText
+            ?? String(response?.status),
         );
 
         this.name = 'HTTPError';

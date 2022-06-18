@@ -4,15 +4,15 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
+import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { cleanLength } from '../utility/utility';
-import { type CommandInteraction } from 'discord.js';
 import { Limits } from '../enums/Limits';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 
-type errorTypes =
+type ErrorTypes =
     | 'abort'
     | 'generic'
     | 'http';
@@ -134,8 +134,8 @@ export class APICommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -151,7 +151,7 @@ export class APICommand extends Command {
                 break;
             case 'call': await this.call(interaction);
                 break;
-            //no default
+            // no default
         }
     }
 
@@ -223,7 +223,7 @@ export class APICommand extends Command {
     public async set(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
-        const category = interaction.options.getString('category', true) as errorTypes;
+        const category = interaction.options.getString('category', true) as ErrorTypes;
         const type = interaction.options.getString('type', true);
         const value = interaction.options.getNumber('value', true);
 
@@ -262,9 +262,9 @@ export class APICommand extends Command {
         const hypixelModuleErrors = this.container.core.errors;
 
         if (
-            method === 'addAbort' ||
-            method === 'addGeneric' ||
-            method === 'addHTTP'
+            method === 'addAbort'
+            || method === 'addGeneric'
+            || method === 'addHTTP'
         ) {
             hypixelModuleErrors[method]();
         }

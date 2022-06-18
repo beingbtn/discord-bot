@@ -1,16 +1,16 @@
-import { Base } from '../structures/Base';
 import {
     Constants,
     MessageActionRow,
     MessageButton,
 } from 'discord.js';
-import { type rssJSON } from './Format';
+import { Base } from '../structures/Base';
+import { type RssJSON } from './Format';
 
 export class Components extends Base {
-    public create(data: rssJSON) {
+    public create(data: RssJSON) {
         const rows: MessageActionRow[] = [];
 
-        for (const item of data.items) {
+        data.items.forEach((item) => {
             const button = new MessageButton()
                 .setLabel(
                     this.container.i18n.getMessage(
@@ -24,7 +24,7 @@ export class Components extends Base {
                 .setComponents(button);
 
             rows.unshift(row);
-        }
+        });
 
         return rows;
     }

@@ -1,4 +1,4 @@
-//To be deprecated and removed when rss links are moved to the database
+// To be deprecated and removed when rss links are moved to the database
 
 export class Constants {
     static rss = [

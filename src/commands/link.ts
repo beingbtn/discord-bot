@@ -4,8 +4,8 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import { type CommandInteraction } from 'discord.js';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Database } from '../structures/Database';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
@@ -109,8 +109,8 @@ export class LinkCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -134,8 +134,7 @@ export class LinkCommand extends Command {
             .setColor(Options.colorsNormal)
             .setTitle(interaction.options.getSubcommand() === 'link'
                 ? i18n.getMessage('commandsLinkLinkedTitle')
-                : i18n.getMessage('commandsLinkUnlinkedTitle'),
-            )
+                : i18n.getMessage('commandsLinkUnlinkedTitle'))
             .setDescription(interaction.options.getSubcommand() === 'link'
                 ? i18n.getMessage(
                     'commandsLinkLinkedDescription', [
@@ -147,8 +146,7 @@ export class LinkCommand extends Command {
                     'commandsLinkUnlinkedDescription', [
                         id,
                     ],
-                ),
-            );
+                ));
 
         await interaction.editReply({ embeds: [linkEmbed] });
     }

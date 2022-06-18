@@ -5,12 +5,12 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     type CommandInteraction,
     type ExcludeEnum,
     type PresenceStatusData,
 } from 'discord.js';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 import { setPresence } from '../utility/utility';
@@ -118,8 +118,8 @@ export class PresenceCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -146,7 +146,7 @@ export class PresenceCommand extends Command {
                 activities: [{
                     type: (type ?? currentActivity.type) as ExcludeEnum<
                         typeof ActivityTypes,
-                        'CUSTOM'
+                    'CUSTOM'
                     >,
                     name: name ?? currentActivity.name,
                     // eslint-disable-next-line no-undefined
@@ -166,27 +166,27 @@ export class PresenceCommand extends Command {
                 .addFields([
                     {
                         name: i18n.getMessage('commandsPresenceSetStatusName'),
-                        value: status ??
-                            currentPresence.status ??
-                            i18n.getMessage('null'),
+                        value: status
+                            ?? currentPresence.status
+                            ?? i18n.getMessage('null'),
                     },
                     {
                         name: i18n.getMessage('commandsPresenceSetTypeName'),
-                        value: type ??
-                            currentActivity.type ??
-                            i18n.getMessage('null'),
+                        value: type
+                            ?? currentActivity.type
+                            ?? i18n.getMessage('null'),
                     },
                     {
                         name: i18n.getMessage('commandsPresenceSetNameName'),
-                        value: name ??
-                            currentActivity.name ??
-                            i18n.getMessage('null'),
+                        value: name
+                            ?? currentActivity.name
+                            ?? i18n.getMessage('null'),
                     },
                     {
                         name: i18n.getMessage('commandsPresenceSetURLName'),
-                        value: url ??
-                            currentActivity.url ??
-                            i18n.getMessage('null'),
+                        value: url
+                            ?? currentActivity.url
+                            ?? i18n.getMessage('null'),
                     },
                 ]);
         } else {

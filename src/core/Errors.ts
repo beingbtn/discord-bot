@@ -5,7 +5,9 @@ export class Errors extends Base {
     isGlobal: boolean;
 
     readonly abort: Timeout;
+
     readonly http: Timeout;
+
     readonly generic: Timeout;
 
     public constructor() {
@@ -38,9 +40,9 @@ export class Errors extends Base {
 
     public isTimeout() {
         return (
-            this.abort.isTimeout() ||
-            this.generic.isTimeout() ||
-            this.http.isTimeout()
+            this.abort.isTimeout()
+            || this.generic.isTimeout()
+            || this.http.isTimeout()
         );
     }
 

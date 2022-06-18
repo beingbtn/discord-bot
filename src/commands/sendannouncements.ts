@@ -4,11 +4,6 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import {
-    awaitComponent,
-    disableComponents,
-} from '../utility/utility';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import { ChannelTypes } from 'discord.js/typings/enums';
 import {
     type CommandInteraction,
@@ -20,6 +15,11 @@ import {
     MessageEmbed,
     type NewsChannel,
 } from 'discord.js';
+import {
+    awaitComponent,
+    disableComponents,
+} from '../utility/utility';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
@@ -99,8 +99,8 @@ export class SendAnnouncementsCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -173,8 +173,11 @@ export class SendAnnouncementsCommand extends Command {
             components: [button],
         });
 
-        const componentFilter = (i: MessageComponentInteraction) =>
-            interaction.user.id === i.user.id && i.message.id === reply.id;
+        // eslint-disable-next-line arrow-body-style
+        const componentFilter = (i: MessageComponentInteraction) => {
+            return interaction.user.id === i.user.id
+            && i.message.id === reply.id;
+        };
 
         await interaction.client.channels.fetch(interaction.channelId);
 
@@ -215,8 +218,8 @@ export class SendAnnouncementsCommand extends Command {
         const sentAnnouncement = await channel.send({ embeds: [announcement] });
 
         if (
-            sentAnnouncement.crosspostable === true &&
-            interaction.options.getBoolean('crosspost', false) !== false
+            sentAnnouncement.crosspostable === true
+            && interaction.options.getBoolean('crosspost', false) !== false
         ) {
             await sentAnnouncement.crosspost();
         }

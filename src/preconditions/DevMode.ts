@@ -10,12 +10,12 @@ export class DevModePrecondition extends Precondition {
     }
 
     private checkDeveloper(userId: string) {
-        return this.container.config.devMode === false ||
-            developers.includes(userId)
-                ? this.ok()
-                : this.error({
-                    identifier: Identifiers.DevMode,
-                });
+        return this.container.config.devMode === false
+        || developers.includes(userId)
+            ? this.ok()
+            : this.error({
+                identifier: Identifiers.DevMode,
+            });
     }
 }
 

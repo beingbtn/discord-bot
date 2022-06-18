@@ -4,8 +4,6 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { BetterEmbed } from '../structures/BetterEmbed';
-import { Categories } from '../enums/Categories';
 import { ChannelTypes } from 'discord.js/typings/enums';
 import {
     type CommandInteraction,
@@ -14,11 +12,13 @@ import {
     Permissions,
     type TextChannel,
 } from 'discord.js';
+import process from 'node:process';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { Categories } from '../enums/Categories';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
-import process from 'node:process';
 
 export class AnnouncementsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -87,8 +87,8 @@ export class AnnouncementsCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -176,22 +176,27 @@ export class AnnouncementsCommand extends Command {
             return;
         }
 
-        const type = interaction.options.getSubcommand() === 'general'
-            ? Categories.NewsAndAnnouncements
-            : interaction.options.getSubcommand() === 'skyblock'
-                ? Categories.SkyBlockPatchNotes
-                : Categories.ModerationInformationAndChanges;
+        let type: string;
+
+        switch (interaction.options.getSubcommand()) {
+            case 'general': type = Categories.NewsAndAnnouncements;
+                break;
+            case 'skyblock': type = Categories.SkyBlockPatchNotes;
+                break;
+            default: type = Categories.ModerationInformationAndChanges;
+            // no default
+        }
 
         const channels = JSON.parse(process.env.ANNOUNCEMENTS!);
         const announcementID = channels[type].id as string;
 
         const oldWebhooks = await channel.fetchWebhooks();
         const existingAnnouncementWebhook = oldWebhooks
-            .filter(webhook => webhook.sourceChannel?.id === announcementID)
+            .filter((webhook) => webhook.sourceChannel?.id === announcementID)
             .first();
 
         if (typeof existingAnnouncementWebhook === 'undefined') {
-            //Add webhook
+            // Add webhook
 
             const newsChannel = await interaction.client.channels.fetch(
                 announcementID,
@@ -201,7 +206,7 @@ export class AnnouncementsCommand extends Command {
             const webhooks = await channel.fetchWebhooks();
 
             const announcementWebhook = webhooks
-                .filter(webhook => webhook.sourceChannel?.id === announcementID)
+                .filter((webhook) => webhook.sourceChannel?.id === announcementID)
                 .first()!;
 
             await announcementWebhook.edit({
@@ -214,8 +219,9 @@ export class AnnouncementsCommand extends Command {
                 .setTitle(
                     i18n.getMessage(
                         'commandsAnnouncementsAddTitle', [
-                        type,
-                    ]),
+                            type,
+                        ],
+                    ),
                 )
                 .setDescription(
                     i18n.getMessage(
@@ -238,7 +244,7 @@ export class AnnouncementsCommand extends Command {
 
             await interaction.editReply({ embeds: [addEmbed] });
         } else {
-            //Remove webhook
+            // Remove webhook
 
             await existingAnnouncementWebhook.delete();
 

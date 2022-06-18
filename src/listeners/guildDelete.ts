@@ -1,11 +1,11 @@
 import { type Guild } from 'discord.js';
+import { Listener } from '@sapphire/framework';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { Events } from '../enums/Events';
 import {
     formattedUnix,
     setPresence,
 } from '../utility/utility';
-import { Listener } from '@sapphire/framework';
 
 export class RateLimitListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
@@ -18,8 +18,8 @@ export class RateLimitListener extends Listener {
 
     public run(guild: Guild) {
         if (
-            guild.available === false ||
-            !guild.client.isReady()
+            guild.available === false
+            || !guild.client.isReady()
         ) {
             return;
         }

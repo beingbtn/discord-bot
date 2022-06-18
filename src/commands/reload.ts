@@ -5,8 +5,8 @@ import {
     type Listener,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import { type CommandInteraction } from 'discord.js';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
@@ -72,8 +72,8 @@ export class ReloadCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -87,7 +87,7 @@ export class ReloadCommand extends Command {
                 break;
             case 'single': await this.single(interaction);
                 break;
-            //no default
+            // no default
         }
     }
 
@@ -97,10 +97,12 @@ export class ReloadCommand extends Command {
         const now = Date.now();
         const promises: Promise<void>[] = [];
 
+        // eslint-disable-next-line no-restricted-syntax
         for (const [, command] of this.container.stores.get('commands')) {
             promises.push(this.reloadItem(command));
         }
 
+        // eslint-disable-next-line no-restricted-syntax
         for (const [, listener] of this.container.stores.get('listeners')) {
             promises.push(this.reloadItem(listener));
         }

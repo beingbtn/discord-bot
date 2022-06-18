@@ -1,9 +1,9 @@
-import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import {
     type CommandInteraction,
     type MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
+import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import { ErrorHandler } from './ErrorHandler';
 import { Options } from '../utility/Options';
 
@@ -68,8 +68,8 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
 
         try {
             if (
-                this.interaction.replied === true ||
-                this.interaction.deferred === true
+                this.interaction.replied === true
+                || this.interaction.deferred === true
             ) {
                 await this.interaction.followUp(payLoad);
             } else {

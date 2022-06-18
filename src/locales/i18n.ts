@@ -1,9 +1,11 @@
 import { locales } from './locales/main';
 import { Options } from '../utility/Options';
 
-//Simple implementation of Chrome's/Firefox's i18n
+// Simple implementation of Chrome's/Firefox's i18n
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export class i18n {
     readonly locale: typeof locales[keyof typeof locales];
+
     readonly localeName: string;
 
     public constructor(locale?: string) {
@@ -13,7 +15,7 @@ export class i18n {
 
         this.locale = locales[this.localeName as keyof typeof locales];
 
-        //Bindings
+        // Bindings
         this.getMessage = this.getMessage.bind(this);
     }
 
@@ -26,10 +28,10 @@ export class i18n {
         if (message && typeof options !== 'undefined') {
             let index = options.length;
 
-            for (const option of options.reverse()) {
+            options.reverse().forEach((option) => {
                 message = message.replaceAll(`$${index}`, String(option));
                 index -= 1;
-            }
+            });
         }
 
         return message || 'null';

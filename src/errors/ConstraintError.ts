@@ -1,12 +1,12 @@
 export class ConstraintError extends Error {
     public constructor(
         message:
-            | 'devMode'
-            | 'owner'
-            | 'dm'
-            | 'userPermissions'
-            | 'botPermissions'
-            | 'cooldown',
+        | 'devMode'
+        | 'owner'
+        | 'dm'
+        | 'userPermissions'
+        | 'botPermissions'
+        | 'cooldown',
     ) {
         super(message);
         this.name = 'ConstraintError';

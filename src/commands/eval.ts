@@ -4,11 +4,11 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import {
     type CommandInteraction,
     Formatters,
 } from 'discord.js';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Limits } from '../enums/Limits';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
@@ -47,8 +47,8 @@ export class EvalCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -69,7 +69,7 @@ export class EvalCommand extends Command {
         const start = Date.now();
 
         try {
-            const output = await eval(input); //eslint-disable-line no-eval
+            const output = await eval(input); // eslint-disable-line no-eval
             const end = Date.now();
             const timeTaken = end - start;
             const outputMaxLength = (

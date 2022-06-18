@@ -1,4 +1,4 @@
-import { rssJSON } from './core/Format';
+import { RssJSON } from './core/Format';
 import { XMLParser } from 'fast-xml-parser';
 import Turndown from 'turndown';
 
@@ -91,7 +91,7 @@ const rss = {
         ? channel['itunes:image'].href
         : '',
     category: channel.category || [],
-    items: [] as rssJSON['items'],
+    items: [] as RssJSON['items'],
 };
 
 let items = channel.item || channel.entry;
@@ -138,7 +138,7 @@ for (let i = 0; i < items.length; i += 1) {
             ? val.content.$text
             : val['content:encoded'],
         attachments: [] as string[],
-    } as rssJSON['items'][number];
+    } as RssJSON['items'][number];
 
     obj.attachments = [
         ...obj.content.matchAll(

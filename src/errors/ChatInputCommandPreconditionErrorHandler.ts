@@ -2,22 +2,23 @@ import {
     type BaseCommandInteraction,
     type ColorResolvable,
 } from 'discord.js';
-import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
-import { BetterEmbed } from '../structures/BetterEmbed';
-import { cleanRound } from '../utility/utility';
 import {
     type Command,
     type UserError,
 } from '@sapphire/framework';
+import { setTimeout } from 'timers/promises';
+import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { cleanRound } from '../utility/utility';
 import { ErrorHandler } from './ErrorHandler';
 import { Identifiers } from '../enums/Preconditions';
 import { Options } from '../utility/Options';
-import { setTimeout } from 'timers/promises';
 import { Time } from '../enums/Time';
 
 export class ChatInputCommandPreconditionErrorHandler
     extends BaseInteractionErrorHandler<UserError> {
     readonly interaction: BaseCommandInteraction;
+
     readonly command: Command;
 
     public constructor(
@@ -55,7 +56,7 @@ export class ChatInputCommandPreconditionErrorHandler
                     ),
                     Options.colorsWarning,
                 );
-                break;
+                    break;
                 case Identifiers.OwnerOnly: await this.resolveConstraint(
                     this.interaction,
                     this.interaction.i18n.getMessage(
@@ -66,7 +67,7 @@ export class ChatInputCommandPreconditionErrorHandler
                     ),
                     Options.colorsWarning,
                 );
-                break;
+                    break;
                 case Identifiers.GuildOnly: await this.resolveConstraint(
                     this.interaction,
                     this.interaction.i18n.getMessage(
@@ -77,7 +78,7 @@ export class ChatInputCommandPreconditionErrorHandler
                     ),
                     Options.colorsWarning,
                 );
-                break;
+                    break;
                 case Identifiers.Cooldown: await this.resolveConstraint(
                     this.interaction,
                     this.interaction.i18n.getMessage(
@@ -97,28 +98,28 @@ export class ChatInputCommandPreconditionErrorHandler
                     Options.colorsWarning,
                 );
 
-                await setTimeout(
-                    (this.error.context as {
-                        remaining: number,
-                    }).remaining,
-                );
+                    await setTimeout(
+                        (this.error.context as {
+                            remaining: number,
+                        }).remaining,
+                    );
 
-                await this.resolveConstraint(
-                    this.interaction,
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionCooldownCooldownOverTitle',
-                    ),
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionCooldownCooldownOverDescription', [
-                            this.interaction.commandName,
-                        ],
-                    ),
-                    Options.colorsOn,
-                );
-                break;
+                    await this.resolveConstraint(
+                        this.interaction,
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionCooldownCooldownOverTitle',
+                        ),
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionCooldownCooldownOverDescription', [
+                                this.interaction.commandName,
+                            ],
+                        ),
+                        Options.colorsOn,
+                    );
+                    break;
 
-                //TODO: Support client/user local/global permissions
-                //No default
+                // TODO: Support client/user local/global permissions
+                // no default
             }
         } catch (error) {
             new ErrorHandler(error, this.incidentID).init();

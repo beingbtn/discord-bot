@@ -4,15 +4,15 @@ import {
     type Interaction,
     TextChannel,
 } from 'discord.js';
-import { Core } from '../core/Core';
-import { HTTPError } from './HTTPError';
 import { type Pool } from 'pg';
 import {
     type Scope,
     type SeverityLevel,
 } from '@sentry/node';
-import { slashCommandResolver } from '../utility/utility';
 import * as SentryClient from '@sentry/node';
+import { type Core } from '../core/Core';
+import { HTTPError } from './HTTPError';
+import { slashCommandResolver } from '../utility/utility';
 
 export class Sentry {
     readonly scope: Scope;
@@ -75,12 +75,12 @@ export class Sentry {
     }
 
     captureMessages(...messages: string[]) {
-        for (const message of messages) {
+        messages.forEach((message) => {
             SentryClient.captureMessage(
                 message,
                 this.scope,
             );
-        }
+        });
 
         return this;
     }

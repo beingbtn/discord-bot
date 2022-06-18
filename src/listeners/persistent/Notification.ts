@@ -1,11 +1,11 @@
-import { type CustomID } from '../../@types/Persistent';
-import { Events } from '../../enums/Events';
-import { InteractionErrorHandler } from '../../errors/InteractionErrorHandler';
 import { Listener } from '@sapphire/framework';
 import {
     type MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
+import { type CustomID } from '../../@types/Persistent';
+import { Events } from '../../enums/Events';
+import { InteractionErrorHandler } from '../../errors/InteractionErrorHandler';
 import { Options } from '../../utility/Options';
 
 export class PersistentNotificationListener extends Listener {
@@ -85,8 +85,8 @@ export class PersistentNotificationListener extends Listener {
                     name: interaction.i18n.getMessage('persistentNotificationCurrentName'),
                     value: Object.entries(announcements).filter(
                         ([, value]) => memberRoles.cache.has(value.role),
-                    ).map(([key]) => key).join(', ') ||
-                        interaction.i18n.getMessage('none'),
+                    ).map(([key]) => key).join(', ')
+                        || interaction.i18n.getMessage('none'),
                 }]);
 
             await interaction.reply({

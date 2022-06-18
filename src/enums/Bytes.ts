@@ -1,6 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
-
 export const enum Bytes {
     KiloBit = 128,
     KiloByte = 1024,

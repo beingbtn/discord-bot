@@ -1,17 +1,21 @@
-import { Base } from '../structures/Base';
 import {
     type FileOptions,
     SnowflakeUtil,
 } from 'discord.js';
+import { Base } from '../structures/Base';
 import { generateStackTrace } from '../utility/utility';
 import { i18n } from '../locales/i18n';
 import { Sentry } from './Sentry';
 
 export class BaseErrorHandler<E> extends Base {
     readonly error: E;
+
     readonly incidentID: string;
+
     readonly sentry: Sentry;
+
     readonly stackAttachment: FileOptions;
+
     i18n: i18n;
 
     public constructor(error: E) {
@@ -24,7 +28,8 @@ export class BaseErrorHandler<E> extends Base {
 
         Object.defineProperty(
             error,
-            'fullStack', {
+            'fullStack',
+            {
                 value: generateStackTrace(),
             },
         );

@@ -1,13 +1,9 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
-
 export const enum Identifiers {
-    Base = 'Base',
-    DevMode = 'DevMode',
-    OwnerOnly = 'OwnerOnly',
-    Cooldown = 'Cooldown',
-    GuildOnly = 'GuildOnly',
-    GuildTextOnly = 'GuildTextOnly',
+    DevMode = 'preconditionDevMode',
+    OwnerOnly = 'preconditionOwnerOnly',
+    Cooldown = 'preconditionCooldown',
+    GuildOnly = 'preconditionGuildOnly',
+    GuildTextOnly = 'preconditionGuildTextOnly',
 }
 
 export const enum Preconditions {

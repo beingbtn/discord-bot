@@ -1,3 +1,4 @@
+import { setTimeout } from 'node:timers/promises';
 import { Base } from '../structures/Base';
 import { Changes } from './Changes';
 import { Components } from './Components';
@@ -12,7 +13,6 @@ import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { RequestErrorHandler } from '../errors/RequestErrorHandler';
 import { Requests } from './Requests';
-import { setTimeout } from 'node:timers/promises';
 import { Time } from '../enums/Time';
 
 /* eslint-disable no-await-in-loop */
@@ -34,11 +34,17 @@ export class Core extends Base {
     };
 
     readonly changes: Changes;
+
     readonly components: Components;
+
     readonly dispatch: Dispatch;
+
     readonly embeds: Embeds;
+
     readonly errors: Errors;
+
     readonly format: Format;
+
     readonly requests: Requests;
 
     uses: number;
@@ -63,6 +69,7 @@ export class Core extends Base {
     }
 
     public async init() {
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             try {
                 await this.checkSystem();
@@ -93,6 +100,8 @@ export class Core extends Base {
     }
 
     private async refresh(urls: string[]) {
+        // Array Iterations do not allow async
+        // eslint-disable-next-line no-restricted-syntax
         for (const url of urls) {
             const performance: Performance = {
                 start: Date.now(),
@@ -116,28 +125,30 @@ export class Core extends Base {
 
                 if (changes.items.length > 0) {
                     const newPosts = changes.items.filter(
-                        item => item.edited === false,
+                        (item) => item.edited === false,
                     );
 
                     const editedPosts = changes.items.filter(
-                        item => item.edited === true,
+                        (item) => item.edited === true,
                     );
 
                     Log.core(
                         this.container.i18n.getMessage(
                             'coreCoreLogNewPosts', [
-                            newPosts.length,
-                            newPosts.map(post => post.link).join(', '),
-                        ],
-                    ));
+                                newPosts.length,
+                                newPosts.map((post) => post.link).join(', '),
+                            ],
+                        ),
+                    );
 
                     Log.core(
                         this.container.i18n.getMessage(
                             'coreCoreLogEditedPosts', [
-                            editedPosts.length,
-                            editedPosts.map(post => post.link).join(', '),
-                        ],
-                    ));
+                                editedPosts.length,
+                                editedPosts.map((post) => post.link).join(', '),
+                            ],
+                        ),
+                    );
 
                     const embeds = this.embeds.create(changes);
                     const components = this.components.create(changes);
@@ -146,9 +157,10 @@ export class Core extends Base {
                     Log.core(
                         this.container.i18n.getMessage(
                             'coreCoreLogFinishedPosts', [
-                            changes.title,
-                        ],
-                    ));
+                                changes.title,
+                            ],
+                        ),
+                    );
                 }
 
                 performance.send = Date.now();
@@ -165,8 +177,8 @@ export class Core extends Base {
                 }
 
                 const regularInterval = (
-                    this.container.config.interval /
-                    Constants.rss.length
+                    this.container.config.interval
+                    / Constants.rss.length
                 );
 
                 if (regularInterval > this.errors.getTimeout()) {
@@ -177,25 +189,29 @@ export class Core extends Base {
             }
 
             await setTimeout(
-                this.container.config.interval /
-                Constants.rss.length,
+                this.container.config.interval
+                / Constants.rss.length,
             );
         }
     }
 
     private updatePerformance(performance: Performance) {
-        //Turns the ms since the Jan 1st 1970 into relative
-        performance.total = performance.send - performance.start;
-        performance.send -= performance.check;
-        performance.check -= performance.parse;
-        performance.parse -= performance.fetch;
-        performance.fetch -= performance.start;
+        // Turns the ms since the Jan 1st 1970 into relative
+        const copy = performance;
+        copy.total = copy.send - copy.start;
+        copy.send -= copy.check;
+        copy.check -= copy.parse;
+        copy.parse -= copy.fetch;
+        copy.fetch -= copy.start;
 
         this.performance.latest = performance;
 
         const { history } = this.performance;
 
-        if (history[0]?.start + Time.Hour > Date.now()) return;
+        if (
+            typeof history[0] === 'undefined'
+            || history[0].start + Time.Hour > Date.now()
+        ) return;
 
         history.unshift(performance);
 

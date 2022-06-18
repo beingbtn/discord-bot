@@ -4,8 +4,8 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import { type CommandInteraction } from 'discord.js';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Database } from '../structures/Database';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
@@ -98,8 +98,8 @@ export class ConfigCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -127,7 +127,7 @@ export class ConfigCommand extends Command {
             case 'view':
                 await this.view(interaction);
                 break;
-            //no default
+            // no default
         }
     }
 

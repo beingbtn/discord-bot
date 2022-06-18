@@ -5,11 +5,6 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import {
-    awaitComponent,
-    disableComponents,
-} from '../utility/utility';
-import { BetterEmbed } from '../structures/BetterEmbed';
-import {
     type CommandInteraction,
     Constants as DiscordConstants,
     MessageActionRow,
@@ -17,6 +12,11 @@ import {
     type MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
+import {
+    awaitComponent,
+    disableComponents,
+} from '../utility/utility';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
@@ -86,8 +86,8 @@ export class EditAnnouncementsCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
@@ -155,8 +155,11 @@ export class EditAnnouncementsCommand extends Command {
             components: [button],
         });
 
-        const componentFilter = (i: MessageComponentInteraction) =>
-            interaction.user.id === i.user.id && i.message.id === reply.id;
+        // eslint-disable-next-line arrow-body-style
+        const componentFilter = (i: MessageComponentInteraction) => {
+            return interaction.user.id === i.user.id
+            && i.message.id === reply.id;
+        };
 
         await interaction.client.channels.fetch(interaction.channelId);
 
@@ -187,10 +190,10 @@ export class EditAnnouncementsCommand extends Command {
             embeds: message.embeds,
         });
 
-        //Case for when a channel is converted to an announcement channel
+        // Case for when a channel is converted to an announcement channel
         if (
-            editedAnnouncement.crosspostable === true &&
-            interaction.options.getBoolean('crosspost', false) !== false
+            editedAnnouncement.crosspostable === true
+            && interaction.options.getBoolean('crosspost', false) !== false
         ) {
             await editedAnnouncement.crosspost();
         }

@@ -18,8 +18,8 @@ export async function awaitComponent<T extends MessageComponentTypeResolvable>(
         return await channel.awaitMessageComponent<T>(options);
     } catch (error) {
         if (
-            error instanceof Error &&
-            (error as Error & { code: string })
+            error instanceof Error
+            && (error as Error & { code: string })
                 ?.code === 'INTERACTION_COLLECTOR_ERROR'
         ) {
             return null;
@@ -31,15 +31,13 @@ export async function awaitComponent<T extends MessageComponentTypeResolvable>(
 
 export function disableComponents(messageActionRows: MessageActionRow[]) {
     const actionRows = messageActionRows
-        .map(row => new MessageActionRow(row));
+        .map((row) => new MessageActionRow(row));
 
-    for (const actionRow of actionRows) {
-        const components = actionRow.components;
-
-        for (const component of components) {
-            component.disabled = true;
-        }
-    }
+    actionRows.forEach((actionRow) => {
+        actionRow.components.forEach((component) => {
+            component.setDisabled();
+        });
+    });
 
     return actionRows;
 }
@@ -47,8 +45,8 @@ export function disableComponents(messageActionRows: MessageActionRow[]) {
 export function cleanDate(ms: number | Date): string | null {
     const newDate = new Date(ms);
     if (
-        ms < 0 ||
-        !isDate(newDate)
+        ms < 0
+        || !isDate(newDate)
     ) {
         return null;
     }
@@ -72,8 +70,8 @@ export function cleanLength(ms: number | null): string | null {
         return null;
     }
 
-    let newMS = Math.floor(ms / Time.Second) *
-        Time.Second;
+    let newMS = Math.floor(ms / Time.Second)
+        * Time.Second;
 
     const days = Math.floor(newMS / Time.Day);
     newMS -= days * Time.Day;
@@ -83,13 +81,19 @@ export function cleanLength(ms: number | null): string | null {
     newMS -= minutes * Time.Minute;
     const seconds = Math.floor(newMS / Time.Second);
 
-    return days === 0
-        ? hours === 0
-            ? minutes === 0
-                ? `${seconds}s`
-                : `${minutes}m ${seconds}s`
-            : `${hours}h ${minutes}m ${seconds}s`
-        : `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    if (days !== 0) {
+        return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    if (hours !== 0) {
+        return `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    if (minutes !== 0) {
+        return `${minutes}m ${seconds}s`;
+    }
+
+    return `${seconds}s`;
 }
 
 export function cleanRound(number: number, decimals?: number) {
@@ -97,7 +101,7 @@ export function cleanRound(number: number, decimals?: number) {
     return Math.round(number * decimalsFactor) / decimalsFactor;
 }
 
-//Taken from https://stackoverflow.com/a/13016136 under CC BY-SA 3.0 matching ISO 8601
+// Taken from https://stackoverflow.com/a/13016136 under CC BY-SA 3.0 matching ISO 8601
 export function createOffset(date = new Date()): string {
     function pad(value: number) {
         return value < 10 ? `0${value}` : value;
@@ -122,8 +126,8 @@ export function formattedUnix({
 }): string | null {
     const newDate = new Date(ms);
     if (
-        ms < 0 ||
-        !isDate(newDate)
+        ms < 0
+        || !isDate(newDate)
     ) {
         return null;
     }
@@ -169,7 +173,9 @@ export const slashCommandResolver = (interaction: CommandInteraction) => {
         `/${interaction.commandName}`,
     ];
 
-    for (let option of interaction.options.data) {
+    interaction.options.data.forEach((value) => {
+        let option = value;
+
         if (typeof option.value !== 'undefined') {
             commandOptions.push(
                 `${option.name}: ${option.value}`,
@@ -182,17 +188,17 @@ export const slashCommandResolver = (interaction: CommandInteraction) => {
         }
 
         if (option.type === 'SUB_COMMAND') {
-            commandOptions.push(option.name);
+            commandOptions.push(value.name);
         }
 
         if (Array.isArray(option.options)) {
-            for (const subOption of option.options) {
+            value.options?.forEach((subOption) => {
                 commandOptions.push(
                     `${subOption.name}: ${subOption.value}`,
                 );
-            }
+            });
         }
-    }
+    });
 
     return commandOptions.join(' ');
 };
@@ -202,8 +208,8 @@ export function timestamp(
     style?: typeof Formatters.TimestampStylesString,
 ) {
     if (
-        !isNumber(ms) ||
-        ms < 0
+        !isNumber(ms)
+        || ms < 0
     ) {
         return null;
     }

@@ -1,5 +1,5 @@
-import { BaseErrorHandler } from './BaseErrorHandler';
 import { type SeverityLevel } from '@sentry/node';
+import { BaseErrorHandler } from './BaseErrorHandler';
 
 export class ErrorHandler<E> extends BaseErrorHandler<E> {
     data: string[];

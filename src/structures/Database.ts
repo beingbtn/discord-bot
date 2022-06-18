@@ -1,16 +1,16 @@
 import { container } from '@sapphire/framework';
-import { Options } from '../utility/Options';
 import {
     Pool,
     PoolClient,
 } from 'pg';
+import { Options } from '../utility/Options';
 import { Sentry } from '../errors/Sentry';
 
 const pool = new Pool({
     idleTimeoutMillis: Options.postgresqlIdleTimeoutMillis,
 });
 
-pool.on('error', error => {
+pool.on('error', (error) => {
     new Sentry()
         .setSeverity('warning')
         .databaseContext(pool)

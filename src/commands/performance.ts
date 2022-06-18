@@ -4,8 +4,8 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import { type CommandInteraction } from 'discord.js';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
 import { Preconditions } from '../enums/Preconditions';
 
@@ -34,8 +34,8 @@ export class PerformanceCommand extends Command {
             description: 'View system performance',
         }, {
             guildIds: this.options.preconditions?.find(
-                    condition => condition === Preconditions.OwnerOnly,
-                )
+                (condition) => condition === Preconditions.OwnerOnly,
+            )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
