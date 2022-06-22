@@ -89,10 +89,12 @@ export class ChatInputCommandPreconditionErrorHandler
                             this.command.options.cooldownLimit!,
                             this.command.options.cooldownDelay! / Time.Second,
                             cleanRound(
-                                (this.error.context as {
-                                    remaining: number,
-                                }).remaining,
-                            ) / Time.Second,
+                                (
+                                    this.error.context as {
+                                        remaining: number,
+                                    }
+                                ).remaining / Time.Second,
+                            ),
                         ],
                     ),
                     Options.colorsWarning,

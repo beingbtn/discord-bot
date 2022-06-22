@@ -4,6 +4,7 @@ import fetch, {
     type RequestInit,
     type Response,
 } from 'node-fetch';
+import { LogLevel } from '@sapphire/framework';
 import { AbortError } from '../errors/AbortError';
 import { i18n } from '../locales/i18n';
 import { Log } from './Log';
@@ -49,6 +50,7 @@ export class Request {
             if (response.ok === true) {
                 if (this.retry >= 1) {
                     Log.request(
+                        LogLevel.Warn,
                         this.i18n.getMessage(
                             'errorsRequestSuccessAfterRetry',
                         ),
@@ -64,6 +66,7 @@ export class Request {
                 && response.status < 600
             ) {
                 Log.request(
+                    LogLevel.Warn,
                     this.i18n.getMessage(
                         'errorsRequest500_600', [
                             response.status,
@@ -80,6 +83,7 @@ export class Request {
         } catch (error) {
             if (this.retry < this.retryLimit) {
                 Log.request(
+                    LogLevel.Warn,
                     this.i18n.getMessage(
                         'errorsRequestAbort',
                     ),

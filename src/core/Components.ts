@@ -4,10 +4,10 @@ import {
     MessageButton,
 } from 'discord.js';
 import { Base } from '../structures/Base';
-import { type RssJSON } from './Format';
+import { type RSS } from '../@types/RSS';
 
 export class Components extends Base {
-    public create(data: RssJSON) {
+    public create(data: RSS) {
         const rows: MessageActionRow[] = [];
 
         data.items.forEach((item) => {

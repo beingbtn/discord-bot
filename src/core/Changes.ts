@@ -1,9 +1,14 @@
+import {
+    container,
+    LogLevel,
+} from '@sapphire/framework';
 import { Base } from '../structures/Base';
 import { Database } from '../structures/Database';
-import { type RssJSON } from './Format';
+import { type RSS } from '../@types/RSS';
+import { Log } from '../structures/Log';
 
 export class Changes extends Base {
-    public async check(data: RssJSON): Promise<RssJSON> {
+    public async check(data: RSS): Promise<RSS> {
         const { maxComments } = JSON.parse(
             process.env.ANNOUNCEMENTS!,
         )[data.title];
@@ -19,6 +24,22 @@ export class Changes extends Base {
         const newThreads = potentiallyNewThreads.filter(
             (item) => item.comments < maxComments,
         );
+
+        if (potentiallyNewThreads > newThreads) {
+            Log.core(
+                LogLevel.Debug,
+                container.i18n.getMessage(
+                    'coreChangesFilteredByComment', [
+                        potentiallyNewThreads.map(
+                            (thread) => thread.id,
+                        ).join(', '),
+                        newThreads.map(
+                            (thread) => thread.id,
+                        ).join(', '),
+                    ],
+                ),
+            );
+        }
 
         await Promise.all(
             potentiallyNewThreads.map(
@@ -57,7 +78,7 @@ export class Changes extends Base {
         });
     }
 
-    private async get(data: RssJSON): Promise<{
+    private async get(data: RSS): Promise<{
         id: string,
         title: string,
         content: string,
@@ -76,7 +97,7 @@ export class Changes extends Base {
         return links.rows;
     }
 
-    private async insert(data: RssJSON, item: RssJSON['items'][number]) {
+    private async insert(data: RSS, item: RSS['items'][number]) {
         await Database.query(
             `INSERT INTO "${
                 data.title
@@ -85,7 +106,7 @@ export class Changes extends Base {
         );
     }
 
-    private async update(data: RssJSON, item: RssJSON['items'][number]) {
+    private async update(data: RSS, item: RSS['items'][number]) {
         await Database.query(
             `UPDATE "${
                 data.title

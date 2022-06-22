@@ -1,4 +1,5 @@
 import { setTimeout } from 'node:timers/promises';
+import { LogLevel } from '@sapphire/framework';
 import { Base } from '../structures/Base';
 import { Changes } from './Changes';
 import { Components } from './Components';
@@ -7,13 +8,14 @@ import { Dispatch } from './Dispatch';
 import { Embeds } from './Embeds';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { Errors } from './Errors';
-import { Format } from './Format';
+import { Normalize } from './Normalize';
 import { HTTPError } from '../errors/HTTPError';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { RequestErrorHandler } from '../errors/RequestErrorHandler';
 import { Requests } from './Requests';
 import { Time } from '../enums/Time';
+import { Parser } from './Parser';
 
 /* eslint-disable no-await-in-loop */
 
@@ -43,7 +45,9 @@ export class Core extends Base {
 
     readonly errors: Errors;
 
-    readonly format: Format;
+    readonly format: Normalize;
+
+    readonly parser: Parser;
 
     readonly requests: Requests;
 
@@ -62,7 +66,8 @@ export class Core extends Base {
         this.dispatch = new Dispatch();
         this.embeds = new Embeds();
         this.errors = new Errors();
-        this.format = new Format();
+        this.format = new Normalize();
+        this.parser = new Parser();
         this.requests = new Requests();
 
         this.uses = 0;
@@ -114,10 +119,12 @@ export class Core extends Base {
             };
 
             try {
-                const xmlString = await this.requests.request(url);
+                const xml = await this.requests.request(url);
                 performance.fetch = Date.now();
 
-                const rssJSON = this.format.parse(xmlString);
+                const rss = this.parser.parse(xml);
+
+                const rssJSON = this.format.normalize(rss);
                 performance.parse = Date.now();
 
                 const changes = await this.changes.check(rssJSON);
@@ -133,6 +140,7 @@ export class Core extends Base {
                     );
 
                     Log.core(
+                        LogLevel.Info,
                         this.container.i18n.getMessage(
                             'coreCoreLogNewPosts', [
                                 newPosts.length,
@@ -142,6 +150,7 @@ export class Core extends Base {
                     );
 
                     Log.core(
+                        LogLevel.Info,
                         this.container.i18n.getMessage(
                             'coreCoreLogEditedPosts', [
                                 editedPosts.length,
@@ -155,6 +164,7 @@ export class Core extends Base {
                     await this.dispatch.dispatch(embeds, components, changes);
 
                     Log.core(
+                        LogLevel.Info,
                         this.container.i18n.getMessage(
                             'coreCoreLogFinishedPosts', [
                                 changes.title,

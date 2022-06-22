@@ -1,39 +1,53 @@
-import { Format } from './core/Format';
+import { Normalize } from './core/Normalize';
+import { Parser } from './core/Parser';
 
 const xml = `
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
   <channel>
-    <title>SkyBlock Patch Notes</title>
-    <description>All SkyBlock Patch Notes can be found here! You can click the Watch button in this section to be alerted when new Patch Notes are released!</description>
-    <pubDate>Fri, 01 Apr 2022 16:17:18 +0000</pubDate>
-    <lastBuildDate>Fri, 01 Apr 2022 16:17:18 +0000</lastBuildDate>
+    <title>News and Announcements</title>
+    <description>Important announcements regarding the network are posted in this forum.
+
+If you click the "Watch" button in this forum you can be alerted whenever a new announcement is posted!</description>
+    <pubDate>Wed, 22 Jun 2022 19:32:03 +0000</pubDate>
+    <lastBuildDate>Wed, 22 Jun 2022 19:32:03 +0000</lastBuildDate>
     <generator>Hypixel - Minecraft Server and Maps</generator>
     <link>https://hypixel.net/</link>
-    <atom:link rel="self" type="application/rss+xml" href="https://hypixel.net/forums/skyblock-patch-notes.158/index.rss"/>
+    <atom:link rel="self" type="application/rss+xml" href="https://hypixel.net/forums/news-and-announcements.4/index.rss"/>
     <item>
-      <title>Hypixel Player Council Applications [OPEN]</title>
-      <pubDate>Tue, 31 Jul 2018 18:53:07 +0000</pubDate>
-      <link>https://hypixel.net/threads/hypixel-player-council-applications-open.1772358/</link>
-      <guid isPermaLink="false">1772358</guid>
-      <author>invalid@example.com (Hypixel Player Council)</author>
-      <category domain="https://hypixel.net/forums/moderation-information-and-changes.164/"><![CDATA[Moderation Information and Changes]]></category>
-      <dc:creator>Hypixel Player Council</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><i>This thread contains all the information you need to apply for the Hypixel Player Council. Please read through the entire post carefully before applying.</i><br />
+      <title>Hypixel now supports Minecraft 1.19</title>
+      <pubDate>Wed, 22 Jun 2022 19:23:20 +0000</pubDate>
+      <link>https://hypixel.net/threads/hypixel-now-supports-minecraft-1-19.4976618/</link>
+      <guid isPermaLink="false">4976618</guid>
+      <author>invalid@example.com (Donpireso)</author>
+      <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
+      <dc:creator>Donpireso</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/version-support-updates-forums-png.3004667/"
+			class="bbImage "
+			style=""
+			alt="version-support-updates-forums.png"
+			title="version-support-updates-forums.png"
+			width="1048" height="400" loading="lazy" /><br />
 <br />
-----<br />
+Hey everyone!<br />
 <br />
-<b><span style="font-size: 22px">What is the Hypixel Player Council?</span></b><br />
+Minecraft 1.19 is out! The Hypixel Server has now been updated to support the new version.<br />
 <br />
-The Player Council is a group of experienced Hypixel players who assist our development team in game testing, balancing, and filing bug reports. Members receive no in-game benefits, but are essential to help improve the experience of playing on Hypixel. Please note that the HPC...<br />
+As such, at this time, we do support the following versions:<br />
+<b>1.8, 1.12, 1.14, 1.15, 1.16, 1.17, 1.18, and 1.19!</b><br />
 <br />
-<a href="https://hypixel.net/threads/hypixel-player-council-applications-open.1772358/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>0</slash:comments>
+If you come across any sort of exploits, bugs, issues, or anything else, please report it to our <a href="https://hypixel.net/forums/server-bug-reports.35/" class="link link--internal">bug report section</a>.<br />
+<br />
+Finally, as always, I'd like to remind everyone that Hypixel <a href="https://hypixel.net/threads/hypixel-optimised-for-1-8-9-best-version-of-minecraft-for-hypixel.1731620/" class="link link--internal">is better played on the 1.8.9 version of Minecraft</a> if you tend...<br />
+<br />
+<a href="https://hypixel.net/threads/hypixel-now-supports-minecraft-1-19.4976618/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>206</slash:comments>
     </item>
   </channel>
 </rss>
 `;
 
-const rss = new Format().parse(xml);
+const rss = new Parser().parse(xml);
+const output = new Normalize().normalize(rss);
 
-console.log(JSON.stringify(rss));
+console.log(JSON.stringify(output));

@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js';
-import { container } from '@sapphire/framework';
+import { container, LogLevel } from '@sapphire/framework';
 
 export class Log {
     static command(interaction: CommandInteraction, ...text: unknown[]) {
@@ -14,15 +14,17 @@ export class Log {
         );
     }
 
-    static core(...text: unknown[]) {
-        container.logger.info(
+    static core(level: LogLevel, ...text: unknown[]) {
+        container.logger.write(
+            level,
             container.i18n.getMessage('logCore'),
             ...text,
         );
     }
 
-    static request(...text: unknown[]) {
-        container.logger.warn(
+    static request(level: LogLevel, ...text: unknown[]) {
+        container.logger.write(
+            level,
             container.i18n.getMessage('logRequest'),
             ...text,
         );

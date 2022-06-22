@@ -1,9 +1,9 @@
 import { MessageEmbed } from 'discord.js';
 import { Base } from '../structures/Base';
-import { type RssJSON } from './Format';
+import { type RSS } from '../@types/RSS';
 
 export class Embeds extends Base {
-    public create(data: RssJSON) {
+    public create(data: RSS) {
         const posts: MessageEmbed[] = [];
 
         data.items.forEach((item) => {

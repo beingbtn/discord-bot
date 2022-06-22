@@ -9,7 +9,7 @@ import process from 'node:process';
 import { Base } from '../structures/Base';
 import { Database } from '../structures/Database';
 import { Options } from '../utility/Options';
-import { type RssJSON } from './Format';
+import { type RSS } from '../@types/RSS';
 
 /* eslint-disable no-await-in-loop */
 
@@ -31,7 +31,7 @@ export class Dispatch extends Base {
     public async dispatch(
         embeds: MessageEmbed[],
         components: MessageActionRow[],
-        data: RssJSON,
+        data: RSS,
     ) {
         const announcement = this.announcements[data.title];
         const channel = await this.container.client.channels.fetch(
@@ -91,7 +91,7 @@ export class Dispatch extends Base {
         }
     }
 
-    private async postsGet(data: RssJSON, editedThreadIDs: string[]) {
+    private async postsGet(data: RSS, editedThreadIDs: string[]) {
         const posts = await Database.query(
             `SELECT id, message FROM "${
                 data.title
@@ -106,7 +106,7 @@ export class Dispatch extends Base {
         }[];
     }
 
-    private async postSet(data: RssJSON, id: string, messageID: string) {
+    private async postSet(data: RSS, id: string, messageID: string) {
         await Database.query(
             `UPDATE "${
                 data.title

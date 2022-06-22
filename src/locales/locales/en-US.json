@@ -350,6 +350,9 @@
     "commandsSystemUsersName": {
         "message": "Users"
     },
+    "coreChangesFilteredByComment": {
+        "message": "The potential new threads $1 were found, of which $2 remain after the comment count filter"
+    },
     "coreComponentsButtonsReadMoreLabel": {
         "message": "Read More"
     },
@@ -361,6 +364,15 @@
     },
     "coreCoreLogNewPosts": {
         "message": "New Posts Found: $1 $2"
+    },
+    "coreParserValidationVersion": {
+        "message": "Expected RSS version $1; received version $2"
+    },
+    "coreParserValidationNamespaces": {
+        "message": "Expected $1 RSS namespaces; missing $2"
+    },
+    "coreNormalizeValidationItemNotDefined": {
+        "message": "Expected <Channel>.item to be an object or array; received undefined"
     },
     "errorsDatabasePool": {
         "message": "PostgreSQL Pool Error | Total Clients: $1 Idle Clients: $2 Waiting Clients: $3"
@@ -402,7 +414,7 @@
         "message": "Cooldown Over"
     },
     "errorsPreconditionCooldownWaitingDescription": {
-        "message": "You are executing commands too quickly! The cooldown of this command allows $1 executions in $2 seconds. This message will turn green in $3 seconds once the cooldown expires."
+        "message": "You are executing commands too quickly! The cooldown of this command allows $1 execution(s) in $2 second(s). This message will turn green in $3 seconds once the cooldown expires."
     },
     "errorsPreconditionCooldownWaitingTitle": {
         "message": "Cooldown"
@@ -471,13 +483,13 @@
         "message": "Discord.js Warning:"
     },
     "logCommand": {
-        "message": "Command: ID $1: User $2:"
+        "message": "Command - ID $1 - User $2 -"
     },
     "logCore": {
-        "message": "Core:"
+        "message": "Core -"
     },
     "logRequest": {
-        "message": "Request:"
+        "message": "Request -"
     },
     "persistentNotificationAddDescription": {
         "message": "You will now be notified whenever **$1** are published!"

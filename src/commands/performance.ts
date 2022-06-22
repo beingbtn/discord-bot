@@ -52,7 +52,7 @@ export class PerformanceCommand extends Command {
             check: checkPerformance,
             send: sendPerformance,
             total,
-        } = this.container.core.performance.latest!;
+        } = this.container.core.performance.latest ?? {};
 
         const responseEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
@@ -70,7 +70,9 @@ export class PerformanceCommand extends Command {
                         checkPerformance,
                         sendPerformance,
                         total,
-                    ],
+                    ].map(
+                        (value) => value ?? i18n.getMessage('null'),
+                    ),
                 ),
             });
 
