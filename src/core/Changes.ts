@@ -59,10 +59,11 @@ export class Changes extends Base {
             ) !== 'undefined',
         );
 
-        editedThreads.map((editedThread) => ({
-            ...editedThread,
-            edited: true,
-        }));
+        editedThreads.forEach((editedThread) => {
+            Object.assign(editedThread, {
+                edited: true,
+            });
+        });
 
         await Promise.all(
             editedThreads.map(
