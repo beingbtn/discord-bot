@@ -48,16 +48,12 @@ export class Normalize extends Base {
         }
 
         if (typeof channel.item === 'undefined') {
-            /**
-             * const message = this.container.i18n.getMessage(
+            const message = this.container.i18n.getMessage(
                 'coreNormalizeValidationItemNotDefined',
             );
 
             Log.core(LogLevel.Error, message, channel.item);
             throw new Error(message);
-             */
-
-            return;
         }
 
         const items = Array.isArray(channel.item)
