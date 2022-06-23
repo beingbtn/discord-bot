@@ -2,17 +2,18 @@ import {
     type CommandInteraction,
     type MessageComponentInteraction,
     MessageEmbed,
+    ContextMenuInteraction,
 } from 'discord.js';
 import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import { ErrorHandler } from './ErrorHandler';
 import { Options } from '../utility/Options';
 
 export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
-    readonly interaction: CommandInteraction | MessageComponentInteraction;
+    readonly interaction: CommandInteraction | ContextMenuInteraction | MessageComponentInteraction;
 
     private constructor(
         error: E,
-        interaction: CommandInteraction | MessageComponentInteraction,
+        interaction: CommandInteraction | ContextMenuInteraction | MessageComponentInteraction,
     ) {
         super(error, interaction);
 
@@ -21,7 +22,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
 
     static async init<T>(
         error: T,
-        interaction: CommandInteraction | MessageComponentInteraction,
+        interaction: CommandInteraction | ContextMenuInteraction | MessageComponentInteraction,
     ) {
         const handler = new InteractionErrorHandler(error, interaction);
 

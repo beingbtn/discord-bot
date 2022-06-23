@@ -15,33 +15,27 @@ If you click the "Watch" button in this forum you can be alerted whenever a new 
     <link>https://hypixel.net/</link>
     <atom:link rel="self" type="application/rss+xml" href="https://hypixel.net/forums/news-and-announcements.4/index.rss"/>
     <item>
-      <title>Hypixel now supports Minecraft 1.19</title>
-      <pubDate>Wed, 22 Jun 2022 19:23:20 +0000</pubDate>
-      <link>https://hypixel.net/threads/hypixel-now-supports-minecraft-1-19.4976618/</link>
-      <guid isPermaLink="false">4976618</guid>
-      <author>invalid@example.com (Donpireso)</author>
+      <title>Summer Event and Sale 2022</title>
+      <pubDate>Thu, 23 Jun 2022 18:42:00 +0000</pubDate>
+      <link>https://hypixel.net/threads/summer-event-and-sale-2022.4994707/</link>
+      <guid isPermaLink="false">4994707</guid>
+      <author>invalid@example.com (Hypixel Team)</author>
       <category domain="https://hypixel.net/forums/news-and-announcements.4/"><![CDATA[News and Announcements]]></category>
-      <dc:creator>Donpireso</dc:creator>
-      <content:encoded><![CDATA[<div class="bbWrapper"><img src="https://hypixel.net/attachments/version-support-updates-forums-png.3004667/"
-			class="bbImage "
-			style=""
-			alt="version-support-updates-forums.png"
-			title="version-support-updates-forums.png"
-			width="1048" height="400" loading="lazy" /><br />
+      <dc:creator>Hypixel Team</dc:creator>
+      <content:encoded><![CDATA[<div class="bbWrapper"><a href="https://store.hypixel.net/sum2022main" target="_blank" class="link link--external" rel="nofollow ugc noopener">
+	<img src="https://staticassets.hypixel.net/news/687eecc3-aa85-4c5c-b35d-59b2c53a95a1.summer-forums.png" data-url="https://staticassets.hypixel.net/news/687eecc3-aa85-4c5c-b35d-59b2c53a95a1.summer-forums.png" class="bbImage " loading="lazy"
+		 style="" width="" height="" />
+
+</a><br />
 <br />
-Hey everyone!<br />
+Hey all!<br />
 <br />
-Minecraft 1.19 is out! The Hypixel Server has now been updated to support the new version.<br />
-<br />
-As such, at this time, we do support the following versions:<br />
-<b>1.8, 1.12, 1.14, 1.15, 1.16, 1.17, 1.18, and 1.19!</b><br />
-<br />
-If you come across any sort of exploits, bugs, issues, or anything else, please report it to our <a href="https://hypixel.net/forums/server-bug-reports.35/" class="link link--internal">bug report section</a>.<br />
-<br />
-Finally, as always, I'd like to remind everyone that Hypixel <a href="https://hypixel.net/threads/hypixel-optimised-for-1-8-9-best-version-of-minecraft-for-hypixel.1731620/" class="link link--internal">is better played on the 1.8.9 version of Minecraft</a> if you tend...<br />
-<br />
-<a href="https://hypixel.net/threads/hypixel-now-supports-minecraft-1-19.4976618/" class="link link--internal">Read more</a></div>]]></content:encoded>
-      <slash:comments>206</slash:comments>
+<b>The Hypixel Suummer Event</b> is upon us and we have some big changes hopefully making summer a little cooler (pun intended) for everyone! We've put together some new content for players to enjoy on the server during the summer months! Here's what's included:<br />
+<ul>
+<li data-xf-list-type="ul"><span style="font-size: 18px"><i><span style="color: rgb(184, 49, 47)"><b><i>Summer Sale - up to 25% off on the in-game store!</i></b></span></i></span>...</li>
+</ul><br />
+<a href="https://hypixel.net/threads/summer-event-and-sale-2022.4994707/" class="link link--internal">Read more</a></div>]]></content:encoded>
+      <slash:comments>18</slash:comments>
     </item>
   </channel>
 </rss>

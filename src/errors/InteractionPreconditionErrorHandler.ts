@@ -1,4 +1,6 @@
 import {
+    CommandInteraction,
+    ContextMenuInteraction,
     type BaseCommandInteraction,
     type ColorResolvable,
 } from 'discord.js';
@@ -15,15 +17,14 @@ import { Identifiers } from '../enums/Preconditions';
 import { Options } from '../utility/Options';
 import { Time } from '../enums/Time';
 
-export class ChatInputCommandPreconditionErrorHandler
-    extends BaseInteractionErrorHandler<UserError> {
-    readonly interaction: BaseCommandInteraction;
+export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHandler<UserError> {
+    readonly interaction: CommandInteraction | ContextMenuInteraction;
 
     readonly command: Command;
 
     public constructor(
         error: UserError,
-        interaction: BaseCommandInteraction,
+        interaction: CommandInteraction | ContextMenuInteraction,
         command: Command,
     ) {
         super(error, interaction);

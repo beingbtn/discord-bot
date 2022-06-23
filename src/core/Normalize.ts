@@ -48,12 +48,16 @@ export class Normalize extends Base {
         }
 
         if (typeof channel.item === 'undefined') {
-            const message = this.container.i18n.getMessage(
+            /**
+             * const message = this.container.i18n.getMessage(
                 'coreNormalizeValidationItemNotDefined',
             );
 
             Log.core(LogLevel.Error, message, channel.item);
             throw new Error(message);
+             */
+
+            return;
         }
 
         const items = Array.isArray(channel.item)
@@ -101,7 +105,7 @@ export class Normalize extends Base {
 
     private contentFix(content: string): string {
         return content
-            .replace(/^!\[\S*?\]\(.+\)/, '') // Remove the first image at the beginning, if any
+            .replace(/^!?\[\S*?\]\(.+\)/, '') // Remove the first image at the beginning, if any
             .replaceAll(/\n!\[\S*?\]/gm, '[Image]') // Replace image hyperlink text with [Image]
             .replaceAll(/ "\S+\.(png|jpg)"/gm, '') // Replace image descriptions at the end of hyperlinks
             .replaceAll('  \n', '\n') // Remove weird newlines

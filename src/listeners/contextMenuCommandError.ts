@@ -1,20 +1,20 @@
 import {
-    type ChatInputCommandErrorPayload,
+    type ContextMenuCommandErrorPayload,
     Listener,
 } from '@sapphire/framework';
 import { Events } from '../enums/Events';
 import { InteractionErrorHandler } from '../errors/InteractionErrorHandler';
 
-export class ChatInputCommandErrorListener extends Listener {
+export class ContextMenuCommandErrorListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
         super(context, {
             ...options,
             once: false,
-            event: Events.ChatInputCommandError,
+            event: Events.ContextMenuCommandError,
         });
     }
 
-    public async run(error: Error, payload: ChatInputCommandErrorPayload) {
+    public async run(error: Error, payload: ContextMenuCommandErrorPayload) {
         await InteractionErrorHandler.init(
             error,
             payload.interaction,

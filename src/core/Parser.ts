@@ -76,7 +76,8 @@ export class Parser extends Base {
     }
 
     public validate(rss: BaseRss) {
-        const { namespaces, version } = this.validation;
+        /**
+         * const { namespaces, version } = this.validation;
 
         if (rss.rss.version !== version) {
             const message = this.container.i18n.getMessage(
@@ -105,5 +106,6 @@ export class Parser extends Base {
             Log.core(LogLevel.Error, message);
             throw new Error(message);
         }
+         */
     }
 }
