@@ -228,13 +228,13 @@
         "message": "/$1"
     },
     "commandsLinkLinkedDescription": {
-        "message": "$1 is now linked to $2."
+        "message": "The ID $1 is now linked to the message $2."
     },
     "commandsLinkLinkedTitle": {
         "message": "Linked"
     },
     "commandsLinkUnlinkedDescription": {
-        "message": "$1 is no longer linked to $1."
+        "message": "$1 is no longer linked to a message."
     },
     "commandsLinkUnlinkedTitle": {
         "message": "Unlinked"
