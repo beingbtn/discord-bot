@@ -5,12 +5,3 @@ export const enum Identifiers {
     GuildOnly = 'preconditionGuildOnly',
     GuildTextOnly = 'preconditionGuildTextOnly',
 }
-
-export const enum Preconditions {
-    Base = 'Base',
-    DevMode = 'DevMode',
-    OwnerOnly = 'OwnerOnly',
-    Cooldown = 'Cooldown',
-    GuildOnly = 'GuildOnly',
-    GuildTextOnly = 'GuildTextOnly',
-}

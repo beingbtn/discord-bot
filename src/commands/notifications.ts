@@ -17,9 +17,8 @@ import {
 } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { CustomID } from '../@types/Persistent';
-import { Events } from '../enums/Events';
 import { Options } from '../utility/Options';
-import { Preconditions } from '../enums/Preconditions';
+import { Events } from '../enums/Events';
 
 export class NotificationsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -31,10 +30,10 @@ export class NotificationsCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                Preconditions.Base,
-                Preconditions.DevMode,
-                Preconditions.OwnerOnly,
-                Preconditions.GuildTextOnly,
+                'Base',
+                'DevMode',
+                'OwnerOnly',
+                'GuildOnly',
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -56,7 +55,7 @@ export class NotificationsCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                (condition) => condition === Preconditions.OwnerOnly,
+                (condition) => condition === 'OwnerOnly',
             )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

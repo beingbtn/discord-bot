@@ -1,7 +1,9 @@
 import { type Guild } from 'discord.js';
-import { Listener } from '@sapphire/framework';
+import {
+    Events,
+    Listener,
+} from '@sapphire/framework';
 import { ErrorHandler } from '../errors/ErrorHandler';
-import { Events } from '../enums/Events';
 import {
     formattedUnix,
     setPresence,

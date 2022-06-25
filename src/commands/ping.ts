@@ -12,7 +12,6 @@ import {
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
-import { Preconditions } from '../enums/Preconditions';
 
 export class PingCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -24,9 +23,9 @@ export class PingCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                Preconditions.Base,
-                Preconditions.DevMode,
-                Preconditions.OwnerOnly,
+                'Base',
+                'DevMode',
+                'OwnerOnly',
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -39,7 +38,7 @@ export class PingCommand extends Command {
             description: 'Ping!',
         }, {
             guildIds: this.options.preconditions?.find(
-                (condition) => condition === Preconditions.OwnerOnly,
+                (condition) => condition === 'OwnerOnly',
             )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

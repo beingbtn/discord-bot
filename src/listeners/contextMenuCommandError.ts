@@ -1,8 +1,8 @@
 import {
     type ContextMenuCommandErrorPayload,
     Listener,
+    Events,
 } from '@sapphire/framework';
-import { Events } from '../enums/Events';
 import { InteractionErrorHandler } from '../errors/InteractionErrorHandler';
 
 export class ContextMenuCommandErrorListener extends Listener {

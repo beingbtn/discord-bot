@@ -2,9 +2,9 @@ import {
     type ContextMenuCommandDeniedPayload,
     Listener,
     type UserError,
+    Events,
 } from '@sapphire/framework';
 import { InteractionPreconditionErrorHandler } from '../errors/InteractionPreconditionErrorHandler';
-import { Events } from '../enums/Events';
 
 export class ContextMenuCommandDeniedListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {

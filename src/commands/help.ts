@@ -7,7 +7,6 @@ import {
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
-import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
 
 export class HelpCommand extends Command {
@@ -20,8 +19,8 @@ export class HelpCommand extends Command {
             cooldownDelay: Time.Second * 10,
             cooldownScope: BucketScope.User,
             preconditions: [
-                Preconditions.Base,
-                Preconditions.DevMode,
+                'Base',
+                'DevMode',
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -64,7 +63,7 @@ export class HelpCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                (condition) => condition === Preconditions.OwnerOnly,
+                (condition) => condition === 'OwnerOnly',
             )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
@@ -158,11 +157,11 @@ export class HelpCommand extends Command {
         });
 
         const guildOnly = command.options.preconditions?.find(
-            (condition) => condition === Preconditions.GuildOnly,
+            (condition) => condition === 'GuildOnly',
         );
 
         const ownerOnly = command.options.preconditions?.find(
-            (condition) => condition === Preconditions.OwnerOnly,
+            (condition) => condition === 'OwnerOnly',
         );
 
         if (typeof guildOnly !== 'undefined') {
@@ -188,7 +187,7 @@ export class HelpCommand extends Command {
         const commandsCollection = this.container.stores
             .get('commands')
             .filter((command) => typeof command.options.preconditions?.find(
-                (condition) => condition === Preconditions.OwnerOnly,
+                (condition) => condition === 'OwnerOnly',
             ) === 'undefined');
 
         const allCommandsEmbed = new BetterEmbed(interaction)

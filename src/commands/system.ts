@@ -13,7 +13,6 @@ import {
     cleanRound,
 } from '../utility/utility';
 import { Options } from '../utility/Options';
-import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
 
 export class SystemCommand extends Command {
@@ -26,9 +25,9 @@ export class SystemCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                Preconditions.Base,
-                Preconditions.DevMode,
-                Preconditions.OwnerOnly,
+                'Base',
+                'DevMode',
+                'OwnerOnly',
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -41,7 +40,7 @@ export class SystemCommand extends Command {
             description: 'View system information',
         }, {
             guildIds: this.options.preconditions?.find(
-                (condition) => condition === Preconditions.OwnerOnly,
+                (condition) => condition === 'OwnerOnly',
             )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

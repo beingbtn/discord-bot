@@ -14,11 +14,10 @@ import {
 } from 'discord.js';
 import process from 'node:process';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Categories } from '../enums/Categories';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
-import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
+import { Category } from '../@types/Category';
 
 export class AnnouncementsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -30,9 +29,9 @@ export class AnnouncementsCommand extends Command {
             cooldownDelay: Time.Second * 10,
             cooldownScope: BucketScope.Guild,
             preconditions: [
-                Preconditions.Base,
-                Preconditions.DevMode,
-                Preconditions.GuildOnly,
+                'Base',
+                'DevMode',
+                'GuildOnly',
             ],
         });
     }
@@ -87,7 +86,7 @@ export class AnnouncementsCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                (condition) => condition === Preconditions.OwnerOnly,
+                (condition) => condition === 'OwnerOnly',
             )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined
@@ -176,15 +175,14 @@ export class AnnouncementsCommand extends Command {
             return;
         }
 
-        let type: string;
+        let type: Category;
 
         switch (interaction.options.getSubcommand()) {
-            case 'general': type = Categories.NewsAndAnnouncements;
+            case 'general': type = 'News and Announcements';
                 break;
-            case 'skyblock': type = Categories.SkyBlockPatchNotes;
+            case 'skyblock': type = 'SkyBlock Patch Notes';
                 break;
-            default: type = Categories.ModerationInformationAndChanges;
-            // no default
+            default: type = 'Moderation Information and Changes';
         }
 
         const channels = JSON.parse(process.env.ANNOUNCEMENTS!);

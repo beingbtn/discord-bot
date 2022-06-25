@@ -2,9 +2,9 @@ import {
     type ChatInputCommandDeniedPayload,
     Listener,
     type UserError,
+    Events,
 } from '@sapphire/framework';
 import { InteractionPreconditionErrorHandler } from '../errors/InteractionPreconditionErrorHandler';
-import { Events } from '../enums/Events';
 
 export class ChatInputCommandErrorListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {

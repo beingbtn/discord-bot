@@ -12,7 +12,6 @@ import {
 } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
-import { Preconditions } from '../enums/Preconditions';
 import { setPresence } from '../utility/utility';
 
 export class PresenceCommand extends Command {
@@ -25,9 +24,9 @@ export class PresenceCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                Preconditions.Base,
-                Preconditions.DevMode,
-                Preconditions.OwnerOnly,
+                'Base',
+                'DevMode',
+                'OwnerOnly',
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -118,7 +117,7 @@ export class PresenceCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                (condition) => condition === Preconditions.OwnerOnly,
+                (condition) => condition === 'OwnerOnly',
             )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

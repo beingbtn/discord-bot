@@ -22,7 +22,6 @@ import {
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
-import { Preconditions } from '../enums/Preconditions';
 import { Time } from '../enums/Time';
 
 export class SendAnnouncementsCommand extends Command {
@@ -35,10 +34,10 @@ export class SendAnnouncementsCommand extends Command {
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
             preconditions: [
-                Preconditions.Base,
-                Preconditions.DevMode,
-                Preconditions.OwnerOnly,
-                Preconditions.GuildOnly,
+                'Base',
+                'DevMode',
+                'OwnerOnly',
+                'GuildOnly',
             ],
             requiredUserPermissions: [],
             requiredClientPermissions: [],
@@ -99,7 +98,7 @@ export class SendAnnouncementsCommand extends Command {
             ],
         }, {
             guildIds: this.options.preconditions?.find(
-                (condition) => condition === Preconditions.OwnerOnly,
+                (condition) => condition === 'OwnerOnly',
             )
                 ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
                 : undefined, // eslint-disable-line no-undefined

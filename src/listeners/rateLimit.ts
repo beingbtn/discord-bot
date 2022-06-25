@@ -1,5 +1,7 @@
-import { Listener } from '@sapphire/framework';
-import { Events } from '../enums/Events';
+import {
+    Events,
+    Listener,
+} from '@sapphire/framework';
 import { Sentry } from '../structures/Sentry';
 
 export class RateLimitListener extends Listener {

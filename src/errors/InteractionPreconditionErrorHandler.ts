@@ -13,7 +13,7 @@ import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { cleanRound } from '../utility/utility';
 import { ErrorHandler } from './ErrorHandler';
-import { Identifiers } from '../enums/Preconditions';
+import { Identifiers } from '../enums/Identifiers';
 import { Options } from '../utility/Options';
 import { Time } from '../enums/Time';
 
