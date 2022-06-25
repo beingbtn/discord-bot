@@ -148,16 +148,6 @@ export function formattedUnix({
     return `${utcString}${timeString}${dateString}`;
 }
 
-export function generateStackTrace() {
-    const stack = new Error().stack ?? '';
-    const cleanStack = stack
-        .split('\n')
-        .splice(2)
-        .join('\n');
-
-    return cleanStack;
-}
-
 export function setPresence() {
     let presence = container.customPresence;
 
