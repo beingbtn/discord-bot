@@ -1,7 +1,7 @@
 import 'dotenv/config';
+import process from 'node:process';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v10';
-import process from 'node:process';
 import { i18n } from './locales/i18n';
 
 (async () => {

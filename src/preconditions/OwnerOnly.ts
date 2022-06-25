@@ -1,5 +1,9 @@
-import { ContextMenuInteraction, Message, type CommandInteraction } from 'discord.js';
 import { Precondition } from '@sapphire/framework';
+import {
+    ContextMenuInteraction,
+    Message,
+    type CommandInteraction,
+} from 'discord.js';
 import { Identifiers } from '../enums/Identifiers';
 
 const owners = JSON.parse(process.env.OWNERS!) as string[];

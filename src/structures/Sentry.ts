@@ -1,3 +1,4 @@
+import * as SentryClient from '@sentry/node';
 import {
     CommandInteraction,
     GuildChannel,
@@ -5,17 +6,12 @@ import {
     TextChannel,
 } from 'discord.js';
 import { type Pool } from 'pg';
-import {
-    type Scope,
-    type SeverityLevel,
-} from '@sentry/node';
-import * as SentryClient from '@sentry/node';
 import { type Core } from '../core/Core';
 import { HTTPError } from '../errors/HTTPError';
 import { slashCommandResolver } from '../utility/utility';
 
 export class Sentry {
-    readonly scope: Scope;
+    readonly scope: SentryClient.Scope;
 
     constructor() {
         this.scope = new SentryClient.Scope();
@@ -127,7 +123,7 @@ export class Sentry {
         return this;
     }
 
-    setSeverity(level: SeverityLevel) {
+    setSeverity(level: SentryClient.SeverityLevel) {
         this.scope.setLevel(level);
 
         return this;

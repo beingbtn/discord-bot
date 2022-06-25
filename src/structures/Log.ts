@@ -1,5 +1,8 @@
+import {
+    container,
+    LogLevel,
+} from '@sapphire/framework';
 import { Interaction } from 'discord.js';
-import { container, LogLevel } from '@sapphire/framework';
 
 export class Log {
     static command(interaction: Interaction, ...text: unknown[]) {

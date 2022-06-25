@@ -1,11 +1,11 @@
-import { ActivityTypes } from 'discord.js/typings/enums';
+import { PresenceUpdateStatus } from 'discord-api-types/v10';
 import {
     type ColorResolvable,
     type PresenceData,
 } from 'discord.js';
-import { PresenceUpdateStatus } from 'discord-api-types/v10';
-import { locales } from '../locales/locales/main';
+import { ActivityTypes } from 'discord.js/typings/enums';
 import { Time } from '../enums/Time';
+import { locales } from '../locales/locales/main';
 
 export class Options {
     static colorsError: ColorResolvable = 0xAA0000;

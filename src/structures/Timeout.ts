@@ -2,8 +2,8 @@ import {
     clearTimeout,
     setTimeout,
 } from 'node:timers';
-import { Options } from '../utility/Options';
 import { Time } from '../enums/Time';
+import { Options } from '../utility/Options';
 
 /* eslint-disable no-unused-vars */
 

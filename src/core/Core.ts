@@ -1,21 +1,21 @@
 import { setTimeout } from 'node:timers/promises';
 import { LogLevel } from '@sapphire/framework';
-import { Base } from '../structures/Base';
 import { Changes } from './Changes';
 import { Components } from './Components';
-import { Constants } from '../utility/Constants';
 import { Dispatch } from './Dispatch';
 import { Embeds } from './Embeds';
-import { ErrorHandler } from '../errors/ErrorHandler';
-import { Errors } from './Errors';
-import { Normalize } from './Normalize';
-import { HTTPError } from '../errors/HTTPError';
-import { Log } from '../structures/Log';
-import { Options } from '../utility/Options';
-import { RequestErrorHandler } from '../errors/RequestErrorHandler';
-import { Requests } from './Requests';
 import { Time } from '../enums/Time';
+import { Errors } from './Errors';
+import { ErrorHandler } from '../errors/ErrorHandler';
+import { HTTPError } from '../errors/HTTPError';
+import { RequestErrorHandler } from '../errors/RequestErrorHandler';
+import { Normalize } from './Normalize';
 import { Parser } from './Parser';
+import { Requests } from './Requests';
+import { Base } from '../structures/Base';
+import { Log } from '../structures/Log';
+import { Constants } from '../utility/Constants';
+import { Options } from '../utility/Options';
 
 /* eslint-disable no-await-in-loop */
 

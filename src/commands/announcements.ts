@@ -1,10 +1,10 @@
+import process from 'node:process';
 import {
     type ApplicationCommandRegistry,
     BucketScope,
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { ChannelTypes } from 'discord.js/typings/enums';
 import {
     type CommandInteraction,
     Formatters,
@@ -12,12 +12,12 @@ import {
     Permissions,
     type TextChannel,
 } from 'discord.js';
-import process from 'node:process';
+import { ChannelTypes } from 'discord.js/typings/enums';
+import { Category } from '../@types/Category';
+import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
-import { Time } from '../enums/Time';
-import { Category } from '../@types/Category';
 
 export class AnnouncementsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {

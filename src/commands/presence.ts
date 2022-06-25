@@ -1,4 +1,3 @@
-import { ActivityTypes } from 'discord.js/typings/enums';
 import {
     type ApplicationCommandRegistry,
     BucketScope,
@@ -10,6 +9,7 @@ import {
     type ExcludeEnum,
     type PresenceStatusData,
 } from 'discord.js';
+import { ActivityTypes } from 'discord.js/typings/enums';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
 import { setPresence } from '../utility/utility';

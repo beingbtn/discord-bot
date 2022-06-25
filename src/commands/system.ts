@@ -1,3 +1,4 @@
+import process from 'node:process';
 import {
     ApplicationCommandRegistry,
     BucketScope,
@@ -5,15 +6,14 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
-import process from 'node:process';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import { Bytes } from '../enums/Bytes';
+import { Time } from '../enums/Time';
+import { Options } from '../utility/Options';
 import {
     cleanLength,
     cleanRound,
 } from '../utility/utility';
-import { Options } from '../utility/Options';
-import { Time } from '../enums/Time';
+import { BetterEmbed } from '../structures/BetterEmbed';
 
 export class SystemCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {

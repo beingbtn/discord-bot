@@ -1,11 +1,11 @@
 import {
-    type Interaction,
-    MessageFlags,
-} from 'discord.js';
-import {
     Events,
     Listener,
 } from '@sapphire/framework';
+import {
+    type Interaction,
+    MessageFlags,
+} from 'discord.js';
 import { type CustomID } from '../@types/Persistent';
 
 export class ComponentInteractionCreateListener extends Listener {

@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
-import { Base } from '../structures/Base';
 import { type RSS } from '../@types/RSS';
+import { Base } from '../structures/Base';
 
 export class Embeds extends Base {
     public create(data: RSS) {

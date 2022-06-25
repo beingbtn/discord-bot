@@ -2,9 +2,9 @@ import {
     container,
     LogLevel,
 } from '@sapphire/framework';
+import { type RSS } from '../@types/RSS';
 import { Base } from '../structures/Base';
 import { Database } from '../structures/Database';
-import { type RSS } from '../@types/RSS';
 import { Log } from '../structures/Log';
 
 export class Changes extends Base {

@@ -5,20 +5,20 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import {
-    ChannelTypes,
-    MessageButtonStyles,
-} from 'discord.js/typings/enums';
-import {
     type CommandInteraction,
     MessageActionRow,
     MessageButton,
     MessageEmbed,
     type TextChannel,
 } from 'discord.js';
-import { BetterEmbed } from '../structures/BetterEmbed';
+import {
+    ChannelTypes,
+    MessageButtonStyles,
+} from 'discord.js/typings/enums';
 import { CustomID } from '../@types/Persistent';
-import { Options } from '../utility/Options';
 import { Events } from '../enums/Events';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { Options } from '../utility/Options';
 
 export class NotificationsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {

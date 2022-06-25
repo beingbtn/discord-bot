@@ -1,10 +1,10 @@
-import { AbortSignal } from 'node-fetch/externals';
 import { setTimeout } from 'node:timers';
+import { LogLevel } from '@sapphire/framework';
 import fetch, {
     type RequestInit,
     type Response,
 } from 'node-fetch';
-import { LogLevel } from '@sapphire/framework';
+import { AbortSignal } from 'node-fetch/externals';
 import { AbortError } from '../errors/AbortError';
 import { i18n } from '../locales/i18n';
 import { Log } from './Log';

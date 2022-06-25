@@ -1,15 +1,15 @@
+import process from 'node:process';
+import { setTimeout } from 'node:timers/promises';
 import {
     Formatters,
     type MessageActionRow,
     type MessageEmbed,
     type NewsChannel,
 } from 'discord.js';
-import { setTimeout } from 'node:timers/promises';
-import process from 'node:process';
+import { type RSS } from '../@types/RSS';
 import { Base } from '../structures/Base';
 import { Database } from '../structures/Database';
 import { Options } from '../utility/Options';
-import { type RSS } from '../@types/RSS';
 
 /* eslint-disable no-await-in-loop */
 

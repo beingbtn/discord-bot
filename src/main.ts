@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import '@sentry/tracing';
 import '@sapphire/plugin-logger/register';
+import process from 'node:process';
 import { ExtraErrorData } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
-import process from 'node:process';
 import { ErrorHandler } from './errors/ErrorHandler';
 import { Client } from './structures/Client';
 

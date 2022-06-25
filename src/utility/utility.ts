@@ -1,3 +1,4 @@
+import { container } from '@sapphire/framework';
 import {
     type AwaitMessageCollectorOptionsParams,
     type CommandInteraction,
@@ -6,9 +7,8 @@ import {
     type MessageComponentTypeResolvable,
     type TextBasedChannel,
 } from 'discord.js';
-import { container } from '@sapphire/framework';
-import { Options } from './Options';
 import { Time } from '../enums/Time';
+import { Options } from './Options';
 
 export async function awaitComponent<T extends MessageComponentTypeResolvable>(
     channel: TextBasedChannel,

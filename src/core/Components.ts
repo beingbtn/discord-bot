@@ -3,8 +3,8 @@ import {
     MessageActionRow,
     MessageButton,
 } from 'discord.js';
-import { Base } from '../structures/Base';
 import { type RSS } from '../@types/RSS';
+import { Base } from '../structures/Base';
 
 export class Components extends Base {
     public create(data: RSS) {

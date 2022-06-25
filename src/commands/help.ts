@@ -5,9 +5,9 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
+import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
-import { Time } from '../enums/Time';
 
 export class HelpCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {

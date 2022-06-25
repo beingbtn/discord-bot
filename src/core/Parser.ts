@@ -1,8 +1,8 @@
+import { LogLevel } from '@sapphire/framework';
 import { XMLParser } from 'fast-xml-parser';
 import Turndown from 'turndown';
-import { LogLevel } from '@sapphire/framework';
-import { Base } from '../structures/Base';
 import { BaseRss } from '../@types/BaseRss';
+import { Base } from '../structures/Base';
 import { Log } from '../structures/Log';
 
 export class Parser extends Base {

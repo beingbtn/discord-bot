@@ -8,8 +8,8 @@ import {
     type CommandInteraction,
     Formatters,
 } from 'discord.js';
-import { BetterEmbed } from '../structures/BetterEmbed';
 import { Limits } from '../enums/Limits';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 

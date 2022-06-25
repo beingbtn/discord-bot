@@ -5,11 +5,11 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
-import { BetterEmbed } from '../structures/BetterEmbed';
-import { cleanLength } from '../utility/utility';
 import { Limits } from '../enums/Limits';
+import { BetterEmbed } from '../structures/BetterEmbed';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
+import { cleanLength } from '../utility/utility';
 
 type ErrorTypes =
     | 'abort'

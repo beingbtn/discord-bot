@@ -1,21 +1,21 @@
+import { setTimeout } from 'node:timers/promises';
+import {
+    type Command,
+    type UserError,
+} from '@sapphire/framework';
 import {
     CommandInteraction,
     ContextMenuInteraction,
     type BaseCommandInteraction,
     type ColorResolvable,
 } from 'discord.js';
-import {
-    type Command,
-    type UserError,
-} from '@sapphire/framework';
-import { setTimeout } from 'timers/promises';
 import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
+import { Identifiers } from '../enums/Identifiers';
+import { Time } from '../enums/Time';
+import { ErrorHandler } from './ErrorHandler';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { cleanRound } from '../utility/utility';
-import { ErrorHandler } from './ErrorHandler';
-import { Identifiers } from '../enums/Identifiers';
 import { Options } from '../utility/Options';
-import { Time } from '../enums/Time';
 
 export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHandler<UserError> {
     readonly interaction: CommandInteraction | ContextMenuInteraction;

@@ -1,6 +1,6 @@
 import { SnowflakeUtil } from 'discord.js';
-import { Base } from '../structures/Base';
 import { i18n } from '../locales/i18n';
+import { Base } from '../structures/Base';
 import { Sentry } from '../structures/Sentry';
 
 export class BaseErrorHandler<E> extends Base {

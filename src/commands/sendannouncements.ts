@@ -4,7 +4,6 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { ChannelTypes } from 'discord.js/typings/enums';
 import {
     type CommandInteraction,
     Constants as DiscordConstants,
@@ -15,14 +14,15 @@ import {
     MessageEmbed,
     type NewsChannel,
 } from 'discord.js';
+import { ChannelTypes } from 'discord.js/typings/enums';
+import { Time } from '../enums/Time';
+import { BetterEmbed } from '../structures/BetterEmbed';
+import { Log } from '../structures/Log';
+import { Options } from '../utility/Options';
 import {
     awaitComponent,
     disableComponents,
 } from '../utility/utility';
-import { BetterEmbed } from '../structures/BetterEmbed';
-import { Log } from '../structures/Log';
-import { Options } from '../utility/Options';
-import { Time } from '../enums/Time';
 
 export class SendAnnouncementsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {

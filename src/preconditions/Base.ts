@@ -1,5 +1,9 @@
-import { ContextMenuInteraction, Message, type CommandInteraction } from 'discord.js';
 import { Precondition } from '@sapphire/framework';
+import {
+    ContextMenuInteraction,
+    Message,
+    type CommandInteraction,
+} from 'discord.js';
 import { i18n } from '../locales/i18n';
 import { Log } from '../structures/Log';
 import { slashCommandResolver } from '../utility/utility';

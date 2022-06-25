@@ -1,5 +1,5 @@
-import { Base } from '../structures/Base';
 import { HTTPError } from '../errors/HTTPError';
+import { Base } from '../structures/Base';
 import { Request } from '../structures/Request';
 
 export class Requests extends Base {
