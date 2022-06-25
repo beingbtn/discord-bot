@@ -1,7 +1,7 @@
 import { SnowflakeUtil } from 'discord.js';
 import { Base } from '../structures/Base';
 import { i18n } from '../locales/i18n';
-import { Sentry } from './Sentry';
+import { Sentry } from '../structures/Sentry';
 
 export class BaseErrorHandler<E> extends Base {
     readonly error: E;

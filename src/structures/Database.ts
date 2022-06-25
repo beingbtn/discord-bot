@@ -4,7 +4,7 @@ import {
     PoolClient,
 } from 'pg';
 import { Options } from '../utility/Options';
-import { Sentry } from '../errors/Sentry';
+import { Sentry } from './Sentry';
 
 const pool = new Pool({
     idleTimeoutMillis: Options.postgresqlIdleTimeoutMillis,

@@ -11,7 +11,7 @@ import {
 } from '@sentry/node';
 import * as SentryClient from '@sentry/node';
 import { type Core } from '../core/Core';
-import { HTTPError } from './HTTPError';
+import { HTTPError } from '../errors/HTTPError';
 import { slashCommandResolver } from '../utility/utility';
 
 export class Sentry {
