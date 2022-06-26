@@ -81,7 +81,9 @@ export class Client extends SapphireClient {
         container.i18n = new i18n();
 
         container.announcements = (
-            await container.database.query('SELECT * FROM announcements')
+            await container.database.query(
+                'SELECT * FROM announcements',
+            )
         ).rows as Announcement[];
 
         container.config = (
@@ -90,7 +92,7 @@ export class Client extends SapphireClient {
             )
         ).rows[0] as Config;
 
-        await super.login();
+        await this.login();
     }
 }
 
