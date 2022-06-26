@@ -86,6 +86,8 @@ export class Client extends SapphireClient {
             )
         ).rows as Announcement[];
 
+        console.log(container.announcements);
+
         container.config = (
             await container.database.query(
                 'SELECT * FROM config WHERE index = 0',

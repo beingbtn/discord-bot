@@ -24,18 +24,18 @@ export class PersistentNotificationListener extends Listener {
         try {
             const category = customID.value;
 
-            const { role } = this.container.announcements.find(
+            const { roleID } = this.container.announcements.find(
                 (announcement) => announcement.category === category,
             )!;
 
             const memberRoles = interaction.member.roles;
-            const hasRole = memberRoles.cache.has(role);
+            const hasRole = memberRoles.cache.has(roleID);
 
             const notificationsEmbed = new MessageEmbed()
                 .setColor(Options.colorsNormal);
 
             if (hasRole === true) {
-                await memberRoles.remove(role);
+                await memberRoles.remove(roleID);
 
                 notificationsEmbed
                     .setTitle(
@@ -53,7 +53,7 @@ export class PersistentNotificationListener extends Listener {
                         ),
                     );
             } else {
-                await memberRoles.add(role);
+                await memberRoles.add(roleID);
 
                 notificationsEmbed
                     .setTitle(
@@ -78,7 +78,7 @@ export class PersistentNotificationListener extends Listener {
                 .addFields([{
                     name: interaction.i18n.getMessage('persistentNotificationCurrentName'),
                     value: this.container.announcements.filter(
-                        (announcement) => memberRoles.cache.has(announcement.role),
+                        (announcement) => memberRoles.cache.has(announcement.roleID),
                     ).map(
                         (announcement) => announcement.category,
                     ).join(', ')

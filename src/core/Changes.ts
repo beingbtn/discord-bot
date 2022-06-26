@@ -8,7 +8,7 @@ import { Log } from '../structures/Log';
 
 export class Changes extends Base {
     public async check(data: RSS): Promise<RSS> {
-        const { comments: maxComments } = this.container.announcements.find(
+        const { maxComments } = this.container.announcements.find(
             (announcement) => announcement.category === data.title,
         )!;
 

@@ -186,7 +186,7 @@ export class AnnouncementsCommand extends Command {
 
         const announcementChannelID = this.container.announcements.find(
             (announcement) => announcement.category === type,
-        )!.channel;
+        )!.channelID;
 
         const oldWebhooks = await channel.fetchWebhooks();
         const existingAnnouncementWebhook = oldWebhooks

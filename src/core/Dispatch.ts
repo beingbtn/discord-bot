@@ -26,7 +26,7 @@ export class Dispatch extends Base {
         components: MessageActionRow[],
         data: RSS,
     ) {
-        const { channel: channelID, role: roleID } = this.announcements.find(
+        const { channelID, roleID } = this.announcements.find(
             (announcement) => announcement.category === data.title,
         )!;
 
