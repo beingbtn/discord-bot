@@ -57,7 +57,7 @@ export class NotificationsCommand extends Command {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',
             )
-                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                ? this.container.config.ownerGuilds
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
@@ -80,21 +80,15 @@ export class NotificationsCommand extends Command {
                 ),
             );
 
-        const announcements = JSON.parse(process.env.ANNOUNCEMENTS!) as {
-            [key: string]: {
-                id: string,
-            }
-        };
-
         const actionRow = new MessageActionRow()
             .setComponents(
-                Object.entries(announcements).map(
-                    ([key]) => new MessageButton()
+                this.container.announcements.map(
+                    (announcement) => new MessageButton()
                         .setCustomId(JSON.stringify({
                             event: Events.PersistentNotification,
-                            value: key,
+                            value: announcement.category,
                         } as CustomID))
-                        .setLabel(key)
+                        .setLabel(announcement.category)
                         .setStyle(MessageButtonStyles.PRIMARY),
                 ),
             );

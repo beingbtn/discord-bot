@@ -24,24 +24,18 @@ export class PersistentNotificationListener extends Listener {
         try {
             const category = customID.value;
 
-            const announcements = JSON.parse(
-                process.env.ANNOUNCEMENTS!,
-            ) as {
-                [key: string]: {
-                    id: string,
-                    role: string,
-                }
-            };
+            const { role } = this.container.announcements.find(
+                (announcement) => announcement.category === category,
+            )!;
 
-            const announcement = announcements[category];
             const memberRoles = interaction.member.roles;
-            const hasRole = memberRoles.cache.has(announcement.role);
+            const hasRole = memberRoles.cache.has(role);
 
             const notificationsEmbed = new MessageEmbed()
                 .setColor(Options.colorsNormal);
 
             if (hasRole === true) {
-                await memberRoles.remove(announcement.role);
+                await memberRoles.remove(role);
 
                 notificationsEmbed
                     .setTitle(
@@ -59,7 +53,7 @@ export class PersistentNotificationListener extends Listener {
                         ),
                     );
             } else {
-                await memberRoles.add(announcement.role);
+                await memberRoles.add(role);
 
                 notificationsEmbed
                     .setTitle(
@@ -83,9 +77,11 @@ export class PersistentNotificationListener extends Listener {
             notificationsEmbed
                 .addFields([{
                     name: interaction.i18n.getMessage('persistentNotificationCurrentName'),
-                    value: Object.entries(announcements).filter(
-                        ([, value]) => memberRoles.cache.has(value.role),
-                    ).map(([key]) => key).join(', ')
+                    value: this.container.announcements.filter(
+                        (announcement) => memberRoles.cache.has(announcement.role),
+                    ).map(
+                        (announcement) => announcement.category,
+                    ).join(', ')
                         || interaction.i18n.getMessage('none'),
                 }]);
 

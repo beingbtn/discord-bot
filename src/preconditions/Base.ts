@@ -1,7 +1,6 @@
 import { Precondition } from '@sapphire/framework';
 import {
     ContextMenuInteraction,
-    Message,
     type CommandInteraction,
 } from 'discord.js';
 import { i18n } from '../locales/i18n';
@@ -20,18 +19,6 @@ export class BasePrecondition extends Precondition {
 
     public override async contextMenuRun(interaction: ContextMenuInteraction) {
         return this.interaction(interaction);
-    }
-
-    public override async messageRun(message: Message) {
-        Object.defineProperty(
-            message,
-            'i18n',
-            {
-                value: new i18n(),
-            },
-        );
-
-        return this.ok();
     }
 
     private async interaction(action: CommandInteraction | ContextMenuInteraction) {

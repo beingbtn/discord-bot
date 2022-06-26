@@ -92,41 +92,53 @@
     "commandsAPIStatsUsesName": {
         "message": "Uses"
     },
-    "commandsConfigCoreDescription": {
-        "message": "The core is now **$1**."
-    },
     "commandsConfigCoreTitle": {
         "message": "Core State Updated"
     },
-    "commandsConfigDevModeDescription": {
-        "message": "Developer Mode is now **$1**."
+    "commandsConfigCoreDescription": {
+        "message": "The core is now **$1**."
     },
     "commandsConfigDevModeTitle": {
         "message": "Developer Mode Updated"
     },
-    "commandsConfigIntervalDescription": {
-        "message": "The interval is now **$1**ms."
+    "commandsConfigDevModeDescription": {
+        "message": "Developer Mode is now **$1**."
     },
     "commandsConfigIntervalTitle": {
         "message": "Interval Updated"
     },
-    "commandsConfigRestRequestTimeoutDescription": {
-        "message": "The rest request timeout is now **$1**."
+    "commandsConfigIntervalDescription": {
+        "message": "The interval is now **$1**ms."
     },
     "commandsConfigRestRequestTimeoutTitle": {
         "message": "Rest Request Timeout Updated"
     },
-    "commandsConfigRetryLimitDescription": {
-        "message": "The retry limit is now **$1**."
+    "commandsConfigRestRequestTimeoutDescription": {
+        "message": "The rest request timeout is now **$1**."
     },
     "commandsConfigRetryLimitTitle": {
         "message": "Retry Limit Updated"
     },
-    "commandsConfigViewDescription": {
-        "message": "Core: **$1**\nDeveloper Mode: **$2**\nInterval: **$3**ms\nRest Request Timeout: **$4**ms\nRetry Limit: **$5**"
+    "commandsConfigRetryLimitDescription": {
+        "message": "The retry limit is now **$1**."
+    },
+    "commandsConfigOwnerGuildsTitle": {
+        "message": "Owner Guilds Updated"
+    },
+    "commandsConfigOwnerGuildsDescription": {
+        "message": "The owner guilds are now **$1**."
+    },
+    "commandsConfigOwnersTitle": {
+        "message": "Owners Updated"
+    },
+    "commandsConfigOwnersDescription": {
+        "message": "The owners are now **$1**."
     },
     "commandsConfigViewTitle": {
         "message": "Current Configuration"
+    },
+    "commandsConfigViewDescription": {
+        "message": "Core: **$1**\nDeveloper Mode: **$2**\nInterval: **$3**ms\nRest Request Timeout: **$4**ms\nRetry Limit: **$5**\nOwner Guilds: **$6**\nOwners: **$7**"
     },
     "commandsDeployNone": {
         "message": "None"
@@ -487,6 +499,9 @@
     },
     "logCore": {
         "message": "Core -"
+    },
+    "logError": {
+        "message": "Incident - ID $1 -"
     },
     "logRequest": {
         "message": "Request -"

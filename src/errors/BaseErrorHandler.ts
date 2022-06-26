@@ -22,7 +22,11 @@ export class BaseErrorHandler<E> extends Base {
     }
 
     public log(...text: unknown[]) {
-        const id = `${this.incidentID} |`;
+        const id = this.container.i18n.getMessage(
+            'logError', [
+                this.incidentID,
+            ],
+        );
 
         this.container.logger.error(id, ...text);
     }

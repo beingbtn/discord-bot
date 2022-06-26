@@ -6,7 +6,6 @@ import {
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Database } from '../structures/Database';
 import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
@@ -90,6 +89,32 @@ export class ConfigCommand extends Command {
                     ],
                 },
                 {
+                    name: 'ownerguilds',
+                    description: 'Set the guild(s) where owner commands should be set',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'guilds',
+                            type: 3,
+                            description: 'The IDs of the guilds separated by a comma (no spaces)',
+                            required: true,
+                        },
+                    ],
+                },
+                {
+                    name: 'owners',
+                    description: 'Set the application owner(s)',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'owners',
+                            type: 3,
+                            description: 'The IDs of the owners separated by a comma (no spaces)',
+                            required: true,
+                        },
+                    ],
+                },
+                {
                     name: 'view',
                     description: 'View the current configuration',
                     type: 1,
@@ -99,7 +124,7 @@ export class ConfigCommand extends Command {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',
             )
-                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                ? this.container.config.ownerGuilds
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
@@ -123,6 +148,12 @@ export class ConfigCommand extends Command {
             case 'retrylimit':
                 await this.retryLimit(interaction);
                 break;
+            case 'ownerguilds':
+                await this.ownerGuilds(interaction);
+                break;
+            case 'owners':
+                await this.owners(interaction);
+                break;
             case 'view':
                 await this.view(interaction);
                 break;
@@ -135,7 +166,7 @@ export class ConfigCommand extends Command {
 
         this.container.config.core = !this.container.config.core;
 
-        await Database.query(
+        await this.container.database.query(
             'UPDATE config SET "core" = $1 WHERE index = 0',
             [this.container.config.core],
         );
@@ -165,7 +196,7 @@ export class ConfigCommand extends Command {
 
         this.container.config.devMode = !this.container.config.devMode;
 
-        await Database.query(
+        await this.container.database.query(
             'UPDATE config SET "devMode" = $1 WHERE index = 0',
             [this.container.config.devMode],
         );
@@ -202,7 +233,7 @@ export class ConfigCommand extends Command {
 
         this.container.config.interval = milliseconds;
 
-        await Database.query(
+        await this.container.database.query(
             'UPDATE config SET "interval" = $1 WHERE index = 0',
             [this.container.config.interval],
         );
@@ -237,7 +268,7 @@ export class ConfigCommand extends Command {
 
         this.container.config.restRequestTimeout = milliseconds;
 
-        await Database.query(
+        await this.container.database.query(
             'UPDATE config SET "restRequestTimeout" = $1 WHERE index = 0',
             [this.container.config.restRequestTimeout],
         );
@@ -277,7 +308,7 @@ export class ConfigCommand extends Command {
 
         this.container.config.retryLimit = limit;
 
-        await Database.query(
+        await this.container.database.query(
             'UPDATE config SET "retryLimit" = $1 WHERE index = 0',
             [this.container.config.retryLimit],
         );
@@ -302,6 +333,76 @@ export class ConfigCommand extends Command {
         Log.command(interaction, retryLimitEmbed.description);
     }
 
+    public async ownerGuilds(interaction: CommandInteraction) {
+        const { i18n } = interaction;
+
+        const guilds = interaction.options.getString(
+            'guilds',
+            true,
+        ).split(',');
+
+        this.container.config.ownerGuilds = guilds;
+
+        await this.container.database.query(
+            'UPDATE config SET "ownerGuilds" = $1 WHERE index = 0',
+            [this.container.config.ownerGuilds],
+        );
+
+        const ownerGuildsEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal)
+            .setTitle(
+                i18n.getMessage(
+                    'commandsConfigOwnerGuildsTitle',
+                ),
+            )
+            .setDescription(
+                i18n.getMessage(
+                    'commandsConfigOwnerGuildsDescription', [
+                        guilds.join(', '),
+                    ],
+                ),
+            );
+
+        await interaction.editReply({ embeds: [ownerGuildsEmbed] });
+
+        Log.command(interaction, ownerGuildsEmbed.description);
+    }
+
+    public async owners(interaction: CommandInteraction) {
+        const { i18n } = interaction;
+
+        const owners = interaction.options.getString(
+            'owners',
+            true,
+        ).split(',');
+
+        this.container.config.owners = owners;
+
+        await this.container.database.query(
+            'UPDATE config SET "owners" = $1 WHERE index = 0',
+            [this.container.config.owners],
+        );
+
+        const ownersEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal)
+            .setTitle(
+                i18n.getMessage(
+                    'commandsConfigOwnersTitle',
+                ),
+            )
+            .setDescription(
+                i18n.getMessage(
+                    'commandsConfigOwnersDescription', [
+                        owners.join(', '),
+                    ],
+                ),
+            );
+
+        await interaction.editReply({ embeds: [ownersEmbed] });
+
+        Log.command(interaction, ownersEmbed.description);
+    }
+
     public async view(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
@@ -324,6 +425,9 @@ export class ConfigCommand extends Command {
                         this.container.config.interval,
                         this.container.config.restRequestTimeout,
                         this.container.config.retryLimit,
+                        this.container.config.ownerGuilds.join(', '),
+                        this.container.config.owners.join(', '),
+
                     ],
                 ),
             );

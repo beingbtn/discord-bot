@@ -9,7 +9,7 @@ import { i18n } from './locales/i18n';
         const rest = new REST({ version: '10' })
             .setToken(process.env.DISCORD_TOKEN!);
 
-        const guildIDs = JSON.parse(process.env.OWNER_GUILDS!) as string[];
+        const guildIDs = ['873000534955667496'];
 
         await Promise.all([
             rest.put(

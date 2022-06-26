@@ -5,14 +5,12 @@ import fetch, {
     type Response,
 } from 'node-fetch';
 import { AbortSignal } from 'node-fetch/externals';
+import { Base } from './Base';
 import { AbortError } from '../errors/AbortError';
-import { i18n } from '../locales/i18n';
 import { Log } from './Log';
 import { Options } from '../utility/Options';
 
-export class Request {
-    readonly i18n: i18n;
-
+export class Request extends Base {
     readonly restRequestTimeout: number;
 
     private retry: number;
@@ -23,7 +21,7 @@ export class Request {
         retryLimit?: number,
         restRequestTimeout?: number,
     }) {
-        this.i18n = new i18n();
+        super();
 
         this.restRequestTimeout = config?.restRequestTimeout
             ?? Options.restRequestTimeout;
@@ -51,7 +49,7 @@ export class Request {
                 if (this.retry >= 1) {
                     Log.request(
                         LogLevel.Warn,
-                        this.i18n.getMessage(
+                        this.container.i18n.getMessage(
                             'errorsRequestSuccessAfterRetry',
                         ),
                     );
@@ -67,7 +65,7 @@ export class Request {
             ) {
                 Log.request(
                     LogLevel.Warn,
-                    this.i18n.getMessage(
+                    this.container.i18n.getMessage(
                         'errorsRequest500_600', [
                             response.status,
                         ],
@@ -84,7 +82,7 @@ export class Request {
             if (this.retry < this.retryLimit) {
                 Log.request(
                     LogLevel.Warn,
-                    this.i18n.getMessage(
+                    this.container.i18n.getMessage(
                         'errorsRequestAbort',
                     ),
                 );

@@ -73,7 +73,7 @@ export class Normalize extends Base {
                     published: Date.parse(item.pubDate.text),
                     edited: false,
                     category: item.category.text,
-                    comments: item['slash:comments'].text ?? 0,
+                    comments: Number(item['slash:comments'].text) ?? 0,
                     content: item['content:encoded'].text,
                     attachments: [] as string[],
                 };

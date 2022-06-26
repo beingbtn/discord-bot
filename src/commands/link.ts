@@ -6,7 +6,6 @@ import {
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Database } from '../structures/Database';
 import { Options } from '../utility/Options';
 
 export class LinkCommand extends Command {
@@ -110,7 +109,7 @@ export class LinkCommand extends Command {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',
             )
-                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                ? this.container.config.ownerGuilds
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
@@ -124,7 +123,7 @@ export class LinkCommand extends Command {
         const id = interaction.options.getString('id', true);
         const message = interaction.options.getString('message', false);
 
-        await Database.query(
+        await this.container.database.query(
             `UPDATE "${category}" SET message = $1 WHERE id = $2`,
             [message, id],
         );

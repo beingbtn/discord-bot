@@ -15,8 +15,6 @@ export class Requests extends Base {
             });
         }
 
-        const xml = await response.text();
-
-        return xml;
+        return response.text();
     }
 }

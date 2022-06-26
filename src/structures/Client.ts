@@ -8,6 +8,7 @@ import {
     type PresenceData,
     Sweepers,
 } from 'discord.js';
+import { Announcement } from '../@types/Announcement';
 import { Config } from '../@types/Config';
 import { Core } from '../core/Core';
 import { Database } from './Database';
@@ -74,16 +75,20 @@ export class Client extends SapphireClient {
     }
 
     public async init() {
-        container.config = (
-            await Database.query(
-                'SELECT * FROM config WHERE index = 0',
-            )
-        ).rows[0] as Config;
-
-        container.database = Database;
+        container.database = new Database();
         container.core = new Core();
         container.customPresence = null;
         container.i18n = new i18n();
+
+        container.announcements = (
+            await container.database.query('SELECT * FROM announcements')
+        ).rows as Announcement[];
+
+        container.config = (
+            await container.database.query(
+                'SELECT * FROM config WHERE index = 0',
+            )
+        ).rows[0] as Config;
 
         await super.login();
     }
@@ -91,6 +96,7 @@ export class Client extends SapphireClient {
 
 declare module '@sapphire/pieces' {
     interface Container {
+        announcements: Announcement[],
         config: Config,
         core: Core,
         customPresence: PresenceData | null,

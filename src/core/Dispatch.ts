@@ -1,4 +1,3 @@
-import process from 'node:process';
 import { setTimeout } from 'node:timers/promises';
 import {
     Formatters,
@@ -6,26 +5,20 @@ import {
     type MessageEmbed,
     type NewsChannel,
 } from 'discord.js';
+import { Announcement } from '../@types/Announcement';
 import { type RSS } from '../@types/RSS';
 import { Base } from '../structures/Base';
-import { Database } from '../structures/Database';
 import { Options } from '../utility/Options';
 
 /* eslint-disable no-await-in-loop */
 
 export class Dispatch extends Base {
-    announcements: {
-        [key: string]: {
-            id: string
-            maxComments: number,
-            role: string,
-        }
-    };
+    announcements: Announcement[];
 
     public constructor() {
         super();
 
-        this.announcements = JSON.parse(process.env.ANNOUNCEMENTS!);
+        this.announcements = this.container.announcements;
     }
 
     public async dispatch(
@@ -33,9 +26,12 @@ export class Dispatch extends Base {
         components: MessageActionRow[],
         data: RSS,
     ) {
-        const announcement = this.announcements[data.title];
+        const { channel: channelID, role: roleID } = this.announcements.find(
+            (announcement) => announcement.category === data.title,
+        )!;
+
         const channel = await this.container.client.channels.fetch(
-            announcement.id,
+            channelID,
         ) as NewsChannel;
 
         const editedThreadIDs = data.items.filter(
@@ -50,7 +46,7 @@ export class Dispatch extends Base {
 
         if (data.items.some((item) => item.edited === false)) {
             await channel.send({
-                content: Formatters.roleMention(announcement.role),
+                content: Formatters.roleMention(roleID),
                 allowedMentions: {
                     parse: ['roles'],
                 },
@@ -92,7 +88,7 @@ export class Dispatch extends Base {
     }
 
     private async postsGet(data: RSS, editedThreadIDs: string[]) {
-        const posts = await Database.query(
+        const posts = await this.container.database.query(
             `SELECT id, message FROM "${
                 data.title
             }" WHERE id IN (${
@@ -107,7 +103,7 @@ export class Dispatch extends Base {
     }
 
     private async postSet(data: RSS, id: string, messageID: string) {
-        await Database.query(
+        await this.container.database.query(
             `UPDATE "${
                 data.title
             }" SET message = $1 WHERE id = $2`,

@@ -4,14 +4,13 @@ import {
 } from '@sapphire/framework';
 import { type RSS } from '../@types/RSS';
 import { Base } from '../structures/Base';
-import { Database } from '../structures/Database';
 import { Log } from '../structures/Log';
 
 export class Changes extends Base {
     public async check(data: RSS): Promise<RSS> {
-        const { maxComments } = JSON.parse(
-            process.env.ANNOUNCEMENTS!,
-        )[data.title];
+        const { comments: maxComments } = this.container.announcements.find(
+            (announcement) => announcement.category === data.title,
+        )!;
 
         const knownThreads = await this.get(data);
 
@@ -87,7 +86,7 @@ export class Changes extends Base {
     }[]> {
         const ids = data.items.map((item) => `'${item.id}'`).join(', ');
 
-        const links = await Database.query(
+        const links = await this.container.database.query(
             `SELECT id, title, content, message FROM "${
                 data.title
             }" WHERE id IN (${
@@ -99,7 +98,7 @@ export class Changes extends Base {
     }
 
     private async insert(data: RSS, item: RSS['items'][number]) {
-        await Database.query(
+        await this.container.database.query(
             `INSERT INTO "${
                 data.title
             }" (id, title, content) VALUES ($1, $2, $3)`,
@@ -108,7 +107,7 @@ export class Changes extends Base {
     }
 
     private async update(data: RSS, item: RSS['items'][number]) {
-        await Database.query(
+        await this.container.database.query(
             `UPDATE "${
                 data.title
             }" SET title = $1, content = $2 WHERE id = $3`,

@@ -3,6 +3,7 @@ import {
     Pool,
     PoolClient,
 } from 'pg';
+import { Base } from './Base';
 import { Options } from '../utility/Options';
 import { Sentry } from './Sentry';
 
@@ -28,8 +29,8 @@ pool.on('error', (error) => {
     );
 });
 
-export class Database {
-    static async query(input: string, values?: unknown[]) {
+export class Database extends Base {
+    async query(input: string, values?: unknown[]) {
         const poolClient = await pool.connect();
 
         try {
@@ -42,7 +43,7 @@ export class Database {
     }
 
     // eslint-disable-next-line no-unused-vars
-    static async transaction(func: (poolClient: PoolClient) => Promise<void>) {
+    async transaction(func: (poolClient: PoolClient) => Promise<void>) {
         const poolClient = await pool.connect();
 
         try {
@@ -57,7 +58,7 @@ export class Database {
         }
     }
 
-    static async close() {
+    async close() {
         await pool.end();
     }
 }

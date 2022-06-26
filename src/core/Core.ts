@@ -14,7 +14,6 @@ import { Parser } from './Parser';
 import { Requests } from './Requests';
 import { Base } from '../structures/Base';
 import { Log } from '../structures/Log';
-import { Constants } from '../utility/Constants';
 import { Options } from '../utility/Options';
 
 /* eslint-disable no-await-in-loop */
@@ -94,7 +93,9 @@ export class Core extends Base {
             return;
         }
 
-        const urls = Constants.rss;
+        const urls = this.container.announcements.map(
+            (announcement) => announcement.url,
+        );
 
         if (urls.length === 0) {
             await setTimeout(Options.coreDisabledTimeout);
@@ -188,7 +189,7 @@ export class Core extends Base {
 
                 const regularInterval = (
                     this.container.config.interval
-                    / Constants.rss.length
+                    / this.container.announcements.length
                 );
 
                 if (regularInterval > this.errors.getTimeout()) {
@@ -200,7 +201,7 @@ export class Core extends Base {
 
             await setTimeout(
                 this.container.config.interval
-                / Constants.rss.length,
+                / this.container.announcements.length,
             );
         }
     }

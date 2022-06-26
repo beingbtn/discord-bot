@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
-      "target": "es2022",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "strict": true,
-      "alwaysStrict": true,
-      "esModuleInterop": true,
-      "downlevelIteration": true,
-      "outDir": "dist",
+        "target": "es2022",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "strict": true,
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+        "downlevelIteration": true,
+        "outDir": "dist",
     }
 }

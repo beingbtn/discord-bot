@@ -1,4 +1,3 @@
-import process from 'node:process';
 import {
     type ApplicationCommandRegistry,
     BucketScope,
@@ -88,7 +87,7 @@ export class AnnouncementsCommand extends Command {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',
             )
-                ? JSON.parse(process.env.OWNER_GUILDS!) as string[]
+                ? this.container.config.ownerGuilds
                 : undefined, // eslint-disable-line no-undefined
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
@@ -185,26 +184,27 @@ export class AnnouncementsCommand extends Command {
             default: type = 'Moderation Information and Changes';
         }
 
-        const channels = JSON.parse(process.env.ANNOUNCEMENTS!);
-        const announcementID = channels[type].id as string;
+        const announcementChannelID = this.container.announcements.find(
+            (announcement) => announcement.category === type,
+        )!.channel;
 
         const oldWebhooks = await channel.fetchWebhooks();
         const existingAnnouncementWebhook = oldWebhooks
-            .filter((webhook) => webhook.sourceChannel?.id === announcementID)
+            .filter((webhook) => webhook.sourceChannel?.id === announcementChannelID)
             .first();
 
         if (typeof existingAnnouncementWebhook === 'undefined') {
             // Add webhook
 
             const newsChannel = await interaction.client.channels.fetch(
-                announcementID,
+                announcementChannelID,
             ) as NewsChannel;
 
             await newsChannel.addFollower(channel);
             const webhooks = await channel.fetchWebhooks();
 
             const announcementWebhook = webhooks
-                .filter((webhook) => webhook.sourceChannel?.id === announcementID)
+                .filter((webhook) => webhook.sourceChannel?.id === announcementChannelID)
                 .first()!;
 
             await announcementWebhook.edit({

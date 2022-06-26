@@ -1,12 +1,9 @@
 import { Precondition } from '@sapphire/framework';
 import {
     ContextMenuInteraction,
-    Message,
     type CommandInteraction,
 } from 'discord.js';
 import { Identifiers } from '../enums/Identifiers';
-
-const developers = JSON.parse(process.env.OWNERS!) as string[];
 
 export class DevModePrecondition extends Precondition {
     public override chatInputRun(interaction: CommandInteraction) {
@@ -17,13 +14,9 @@ export class DevModePrecondition extends Precondition {
         return this.checkDeveloper(interaction.user.id);
     }
 
-    public override messageRun(message: Message) {
-        return this.checkDeveloper(message.author.id);
-    }
-
     private checkDeveloper(userId: string) {
         return this.container.config.devMode === false
-        || developers.includes(userId)
+        || this.container.config.owners.includes(userId)
             ? this.ok()
             : this.error({
                 identifier: Identifiers.DevMode,

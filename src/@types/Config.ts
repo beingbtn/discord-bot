@@ -4,4 +4,6 @@ export interface Config {
     interval: number,
     restRequestTimeout: number,
     retryLimit: number,
+    ownerGuilds: string[],
+    owners: string[],
 }

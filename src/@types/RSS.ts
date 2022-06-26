@@ -10,7 +10,7 @@ export interface RSS {
         published: number;
         edited: boolean;
         category: string;
-        comments: string;
+        comments: number;
         content: string;
         attachments: string[];
     }[];
