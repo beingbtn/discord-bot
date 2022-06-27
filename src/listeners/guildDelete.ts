@@ -9,7 +9,7 @@ import {
     setPresence,
 } from '../utility/utility';
 
-export class RateLimitListener extends Listener {
+export class GuildDeleteListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
         super(context, {
             ...options,

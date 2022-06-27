@@ -6,7 +6,7 @@ import { type Guild } from 'discord.js';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { setPresence } from '../utility/utility';
 
-export class RateLimitListener extends Listener {
+export class GuildCreateListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
         super(context, {
             ...options,

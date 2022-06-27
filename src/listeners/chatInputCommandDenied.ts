@@ -6,7 +6,7 @@ import {
 } from '@sapphire/framework';
 import { InteractionPreconditionErrorHandler } from '../errors/InteractionPreconditionErrorHandler';
 
-export class ChatInputCommandErrorListener extends Listener {
+export class ChatInputCommandDeniedErrorListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
         super(context, {
             ...options,

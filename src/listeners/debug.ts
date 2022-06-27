@@ -4,7 +4,7 @@ import {
 } from '@sapphire/framework';
 import { Sentry } from '../structures/Sentry';
 
-export class RateLimitListener extends Listener {
+export class DebugListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
         super(context, {
             ...options,
