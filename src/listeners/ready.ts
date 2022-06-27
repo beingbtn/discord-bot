@@ -18,11 +18,8 @@ export class ReadyListener extends Listener {
 
     public async run(client: Client) {
         this.container.logger.info(
-            this.container.i18n.getMessage(
-                'eventsReady', [
-                    client!.user!.tag!,
-                ],
-            ),
+            `${this.constructor.name}:`,
+            `Logged in as ${client!.user!.tag!}.`,
         );
 
         set();

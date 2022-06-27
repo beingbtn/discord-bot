@@ -15,7 +15,7 @@ export class WarnListener extends Listener {
 
     public run(info: string) {
         this.container.logger.warn(
-            this.container.i18n.getMessage('eventsWarn'),
+            `${this.constructor.name}:`,
             info,
         );
 

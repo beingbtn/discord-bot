@@ -110,7 +110,7 @@ export class LinkCommand extends Command {
                 (condition) => condition === 'OwnerOnly',
             )
                 ? this.container.config.ownerGuilds
-                : undefined, // eslint-disable-line no-undefined
+                : undefined,
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });

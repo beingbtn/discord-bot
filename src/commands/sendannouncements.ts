@@ -17,7 +17,6 @@ import {
 import { ChannelTypes } from 'discord.js/typings/enums';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import {
     awaitComponent,
@@ -101,7 +100,7 @@ export class SendAnnouncementsCommand extends Command {
                 (condition) => condition === 'OwnerOnly',
             )
                 ? this.container.config.ownerGuilds
-                : undefined, // eslint-disable-line no-undefined
+                : undefined,
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
@@ -196,11 +195,11 @@ export class SendAnnouncementsCommand extends Command {
             return;
         }
 
-        Log.command(
-            interaction,
-            i18n.getMessage(
-                'commandsSendAnnouncementsLogSending',
-            ),
+        this.container.logger.info(
+            `Interaction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            'Sending message...',
         );
 
         const role = interaction.options.getRole('role', false);
@@ -223,11 +222,11 @@ export class SendAnnouncementsCommand extends Command {
             await sentAnnouncement.crosspost();
         }
 
-        Log.command(
-            interaction,
-            i18n.getMessage(
-                'commandsSendAnnouncementsLogPublished',
-            ),
+        this.container.logger.info(
+            `Interaction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            'Published announcement!',
         );
 
         const successEmbed = new BetterEmbed(interaction)

@@ -34,12 +34,10 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
 
     public async init() {
         try {
-            this.log(this.i18n.getMessage(
-                'errorsPreconditionLog', [
-                    this.interaction.user.id,
-                    this.error.identifier,
-                ],
-            ));
+            this.log(
+                `${this.constructor.name}:`,
+                `${this.interaction.user.id} failed ${this.error.identifier}.`,
+            );
 
             this.sentry
                 .setSeverity('warning')

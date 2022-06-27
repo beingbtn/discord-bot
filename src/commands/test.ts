@@ -56,13 +56,13 @@ export class TestCommand extends Command {
                 (condition) => condition === 'OwnerOnly',
             )
                 ? this.container.config.ownerGuilds
-                : undefined, // eslint-disable-line no-undefined
+                : undefined,
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
     }
 
-    public async chatInputCommand(interaction: CommandInteraction) {
+    public async chatInputRun(interaction: CommandInteraction) {
         await interaction.followUp({
             content: 'e',
         });

@@ -1,10 +1,5 @@
-import {
-    container,
-    LogLevel,
-} from '@sapphire/framework';
 import { type RSS } from '../@types/RSS';
 import { Base } from '../structures/Base';
-import { Log } from '../structures/Log';
 
 export class Changes extends Base {
     public async check(data: RSS): Promise<RSS> {
@@ -25,18 +20,18 @@ export class Changes extends Base {
         );
 
         if (potentiallyNewThreads > newThreads) {
-            Log.core(
-                LogLevel.Debug,
-                container.i18n.getMessage(
-                    'coreChangesFilteredByComment', [
-                        potentiallyNewThreads.map(
-                            (thread) => thread.id,
-                        ).join(', '),
-                        newThreads.map(
-                            (thread) => thread.id,
-                        ).join(', '),
-                    ],
-                ),
+            const potentiallyNewIDs = potentiallyNewThreads.map(
+                (thread) => thread.id,
+            ).join(', ');
+
+            const newIDs = potentiallyNewThreads.map(
+                (thread) => thread.id,
+            ).join(', ');
+
+            this.container.logger.debug(
+                `${this.constructor.name}:`,
+                `The potential new threads ${potentiallyNewIDs} were found.`,
+                `${newIDs} remain after the comment count filter.`,
             );
         }
 

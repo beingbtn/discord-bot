@@ -96,12 +96,11 @@ export class Client extends SapphireClient {
 
         const endTime = Date.now();
 
+        const initTime = endTime - startTime;
+
         container.logger.info(
-            container.i18n.getMessage(
-                'containerInit', [
-                    endTime - startTime,
-                ],
-            ),
+            `${this.constructor.name}:`,
+            `Initialized container extensions after ${initTime}ms.`,
         );
 
         await this.login();

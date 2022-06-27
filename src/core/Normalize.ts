@@ -1,8 +1,6 @@
 import Turndown from 'turndown';
-import { LogLevel } from '@sapphire/framework';
 import { BaseRss } from '../@types/BaseRss';
 import { Base } from '../structures/Base';
-import { Log } from '../structures/Log';
 
 export class Normalize extends Base {
     turndown: Turndown;
@@ -48,11 +46,13 @@ export class Normalize extends Base {
         }
 
         if (typeof channel.item === 'undefined') {
-            const message = this.container.i18n.getMessage(
-                'coreNormalizeValidationItemNotDefined',
+            const message = 'Expected <Channel>.item to be an object or array; received undefined';
+
+            this.container.logger.error(
+                `${this.constructor.name}:`,
+                message,
             );
 
-            Log.core(LogLevel.Error, message, channel.item);
             throw new Error(message);
         }
 

@@ -1,5 +1,4 @@
 import { setTimeout } from 'node:timers';
-import { LogLevel } from '@sapphire/framework';
 import fetch, {
     type RequestInit,
     type Response,
@@ -7,7 +6,6 @@ import fetch, {
 import { AbortSignal } from 'node-fetch/externals';
 import { Base } from './Base';
 import { AbortError } from '../errors/AbortError';
-import { Log } from './Log';
 import { Options } from '../utility/Options';
 
 export class Request extends Base {
@@ -47,11 +45,9 @@ export class Request extends Base {
 
             if (response.ok === true) {
                 if (this.retry >= 1) {
-                    Log.request(
-                        LogLevel.Warn,
-                        this.container.i18n.getMessage(
-                            'errorsRequestSuccessAfterRetry',
-                        ),
+                    this.container.logger.warn(
+                        `${this.constructor.name}:`,
+                        'Successfully fetched after one or more retries.',
                     );
                 }
 
@@ -63,13 +59,9 @@ export class Request extends Base {
                 && response.status >= 500
                 && response.status < 600
             ) {
-                Log.request(
-                    LogLevel.Warn,
-                    this.container.i18n.getMessage(
-                        'errorsRequest500_600', [
-                            response.status,
-                        ],
-                    ),
+                this.container.logger.warn(
+                    `${this.constructor.name}:`,
+                    `Retrying due to a response between 500 and 600: ${response.status}.`,
                 );
 
                 this.retry += 1;
@@ -80,11 +72,9 @@ export class Request extends Base {
             return response;
         } catch (error) {
             if (this.retry < this.retryLimit) {
-                Log.request(
-                    LogLevel.Warn,
-                    this.container.i18n.getMessage(
-                        'errorsRequestAbort',
-                    ),
+                this.container.logger.warn(
+                    `${this.constructor.name}:`,
+                    'Retrying due to an AbortError.',
                 );
 
                 this.retry += 1;

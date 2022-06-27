@@ -14,7 +14,6 @@ import {
 } from 'discord.js';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import {
     awaitComponent,
@@ -88,7 +87,7 @@ export class EditAnnouncementsCommand extends Command {
                 (condition) => condition === 'OwnerOnly',
             )
                 ? this.container.config.ownerGuilds
-                : undefined, // eslint-disable-line no-undefined
+                : undefined,
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
@@ -178,11 +177,11 @@ export class EditAnnouncementsCommand extends Command {
             return;
         }
 
-        Log.command(
-            interaction,
-            i18n.getMessage(
-                'commandsEditAnnouncementsLogEditing',
-            ),
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            'Sending edit...',
         );
 
         const editedAnnouncement = await message.edit({
@@ -197,11 +196,11 @@ export class EditAnnouncementsCommand extends Command {
             await editedAnnouncement.crosspost();
         }
 
-        Log.command(
-            interaction,
-            i18n.getMessage(
-                'commandsEditAnnouncementsLogPublished',
-            ),
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            'Published edit!',
         );
 
         const successEmbed = new BetterEmbed(interaction)

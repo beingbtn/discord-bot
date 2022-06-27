@@ -1,5 +1,4 @@
 import { setTimeout } from 'node:timers/promises';
-import { LogLevel } from '@sapphire/framework';
 import { Changes } from './Changes';
 import { Components } from './Components';
 import { Dispatch } from './Dispatch';
@@ -13,7 +12,6 @@ import { Normalize } from './Normalize';
 import { Parser } from './Parser';
 import { Requests } from './Requests';
 import { Base } from '../structures/Base';
-import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
 /* eslint-disable no-await-in-loop */
@@ -140,37 +138,27 @@ export class Core extends Base {
                         (item) => item.edited === true,
                     );
 
-                    Log.core(
-                        LogLevel.Info,
-                        this.container.i18n.getMessage(
-                            'coreCoreLogNewPosts', [
-                                newPosts.length,
-                                newPosts.map((post) => post.link).join(', '),
-                            ],
-                        ),
+                    const postLinks = newPosts.map((post) => post.link).join(', ');
+
+                    this.container.logger.error(
+                        `${this.constructor.name}:`,
+                        `New Posts Found: ${newPosts.length} ${postLinks}.`,
                     );
 
-                    Log.core(
-                        LogLevel.Info,
-                        this.container.i18n.getMessage(
-                            'coreCoreLogEditedPosts', [
-                                editedPosts.length,
-                                editedPosts.map((post) => post.link).join(', '),
-                            ],
-                        ),
+                    const editedPostLinks = newPosts.map((post) => post.link).join(', ');
+
+                    this.container.logger.error(
+                        `${this.constructor.name}:`,
+                        `Edited Posts Found: ${editedPosts.length} ${editedPostLinks}.`,
                     );
 
                     const embeds = this.embeds.create(changes);
                     const components = this.components.create(changes);
                     await this.dispatch.dispatch(embeds, components, changes);
 
-                    Log.core(
-                        LogLevel.Info,
-                        this.container.i18n.getMessage(
-                            'coreCoreLogFinishedPosts', [
-                                changes.title,
-                            ],
-                        ),
+                    this.container.logger.error(
+                        `${this.constructor.name}:`,
+                        `Finished dispatching messages from ${changes.title}.`,
                     );
                 }
 

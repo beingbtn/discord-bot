@@ -15,7 +15,7 @@ export class RateLimitListener extends Listener {
 
     public run(rateLimitInfo: string) {
         this.container.logger.warn(
-            this.container.i18n.getMessage('eventsRateLimit'),
+            `${this.constructor.name}:`,
             rateLimitInfo,
         );
 

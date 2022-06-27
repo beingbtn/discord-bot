@@ -7,7 +7,6 @@ import {
 import { type CommandInteraction } from 'discord.js';
 import { Limits } from '../enums/Limits';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 import { cleanLength } from '../utility/utility';
 
@@ -136,7 +135,7 @@ export class APICommand extends Command {
                 (condition) => condition === 'OwnerOnly',
             )
                 ? this.container.config.ownerGuilds
-                : undefined, // eslint-disable-line no-undefined
+                : undefined,
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
@@ -247,7 +246,12 @@ export class APICommand extends Command {
                 ),
             );
 
-        Log.command(interaction, setEmbed.description);
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `<Core>.errors.${category}.${type} is now ${value}.`,
+        );
 
         await interaction.editReply({
             embeds: [setEmbed],
@@ -283,7 +287,12 @@ export class APICommand extends Command {
                 ),
             );
 
-        Log.command(interaction, callEmbed.description);
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `Executed <Core>.errors.${method}.`,
+        );
 
         await this.stats(interaction);
         await interaction.followUp({

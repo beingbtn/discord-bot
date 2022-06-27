@@ -20,26 +20,17 @@
     "commandsAnnouncementsAddDescription": {
         "message": "$1 will be sent to $2!"
     },
-    "commandsAnnouncementsAddLog": {
-        "message": "$1 added to $2"
-    },
     "commandsAnnouncementsAddTitle": {
         "message": "Added $1"
     },
     "commandsAnnouncementsBotMissingPermissionDescription": {
         "message": "This bot is unable to use the channel you selected because it is missing permission(s): $1. Grant the bot the listed permissions or select a different channel that the bot can use."
     },
-    "commandsAnnouncementsBotMissingPermissionLog": {
-        "message": "Bot missing permission"
-    },
     "commandsAnnouncementsBotMissingPermissionTitle": {
         "message": "Missing Permission"
     },
     "commandsAnnouncementsRemoveDescription": {
         "message": "$1 will no longer be sent to $2!"
-    },
-    "commandsAnnouncementsRemoveLog": {
-        "message": "$1 removed from $2"
     },
     "commandsAnnouncementsRemoveNotFoundDescription": {
         "message": "The announcement type `$1` isn't added to $2!"
@@ -52,9 +43,6 @@
     },
     "commandsAnnouncementsUserMissingPermissionDescription": {
         "message": "You must have the **Manage Webhook(s)** permission to use this command. This permission can either be granted server-wide or given through a channel's advanced permissions."
-    },
-    "commandsAnnouncementsUserMissingPermissionLog": {
-        "message": "User missing permission"
     },
     "commandsAnnouncementsUserMissingPermissionTitle": {
         "message": "Missing Permission"
@@ -145,12 +133,6 @@
     },
     "commandsDeployTitle": {
         "message": "Success"
-    },
-    "commandsEditAnnouncementsLogEditing": {
-        "message": "Sending message..."
-    },
-    "commandsEditAnnouncementsLogPublished": {
-        "message": "Published edit!"
     },
     "commandsEditAnnouncementsPreviewButtonLabel": {
         "message": "Looks Good!"
@@ -323,12 +305,6 @@
     "commandsSendAnnouncementsEmbedFooterName": {
         "message": "Special Announcement"
     },
-    "commandsSendAnnouncementsLogPublished": {
-        "message": "Published announcement!"
-    },
-    "commandsSendAnnouncementsLogSending": {
-        "message": "Sending message..."
-    },
     "commandsSendAnnouncementsPreviewButtonLabel": {
         "message": "Looks Good!"
     },
@@ -362,35 +338,8 @@
     "commandsSystemUsersName": {
         "message": "Users"
     },
-    "containerInit": {
-        "message": "Initialized container extensions after $1ms"
-    },
-    "coreChangesFilteredByComment": {
-        "message": "The potential new threads $1 were found, of which $2 remain after the comment count filter"
-    },
     "coreComponentsButtonsReadMoreLabel": {
         "message": "Read More"
-    },
-    "coreCoreLogEditedPosts": {
-        "message": "Edited Posts Found: $1 $2"
-    },
-    "coreCoreLogFinishedPosts": {
-        "message": "Finished dispatching messages from $1"
-    },
-    "coreCoreLogNewPosts": {
-        "message": "New Posts Found: $1 $2"
-    },
-    "coreParserValidationVersion": {
-        "message": "Expected RSS version $1; received version $2"
-    },
-    "coreParserValidationNamespaces": {
-        "message": "Expected $1 RSS namespaces; missing $2"
-    },
-    "coreNormalizeValidationItemNotDefined": {
-        "message": "Expected <Channel>.item to be an object or array; received undefined"
-    },
-    "errorsDatabasePool": {
-        "message": "PostgreSQL Pool Error | Total Clients: $1 Idle Clients: $2 Waiting Clients: $3"
     },
     "errorsGeneralError": {
         "message": "Error"
@@ -446,9 +395,6 @@
     "errorsPreconditionDMTitle": {
         "message": "DM Channel"
     },
-    "errorsPreconditionLog": {
-        "message": "$1 failed $2"
-    },
     "errorsPreconditionOwnerDescription": {
         "message": "You cannot execute this command without being an owner!"
     },
@@ -466,48 +412,6 @@
     },
     "errorsPreconditionUserLocalPermissionsTitle": {
         "message": "Missing Permission(s)"
-    },
-    "errorsRequest500_600": {
-        "message": "Retrying due to a response between 500 and 600: $1"
-    },
-    "errorsRequestAbort": {
-        "message": "Retrying due to an AbortError"
-    },
-    "errorsRequestSuccessAfterRetry": {
-        "message": "Successfully fetched after a retry"
-    },
-    "eventsDebug": {
-        "message": "Discord.js Debug:"
-    },
-    "eventsError": {
-        "message": "Discord.js Error:"
-    },
-    "eventsGuildCreate": {
-        "message": "Bot has joined a guild. Guild: $1 | $2 Guild Owner: $3 Guild Member Count: $4 (w/ bot)"
-    },
-    "eventsGuildDelete": {
-        "message": "Bot has left a guild; joined $1. Guild: $2 | $4 Guild Owner: $5 Guild Member Count: $6 (new count)"
-    },
-    "eventsRateLimit": {
-        "message": "Discord.js RateLimit:"
-    },
-    "eventsReady": {
-        "message": "Logged in as $1"
-    },
-    "eventsWarn": {
-        "message": "Discord.js Warning:"
-    },
-    "logCommand": {
-        "message": "Command - ID $1 - User $2 -"
-    },
-    "logCore": {
-        "message": "Core -"
-    },
-    "logError": {
-        "message": "Incident - ID $1 -"
-    },
-    "logRequest": {
-        "message": "Request -"
     },
     "persistentNotificationAddDescription": {
         "message": "You will now be notified whenever **$1** are published!"

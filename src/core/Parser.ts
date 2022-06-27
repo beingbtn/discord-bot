@@ -1,9 +1,7 @@
-import { LogLevel } from '@sapphire/framework';
 import { XMLParser } from 'fast-xml-parser';
 import Turndown from 'turndown';
 import { BaseRss } from '../@types/BaseRss';
 import { Base } from '../structures/Base';
-import { Log } from '../structures/Log';
 
 export class Parser extends Base {
     validation: {
@@ -79,14 +77,13 @@ export class Parser extends Base {
         const { namespaces, version } = this.validation;
 
         if (rss.rss.version !== version) {
-            const message = this.container.i18n.getMessage(
-                'coreParserValidationVersion', [
-                    version,
-                    rss.rss.version,
-                ],
+            const message = `Expected RSS version ${version}; got version ${rss.rss.version}.`;
+
+            this.container.logger.error(
+                `${this.constructor.name}:`,
+                message,
             );
 
-            Log.core(LogLevel.Error, message);
             throw new Error(message);
         }
 
@@ -95,14 +92,13 @@ export class Parser extends Base {
         );
 
         if (missingNamespaces.length !== 0) {
-            const message = this.container.i18n.getMessage(
-                'coreParserValidationNamespaces', [
-                    namespaces.length,
-                    missingNamespaces.join(', '),
-                ],
+            const message = `Expected ${namespaces.length} RSS namespaces; missing ${missingNamespaces.join(', ')}.`;
+
+            this.container.logger.error(
+                `${this.constructor.name}:`,
+                message,
             );
 
-            Log.core(LogLevel.Error, message);
             throw new Error(message);
         }
     }

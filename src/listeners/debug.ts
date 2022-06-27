@@ -16,7 +16,7 @@ export class DebugListener extends Listener {
     public run(info: string) {
         return;
         this.container.logger.debug(
-            this.container.i18n.getMessage('eventsDebug'),
+            `${this.constructor.name}:`,
             info,
         );
 

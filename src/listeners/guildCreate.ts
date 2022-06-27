@@ -24,14 +24,10 @@ export class GuildCreateListener extends Listener {
         }
 
         this.container.logger.info(
-            this.container.i18n.getMessage(
-                'eventsGuildCreate', [
-                    guild.name,
-                    guild.id,
-                    guild.ownerId,
-                    guild.memberCount,
-                ],
-            ),
+            `${this.constructor.name}:`,
+            `Guild's ID is ${guild.id}.`,
+            `Guild owner's ID is ${guild.ownerId}.`,
+            `New member count is ${guild.memberCount - 1}.`,
         );
 
         try {

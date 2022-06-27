@@ -7,7 +7,6 @@ import {
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
 export class ReloadCommand extends Command {
@@ -74,7 +73,7 @@ export class ReloadCommand extends Command {
                 (condition) => condition === 'OwnerOnly',
             )
                 ? this.container.config.ownerGuilds
-                : undefined, // eslint-disable-line no-undefined
+                : undefined,
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
@@ -124,11 +123,13 @@ export class ReloadCommand extends Command {
                 ),
             );
 
-        Log.command(
-            interaction,
-            `All imports have been reloaded after ${
-                Date.now() - now
-            } milliseconds.`,
+        const timeTaken = Date.now() - now;
+
+        this.container.logger.info(
+            `Interaction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `All imports have been reloaded after ${timeTaken} milliseconds.`,
         );
 
         await interaction.editReply({ embeds: [reloadedEmbed] });
@@ -188,15 +189,13 @@ export class ReloadCommand extends Command {
                 ),
             );
 
-        Log.command(
-            interaction,
-            `${
-                typeName
-            }.${
-                item
-            } was successfully reloaded after ${
-                Date.now() - now
-            } milliseconds.`,
+        const timeTaken = Date.now() - now;
+
+        this.container.logger.info(
+            `Interaction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `${typeName}.${item} was successfully reloaded after ${timeTaken} milliseconds.`,
         );
 
         await interaction.editReply({

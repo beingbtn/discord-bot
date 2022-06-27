@@ -4,13 +4,14 @@ import {
     type CommandInteraction,
 } from 'discord.js';
 import { i18n } from '../locales/i18n';
-import { Log } from '../structures/Log';
 import { slashCommandResolver } from '../utility/utility';
 
 export class BasePrecondition extends Precondition {
     public override async chatInputRun(interaction: CommandInteraction) {
-        Log.command(
-            interaction,
+        this.container.logger.info(
+            `Interaction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
             slashCommandResolver(interaction),
         );
 

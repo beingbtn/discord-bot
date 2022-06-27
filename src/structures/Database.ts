@@ -11,24 +11,6 @@ const pool = new Pool({
     idleTimeoutMillis: Options.postgresqlIdleTimeoutMillis,
 });
 
-pool.on('error', (error) => {
-    new Sentry()
-        .setSeverity('warning')
-        .databaseContext(pool)
-        .captureException(error);
-
-    container.logger.error(
-        container.i18n.getMessage(
-            'errorsDatabasePool', [
-                pool.totalCount,
-                pool.idleCount,
-                pool.waitingCount,
-            ],
-        ),
-        error.stack,
-    );
-});
-
 export class Database extends Base {
     async query(input: string, values?: unknown[]) {
         const poolClient = await pool.connect();
@@ -62,3 +44,18 @@ export class Database extends Base {
         await pool.end();
     }
 }
+
+pool.on('error', (error) => {
+    new Sentry()
+        .setSeverity('warning')
+        .databaseContext(pool)
+        .captureException(error);
+
+    container.logger.debug(
+        Database.constructor.name,
+        `${pool.totalCount} clients total.`,
+        `${pool.idleCount} clients idle.`,
+        `${pool.waitingCount} clients waiting.`,
+        error.stack,
+    );
+});

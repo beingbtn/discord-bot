@@ -10,7 +10,6 @@ import {
     Message,
 } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
 export class PingCommand extends Command {
@@ -41,7 +40,7 @@ export class PingCommand extends Command {
                 (condition) => condition === 'OwnerOnly',
             )
                 ? this.container.config.ownerGuilds
-                : undefined, // eslint-disable-line no-undefined
+                : undefined,
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
@@ -98,13 +97,12 @@ export class PingCommand extends Command {
                 ),
             );
 
-        Log.command(
-            interaction,
-            `WS: ${
-                interaction.client.ws.ping
-            }ms | RT: ${
-                roundTripDelay
-            }ms`,
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `WS ${interaction.client.ws.ping}.`,
+            `RS ${roundTripDelay}ms.`,
         );
 
         await interaction.editReply({

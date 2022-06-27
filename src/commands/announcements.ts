@@ -15,7 +15,6 @@ import { ChannelTypes } from 'discord.js/typings/enums';
 import { Category } from '../@types/Category';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
 export class AnnouncementsCommand extends Command {
@@ -88,7 +87,7 @@ export class AnnouncementsCommand extends Command {
                 (condition) => condition === 'OwnerOnly',
             )
                 ? this.container.config.ownerGuilds
-                : undefined, // eslint-disable-line no-undefined
+                : undefined,
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
@@ -123,11 +122,11 @@ export class AnnouncementsCommand extends Command {
                     ),
                 );
 
-            Log.command(
-                interaction,
-                i18n.getMessage(
-                    'commandsAnnouncementsUserMissingPermissionLog',
-                ),
+            this.container.logger.info(
+                `Ineraction ${interaction.id}`,
+                `User ${interaction.user.id}`,
+                `${this.constructor.name}:`,
+                'User missing permission.',
             );
 
             await interaction.editReply({
@@ -160,11 +159,11 @@ export class AnnouncementsCommand extends Command {
                     ),
                 );
 
-            Log.command(
-                interaction,
-                i18n.getMessage(
-                    'commandsAnnouncementsBotMissingPermissionLog',
-                ),
+            this.container.logger.info(
+                `${this.constructor.name}:`,
+                `Ineraction ${interaction.id}`,
+                `User ${interaction.user.id}`,
+                'Bot missing permission.',
             );
 
             await interaction.editReply({
@@ -230,14 +229,11 @@ export class AnnouncementsCommand extends Command {
                     ),
                 );
 
-            Log.command(
-                interaction,
-                i18n.getMessage(
-                    'commandsAnnouncementsAddLog', [
-                        type,
-                        channel.id,
-                    ],
-                ),
+            this.container.logger.info(
+                `${this.constructor.name}:`,
+                `Ineraction ${interaction.id}`,
+                `User ${interaction.user.id}`,
+                `${type} added from ${channel.id}.`,
             );
 
             await interaction.editReply({ embeds: [addEmbed] });
@@ -264,14 +260,11 @@ export class AnnouncementsCommand extends Command {
                     ),
                 );
 
-            Log.command(
-                interaction,
-                i18n.getMessage(
-                    'commandsAnnouncementsRemoveLog', [
-                        type,
-                        channel.id,
-                    ],
-                ),
+            this.container.logger.info(
+                `${this.constructor.name}:`,
+                `Ineraction ${interaction.id}`,
+                `User ${interaction.user.id}`,
+                `${type} removed from ${channel.id}.`,
             );
 
             await interaction.editReply({ embeds: [removeEmbed] });

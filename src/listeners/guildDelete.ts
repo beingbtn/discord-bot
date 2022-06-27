@@ -33,15 +33,11 @@ export class GuildDeleteListener extends Listener {
         })!;
 
         this.container.logger.info(
-            this.container.i18n.getMessage(
-                'eventsGuildDelete', [
-                    joinedAt,
-                    guild.name,
-                    guild.id,
-                    guild.ownerId,
-                    guild.memberCount - 1,
-                ],
-            ),
+            `${this.constructor.name}:`,
+            `Originally joined ${joinedAt}.`,
+            `Guild's ID is ${guild.id}.`,
+            `Guild owner's ID is ${guild.ownerId}.`,
+            `New member count is ${guild.memberCount - 1}.`,
         );
 
         try {

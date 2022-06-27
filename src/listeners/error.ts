@@ -15,7 +15,7 @@ export class ErrorListener extends Listener {
 
     public run(error: Error) {
         this.container.logger.error(
-            this.container.i18n.getMessage('eventsError'),
+            `${this.constructor.name}:`,
             error,
         );
 

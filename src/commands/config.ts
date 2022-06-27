@@ -6,7 +6,6 @@ import {
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Log } from '../structures/Log';
 import { Options } from '../utility/Options';
 
 export class ConfigCommand extends Command {
@@ -125,7 +124,7 @@ export class ConfigCommand extends Command {
                 (condition) => condition === 'OwnerOnly',
             )
                 ? this.container.config.ownerGuilds
-                : undefined, // eslint-disable-line no-undefined
+                : undefined,
             registerCommandIfMissing: true,
             behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
         });
@@ -188,7 +187,16 @@ export class ConfigCommand extends Command {
             embeds: [coreEmbed],
         });
 
-        Log.command(interaction, coreEmbed.description);
+        const state = this.container.config.core === true
+            ? 'on'
+            : 'off';
+
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `Developer Mode is now ${state}.`,
+        );
     }
 
     public async devModeCommand(interaction: CommandInteraction) {
@@ -220,7 +228,16 @@ export class ConfigCommand extends Command {
 
         await interaction.editReply({ embeds: [devModeEmbed] });
 
-        Log.command(interaction, devModeEmbed.description);
+        const state = this.container.config.devMode === true
+            ? 'on'
+            : 'off';
+
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `Developer Mode is now ${state}.`,
+        );
     }
 
     public async interval(interaction: CommandInteraction) {
@@ -255,7 +272,12 @@ export class ConfigCommand extends Command {
 
         await interaction.editReply({ embeds: [intervalEmbed] });
 
-        Log.command(interaction, intervalEmbed.description);
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `The interval is now ${milliseconds}ms.`,
+        );
     }
 
     public async restRequestTimeout(interaction: CommandInteraction) {
@@ -292,9 +314,11 @@ export class ConfigCommand extends Command {
             embeds: [restRequestTimeoutEmbed],
         });
 
-        Log.command(
-            interaction,
-            restRequestTimeoutEmbed.description,
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `The rest request timeout is now ${milliseconds}ms.`,
         );
     }
 
@@ -330,7 +354,12 @@ export class ConfigCommand extends Command {
 
         await interaction.editReply({ embeds: [retryLimitEmbed] });
 
-        Log.command(interaction, retryLimitEmbed.description);
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `The retry limit is now ${limit}.`,
+        );
     }
 
     public async ownerGuilds(interaction: CommandInteraction) {
@@ -365,7 +394,12 @@ export class ConfigCommand extends Command {
 
         await interaction.editReply({ embeds: [ownerGuildsEmbed] });
 
-        Log.command(interaction, ownerGuildsEmbed.description);
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `The owner guilds are now ${guilds.join(', ')}.`,
+        );
     }
 
     public async owners(interaction: CommandInteraction) {
@@ -400,7 +434,12 @@ export class ConfigCommand extends Command {
 
         await interaction.editReply({ embeds: [ownersEmbed] });
 
-        Log.command(interaction, ownersEmbed.description);
+        this.container.logger.info(
+            `Ineraction ${interaction.id}`,
+            `User ${interaction.user.id}`,
+            `${this.constructor.name}:`,
+            `The owners are now ${owners.join(', ')}.`,
+        );
     }
 
     public async view(interaction: CommandInteraction) {
