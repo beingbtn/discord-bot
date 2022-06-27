@@ -362,6 +362,9 @@
     "commandsSystemUsersName": {
         "message": "Users"
     },
+    "containerInit": {
+        "message": "Initialized container extensions after $1ms"
+    },
     "coreChangesFilteredByComment": {
         "message": "The potential new threads $1 were found, of which $2 remain after the comment count filter"
     },

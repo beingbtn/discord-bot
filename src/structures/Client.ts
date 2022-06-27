@@ -75,10 +75,18 @@ export class Client extends SapphireClient {
     }
 
     public async init() {
+        const startTime = Date.now();
+
         container.database = new Database();
         container.core = new Core();
         container.customPresence = null;
         container.i18n = new i18n();
+
+        container.config = (
+            await container.database.query(
+                'SELECT * FROM config WHERE index = 0',
+            )
+        ).rows[0] as Config;
 
         container.announcements = (
             await container.database.query(
@@ -86,13 +94,15 @@ export class Client extends SapphireClient {
             )
         ).rows as Announcement[];
 
-        console.log(container.announcements);
+        const endTime = Date.now();
 
-        container.config = (
-            await container.database.query(
-                'SELECT * FROM config WHERE index = 0',
-            )
-        ).rows[0] as Config;
+        container.logger.info(
+            container.i18n.getMessage(
+                'containerInit', [
+                    endTime - startTime,
+                ],
+            ),
+        );
 
         await this.login();
     }
