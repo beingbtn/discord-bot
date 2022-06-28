@@ -1,12 +1,13 @@
 import {
     type ApplicationCommandRegistry,
     BucketScope,
-    Command,
+    Command as SapphireCommand,
     type Listener,
     RegisterBehavior,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
+import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
 
 export class ReloadCommand extends Command {
@@ -126,8 +127,7 @@ export class ReloadCommand extends Command {
         const timeTaken = Date.now() - now;
 
         this.container.logger.info(
-            `Interaction ${interaction.id}`,
-            `User ${interaction.user.id}`,
+            this.logContext(interaction),
             `${this.constructor.name}:`,
             `All imports have been reloaded after ${timeTaken} milliseconds.`,
         );
@@ -192,8 +192,7 @@ export class ReloadCommand extends Command {
         const timeTaken = Date.now() - now;
 
         this.container.logger.info(
-            `Interaction ${interaction.id}`,
-            `User ${interaction.user.id}`,
+            this.logContext(interaction),
             `${this.constructor.name}:`,
             `${typeName}.${item} was successfully reloaded after ${timeTaken} milliseconds.`,
         );
@@ -203,7 +202,7 @@ export class ReloadCommand extends Command {
         });
     }
 
-    private async reloadItem(item: Command | Listener) {
+    private async reloadItem(item: SapphireCommand | Listener) {
         await item.reload();
     }
 }

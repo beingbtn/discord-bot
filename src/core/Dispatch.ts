@@ -5,7 +5,6 @@ import {
     type MessageEmbed,
     type NewsChannel,
 } from 'discord.js';
-import { Announcement } from '../@types/Announcement';
 import { type RSS } from '../@types/RSS';
 import { Base } from '../structures/Base';
 import { Options } from '../utility/Options';
@@ -13,20 +12,12 @@ import { Options } from '../utility/Options';
 /* eslint-disable no-await-in-loop */
 
 export class Dispatch extends Base {
-    announcements: Announcement[];
-
-    public constructor() {
-        super();
-
-        this.announcements = this.container.announcements;
-    }
-
     public async dispatch(
         embeds: MessageEmbed[],
         components: MessageActionRow[],
         data: RSS,
     ) {
-        const { channelID, roleID } = this.announcements.find(
+        const { channelID, roleID } = this.container.announcements.find(
             (announcement) => announcement.category === data.title,
         )!;
 

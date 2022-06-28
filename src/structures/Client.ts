@@ -88,11 +88,21 @@ export class Client extends SapphireClient {
             )
         ).rows[0] as Config;
 
+        container.logger.info(
+            `${this.constructor.name}:`,
+            'Fetched config from the database.',
+        );
+
         container.announcements = (
             await container.database.query(
                 'SELECT * FROM announcements',
             )
         ).rows as Announcement[];
+
+        container.logger.info(
+            `${this.constructor.name}:`,
+            'Fetched announcements from the database.',
+        );
 
         const endTime = Date.now();
 
@@ -100,7 +110,7 @@ export class Client extends SapphireClient {
 
         container.logger.info(
             `${this.constructor.name}:`,
-            `Initialized container extensions after ${initTime}ms.`,
+            `Initialized container after ${initTime}ms.`,
         );
 
         await this.login();

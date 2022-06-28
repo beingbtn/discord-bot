@@ -1,11 +1,11 @@
 import {
     type ApplicationCommandRegistry,
     BucketScope,
-    Command,
     RegisterBehavior,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
+import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
 
 export class LinkCommand extends Command {
@@ -129,22 +129,38 @@ export class LinkCommand extends Command {
         );
 
         const linkEmbed = new BetterEmbed(interaction)
-            .setColor(Options.colorsNormal)
-            .setTitle(interaction.options.getSubcommand() === 'link'
-                ? i18n.getMessage('commandsLinkLinkedTitle')
-                : i18n.getMessage('commandsLinkUnlinkedTitle'))
-            .setDescription(interaction.options.getSubcommand() === 'link'
-                ? i18n.getMessage(
-                    'commandsLinkLinkedDescription', [
-                        id,
-                        message!,
-                    ],
-                )
-                : i18n.getMessage(
-                    'commandsLinkUnlinkedDescription', [
-                        id,
-                    ],
-                ));
+            .setColor(Options.colorsNormal);
+
+        if (interaction.options.getSubcommand() === 'link') {
+            linkEmbed
+                .setTitle(i18n.getMessage('commandsLinkLinkedTitle'))
+                .setDescription(
+                    i18n.getMessage(
+                        'commandsLinkLinkedDescription', [
+                            id,
+                            message!,
+                        ],
+                    ),
+                );
+        } else {
+            linkEmbed
+                .setTitle(i18n.getMessage('commandsLinkUnlinkedTitle'))
+                .setDescription(
+                    i18n.getMessage(
+                        'commandsLinkUnlinkedDescription', [
+                            id,
+                        ],
+                    ),
+                );
+        }
+
+        this.container.logger.info(
+            this.logContext(interaction),
+            `${this.constructor.name}:`,
+            interaction.options.getSubcommand() === 'link'
+                ? `Linked the ID ${id} to ${message}.`
+                : `Unlinked the ID ${id} from a message.`,
+        );
 
         await interaction.editReply({ embeds: [linkEmbed] });
     }

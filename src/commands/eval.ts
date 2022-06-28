@@ -1,7 +1,6 @@
 import {
     type ApplicationCommandRegistry,
     BucketScope,
-    Command,
     RegisterBehavior,
 } from '@sapphire/framework';
 import {
@@ -10,6 +9,7 @@ import {
 } from 'discord.js';
 import { Limits } from '../enums/Limits';
 import { BetterEmbed } from '../structures/BetterEmbed';
+import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
 
 export class EvalCommand extends Command {
@@ -109,8 +109,7 @@ export class EvalCommand extends Command {
             }
 
             this.container.logger.info(
-                `Ineraction ${interaction.id}`,
-                `User ${interaction.user.id}`,
+                this.logContext(interaction),
                 `${this.constructor.name}:`,
                 output,
             );

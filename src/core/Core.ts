@@ -140,14 +140,14 @@ export class Core extends Base {
 
                     const postLinks = newPosts.map((post) => post.link).join(', ');
 
-                    this.container.logger.error(
+                    this.container.logger.info(
                         `${this.constructor.name}:`,
                         `New Posts Found: ${newPosts.length} ${postLinks}.`,
                     );
 
                     const editedPostLinks = newPosts.map((post) => post.link).join(', ');
 
-                    this.container.logger.error(
+                    this.container.logger.info(
                         `${this.constructor.name}:`,
                         `Edited Posts Found: ${editedPosts.length} ${editedPostLinks}.`,
                     );
@@ -156,7 +156,7 @@ export class Core extends Base {
                     const components = this.components.create(changes);
                     await this.dispatch.dispatch(embeds, components, changes);
 
-                    this.container.logger.error(
+                    this.container.logger.info(
                         `${this.constructor.name}:`,
                         `Finished dispatching messages from ${changes.title}.`,
                     );

@@ -1,7 +1,6 @@
 import {
     type ApplicationCommandRegistry,
     BucketScope,
-    Command,
     RegisterBehavior,
 } from '@sapphire/framework';
 import {
@@ -14,6 +13,7 @@ import {
 } from 'discord.js';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
+import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
 import {
     awaitComponent,
@@ -178,8 +178,7 @@ export class EditAnnouncementsCommand extends Command {
         }
 
         this.container.logger.info(
-            `Ineraction ${interaction.id}`,
-            `User ${interaction.user.id}`,
+            this.logContext(interaction),
             `${this.constructor.name}:`,
             'Sending edit...',
         );
@@ -197,8 +196,7 @@ export class EditAnnouncementsCommand extends Command {
         }
 
         this.container.logger.info(
-            `Ineraction ${interaction.id}`,
-            `User ${interaction.user.id}`,
+            this.logContext(interaction),
             `${this.constructor.name}:`,
             'Published edit!',
         );

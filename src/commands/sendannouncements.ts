@@ -1,7 +1,6 @@
 import {
     type ApplicationCommandRegistry,
     BucketScope,
-    Command,
     RegisterBehavior,
 } from '@sapphire/framework';
 import {
@@ -17,6 +16,7 @@ import {
 import { ChannelTypes } from 'discord.js/typings/enums';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
+import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
 import {
     awaitComponent,
@@ -196,8 +196,7 @@ export class SendAnnouncementsCommand extends Command {
         }
 
         this.container.logger.info(
-            `Interaction ${interaction.id}`,
-            `User ${interaction.user.id}`,
+            this.logContext(interaction),
             `${this.constructor.name}:`,
             'Sending message...',
         );
@@ -223,8 +222,7 @@ export class SendAnnouncementsCommand extends Command {
         }
 
         this.container.logger.info(
-            `Interaction ${interaction.id}`,
-            `User ${interaction.user.id}`,
+            this.logContext(interaction),
             `${this.constructor.name}:`,
             'Published announcement!',
         );

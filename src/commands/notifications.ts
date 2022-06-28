@@ -1,7 +1,6 @@
 import {
     type ApplicationCommandRegistry,
     BucketScope,
-    Command,
     RegisterBehavior,
 } from '@sapphire/framework';
 import {
@@ -18,6 +17,7 @@ import {
 import { CustomID } from '../@types/Persistent';
 import { Events } from '../enums/Events';
 import { BetterEmbed } from '../structures/BetterEmbed';
+import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
 
 export class NotificationsCommand extends Command {
