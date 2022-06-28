@@ -230,9 +230,9 @@ export class AnnouncementsCommand extends Command {
                 );
 
             this.container.logger.info(
-                `${this.constructor.name}:`,
                 `Ineraction ${interaction.id}`,
                 `User ${interaction.user.id}`,
+                `${this.constructor.name}:`,
                 `${type} added from ${channel.id}.`,
             );
 
@@ -261,9 +261,9 @@ export class AnnouncementsCommand extends Command {
                 );
 
             this.container.logger.info(
-                `${this.constructor.name}:`,
                 `Ineraction ${interaction.id}`,
                 `User ${interaction.user.id}`,
+                `${this.constructor.name}:`,
                 `${type} removed from ${channel.id}.`,
             );
 
