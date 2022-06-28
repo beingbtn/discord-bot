@@ -10,7 +10,7 @@ export class BaseErrorHandler<E> extends Base {
 
     readonly sentry: Sentry;
 
-    i18n: i18n;
+    readonly i18n: i18n;
 
     public constructor(error: E) {
         super();

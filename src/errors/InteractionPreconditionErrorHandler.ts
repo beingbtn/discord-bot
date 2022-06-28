@@ -45,59 +45,63 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                 .captureMessages(this.error.identifier);
 
             switch (this.error.identifier) {
-                case Identifiers.DevMode: await this.resolveConstraint(
-                    this.interaction,
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionDevModeTitle',
-                    ),
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionDevModeDescription',
-                    ),
-                    Options.colorsWarning,
-                );
+                case Identifiers.DevMode:
+                    await this.resolveConstraint(
+                        this.interaction,
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionDevModeTitle',
+                        ),
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionDevModeDescription',
+                        ),
+                        Options.colorsWarning,
+                    );
                     break;
-                case Identifiers.OwnerOnly: await this.resolveConstraint(
-                    this.interaction,
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionOwnerTitle',
-                    ),
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionOwnerDescription',
-                    ),
-                    Options.colorsWarning,
-                );
+                case Identifiers.OwnerOnly:
+                    await this.resolveConstraint(
+                        this.interaction,
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionOwnerTitle',
+                        ),
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionOwnerDescription',
+                        ),
+                        Options.colorsWarning,
+                    );
                     break;
-                case Identifiers.GuildOnly: await this.resolveConstraint(
-                    this.interaction,
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionDMTitle',
-                    ),
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionDMDescription',
-                    ),
-                    Options.colorsWarning,
-                );
+                case Identifiers.GuildOnly:
+                    await this.resolveConstraint(
+                        this.interaction,
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionDMTitle',
+                        ),
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionDMDescription',
+                        ),
+                        Options.colorsWarning,
+                    );
                     break;
-                case Identifiers.Cooldown: await this.resolveConstraint(
-                    this.interaction,
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionCooldownWaitingTitle',
-                    ),
-                    this.interaction.i18n.getMessage(
-                        'errorsPreconditionCooldownWaitingDescription', [
-                            this.command.options.cooldownLimit!,
-                            this.command.options.cooldownDelay! / Time.Second,
-                            cleanRound(
-                                (
-                                    this.error.context as {
-                                        remaining: number,
-                                    }
-                                ).remaining / Time.Second,
-                            ),
-                        ],
-                    ),
-                    Options.colorsWarning,
-                );
+                case Identifiers.Cooldown:
+                    await this.resolveConstraint(
+                        this.interaction,
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionCooldownWaitingTitle',
+                        ),
+                        this.interaction.i18n.getMessage(
+                            'errorsPreconditionCooldownWaitingDescription', [
+                                this.command.options.cooldownLimit!,
+                                this.command.options.cooldownDelay! / Time.Second,
+                                cleanRound(
+                                    (
+                                        this.error.context as {
+                                            remaining: number,
+                                        }
+                                    ).remaining / Time.Second,
+                                ),
+                            ],
+                        ),
+                        Options.colorsWarning,
+                    );
 
                     await setTimeout(
                         (this.error.context as {
