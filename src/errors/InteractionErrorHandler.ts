@@ -76,16 +76,16 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
             } else {
                 await this.interaction.reply(payLoad);
             }
-        } catch (err) {
-            const message = this.i18n.getMessage(
-                'errorsInteractionReplyFailedNotify',
+        } catch (error) {
+            this.log(
+                `${this.constructor.name}:`,
+                'An error has occurred and also failed to notify the user.',
+                error,
             );
-
-            this.log(message, err);
 
             this.sentry
                 .setSeverity('error')
-                .captureException(err);
+                .captureException(error);
         }
     }
 }

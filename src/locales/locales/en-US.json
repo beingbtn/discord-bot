@@ -350,9 +350,6 @@
     "errorsInteractionReplyDescription": {
         "message": "An error occurred while executing the interaction! This error has been automatically forwarded for review. Sorry."
     },
-    "errorsInteractionReplyFailedNotify": {
-        "message": "An error has occurred and also failed to notify the user"
-    },
     "errorsInteractionReplyIncidentName": {
         "message": "Incident ID"
     },
