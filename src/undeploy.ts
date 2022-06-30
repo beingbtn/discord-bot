@@ -2,7 +2,6 @@ import 'dotenv/config';
 import process from 'node:process';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v10';
-import { i18n } from './locales/i18n';
 
 (async () => {
     try {
@@ -29,7 +28,7 @@ import { i18n } from './locales/i18n';
             )),
         ]);
 
-        console.log(new i18n().getMessage('commandsDeployTitle'));
+        console.log('Successfully un-deployed!');
     } catch (error) {
         console.error(error);
     }
