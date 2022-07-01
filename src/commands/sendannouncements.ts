@@ -83,6 +83,12 @@ export class SendAnnouncementsCommand extends Command {
                     required: false,
                 },
                 {
+                    name: 'author',
+                    description: 'The author of the announcement',
+                    type: 3,
+                    required: false,
+                },
+                {
                     name: 'role',
                     description: 'The role to mention with the announcement',
                     type: 8,
@@ -118,6 +124,7 @@ export class SendAnnouncementsCommand extends Command {
         const description = interaction.options.getString('description', true);
         const image = interaction.options.getString('image', false);
         const url = interaction.options.getString('url', false);
+        const author = interaction.options.getString('author', false);
 
         const announcement = new MessageEmbed()
             .setAuthor({
@@ -140,6 +147,10 @@ export class SendAnnouncementsCommand extends Command {
 
         if (url !== null) {
             announcement.setURL(url);
+        }
+
+        if (author !== null) {
+            announcement.setAuthor({ name: author });
         }
 
         const button = new MessageActionRow().setComponents(
