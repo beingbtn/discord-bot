@@ -3,7 +3,7 @@
     "description": "Hypixel News is a project that sends you the latest news from the Hypixel Network.",
     "license": "MIT",
     "author": "Attituding <Attituding@outlook.com>",
-    "main": "dist/main.js",
+    "main": "dist/index.js",
     "devDependencies": {
         "@types/node": "^18.0.0",
         "@types/node-fetch": "^2.6.2",
@@ -37,8 +37,8 @@
     "scripts": {
         "build": "tsc -p .",
         "prerun": "npm run build",
-        "run": "node dist/main.js",
-        "docker": "node dist/main.js"
+        "run": "node dist/index.js",
+        "docker": "node dist/index.js"
     },
     "engines": {
         "node": ">=18.0.0"

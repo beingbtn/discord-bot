@@ -5,7 +5,7 @@ import {
 } from 'discord.js';
 import { ActivityTypes } from 'discord.js/typings/enums';
 import { Time } from '../enums/Time';
-import { locales } from '../locales/locales/main';
+import { locales } from '../locales/locales';
 
 export class Options {
     static colorsError: ColorResolvable = 0xAA0000;

@@ -1,4 +1,4 @@
-import { locales } from './locales/main';
+import { locales } from './locales';
 import { Options } from '../utility/Options';
 
 // Simple implementation of Chrome's/Firefox's i18n
