@@ -1,3 +1,4 @@
+import { EmbedLimits } from '@sapphire/discord-utilities';
 import {
     type ApplicationCommandRegistry,
     BucketScope,
@@ -71,7 +72,7 @@ export class EvalCommand extends Command {
             const end = Date.now();
             const timeTaken = end - start;
             const outputMaxLength = (
-                output?.length >= Limits.EmbedField
+                output?.length >= EmbedLimits.MaximumFieldValueLength
             );
 
             evalEmbed.setColor(Options.colorsNormal).addFields(
@@ -81,7 +82,7 @@ export class EvalCommand extends Command {
                         'javascript',
                         output?.toString()?.slice(
                             0,
-                            Limits.EmbedField,
+                            EmbedLimits.MaximumFieldValueLength,
                         ),
                     ),
                 },

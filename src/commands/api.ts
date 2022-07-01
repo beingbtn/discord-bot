@@ -1,10 +1,10 @@
+import { EmbedLimits } from '@sapphire/discord-utilities';
 import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
-import { Limits } from '../enums/Limits';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
@@ -170,7 +170,7 @@ export class APICommand extends Command {
             .setDescription(
                 JSON.stringify(
                     this.container.core.performance,
-                ).slice(0, Limits.EmbedDescription),
+                ).slice(0, EmbedLimits.MaximumDescriptionLength),
             )
             .addFields(
                 {
