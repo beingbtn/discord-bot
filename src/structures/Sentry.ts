@@ -61,7 +61,7 @@ export class Sentry {
         return this;
     }
 
-    captureException(exception: unknown) {
+    public captureException(exception: unknown) {
         SentryClient.captureException(
             exception,
             this.scope,
@@ -70,7 +70,7 @@ export class Sentry {
         return this;
     }
 
-    captureMessages(...messages: string[]) {
+    public captureMessages(...messages: string[]) {
         messages.forEach((message) => {
             SentryClient.captureMessage(
                 message,
@@ -81,7 +81,7 @@ export class Sentry {
         return this;
     }
 
-    databaseContext(pool: Pool) {
+    public databaseContext(pool: Pool) {
         this.scope.setTags({
             totalCount: pool.totalCount,
             idleCount: pool.idleCount,
@@ -91,7 +91,7 @@ export class Sentry {
         return this;
     }
 
-    baseInteractionPreconditionContext(precondition: string) {
+    public baseInteractionPreconditionContext(precondition: string) {
         this.scope.setTags({
             precondition: precondition,
         });
@@ -99,7 +99,7 @@ export class Sentry {
         return this;
     }
 
-    requestContext(error: unknown, core: Core) {
+    public requestContext(error: unknown, core: Core) {
         this.scope.setTags({
             type: error instanceof Error
                 ? error.name
@@ -123,7 +123,7 @@ export class Sentry {
         return this;
     }
 
-    setSeverity(level: SentryClient.SeverityLevel) {
+    public setSeverity(level: SentryClient.SeverityLevel) {
         this.scope.setLevel(level);
 
         return this;

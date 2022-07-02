@@ -46,7 +46,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
 
             switch (this.error.identifier) {
                 case Identifiers.DevMode:
-                    await this.resolveConstraint(
+                    await this.resolvePrecondition(
                         this.interaction,
                         this.interaction.i18n.getMessage(
                             'errorsPreconditionDevModeTitle',
@@ -58,7 +58,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                     );
                     break;
                 case Identifiers.OwnerOnly:
-                    await this.resolveConstraint(
+                    await this.resolvePrecondition(
                         this.interaction,
                         this.interaction.i18n.getMessage(
                             'errorsPreconditionOwnerTitle',
@@ -70,7 +70,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                     );
                     break;
                 case Identifiers.GuildOnly:
-                    await this.resolveConstraint(
+                    await this.resolvePrecondition(
                         this.interaction,
                         this.interaction.i18n.getMessage(
                             'errorsPreconditionDMTitle',
@@ -82,7 +82,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                     );
                     break;
                 case Identifiers.Cooldown:
-                    await this.resolveConstraint(
+                    await this.resolvePrecondition(
                         this.interaction,
                         this.interaction.i18n.getMessage(
                             'errorsPreconditionCooldownWaitingTitle',
@@ -109,7 +109,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                         }).remaining,
                     );
 
-                    await this.resolveConstraint(
+                    await this.resolvePrecondition(
                         this.interaction,
                         this.interaction.i18n.getMessage(
                             'errorsPreconditionCooldownCooldownOverTitle',
@@ -131,7 +131,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
         }
     }
 
-    private async resolveConstraint(
+    private async resolvePrecondition(
         interaction: BaseCommandInteraction,
         title: string,
         description: string,
