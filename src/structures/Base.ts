@@ -1,9 +1,9 @@
 import { container } from '@sapphire/framework';
 
 export class Base {
-    readonly container: typeof container;
+    public readonly container: typeof container;
 
-    constructor() {
+    public constructor() {
         this.container = container;
     }
 }

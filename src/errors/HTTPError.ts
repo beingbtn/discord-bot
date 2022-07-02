@@ -1,13 +1,13 @@
 import { type Response } from 'node-fetch';
 
 export class HTTPError extends Error {
-    readonly response: Response | null;
+    public readonly response: Response | null;
 
-    readonly status: number;
+    public readonly status: number;
 
-    readonly statusText: string | null;
+    public readonly statusText: string | null;
 
-    readonly url: string;
+    public readonly url: string;
 
     public constructor({
         message,

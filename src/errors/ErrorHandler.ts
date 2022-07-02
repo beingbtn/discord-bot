@@ -2,7 +2,7 @@ import { type SeverityLevel } from '@sentry/node';
 import { BaseErrorHandler } from './BaseErrorHandler';
 
 export class ErrorHandler<E> extends BaseErrorHandler<E> {
-    readonly data: string[];
+    public readonly data: string[];
 
     public constructor(error: E, ...data: string[]) {
         super(error);

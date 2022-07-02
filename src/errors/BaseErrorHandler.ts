@@ -4,13 +4,13 @@ import { Base } from '../structures/Base';
 import { Sentry } from '../structures/Sentry';
 
 export class BaseErrorHandler<E> extends Base {
-    readonly error: E;
+    public readonly error: E;
 
-    readonly incidentID: string;
+    public readonly incidentID: string;
 
-    readonly sentry: Sentry;
+    public readonly sentry: Sentry;
 
-    readonly i18n: i18n;
+    public readonly i18n: i18n;
 
     public constructor(error: E) {
         super();

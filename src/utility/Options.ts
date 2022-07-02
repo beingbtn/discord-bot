@@ -8,33 +8,33 @@ import { Time } from '../enums/Time';
 import { locales } from '../locales/locales';
 
 export class Options {
-    static colorsError: ColorResolvable = 0xAA0000;
+    static readonly colorsError: ColorResolvable = 0xAA0000;
 
-    static colorsWarning: ColorResolvable = 0xFF5555;
+    static readonly colorsWarning: ColorResolvable = 0xFF5555;
 
-    static colorsNormal: ColorResolvable = 0x2f3136;
+    static readonly colorsNormal: ColorResolvable = 0x2f3136;
 
-    static colorsOk: ColorResolvable = 0xFFAA00;
+    static readonly colorsOk: ColorResolvable = 0xFFAA00;
 
-    static colorsOn: ColorResolvable = 0x00AA00;
+    static readonly colorsOn: ColorResolvable = 0x00AA00;
 
-    static cooldownMinimum = Time.Second * 2.5;
+    static readonly cooldownMinimum = Time.Second * 2.5;
 
-    static coreDisabledTimeout = Time.Second * 2.5;
+    static readonly coreDisabledTimeout = Time.Second * 2.5;
 
-    static coreDispatchTimeout = Time.Second * 2.5;
+    static readonly coreDispatchTimeout = Time.Second * 2.5;
 
-    static defaultLocale: keyof typeof locales = 'en-US';
+    static readonly defaultLocale: keyof typeof locales = 'en-US';
 
-    static performanceHistory = 50;
+    static readonly performanceHistory = 50;
 
-    static pingOkMinimum = 300;
+    static readonly pingOkMinimum = 300;
 
-    static pingOnMinimum = 150;
+    static readonly pingOnMinimum = 150;
 
-    static postgresqlIdleTimeoutMillis = Time.Minute * 5;
+    static readonly postgresqlIdleTimeoutMillis = Time.Minute * 5;
 
-    static presence: PresenceData = {
+    static readonly presence: PresenceData = {
         activities: [{
             name: 'Hypixel News',
             type: ActivityTypes.WATCHING,
@@ -42,11 +42,11 @@ export class Options {
         status: PresenceUpdateStatus.Online,
     };
 
-    static restRequestTimeout = Time.Second * 5;
+    static readonly restRequestTimeout = Time.Second * 5;
 
-    static retryLimit = 2;
+    static readonly retryLimit = 2;
 
-    static timeoutBaseTimeout = Time.Minute;
+    static readonly timeoutBaseTimeout = Time.Minute;
 
-    static timeoutMaxTimeout = Time.Day / 2;
+    static readonly timeoutMaxTimeout = Time.Day / 2;
 }

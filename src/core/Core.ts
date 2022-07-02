@@ -27,28 +27,28 @@ export type Performance = {
 };
 
 export class Core extends Base {
-    readonly performance: {
+    public readonly performance: {
         latest: Performance | null;
         history: Performance[];
     };
 
-    readonly changes: Changes;
+    public readonly changes: Changes;
 
-    readonly components: Components;
+    public readonly components: Components;
 
-    readonly dispatch: Dispatch;
+    public readonly dispatch: Dispatch;
 
-    readonly embeds: Embeds;
+    public readonly embeds: Embeds;
 
-    readonly errors: Errors;
+    public readonly errors: Errors;
 
-    readonly format: Normalize;
+    public readonly format: Normalize;
 
-    readonly parser: Parser;
+    public readonly parser: Parser;
 
-    readonly requests: Requests;
+    public readonly requests: Requests;
 
-    uses: number;
+    public uses: number;
 
     public constructor() {
         super();

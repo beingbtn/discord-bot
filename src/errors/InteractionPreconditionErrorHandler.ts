@@ -18,9 +18,9 @@ import { cleanRound } from '../utility/utility';
 import { Options } from '../utility/Options';
 
 export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHandler<UserError> {
-    readonly interaction: CommandInteraction | ContextMenuInteraction;
+    public readonly interaction: CommandInteraction | ContextMenuInteraction;
 
-    readonly command: Command;
+    public readonly command: Command;
 
     public constructor(
         error: UserError,

@@ -14,21 +14,21 @@ type TimeoutOptions = {
 };
 
 export class Timeout {
-    private baseTimeout: number;
+    private readonly baseTimeout: number;
 
     private clearTimeout: number | undefined;
 
-    lastHour: number;
+    public lastHour: number;
 
-    private maxTimeout: number;
+    private readonly maxTimeout: number;
 
-    pauseFor: number;
+    public pauseFor: number;
 
-    resumeAfter: number;
+    public resumeAfter: number;
 
-    timeout: number;
+    public timeout: number;
 
-    private increment: TimeoutOptions['increment'] | undefined;
+    private readonly increment: TimeoutOptions['increment'] | undefined;
 
     constructor(options?: TimeoutOptions) {
         // Timeout set when the timeout is cleared

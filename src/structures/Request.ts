@@ -9,11 +9,11 @@ import { AbortError } from '../errors/AbortError';
 import { Options } from '../utility/Options';
 
 export class Request extends Base {
-    readonly restRequestTimeout: number;
+    public readonly restRequestTimeout: number;
 
     private retry: number;
 
-    readonly retryLimit: number;
+    public readonly retryLimit: number;
 
     public constructor(config?: {
         retryLimit?: number,

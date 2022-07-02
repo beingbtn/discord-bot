@@ -12,7 +12,7 @@ const pool = new Pool({
 });
 
 export class Database extends Base {
-    async query(input: string, values?: unknown[]) {
+    public async query(input: string, values?: unknown[]) {
         const poolClient = await pool.connect();
 
         try {
@@ -25,7 +25,7 @@ export class Database extends Base {
     }
 
     // eslint-disable-next-line no-unused-vars
-    async transaction(func: (poolClient: PoolClient) => Promise<void>) {
+    public async transaction(func: (poolClient: PoolClient) => Promise<void>) {
         const poolClient = await pool.connect();
 
         try {

@@ -2,13 +2,13 @@ import { Base } from '../structures/Base';
 import { Timeout } from '../structures/Timeout';
 
 export class Errors extends Base {
-    isGlobal: boolean;
+    public isGlobal: boolean;
 
-    readonly abort: Timeout;
+    public readonly abort: Timeout;
 
-    readonly http: Timeout;
+    public readonly http: Timeout;
 
-    readonly generic: Timeout;
+    public readonly generic: Timeout;
 
     public constructor() {
         super();

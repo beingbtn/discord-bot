@@ -11,9 +11,9 @@ import { HTTPError } from '../errors/HTTPError';
 import { slashCommandResolver } from '../utility/utility';
 
 export class Sentry {
-    readonly scope: SentryClient.Scope;
+    public readonly scope: SentryClient.Scope;
 
-    constructor() {
+    public constructor() {
         this.scope = new SentryClient.Scope();
     }
 

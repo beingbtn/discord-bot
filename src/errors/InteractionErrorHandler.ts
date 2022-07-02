@@ -9,9 +9,12 @@ import { ErrorHandler } from './ErrorHandler';
 import { Options } from '../utility/Options';
 
 export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
-    readonly interaction: CommandInteraction | ContextMenuInteraction | MessageComponentInteraction;
+    public readonly interaction:
+    | CommandInteraction
+    | ContextMenuInteraction
+    | MessageComponentInteraction;
 
-    private constructor(
+    public constructor(
         error: E,
         interaction: CommandInteraction | ContextMenuInteraction | MessageComponentInteraction,
     ) {
@@ -20,7 +23,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
         this.interaction = interaction;
     }
 
-    static async init<T>(
+    public static async init<T>(
         error: T,
         interaction: CommandInteraction | ContextMenuInteraction | MessageComponentInteraction,
     ) {

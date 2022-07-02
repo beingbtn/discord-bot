@@ -5,7 +5,7 @@ import { ErrorHandler } from './ErrorHandler';
 import { HTTPError } from './HTTPError';
 
 export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
-    readonly core: Core;
+    public readonly core: Core;
 
     public constructor(error: E, core: Core) {
         super(error);

@@ -3,9 +3,9 @@ import { BaseErrorHandler } from './BaseErrorHandler';
 import { i18n } from '../locales/i18n';
 
 export class BaseInteractionErrorHandler<E> extends BaseErrorHandler<E> {
-    readonly interaction: Interaction;
+    public readonly interaction: Interaction;
 
-    readonly i18n: i18n;
+    public readonly i18n: i18n;
 
     public constructor(
         error: E,

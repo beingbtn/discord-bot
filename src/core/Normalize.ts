@@ -3,7 +3,7 @@ import { BaseRss } from '../@types/BaseRss';
 import { Base } from '../structures/Base';
 
 export class Normalize extends Base {
-    turndown: Turndown;
+    public readonly turndown: Turndown;
 
     public constructor() {
         super();
