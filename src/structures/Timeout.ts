@@ -103,11 +103,11 @@ export class Timeout {
         return this;
     }
 
-    isTimeout() {
+    public isTimeout() {
         return this.resumeAfter > Date.now();
     }
 
-    resetTimeout() {
+    public resetTimeout() {
         clearTimeout(this.clearTimeout);
         this.timeout = this.baseTimeout;
     }
