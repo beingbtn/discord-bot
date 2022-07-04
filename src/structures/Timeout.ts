@@ -63,7 +63,7 @@ export class Timeout {
         this.getTimeout = this.getTimeout.bind(this);
     }
 
-    addError() {
+    public addError() {
         this.pauseFor = this.timeout;
         this.resumeAfter = this.timeout + Date.now();
 
@@ -95,11 +95,11 @@ export class Timeout {
         }, Time.Hour);
     }
 
-    getPauseFor() {
+    public getPauseFor() {
         return this.pauseFor;
     }
 
-    getTimeout() {
+    public getTimeout() {
         return this;
     }
 
