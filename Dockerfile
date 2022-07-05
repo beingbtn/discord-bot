@@ -8,6 +8,6 @@ RUN npm install
 
 RUN npm run build
 
-RUN npm i --omit=dev
+RUN npm install --omit=dev
 
 CMD ["npm","run","docker"]
