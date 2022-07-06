@@ -7,6 +7,7 @@ import {
     MessageFlags,
 } from 'discord.js';
 import { type CustomID } from '../@types/Persistent';
+import { i18n } from '../locales/i18n';
 
 export class ComponentInteractionCreateListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
@@ -24,6 +25,19 @@ export class ComponentInteractionCreateListener extends Listener {
             && interaction.message.flags.has(MessageFlags.FLAGS.EPHEMERAL) === false
             && interaction.message.type === 'DEFAULT'
         ) {
+            console.log(
+                `${this.constructor.name}:`,
+                `Received a MessageComponentInteraction from ${interaction.user.id}.`,
+            );
+
+            Object.defineProperty(
+                interaction,
+                'i18n',
+                {
+                    value: new i18n(interaction.locale),
+                },
+            );
+
             const customID = JSON.parse(interaction.customId) as CustomID;
 
             this.container.client.emit(
