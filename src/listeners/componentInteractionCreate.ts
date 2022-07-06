@@ -7,6 +7,7 @@ import {
     MessageFlags,
 } from 'discord.js';
 import { type CustomID } from '../@types/Persistent';
+import { ErrorHandler } from '../errors/ErrorHandler';
 import { i18n } from '../locales/i18n';
 
 export class ComponentInteractionCreateListener extends Listener {
@@ -19,32 +20,36 @@ export class ComponentInteractionCreateListener extends Listener {
     }
 
     public run(interaction: Interaction) {
-        if (
-            interaction.isMessageComponent()
-            && interaction.inCachedGuild()
-            && interaction.message.flags.has(MessageFlags.FLAGS.EPHEMERAL) === false
-            && interaction.message.type === 'DEFAULT'
-        ) {
-            console.log(
-                `${this.constructor.name}:`,
-                `Received a MessageComponentInteraction from ${interaction.user.id}.`,
-            );
+        try {
+            if (
+                interaction.isMessageComponent()
+                && interaction.inCachedGuild()
+                && interaction.message.flags.has(MessageFlags.FLAGS.EPHEMERAL) === false
+                && interaction.message.type === 'DEFAULT'
+            ) {
+                console.log(
+                    `${this.constructor.name}:`,
+                    `Received a MessageComponentInteraction from ${interaction.user.id}.`,
+                );
 
-            Object.defineProperty(
-                interaction,
-                'i18n',
-                {
-                    value: new i18n(interaction.locale),
-                },
-            );
+                Object.defineProperty(
+                    interaction,
+                    'i18n',
+                    {
+                        value: new i18n(interaction.locale),
+                    },
+                );
 
-            const customID = JSON.parse(interaction.customId) as CustomID;
+                const customID = JSON.parse(interaction.customId) as CustomID;
 
-            this.container.client.emit(
-                customID.event,
-                interaction,
-                customID,
-            );
+                this.container.client.emit(
+                    customID.event,
+                    interaction,
+                    customID,
+                );
+            }
+        } catch (error) {
+            new ErrorHandler(error).init();
         }
     }
 }
