@@ -27,9 +27,10 @@ export class ComponentInteractionCreateListener extends Listener {
                 && interaction.message.flags.has(MessageFlags.FLAGS.EPHEMERAL) === false
                 && interaction.message.type === 'DEFAULT'
             ) {
-                console.log(
+                this.container.logger.info(
                     `${this.constructor.name}:`,
                     `Received a MessageComponentInteraction from ${interaction.user.id}.`,
+                    `CustomID reads ${interaction.customId}.`,
                 );
 
                 Object.defineProperty(
