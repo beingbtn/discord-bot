@@ -37,7 +37,7 @@
         "turndown": "^7.1.1"
     },
     "scripts": {
-        "build": "primsa generate && tsc -p .",
+        "build": "prisma generate && tsc -p .",
         "prerun": "npm run build",
         "run": "node dist/index.js",
         "docker": "node dist/index.js"
