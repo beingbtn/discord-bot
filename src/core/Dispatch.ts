@@ -68,7 +68,7 @@ export class Dispatch extends Base {
                 await this.postSet(data, item.id, message.id);
             } else {
                 const message = await channel.messages.fetch(
-                    editedPost!.message,
+                    editedPost!.message!,
                 );
 
                 await message.edit(payload);
@@ -79,26 +79,37 @@ export class Dispatch extends Base {
     }
 
     private async postsGet(data: RSS, editedThreadIDs: string[]) {
-        const posts = await this.container.database.query(
-            `SELECT id, message FROM "${
-                data.title
-            }" WHERE id IN (${
-                editedThreadIDs.join(', ')
-            })`,
-        );
-
-        return posts.rows as {
-            id: string,
-            message: string,
-        }[];
+        return this.container.database.announcements.findMany({
+            select: {
+                id: true,
+                message: true,
+            },
+            where: {
+                category: data.title,
+                AND: [
+                    {
+                        id: {
+                            in: editedThreadIDs,
+                        },
+                    },
+                ],
+            },
+        });
     }
 
     private async postSet(data: RSS, id: string, messageID: string) {
-        await this.container.database.query(
-            `UPDATE "${
-                data.title
-            }" SET message = $1 WHERE id = $2`,
-            [messageID, id],
-        );
+        await this.container.database.announcements.update({
+            data: {
+                message: {
+                    set: messageID,
+                },
+            },
+            where: {
+                category_id: {
+                    category: data.title,
+                    id: id,
+                },
+            },
+        });
     }
 }

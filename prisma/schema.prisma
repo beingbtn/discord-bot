@@ -7,41 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Moderation_Information_and_Changes {
-  id      String  @id
-  title   String
-  content String
-  message String?
-
-  @@map("Moderation Information and Changes")
-}
-
-model News_and_Announcements {
-  id      String  @id
-  title   String
-  content String
-  message String?
-
-  @@map("News and Announcements")
-}
-
-model SkyBlock_Patch_Notes {
-  id      String  @id
-  title   String
-  content String
-  message String?
-
-  @@map("SkyBlock Patch Notes")
-}
-
-model announcements {
-  category    String @id
-  channelID   String
-  maxComments Int
-  roleID      String
-  url         String
-}
-
 model config {
   index              Int      @id @default(0)
   core               Boolean  @default(true)
@@ -51,4 +16,22 @@ model config {
   retryLimit         Int      @default(3)
   ownerGuilds        String[] @default([])
   owners             String[] @default([])
+}
+
+model categories {
+  category    String @id(map: "announcements_pkey")
+  channelID   String
+  maxComments Int
+  roleID      String
+  url         String
+}
+
+model announcements {
+  category String
+  id       String
+  title    String
+  content  String
+  message  String?
+
+  @@id([category, id], map: "unique")
 }

@@ -73,40 +73,52 @@ export class Changes extends Base {
         });
     }
 
-    private async get(data: RSS): Promise<{
-        id: string,
-        title: string,
-        content: string,
-        message: string | null,
-    }[]> {
-        const ids = data.items.map((item) => `'${item.id}'`).join(', ');
+    private async get(data: RSS) {
+        const ids = data.items.map((item) => item.id);
 
-        const links = await this.container.database.query(
-            `SELECT id, title, content, message FROM "${
-                data.title
-            }" WHERE id IN (${
-                ids
-            })`,
-        );
-
-        return links.rows;
+        return this.container.database.announcements.findMany({
+            select: {
+                id: true,
+                title: true,
+                content: true,
+                message: true,
+            },
+            where: {
+                category: data.title,
+                AND: [
+                    {
+                        id: {
+                            in: ids,
+                        },
+                    },
+                ],
+            },
+        });
     }
 
     private async insert(data: RSS, item: RSS['items'][number]) {
-        await this.container.database.query(
-            `INSERT INTO "${
-                data.title
-            }" (id, title, content) VALUES ($1, $2, $3)`,
-            [item.id, item.title, item.content],
-        );
+        await this.container.database.announcements.create({
+            data: {
+                category: data.title,
+                id: item.id,
+                title: item.title,
+                content: item.content,
+            },
+        });
     }
 
     private async update(data: RSS, item: RSS['items'][number]) {
-        await this.container.database.query(
-            `UPDATE "${
-                data.title
-            }" SET title = $1, content = $2 WHERE id = $3`,
-            [item.title, item.content, item.id],
-        );
+        await this.container.database.announcements.update({
+            data: {
+                title: item.title,
+                content: item.content,
+            },
+            where: {
+                category_id: {
+                    category: data.title,
+                    id: item.id,
+                },
+            },
+        });
     }
 }

@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client';
 import {
     container,
     SapphireClient,
@@ -11,7 +12,6 @@ import {
 import { Announcement } from '../@types/Announcement';
 import { Config } from '../@types/Config';
 import { Core } from '../core/Core';
-import { Database } from './Database';
 import { i18n } from '../locales/i18n';
 
 export class Client extends SapphireClient {
@@ -77,27 +77,21 @@ export class Client extends SapphireClient {
     public async init() {
         const startTime = Date.now();
 
-        container.database = new Database();
+        container.database = new PrismaClient();
         container.core = new Core();
         container.customPresence = null;
         container.i18n = new i18n();
 
-        container.config = (
-            await container.database.query(
-                'SELECT * FROM config WHERE index = 0',
-            )
-        ).rows[0] as Config;
+        const { config, categories } = container.database;
+
+        container.config = await config.findFirst() as Config;
 
         container.logger.info(
             `${this.constructor.name}:`,
             'Fetched config from the database.',
         );
 
-        container.announcements = (
-            await container.database.query(
-                'SELECT * FROM announcements',
-            )
-        ).rows as Announcement[];
+        container.announcements = await categories.findMany();
 
         container.logger.info(
             `${this.constructor.name}:`,
@@ -123,7 +117,7 @@ declare module '@sapphire/pieces' {
         config: Config,
         core: Core,
         customPresence: PresenceData | null,
-        database: Database;
+        database: PrismaClient;
         i18n: i18n,
     }
 }

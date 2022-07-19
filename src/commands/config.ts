@@ -165,10 +165,14 @@ export class ConfigCommand extends Command {
 
         this.container.config.core = !this.container.config.core;
 
-        await this.container.database.query(
-            'UPDATE config SET "core" = $1 WHERE index = 0',
-            [this.container.config.core],
-        );
+        await this.container.database.config.update({
+            data: {
+                core: this.container.config.core,
+            },
+            where: {
+                index: 0,
+            },
+        });
 
         const coreEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
@@ -203,10 +207,14 @@ export class ConfigCommand extends Command {
 
         this.container.config.devMode = !this.container.config.devMode;
 
-        await this.container.database.query(
-            'UPDATE config SET "devMode" = $1 WHERE index = 0',
-            [this.container.config.devMode],
-        );
+        await this.container.database.config.update({
+            data: {
+                devMode: this.container.config.devMode,
+            },
+            where: {
+                index: 0,
+            },
+        });
 
         const devModeEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
@@ -248,10 +256,14 @@ export class ConfigCommand extends Command {
 
         this.container.config.interval = milliseconds;
 
-        await this.container.database.query(
-            'UPDATE config SET "interval" = $1 WHERE index = 0',
-            [this.container.config.interval],
-        );
+        await this.container.database.config.update({
+            data: {
+                interval: this.container.config.interval,
+            },
+            where: {
+                index: 0,
+            },
+        });
 
         const intervalEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
@@ -287,10 +299,14 @@ export class ConfigCommand extends Command {
 
         this.container.config.restRequestTimeout = milliseconds;
 
-        await this.container.database.query(
-            'UPDATE config SET "restRequestTimeout" = $1 WHERE index = 0',
-            [this.container.config.restRequestTimeout],
-        );
+        await this.container.database.config.update({
+            data: {
+                restRequestTimeout: this.container.config.restRequestTimeout,
+            },
+            where: {
+                index: 0,
+            },
+        });
 
         const restRequestTimeoutEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
@@ -328,10 +344,14 @@ export class ConfigCommand extends Command {
 
         this.container.config.retryLimit = limit;
 
-        await this.container.database.query(
-            'UPDATE config SET "retryLimit" = $1 WHERE index = 0',
-            [this.container.config.retryLimit],
-        );
+        await this.container.database.config.update({
+            data: {
+                retryLimit: this.container.config.retryLimit,
+            },
+            where: {
+                index: 0,
+            },
+        });
 
         const retryLimitEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
@@ -367,10 +387,14 @@ export class ConfigCommand extends Command {
 
         this.container.config.ownerGuilds = guilds;
 
-        await this.container.database.query(
-            'UPDATE config SET "ownerGuilds" = $1 WHERE index = 0',
-            [this.container.config.ownerGuilds],
-        );
+        await this.container.database.config.update({
+            data: {
+                ownerGuilds: this.container.config.ownerGuilds,
+            },
+            where: {
+                index: 0,
+            },
+        });
 
         const ownerGuildsEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
@@ -406,10 +430,14 @@ export class ConfigCommand extends Command {
 
         this.container.config.owners = owners;
 
-        await this.container.database.query(
-            'UPDATE config SET "owners" = $1 WHERE index = 0',
-            [this.container.config.owners],
-        );
+        await this.container.database.config.update({
+            data: {
+                owners: this.container.config.owners,
+            },
+            where: {
+                index: 0,
+            },
+        });
 
         const ownersEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)

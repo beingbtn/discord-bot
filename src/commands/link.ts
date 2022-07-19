@@ -123,10 +123,17 @@ export class LinkCommand extends Command {
         const id = interaction.options.getString('id', true);
         const message = interaction.options.getString('message', false);
 
-        await this.container.database.query(
-            `UPDATE "${category}" SET message = $1 WHERE id = $2`,
-            [message, id],
-        );
+        await this.container.database.announcements.update({
+            data: {
+                message: message,
+            },
+            where: {
+                category_id: {
+                    category: category,
+                    id: id,
+                },
+            },
+        });
 
         const linkEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal);
