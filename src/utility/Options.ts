@@ -32,8 +32,6 @@ export class Options {
 
     static readonly pingOnMinimum = 150;
 
-    static readonly postgresqlIdleTimeoutMillis = Time.Minute * 5;
-
     static readonly presence: PresenceData = {
         activities: [{
             name: 'Hypixel News',

@@ -5,7 +5,6 @@ import {
     type Interaction,
     TextChannel,
 } from 'discord.js';
-import { type Pool } from 'pg';
 import { type Core } from '../core/Core';
 import { HTTPError } from '../errors/HTTPError';
 import { slashCommandResolver } from '../utility/utility';
@@ -76,16 +75,6 @@ export class Sentry {
                 message,
                 this.scope,
             );
-        });
-
-        return this;
-    }
-
-    public databaseContext(pool: Pool) {
-        this.scope.setTags({
-            totalCount: pool.totalCount,
-            idleCount: pool.idleCount,
-            waitingCount: pool.waitingCount,
         });
 
         return this;
