@@ -2,6 +2,7 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import {
     type CommandInteraction,
@@ -16,11 +17,11 @@ import {
 import { ChannelTypes } from 'discord.js/typings/enums';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
 import {
     awaitComponent,
     disableComponents,
+    interactionLogContext,
 } from '../utility/utility';
 
 export class SendAnnouncementsCommand extends Command {
@@ -207,7 +208,7 @@ export class SendAnnouncementsCommand extends Command {
         }
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             'Sending message...',
         );
@@ -233,7 +234,7 @@ export class SendAnnouncementsCommand extends Command {
         }
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             'Published announcement!',
         );

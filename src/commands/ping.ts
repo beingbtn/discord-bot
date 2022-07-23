@@ -2,6 +2,7 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import {
     type ColorResolvable,
@@ -9,8 +10,8 @@ import {
     Message,
 } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
+import { interactionLogContext } from '../utility/utility';
 
 export class PingCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -98,7 +99,7 @@ export class PingCommand extends Command {
             );
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `WS ${interaction.client.ws.ping}.`,
             `RS ${roundTripDelay}ms.`,

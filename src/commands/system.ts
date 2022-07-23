@@ -2,6 +2,7 @@ import process from 'node:process';
 import {
     ApplicationCommandRegistry,
     BucketScope,
+    Command,
     RegisterBehavior,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
@@ -13,7 +14,6 @@ import {
     cleanRound,
 } from '../utility/utility';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 
 export class SystemCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {

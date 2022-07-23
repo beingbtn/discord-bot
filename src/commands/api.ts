@@ -3,12 +3,15 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
-import { cleanLength } from '../utility/utility';
+import {
+    cleanLength,
+    interactionLogContext,
+} from '../utility/utility';
 
 type ErrorTypes =
     | 'abort'
@@ -247,7 +250,7 @@ export class APICommand extends Command {
             );
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `<Core>.errors.${category}.${type} is now ${value}.`,
         );
@@ -287,7 +290,7 @@ export class APICommand extends Command {
             );
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `Executed <Core>.errors.${method}.`,
         );

@@ -2,11 +2,12 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
+import { interactionLogContext } from '../utility/utility';
 
 export class LinkCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -162,7 +163,7 @@ export class LinkCommand extends Command {
         }
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             interaction.options.getSubcommand() === 'link'
                 ? `Linked the ID ${id} to ${message}.`

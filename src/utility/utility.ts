@@ -6,6 +6,7 @@ import {
     MessageActionRow,
     type MessageComponentTypeResolvable,
     type TextBasedChannel,
+    type Interaction,
 } from 'discord.js';
 import { Time } from '../enums/Time';
 import { Options } from './Options';
@@ -146,6 +147,10 @@ export function formattedUnix({
         : '';
 
     return `${utcString}${timeString}${dateString}`;
+}
+
+export function interactionLogContext(interaction: Interaction) {
+    return `Interaction ${interaction.id} Type ${interaction.type} User ${interaction.user.id}`;
 }
 
 export function setPresence() {

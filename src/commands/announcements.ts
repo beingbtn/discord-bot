@@ -2,6 +2,7 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import {
     type CommandInteraction,
@@ -14,8 +15,8 @@ import { ChannelTypes } from 'discord.js/typings/enums';
 import { Category } from '../@types/Category';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
+import { interactionLogContext } from '../utility/utility';
 
 export class AnnouncementsCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -123,8 +124,7 @@ export class AnnouncementsCommand extends Command {
                 );
 
             this.container.logger.info(
-                `Ineraction ${interaction.id}`,
-                `User ${interaction.user.id}`,
+                interactionLogContext(interaction),
                 `${this.constructor.name}:`,
                 'User missing permission.',
             );
@@ -160,7 +160,7 @@ export class AnnouncementsCommand extends Command {
                 );
 
             this.container.logger.info(
-                this.logContext(interaction),
+                interactionLogContext(interaction),
                 `${this.constructor.name}:`,
                 'Bot missing permission.',
             );
@@ -229,7 +229,7 @@ export class AnnouncementsCommand extends Command {
                 );
 
             this.container.logger.info(
-                this.logContext(interaction),
+                interactionLogContext(interaction),
                 `${this.constructor.name}:`,
                 `${type} added from ${channel.id}.`,
             );
@@ -259,7 +259,7 @@ export class AnnouncementsCommand extends Command {
                 );
 
             this.container.logger.info(
-                this.logContext(interaction),
+                interactionLogContext(interaction),
                 `${this.constructor.name}:`,
                 `${type} removed from ${channel.id}.`,
             );

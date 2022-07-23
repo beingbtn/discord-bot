@@ -2,11 +2,12 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
+import { interactionLogContext } from '../utility/utility';
 
 export class ConfigCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -196,7 +197,7 @@ export class ConfigCommand extends Command {
             : 'off';
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `Developer Mode is now ${state}.`,
         );
@@ -240,7 +241,7 @@ export class ConfigCommand extends Command {
             : 'off';
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `Developer Mode is now ${state}.`,
         );
@@ -283,7 +284,7 @@ export class ConfigCommand extends Command {
         await interaction.editReply({ embeds: [intervalEmbed] });
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `The interval is now ${milliseconds}ms.`,
         );
@@ -328,7 +329,7 @@ export class ConfigCommand extends Command {
         });
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `The rest request timeout is now ${milliseconds}ms.`,
         );
@@ -371,7 +372,7 @@ export class ConfigCommand extends Command {
         await interaction.editReply({ embeds: [retryLimitEmbed] });
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `The retry limit is now ${limit}.`,
         );
@@ -414,7 +415,7 @@ export class ConfigCommand extends Command {
         await interaction.editReply({ embeds: [ownerGuildsEmbed] });
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `The owner guilds are now ${guilds.join(', ')}.`,
         );
@@ -457,7 +458,7 @@ export class ConfigCommand extends Command {
         await interaction.editReply({ embeds: [ownersEmbed] });
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `The owners are now ${owners.join(', ')}.`,
         );

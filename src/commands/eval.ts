@@ -3,6 +3,7 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import {
     type CommandInteraction,
@@ -10,8 +11,8 @@ import {
 } from 'discord.js';
 import { Limits } from '../enums/Limits';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
+import { interactionLogContext } from '../utility/utility';
 
 export class EvalCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -110,7 +111,7 @@ export class EvalCommand extends Command {
             }
 
             this.container.logger.info(
-                this.logContext(interaction),
+                interactionLogContext(interaction),
                 `${this.constructor.name}:`,
                 output,
             );

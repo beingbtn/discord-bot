@@ -2,6 +2,7 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import {
     type CommandInteraction,
@@ -13,11 +14,11 @@ import {
 } from 'discord.js';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
 import {
     awaitComponent,
     disableComponents,
+    interactionLogContext,
 } from '../utility/utility';
 
 export class EditAnnouncementsCommand extends Command {
@@ -178,7 +179,7 @@ export class EditAnnouncementsCommand extends Command {
         }
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             'Sending edit...',
         );
@@ -196,7 +197,7 @@ export class EditAnnouncementsCommand extends Command {
         }
 
         this.container.logger.info(
-            this.logContext(interaction),
+            interactionLogContext(interaction),
             `${this.constructor.name}:`,
             'Published edit!',
         );

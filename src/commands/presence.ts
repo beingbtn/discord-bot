@@ -2,6 +2,7 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import {
     type CommandInteraction,
@@ -10,7 +11,6 @@ import {
 } from 'discord.js';
 import { ActivityTypes } from 'discord.js/typings/enums';
 import { BetterEmbed } from '../structures/BetterEmbed';
-import { Command } from '../structures/Command';
 import { Options } from '../utility/Options';
 import { setPresence } from '../utility/utility';
 

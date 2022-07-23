@@ -2,9 +2,9 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     RegisterBehavior,
+    Command,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
-import { Command } from '../structures/Command';
 
 export class TestCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {

@@ -9,6 +9,7 @@ import {
 import { type CustomID } from '../@types/Persistent';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { i18n } from '../locales/i18n';
+import { interactionLogContext } from '../utility/utility';
 
 export class ComponentInteractionCreateListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
@@ -28,9 +29,9 @@ export class ComponentInteractionCreateListener extends Listener {
                 && interaction.message.type === 'DEFAULT'
             ) {
                 this.container.logger.info(
+                    interactionLogContext(interaction),
                     `${this.constructor.name}:`,
-                    `Received a MessageComponentInteraction from ${interaction.user.id}.`,
-                    `CustomID reads ${interaction.customId}.`,
+                    `CustomID is ${interaction.customId}.`,
                 );
 
                 Object.defineProperty(
