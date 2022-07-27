@@ -99,7 +99,7 @@ export class LinkCommand extends Command {
                         },
                         {
                             name: 'id',
-                            description: 'The ID to link the message to',
+                            description: 'The ID to unlink the message from',
                             type: 3,
                             required: true,
                         },
