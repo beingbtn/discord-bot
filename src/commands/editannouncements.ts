@@ -12,6 +12,7 @@ import {
     type MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
+import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
@@ -49,37 +50,37 @@ export class EditAnnouncementsCommand extends Command {
                 {
                     name: 'message',
                     description: 'The message to target',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: true,
                 },
                 {
                     name: 'title',
                     description: 'The new title for the embed',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: false,
                 },
                 {
                     name: 'description',
                     description: 'The new description for the embed',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: false,
                 },
                 {
                     name: 'image',
                     description: 'The new image for the embed',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: false,
                 },
                 {
                     name: 'url',
                     description: 'The new url for the embed',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: false,
                 },
                 {
                     name: 'crosspost',
                     description: 'Whether to crosspost the announcement, if not already (defaults to true)',
-                    type: 5,
+                    type: ApplicationCommandOptionTypes.BOOLEAN,
                     required: false,
                 },
             ],

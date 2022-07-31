@@ -14,7 +14,10 @@ import {
     MessageEmbed,
     type NewsChannel,
 } from 'discord.js';
-import { ChannelTypes } from 'discord.js/typings/enums';
+import {
+    ApplicationCommandOptionTypes,
+    ChannelTypes,
+} from 'discord.js/typings/enums';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
@@ -52,7 +55,7 @@ export class SendAnnouncementsCommand extends Command {
                 {
                     name: 'channel',
                     description: 'The channel to send the announcement to',
-                    type: 7,
+                    type: ApplicationCommandOptionTypes.CHANNEL,
                     channel_types: [
                         ChannelTypes.GUILD_NEWS,
                         ChannelTypes.GUILD_TEXT,
@@ -62,43 +65,43 @@ export class SendAnnouncementsCommand extends Command {
                 {
                     name: 'title',
                     description: 'The title for the embed',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: true,
                 },
                 {
                     name: 'description',
                     description: 'The description for the embed',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: true,
                 },
                 {
                     name: 'image',
                     description: 'The image for the embed',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: false,
                 },
                 {
                     name: 'url',
                     description: 'The url for the embed',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: false,
                 },
                 {
                     name: 'author',
                     description: 'The author of the announcement',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     required: false,
                 },
                 {
                     name: 'role',
                     description: 'The role to mention with the announcement',
-                    type: 8,
+                    type: ApplicationCommandOptionTypes.ROLE,
                     required: false,
                 },
                 {
                     name: 'crosspost',
                     description: 'Whether to crosspost the announcement (default to true)',
-                    type: 5,
+                    type: ApplicationCommandOptionTypes.BOOLEAN,
                     required: false,
                 },
             ],

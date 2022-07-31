@@ -5,6 +5,7 @@ import {
     Command,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
 import { interactionLogContext } from '../utility/utility';
@@ -35,13 +36,13 @@ export class LinkCommand extends Command {
             options: [
                 {
                     name: 'link',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     description: 'Links a message ID to an ID',
                     options: [
                         {
                             name: 'category',
                             description: 'Used for the link option',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             required: true,
                             choices: [
                                 {
@@ -61,13 +62,13 @@ export class LinkCommand extends Command {
                         {
                             name: 'id',
                             description: 'The ID to link the message to',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             required: true,
                         },
                         {
                             name: 'message',
                             description: 'The message to link to the ID',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             required: true,
                         },
                     ],
@@ -75,12 +76,12 @@ export class LinkCommand extends Command {
                 {
                     name: 'unlink',
                     description: 'Unlinks a message ID from an ID',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     options: [
                         {
                             name: 'category',
                             description: 'Used for the link option',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             required: true,
                             choices: [
                                 {
@@ -100,7 +101,7 @@ export class LinkCommand extends Command {
                         {
                             name: 'id',
                             description: 'The ID to link the message to',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             required: true,
                         },
                     ],

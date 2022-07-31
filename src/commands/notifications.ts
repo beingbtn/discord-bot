@@ -12,6 +12,7 @@ import {
     type TextChannel,
 } from 'discord.js';
 import {
+    ApplicationCommandOptionTypes,
     ChannelTypes,
     MessageButtonStyles,
 } from 'discord.js/typings/enums';
@@ -48,7 +49,7 @@ export class NotificationsCommand extends Command {
                 {
                     name: 'channel',
                     description: 'The channel to add the selector to',
-                    type: 7,
+                    type: ApplicationCommandOptionTypes.CHANNEL,
                     channel_types: [ChannelTypes.GUILD_TEXT],
                     required: true,
                 },

@@ -7,6 +7,7 @@ import {
     Command,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
 import { interactionLogContext } from '../utility/utility';
@@ -37,17 +38,17 @@ export class ReloadCommand extends Command {
             options: [
                 {
                     name: 'all',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     description: 'Refreshes all imports',
                 },
                 {
                     name: 'single',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     description: 'Refresh a single item',
                     options: [
                         {
                             name: 'type',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             description: 'The category to refresh',
                             required: true,
                             choices: [
@@ -63,7 +64,7 @@ export class ReloadCommand extends Command {
                         },
                         {
                             name: 'item',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             description: 'The item to refresh',
                             required: true,
                         },

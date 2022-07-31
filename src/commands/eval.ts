@@ -9,6 +9,7 @@ import {
     type CommandInteraction,
     Formatters,
 } from 'discord.js';
+import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';
 import { Limits } from '../enums/Limits';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
@@ -40,7 +41,7 @@ export class EvalCommand extends Command {
             options: [
                 {
                     name: 'string',
-                    type: 3,
+                    type: ApplicationCommandOptionTypes.STRING,
                     description: 'Code',
                     required: true,
                 },

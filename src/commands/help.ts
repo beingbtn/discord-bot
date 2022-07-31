@@ -5,6 +5,7 @@ import {
     Command,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
@@ -34,12 +35,12 @@ export class HelpCommand extends Command {
             options: [
                 {
                     name: 'commands',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     description: 'Displays information about commands',
                     options: [
                         {
                             name: 'command',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             description: 'A command to get info about. This parameter is completely optional',
                             required: false,
                             choices: [
@@ -58,7 +59,7 @@ export class HelpCommand extends Command {
                 {
                     name: 'information',
                     description: 'Returns information about this bot',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                 },
             ],
         }, {

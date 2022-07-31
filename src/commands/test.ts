@@ -5,6 +5,7 @@ import {
     Command,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';
 
 export class TestCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -32,17 +33,17 @@ export class TestCommand extends Command {
             options: [
                 {
                     name: 'delete',
-                    type: 2,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND_GROUP,
                     description: 'Delete all of your data',
                     options: [
                         {
                             name: 'view',
                             description: 'Returns a file with all of your data',
-                            type: 1,
+                            type: ApplicationCommandOptionTypes.SUB_COMMAND,
                             options: [
                                 {
                                     name: 'command',
-                                    type: 3,
+                                    type: ApplicationCommandOptionTypes.STRING,
                                     description: 'A command to get info about. This parameter is completely optional',
                                     required: false,
                                 },

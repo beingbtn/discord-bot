@@ -5,6 +5,7 @@ import {
     Command,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
 import { interactionLogContext } from '../utility/utility';
@@ -35,22 +36,22 @@ export class ConfigCommand extends Command {
             options: [
                 {
                     name: 'core',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     description: 'Toggle the core',
                 },
                 {
                     name: 'devmode',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     description: 'Toggle Developer Mode',
                 },
                 {
                     name: 'interval',
                     description: 'Set the RSS fetch interval',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     options: [
                         {
                             name: 'milliseconds',
-                            type: 4,
+                            type: ApplicationCommandOptionTypes.INTEGER,
                             description: 'The interval in milliseconds',
                             required: true,
                             minValue: 60,
@@ -61,11 +62,11 @@ export class ConfigCommand extends Command {
                 {
                     name: 'restrequesttimeout',
                     description: 'Set the request timeout before an abort error is thrown',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     options: [
                         {
                             name: 'milliseconds',
-                            type: 4,
+                            type: ApplicationCommandOptionTypes.INTEGER,
                             description: 'The timeout in milliseconds',
                             required: true,
                             minValue: 0,
@@ -76,11 +77,11 @@ export class ConfigCommand extends Command {
                 {
                     name: 'retrylimit',
                     description: 'Set the number of request retries before throwing',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     options: [
                         {
                             name: 'limit',
-                            type: 4,
+                            type: ApplicationCommandOptionTypes.INTEGER,
                             description: 'The number of retries',
                             required: true,
                             minValue: 0,
@@ -91,11 +92,11 @@ export class ConfigCommand extends Command {
                 {
                     name: 'ownerguilds',
                     description: 'Set the guild(s) where owner commands should be set',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     options: [
                         {
                             name: 'guilds',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             description: 'The IDs of the guilds separated by a comma (no spaces)',
                             required: true,
                         },
@@ -104,11 +105,11 @@ export class ConfigCommand extends Command {
                 {
                     name: 'owners',
                     description: 'Set the application owner(s)',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     options: [
                         {
                             name: 'owners',
-                            type: 3,
+                            type: ApplicationCommandOptionTypes.STRING,
                             description: 'The IDs of the owners separated by a comma (no spaces)',
                             required: true,
                         },
@@ -117,7 +118,7 @@ export class ConfigCommand extends Command {
                 {
                     name: 'view',
                     description: 'View the current configuration',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                 },
             ],
         }, {

@@ -11,7 +11,10 @@ import {
     Permissions,
     type TextChannel,
 } from 'discord.js';
-import { ChannelTypes } from 'discord.js/typings/enums';
+import {
+    ApplicationCommandOptionTypes,
+    ChannelTypes,
+} from 'discord.js/typings/enums';
 import { Category } from '../@types/Category';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
@@ -47,7 +50,7 @@ export class AnnouncementsCommand extends Command {
                     options: [
                         {
                             name: 'channel',
-                            type: 7,
+                            type: ApplicationCommandOptionTypes.CHANNEL,
                             channel_types: [ChannelTypes.GUILD_TEXT],
                             description: 'The channel where Hypixel News and Announcements should be toggled',
                             required: true,
@@ -57,11 +60,11 @@ export class AnnouncementsCommand extends Command {
                 {
                     name: 'skyblock',
                     description: 'SkyBlock Patch Notes',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     options: [
                         {
                             name: 'channel',
-                            type: 7,
+                            type: ApplicationCommandOptionTypes.CHANNEL,
                             channel_types: [ChannelTypes.GUILD_TEXT],
                             description: 'The channel where SkyBlock Patch Notes should be toggled',
                             required: true,
@@ -71,11 +74,11 @@ export class AnnouncementsCommand extends Command {
                 {
                     name: 'moderation',
                     description: 'Moderation Information and Changes',
-                    type: 1,
+                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     options: [
                         {
                             name: 'channel',
-                            type: 7,
+                            type: ApplicationCommandOptionTypes.CHANNEL,
                             channel_types: [ChannelTypes.GUILD_TEXT],
                             description: 'The channel where Moderation Information and Changes should be toggled',
                             required: true,
