@@ -100,8 +100,8 @@ export class LinkCommand extends Command {
                         },
                         {
                             name: 'id',
-                            description: 'The ID to link the message to',
                             type: ApplicationCommandOptionTypes.STRING,
+                            description: 'The ID to unlink the message from',
                             required: true,
                         },
                     ],

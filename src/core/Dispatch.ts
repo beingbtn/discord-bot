@@ -28,7 +28,7 @@ export class Dispatch extends Base {
         const editedThreadIDs = data.items.filter(
             (item) => item.edited === true,
         ).map(
-            (item) => `'${item.id}'`,
+            (item) => item.id,
         );
 
         const editedPosts = editedThreadIDs.length > 0
