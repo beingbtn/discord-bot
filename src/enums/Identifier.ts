@@ -1,4 +1,4 @@
-export const enum Identifiers {
+export const enum Identifier {
     DevMode = 'preconditionDevMode',
     OwnerOnly = 'preconditionOwnerOnly',
     Cooldown = 'preconditionCooldown',

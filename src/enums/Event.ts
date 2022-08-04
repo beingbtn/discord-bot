@@ -1,3 +1,3 @@
-export const enum Events {
+export const enum Event {
     PersistentNotification = 'persistentNotification',
 }

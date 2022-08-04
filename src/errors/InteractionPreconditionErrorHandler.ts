@@ -10,7 +10,7 @@ import {
     type ColorResolvable,
 } from 'discord.js';
 import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
-import { Identifiers } from '../enums/Identifiers';
+import { Identifier } from '../enums/Identifier';
 import { Time } from '../enums/Time';
 import { ErrorHandler } from './ErrorHandler';
 import { BetterEmbed } from '../structures/BetterEmbed';
@@ -45,7 +45,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                 .captureMessages(this.error.identifier);
 
             switch (this.error.identifier) {
-                case Identifiers.DevMode:
+                case Identifier.DevMode:
                     await this.resolvePrecondition(
                         this.interaction,
                         this.interaction.i18n.getMessage(
@@ -57,7 +57,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                         Options.colorsWarning,
                     );
                     break;
-                case Identifiers.OwnerOnly:
+                case Identifier.OwnerOnly:
                     await this.resolvePrecondition(
                         this.interaction,
                         this.interaction.i18n.getMessage(
@@ -69,7 +69,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                         Options.colorsWarning,
                     );
                     break;
-                case Identifiers.GuildOnly:
+                case Identifier.GuildOnly:
                     await this.resolvePrecondition(
                         this.interaction,
                         this.interaction.i18n.getMessage(
@@ -81,7 +81,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                         Options.colorsWarning,
                     );
                     break;
-                case Identifiers.Cooldown:
+                case Identifier.Cooldown:
                     await this.resolvePrecondition(
                         this.interaction,
                         this.interaction.i18n.getMessage(

@@ -10,7 +10,6 @@ import {
     Formatters,
 } from 'discord.js';
 import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';
-import { Limits } from '../enums/Limits';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
 import { interactionLogContext } from '../utility/utility';
@@ -123,7 +122,7 @@ export class EvalCommand extends Command {
             const timeTaken = end - start;
 
             const outputMaxLength = Boolean(
-                (error as Error).message.length >= Limits.EmbedField,
+                (error as Error).message.length >= EmbedLimits.MaximumFieldValueLength,
             );
 
             evalEmbed.setColor(Options.colorsNormal).addFields(

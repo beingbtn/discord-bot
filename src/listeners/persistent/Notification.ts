@@ -4,7 +4,7 @@ import {
     MessageEmbed,
 } from 'discord.js';
 import { type CustomID } from '../../@types/Persistent';
-import { Events } from '../../enums/Events';
+import { Event } from '../../enums/Event';
 import { InteractionErrorHandler } from '../../errors/InteractionErrorHandler';
 import { Options } from '../../utility/Options';
 
@@ -13,7 +13,7 @@ export class PersistentNotificationListener extends Listener {
         super(context, {
             ...options,
             once: false,
-            event: Events.PersistentNotification,
+            event: Event.PersistentNotification,
         });
     }
 

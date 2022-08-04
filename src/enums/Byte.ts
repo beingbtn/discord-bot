@@ -1,4 +1,4 @@
-export const enum Bytes {
+export const enum Byte {
     KiloBit = 128,
     KiloByte = 1024,
     MegaBit = 131_072,

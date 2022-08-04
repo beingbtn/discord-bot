@@ -3,7 +3,7 @@ import {
     ContextMenuInteraction,
     type CommandInteraction,
 } from 'discord.js';
-import { Identifiers } from '../enums/Identifiers';
+import { Identifier } from '../enums/Identifier';
 
 export class DevModePrecondition extends Precondition {
     public override chatInputRun(interaction: CommandInteraction) {
@@ -18,7 +18,7 @@ export class DevModePrecondition extends Precondition {
         return this.container.config.owners.includes(userId)
             ? this.ok()
             : this.error({
-                identifier: Identifiers.OwnerOnly,
+                identifier: Identifier.OwnerOnly,
             });
     }
 }

@@ -6,7 +6,7 @@ import {
     RegisterBehavior,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
-import { Bytes } from '../enums/Bytes';
+import { Byte } from '../enums/Byte';
 import { Time } from '../enums/Time';
 import { Options } from '../utility/Options';
 import {
@@ -52,7 +52,7 @@ export class SystemCommand extends Command {
     public async chatInputRun(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
-        const memoryMegaBytes = process.memoryUsage.rss() / Bytes.MegaByte;
+        const memoryMegaBytes = process.memoryUsage.rss() / Byte.MegaByte;
 
         const responseEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
