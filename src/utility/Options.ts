@@ -47,4 +47,6 @@ export class Options {
     static readonly timeoutBaseTimeout = Time.Minute;
 
     static readonly timeoutMaxTimeout = Time.Day / 2;
+
+    static readonly timeoutResetAfter = Time.Minute * 10;
 }

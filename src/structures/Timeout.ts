@@ -11,6 +11,7 @@ type TimeoutOptions = {
     baseTimeout?: number,
     increment?: (current: number) => number,
     maxTimeout?: number,
+    resetAfter?: number,
 };
 
 export class Timeout {
@@ -25,6 +26,8 @@ export class Timeout {
     public pauseFor: number;
 
     public resumeAfter: number;
+
+    public resetAfter: number;
 
     public timeout: number;
 
@@ -46,6 +49,8 @@ export class Timeout {
 
         // The value that would be used for a setTimeout
         this.pauseFor = 0;
+
+        this.resetAfter = options?.resetAfter ?? Options.timeoutResetAfter;
 
         // Unix time for when a timeout should end
         this.resumeAfter = 0;
@@ -86,7 +91,7 @@ export class Timeout {
         this.clearTimeout = setTimeout(() => {
             this.pauseFor = 0;
             this.timeout = this.baseTimeout;
-        }, this.timeout * 1.25) as unknown as number;
+        }, (this.timeout * 1.25) + this.resetAfter) as unknown as number;
 
         this.lastHour += 1;
 
