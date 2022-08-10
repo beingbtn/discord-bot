@@ -1,10 +1,13 @@
 import { Precondition } from '@sapphire/framework';
 import {
-    ContextMenuInteraction,
     type CommandInteraction,
+    type ContextMenuInteraction,
 } from 'discord.js';
 import { i18n } from '../locales/i18n';
-import { interactionLogContext, slashCommandResolver } from '../utility/utility';
+import {
+    interactionLogContext,
+    slashCommandResolver,
+} from '../utility/utility';
 
 export class BasePrecondition extends Precondition {
     public override async chatInputRun(interaction: CommandInteraction) {

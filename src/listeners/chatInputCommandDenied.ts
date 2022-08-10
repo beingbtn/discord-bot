@@ -1,8 +1,8 @@
 import {
     type ChatInputCommandDeniedPayload,
+    Events,
     Listener,
     type UserError,
-    Events,
 } from '@sapphire/framework';
 import { InteractionPreconditionErrorHandler } from '../errors/InteractionPreconditionErrorHandler';
 

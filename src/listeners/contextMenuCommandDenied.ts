@@ -1,8 +1,8 @@
 import {
     type ContextMenuCommandDeniedPayload,
+    Events,
     Listener,
     type UserError,
-    Events,
 } from '@sapphire/framework';
 import { InteractionPreconditionErrorHandler } from '../errors/InteractionPreconditionErrorHandler';
 

@@ -1,8 +1,8 @@
 import {
     type CommandInteraction,
+    type ContextMenuInteraction,
     type MessageComponentInteraction,
     MessageEmbed,
-    ContextMenuInteraction,
 } from 'discord.js';
 import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import { ErrorHandler } from './ErrorHandler';

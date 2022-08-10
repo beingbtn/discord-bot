@@ -1,8 +1,8 @@
 import {
     type ApplicationCommandRegistry,
     BucketScope,
-    RegisterBehavior,
     Command,
+    RegisterBehavior,
 } from '@sapphire/framework';
 import {
     type ColorResolvable,

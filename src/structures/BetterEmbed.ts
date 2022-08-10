@@ -1,7 +1,7 @@
 import {
-    MessageEmbed,
-    type EmbedFieldData,
     BaseCommandInteraction,
+    type EmbedFieldData,
+    MessageEmbed,
 } from 'discord.js';
 
 type Footer =

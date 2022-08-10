@@ -1,10 +1,10 @@
 import {
     type ApplicationCommandRegistry,
     BucketScope,
-    Command as SapphireCommand,
+    Command,
     type Listener,
     RegisterBehavior,
-    Command,
+    Command as SapphireCommand,
 } from '@sapphire/framework';
 import { type CommandInteraction } from 'discord.js';
 import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';

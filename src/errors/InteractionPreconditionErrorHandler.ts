@@ -4,10 +4,10 @@ import {
     type UserError,
 } from '@sapphire/framework';
 import {
-    CommandInteraction,
-    ContextMenuInteraction,
     type BaseCommandInteraction,
     type ColorResolvable,
+    type CommandInteraction,
+    type ContextMenuInteraction,
 } from 'discord.js';
 import { BaseInteractionErrorHandler } from './BaseInteractionErrorHandler';
 import { Identifier } from '../enums/Identifier';

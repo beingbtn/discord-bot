@@ -3,10 +3,10 @@ import {
     type AwaitMessageCollectorOptionsParams,
     type CommandInteraction,
     Formatters,
+    type Interaction,
     MessageActionRow,
     type MessageComponentTypeResolvable,
     type TextBasedChannel,
-    type Interaction,
 } from 'discord.js';
 import { Time } from '../enums/Time';
 import { Options } from './Options';

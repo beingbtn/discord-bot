@@ -1,7 +1,7 @@
 import { Precondition } from '@sapphire/framework';
 import {
-    ContextMenuInteraction,
     type CommandInteraction,
+    type ContextMenuInteraction,
 } from 'discord.js';
 import { Identifier } from '../enums/Identifier';
 
