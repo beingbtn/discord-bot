@@ -29,10 +29,8 @@ export class ReloadCommand extends Command {
             requiredUserPermissions: [],
             requiredClientPermissions: [],
         });
-    }
 
-    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
-        registry.registerChatInputCommand({
+        this.chatInputStructure = {
             name: this.name,
             description: this.description,
             options: [
@@ -71,7 +69,11 @@ export class ReloadCommand extends Command {
                     ],
                 },
             ],
-        }, {
+        };
+    }
+
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
+        registry.registerChatInputCommand(this.chatInputStructure, {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',
             )

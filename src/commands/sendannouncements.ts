@@ -45,10 +45,8 @@ export class SendAnnouncementsCommand extends Command {
             requiredUserPermissions: [],
             requiredClientPermissions: [],
         });
-    }
 
-    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
-        registry.registerChatInputCommand({
+        this.chatInputStructure = {
             name: this.name,
             description: this.description,
             options: [
@@ -105,7 +103,11 @@ export class SendAnnouncementsCommand extends Command {
                     required: false,
                 },
             ],
-        }, {
+        };
+    }
+
+    public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
+        registry.registerChatInputCommand(this.chatInputStructure, {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',
             )

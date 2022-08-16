@@ -34,13 +34,15 @@ export class HelpCommand extends Command {
             requiredUserPermissions: [],
             requiredClientPermissions: [],
         });
+
+        this.chatInputStructure = {
+            name: this.name,
+            description: this.description,
+        };
     }
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
-        registry.registerChatInputCommand({
-            name: this.name,
-            description: this.description,
-        }, {
+        registry.registerChatInputCommand(this.chatInputStructure, {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',
             )
@@ -165,23 +167,16 @@ export class HelpCommand extends Command {
 
         const commandsSelectMenu = () => new MessageSelectMenu()
             .setCustomId(snowflake)
-            .setPlaceholder(
-                i18n.getMessage(
-                    'commandsHelpCommandsMenuPlaceholder', [
-                        selectedCommand.name,
-                    ],
-                ),
-            )
             .setOptions(
                 ...commands.map(
                     (command) => ({
                         label: i18n.getMessage(
                             'commandsHelpCommandsMenuLabel', [
-                                command.name,
+                                i18n.getChatInputName(command),
                             ],
                         ),
-                        description: command.description,
-                        value: command.name,
+                        description: i18n.getChatInputDescription(command),
+                        value: i18n.getChatInputName(command),
                         default: command.name === selectedCommand.name,
                     }),
                 ),
@@ -237,7 +232,7 @@ export class HelpCommand extends Command {
         commandEmbed.setTitle(
             i18n.getMessage(
                 'commandsHelpCommandsMenuTitle', [
-                    command.name,
+                    i18n.getChatInputName(command),
                 ],
             ),
         );

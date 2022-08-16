@@ -32,13 +32,15 @@ export class SystemCommand extends Command {
             requiredUserPermissions: [],
             requiredClientPermissions: [],
         });
+
+        this.chatInputStructure = {
+            name: this.name,
+            description: this.description,
+        };
     }
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
-        registry.registerChatInputCommand({
-            name: this.name,
-            description: this.description,
-        }, {
+        registry.registerChatInputCommand(this.chatInputStructure, {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',
             )

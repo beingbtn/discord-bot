@@ -1,3 +1,4 @@
+import { type Command } from '@sapphire/framework';
 import { locales } from './locales';
 import { Options } from '../utility/Options';
 
@@ -35,5 +36,21 @@ export class i18n {
         }
 
         return message || 'null';
+    }
+
+    public getChatInputName(command: Command) {
+        const structure = command.chatInputStructure;
+
+        return structure.nameLocalizations?.[
+            this.localeName as keyof typeof structure.nameLocalizations
+        ] ?? structure.name;
+    }
+
+    public getChatInputDescription(command: Command) {
+        const structure = command.chatInputStructure;
+
+        return structure.descriptionLocalizations?.[
+            this.localeName as keyof typeof structure.descriptionLocalizations
+        ] ?? structure.description;
     }
 }
