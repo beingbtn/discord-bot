@@ -33,8 +33,8 @@ export class ReloadCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'reload',
-            description: 'Reloads all imports or a single import',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'all',

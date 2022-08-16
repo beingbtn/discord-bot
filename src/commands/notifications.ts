@@ -43,8 +43,8 @@ export class NotificationsCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'notifications',
-            description: 'Add a notifications selector to a channel',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'channel',

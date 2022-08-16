@@ -34,8 +34,8 @@ export class PingCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'ping',
-            description: 'Ping!',
+            name: this.name,
+            description: this.description,
         }, {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',

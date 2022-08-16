@@ -176,49 +176,67 @@
     "commandsEvalTypeName": {
         "message": "Type"
     },
-    "commandsHelpAllName": {
-        "message": "/$1"
+    "commandsHelpTitle": {
+        "message": "Help"
     },
-    "commandsHelpAllTitle": {
+    "commandsHelpInformationLabel": {
+        "message": "Information"
+    },
+    "commandsHelpInformationName": {
+        "message": "Information"
+    },
+    "commandsHelpInformationValue": {
+        "message": "Click \"Information\" to learn more about this bot."
+    },
+    "commandsHelpCommandsLabel": {
         "message": "Commands"
     },
-    "commandsHelpInformationAboutName": {
+    "commandsHelpCommandsName": {
+        "message": "Commands"
+    },
+    "commandsHelpCommandsValue": {
+        "message": "Click \"Commands\" to view available commands."
+    },
+    "commandsHelpInformationMenuTitle": {
+        "message": "Information"
+    },
+    "commandsHelpInformationMenuAboutName": {
         "message": "About"
     },
-    "commandsHelpInformationAboutValue": {
-        "message": "Hypixel News is a project that sends you the latest news from the Hypixel Network. When new posts are made by the admins on the forums, you can choose which ones you want to receive as a neat message in a selected Discord channel.\n\nLearn more at https://attituding.github.io/Hypixel-News/."
+    "commandsHelpInformationMenuAboutValue": {
+        "message": "Hypixel News is a project that sends you the latest news from the Hypixel Network. When new posts are made by the admins on the forums, you can choose which ones you want to receive as a neat message in a selected Discord channel.\n\nLearn more at https://attituding.github.io/hypixel-news/."
     },
-    "commandsHelpInformationLegalName": {
+    "commandsHelpInformationMenuLegalName": {
         "message": "Legal Stuff"
     },
-    "commandsHelpInformationLegalValue": {
+    "commandsHelpInformationMenuLegalValue": {
         "message": "By using this service, you agree to our [Privacy Policy](https://attituding.github.io/Hypixel-News/legal/privacy-policy/ \"Privacy Policy\") and our [Terms of Service](https://attituding.github.io/Hypixel-News/legal/terms-of-service/ \"Terms of Service\")."
     },
-    "commandsHelpSpecificCooldownName": {
+    "commandsHelpCommandsMenuPlaceholder": {
+        "message": "/$1"
+    },
+    "commandsHelpCommandsMenuLabel": {
+        "message": "/$1"
+    },
+    "commandsHelpCommandsMenuCooldownName": {
         "message": "Command Cooldown"
     },
-    "commandsHelpSpecificCooldownValue": {
+    "commandsHelpCommandsMenuCooldownValue": {
         "message": "$1 second(s)."
     },
-    "commandsHelpSpecificDMName": {
+    "commandsHelpCommandsMenuDMName": {
         "message": "Direct Messages"
     },
-    "commandsHelpSpecificDMValue": {
+    "commandsHelpCommandsMenuDMValue": {
         "message": "This command cannot be used in a DM channel."
     },
-    "commandsHelpSpecificInvalidDescription": {
-        "message": "**/$1** isn't a valid command!"
-    },
-    "commandsHelpSpecificInvalidTitle": {
-        "message": "Invalid Command"
-    },
-    "commandsHelpSpecificOwnerName": {
+    "commandsHelpCommandsMenuOwnerName": {
         "message": "Bot Owner"
     },
-    "commandsHelpSpecificOwnerValue": {
+    "commandsHelpCommandsMenuOwnerValue": {
         "message": "Being an owner is required to execute this command."
     },
-    "commandsHelpSpecificTitle": {
+    "commandsHelpCommandsMenuTitle": {
         "message": "/$1"
     },
     "commandsLinkLinkedDescription": {

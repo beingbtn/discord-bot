@@ -29,8 +29,8 @@ export class PerformanceCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'performance',
-            description: 'View system performance',
+            name: this.name,
+            description: this.description,
         }, {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',

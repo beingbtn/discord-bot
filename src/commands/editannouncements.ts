@@ -44,8 +44,8 @@ export class EditAnnouncementsCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'editannouncements',
-            description: 'Edit announcements',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'message',

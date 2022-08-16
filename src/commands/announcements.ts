@@ -40,8 +40,8 @@ export class AnnouncementsCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'announcements',
-            description: 'Configure what announcements you want to receive',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'general',

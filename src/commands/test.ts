@@ -28,8 +28,8 @@ export class TestCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'test',
-            description: 'Does stuff',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'delete',

@@ -49,8 +49,8 @@ export class SendAnnouncementsCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'sendannouncements',
-            description: 'Manually send announcements',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'channel',

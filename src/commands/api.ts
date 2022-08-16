@@ -44,8 +44,8 @@ export class APICommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'api',
-            description: 'Toggles dynamic settings',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'stats',

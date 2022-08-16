@@ -4,11 +4,19 @@ import {
     Command,
     RegisterBehavior,
 } from '@sapphire/framework';
-import { type CommandInteraction } from 'discord.js';
-import { ApplicationCommandOptionTypes } from 'discord.js/typings/enums';
+import {
+    type ButtonInteraction,
+    type CommandInteraction,
+    MessageActionRow,
+    MessageButton,
+    type MessageComponentInteraction,
+    MessageSelectMenu,
+    SnowflakeUtil,
+} from 'discord.js';
 import { Time } from '../enums/Time';
 import { BetterEmbed } from '../structures/BetterEmbed';
 import { Options } from '../utility/Options';
+import { awaitComponent, disableComponents } from '../utility/utility';
 
 export class HelpCommand extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -30,38 +38,8 @@ export class HelpCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'help',
-            description: 'Displays helpful information and available commands',
-            options: [
-                {
-                    name: 'commands',
-                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                    description: 'Displays information about commands',
-                    options: [
-                        {
-                            name: 'command',
-                            type: ApplicationCommandOptionTypes.STRING,
-                            description: 'A command to get info about. This parameter is completely optional',
-                            required: false,
-                            choices: [
-                                {
-                                    name: '/announcements',
-                                    value: 'announcements',
-                                },
-                                {
-                                    name: '/help',
-                                    value: 'help',
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    name: 'information',
-                    description: 'Returns information about this bot',
-                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                },
-            ],
+            name: this.name,
+            description: this.description,
         }, {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',
@@ -74,84 +52,204 @@ export class HelpCommand extends Command {
     }
 
     public async chatInputRun(interaction: CommandInteraction) {
-        if (interaction.options.getSubcommand() === 'information') {
-            await this.information(interaction);
-        } else if (interaction.options.getString('command')) {
-            await this.specific(interaction);
-        } else {
-            await this.commands(interaction);
-        }
-    }
-
-    public async information(interaction: CommandInteraction) {
         const { i18n } = interaction;
-        const informationEmbed = new BetterEmbed(interaction)
+
+        const helpEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
+            .setTitle(i18n.getMessage('commandsHelpTitle'))
             .addFields(
                 {
-                    name: i18n.getMessage('commandsHelpInformationAboutName'),
-                    value: i18n.getMessage('commandsHelpInformationAboutValue'),
+                    name: i18n.getMessage('commandsHelpInformationName'),
+                    value: i18n.getMessage('commandsHelpInformationValue'),
                 },
                 {
-                    name: i18n.getMessage('commandsHelpInformationLegalName'),
-                    value: i18n.getMessage('commandsHelpInformationLegalValue'),
+                    name: i18n.getMessage('commandsHelpCommandsName'),
+                    value: i18n.getMessage('commandsHelpCommandsValue'),
                 },
             );
 
-        await interaction.editReply({ embeds: [informationEmbed] });
-    }
+        const informationSnowflake = SnowflakeUtil.generate();
+        const commandsSnowflake = SnowflakeUtil.generate();
 
-    public async specific(interaction: CommandInteraction) {
-        const { i18n } = interaction;
+        const informationButton = new MessageButton()
+            .setCustomId(informationSnowflake)
+            .setStyle('PRIMARY')
+            .setLabel(i18n.getMessage('commandsHelpInformationLabel'));
 
-        const commandArg = interaction.options.getString(
-            'command',
-            true,
-        );
+        const commandsButton = new MessageButton()
+            .setCustomId(commandsSnowflake)
+            .setStyle('PRIMARY')
+            .setLabel(i18n.getMessage('commandsHelpCommandsLabel'));
 
-        const command = this.container.stores
-            .get('commands')
-            .get(commandArg);
+        const row = new MessageActionRow()
+            .setComponents(
+                informationButton,
+                commandsButton,
+            );
 
-        const commandSearchEmbed = new BetterEmbed(interaction)
-            .setColor(Options.colorsNormal);
+        const reply = await interaction.editReply({
+            embeds: [helpEmbed],
+            components: [row],
+        });
 
-        if (typeof command === 'undefined') {
-            commandSearchEmbed
-                .setColor(Options.colorsWarning)
-                .setTitle(
-                    i18n.getMessage(
-                        'commandsHelpSpecificInvalidTitle',
-                    ),
-                )
-                .setDescription(
-                    i18n.getMessage(
-                        'commandsHelpSpecificInvalidDescription', [
-                            commandArg,
-                        ],
-                    ),
-                );
+        await interaction.client.channels.fetch(interaction.channelId);
 
-            await interaction.editReply({ embeds: [commandSearchEmbed] });
+        // eslint-disable-next-line arrow-body-style
+        const componentFilter = (i: MessageComponentInteraction) => {
+            return interaction.user.id === i.user.id
+            && i.message.id === reply.id;
+        };
+
+        const selectMenuInteraction = await awaitComponent(interaction.channel!, {
+            componentType: 'BUTTON',
+            filter: componentFilter,
+            idle: Time.Minute,
+        });
+
+        if (selectMenuInteraction === null) {
+            const disabledRows = disableComponents([row]);
+
+            await interaction.editReply({
+                components: disabledRows,
+            });
+
             return;
         }
 
-        commandSearchEmbed.setTitle(
+        switch (selectMenuInteraction.customId) {
+            case informationSnowflake:
+                await this.informationMenu(interaction, selectMenuInteraction);
+                break;
+            case commandsSnowflake:
+                await this.commandsMenu(interaction, selectMenuInteraction);
+                break;
+            // no default
+        }
+    }
+
+    public async informationMenu(interaction: CommandInteraction, component: ButtonInteraction) {
+        const { i18n } = interaction;
+
+        const informationMenuEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal)
+            .setTitle(i18n.getMessage('commandsHelpInformationMenuTitle'))
+            .addFields(
+                {
+                    name: i18n.getMessage('commandsHelpInformationMenuAboutName'),
+                    value: i18n.getMessage('commandsHelpInformationMenuAboutValue'),
+                },
+                {
+                    name: i18n.getMessage('commandsHelpInformationMenuLegalName'),
+                    value: i18n.getMessage('commandsHelpInformationMenuLegalValue'),
+                },
+            );
+
+        await component.update({
+            embeds: [informationMenuEmbed],
+            components: [],
+        });
+    }
+
+    public async commandsMenu(interaction: CommandInteraction, component: ButtonInteraction) {
+        const { i18n } = interaction;
+
+        const commands = this.container.stores
+            .get('commands')
+            .filter((command) => typeof command.options.preconditions?.find(
+                (condition) => condition === 'OwnerOnly',
+            ) === 'undefined');
+
+        const snowflake = SnowflakeUtil.generate();
+
+        let selectedCommand = commands.first()!;
+
+        const commandsSelectMenu = () => new MessageSelectMenu()
+            .setCustomId(snowflake)
+            .setPlaceholder(
+                i18n.getMessage(
+                    'commandsHelpCommandsMenuPlaceholder', [
+                        selectedCommand.name,
+                    ],
+                ),
+            )
+            .setOptions(
+                ...commands.map(
+                    (command) => ({
+                        label: i18n.getMessage(
+                            'commandsHelpCommandsMenuLabel', [
+                                command.name,
+                            ],
+                        ),
+                        description: command.description,
+                        value: command.name,
+                        default: command.name === selectedCommand.name,
+                    }),
+                ),
+            );
+
+        const row = () => new MessageActionRow()
+            .setComponents(commandsSelectMenu());
+
+        const reply = await component.update({
+            embeds: [this.generateCommandResponse(interaction, selectedCommand)],
+            components: [row()],
+            fetchReply: true,
+        });
+
+        // eslint-disable-next-line arrow-body-style
+        const componentFilter = (i: MessageComponentInteraction) => {
+            return interaction.user.id === i.user.id
+            && i.message.id === reply.id
+            && i.customId === snowflake;
+        };
+
+        const collector = interaction.channel!.createMessageComponentCollector({
+            componentType: 'SELECT_MENU',
+            filter: componentFilter,
+            idle: Time.Minute,
+            time: Time.Minute * 30,
+        });
+
+        collector.on('collect', async (componentInteraction) => {
+            selectedCommand = commands.get(componentInteraction.values[0])!;
+
+            await componentInteraction.update({
+                embeds: [this.generateCommandResponse(interaction, selectedCommand)],
+                components: [row()],
+            });
+        });
+
+        collector.on('end', async () => {
+            const disabledRows = disableComponents([row()]);
+
+            await interaction.editReply({
+                components: disabledRows,
+            });
+        });
+    }
+
+    public generateCommandResponse(interaction: CommandInteraction, command: Command) {
+        const { i18n } = interaction;
+
+        const commandEmbed = new BetterEmbed(interaction)
+            .setColor(Options.colorsNormal);
+
+        commandEmbed.setTitle(
             i18n.getMessage(
-                'commandsHelpSpecificTitle', [
-                    commandArg,
+                'commandsHelpCommandsMenuTitle', [
+                    command.name,
                 ],
             ),
         );
 
-        commandSearchEmbed.setDescription(
+        commandEmbed.setDescription(
             command.description,
         );
 
-        commandSearchEmbed.addFields({
-            name: i18n.getMessage('commandsHelpSpecificCooldownName'),
+        commandEmbed.addFields({
+            name: i18n.getMessage('commandsHelpCommandsMenuCooldownName'),
             value: i18n.getMessage(
-                'commandsHelpSpecificCooldownValue', [
+                'commandsHelpCommandsMenuCooldownValue', [
                     command.options.cooldownDelay! / Time.Second,
                 ],
             ),
@@ -166,51 +264,19 @@ export class HelpCommand extends Command {
         );
 
         if (typeof guildOnly !== 'undefined') {
-            commandSearchEmbed.addFields({
-                name: i18n.getMessage('commandsHelpSpecificDMName'),
-                value: i18n.getMessage('commandsHelpSpecificDMValue'),
+            commandEmbed.addFields({
+                name: i18n.getMessage('commandsHelpCommandsMenuDMName'),
+                value: i18n.getMessage('commandsHelpCommandsMenuDMValue'),
             });
         }
 
         if (typeof ownerOnly !== 'undefined') {
-            commandSearchEmbed.addFields({
-                name: i18n.getMessage('commandsHelpSpecificOwnerName'),
-                value: i18n.getMessage('commandsHelpSpecificOwnerValue'),
+            commandEmbed.addFields({
+                name: i18n.getMessage('commandsHelpCommandsMenuOwnerName'),
+                value: i18n.getMessage('commandsHelpCommandsMenuOwnerValue'),
             });
         }
 
-        await interaction.editReply({ embeds: [commandSearchEmbed] });
-    }
-
-    public async commands(interaction: CommandInteraction) {
-        const { i18n } = interaction;
-
-        const commandsCollection = this.container.stores
-            .get('commands')
-            .filter((command) => typeof command.options.preconditions?.find(
-                (condition) => condition === 'OwnerOnly',
-            ) === 'undefined');
-
-        const allCommandsEmbed = new BetterEmbed(interaction)
-            .setColor(Options.colorsNormal)
-            .setTitle(
-                i18n.getMessage(
-                    'commandsHelpAllTitle',
-                ),
-            );
-
-        // eslint-disable-next-line no-restricted-syntax
-        for (const command of commandsCollection.values()) {
-            allCommandsEmbed.addFields({
-                name: i18n.getMessage(
-                    'commandsHelpAllName', [
-                        command.name,
-                    ],
-                ),
-                value: command.description,
-            });
-        }
-
-        await interaction.editReply({ embeds: [allCommandsEmbed] });
+        return commandEmbed;
     }
 }

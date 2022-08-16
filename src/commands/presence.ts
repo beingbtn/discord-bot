@@ -38,8 +38,8 @@ export class PresenceCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'presence',
-            description: 'Set a custom presence for the bot',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'clear',

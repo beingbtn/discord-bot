@@ -35,8 +35,8 @@ export class EvalCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'eval',
-            description: 'Evaluates a string',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'string',

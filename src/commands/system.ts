@@ -36,8 +36,8 @@ export class SystemCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'system',
-            description: 'View system information',
+            name: this.name,
+            description: this.description,
         }, {
             guildIds: this.options.preconditions?.find(
                 (condition) => condition === 'OwnerOnly',

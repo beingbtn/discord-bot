@@ -31,8 +31,8 @@ export class LinkCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'link',
-            description: 'Links/unlinks a message ID to an ID',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'link',

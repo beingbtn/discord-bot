@@ -31,8 +31,8 @@ export class ConfigCommand extends Command {
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
         registry.registerChatInputCommand({
-            name: 'config',
-            description: 'Configure and change settings',
+            name: this.name,
+            description: this.description,
             options: [
                 {
                     name: 'core',
