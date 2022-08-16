@@ -3,10 +3,10 @@ import {
     type MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
-import { type CustomID } from '../@types/Persistent';
-import { Event } from '../enums/Event';
-import { InteractionErrorHandler } from '../errors/InteractionErrorHandler';
-import { Options } from '../utility/Options';
+import { type CustomID } from '../../@types/Persistent';
+import { Event } from '../../enums/Event';
+import { InteractionErrorHandler } from '../../errors/InteractionErrorHandler';
+import { Options } from '../../utility/Options';
 
 export class PersistentNotificationListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
