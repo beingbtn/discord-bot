@@ -26,6 +26,10 @@ export class Options {
 
     static readonly defaultLocale: keyof typeof locales = 'en-US';
 
+    static readonly performanceInterval = Time.Hour / 2;
+
+    static readonly performanceMaxDataPoints = 100;
+
     static readonly performanceHistory = 50;
 
     static readonly pingOkMinimum = 300;
