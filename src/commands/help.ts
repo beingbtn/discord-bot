@@ -238,7 +238,11 @@ export class HelpCommand extends Command {
         );
 
         commandEmbed.setDescription(
-            command.description,
+            i18n.getMessage(
+                'commandsHelpCommandsMenuDescription', [
+                    command.description,
+                ],
+            ),
         );
 
         commandEmbed.addFields({

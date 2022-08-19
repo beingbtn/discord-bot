@@ -218,6 +218,9 @@
     "commandsHelpCommandsMenuLabel": {
         "message": "/$1"
     },
+    "commandsHelpCommandsMenuDescription": {
+        "message": "$1."
+    },
     "commandsHelpCommandsMenuCooldownName": {
         "message": "Command Cooldown"
     },
