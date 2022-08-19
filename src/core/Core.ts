@@ -3,7 +3,6 @@ import { Changes } from './Changes';
 import { Components } from './Components';
 import { Dispatch } from './Dispatch';
 import { Embeds } from './Embeds';
-import { Time } from '../enums/Time';
 import { Errors } from './Errors';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { HTTPError } from '../errors/HTTPError';
@@ -12,26 +11,12 @@ import { Normalize } from './Normalize';
 import { Parser } from './Parser';
 import { Requests } from './Requests';
 import { Base } from '../structures/Base';
+import { Performance } from '../structures/Performance';
 import { Options } from '../utility/Options';
 
 /* eslint-disable no-await-in-loop */
 
-export type Performance = {
-    start: number;
-    uses: number;
-    total: number;
-    fetch: number;
-    parse: number;
-    check: number;
-    send: number;
-};
-
 export class Core extends Base {
-    public readonly performance: {
-        latest: Performance | null;
-        history: Performance[];
-    };
-
     public readonly changes: Changes;
 
     public readonly components: Components;
@@ -48,15 +33,12 @@ export class Core extends Base {
 
     public readonly requests: Requests;
 
+    public readonly performance: Performance;
+
     public uses: number;
 
     public constructor() {
         super();
-
-        this.performance = {
-            latest: null,
-            history: [],
-        };
 
         this.changes = new Changes();
         this.components = new Components();
@@ -67,6 +49,7 @@ export class Core extends Base {
         this.parser = new Parser();
         this.requests = new Requests();
 
+        this.performance = new Performance();
         this.uses = 0;
     }
 
@@ -107,28 +90,18 @@ export class Core extends Base {
         // Array Iterations do not allow async
         // eslint-disable-next-line no-restricted-syntax
         for (const url of urls) {
-            const performance: Performance = {
-                start: Date.now(),
-                uses: this.uses,
-                total: NaN,
-                fetch: NaN,
-                parse: NaN,
-                check: NaN,
-                send: NaN,
-            };
-
             try {
+                this.performance.set('fetch');
                 const xml = await this.requests.request(url);
-                performance.fetch = Date.now();
 
+                this.performance.set('parse');
                 const rss = this.parser.parse(xml);
-
                 const rssJSON = this.format.normalize(rss);
-                performance.parse = Date.now();
 
+                this.performance.set('check');
                 const changes = await this.changes.check(rssJSON);
-                performance.check = Date.now();
 
+                this.performance.set('send');
                 if (changes.items.length > 0) {
                     const newPosts = changes.items.filter(
                         (item) => item.edited === false,
@@ -162,11 +135,8 @@ export class Core extends Base {
                     );
                 }
 
-                performance.send = Date.now();
-
+                this.performance.addDataPoint();
                 this.uses += 1;
-
-                this.updatePerformance(performance);
             } catch (error) {
                 if (error instanceof HTTPError) {
                     new RequestErrorHandler(error, this).init();
@@ -192,28 +162,5 @@ export class Core extends Base {
                 / this.container.announcements.length,
             );
         }
-    }
-
-    private updatePerformance(performance: Performance) {
-        // Turns the ms since the Jan 1st 1970 into relative
-        const copy = performance;
-        copy.total = copy.send - copy.start;
-        copy.send -= copy.check;
-        copy.check -= copy.parse;
-        copy.parse -= copy.fetch;
-        copy.fetch -= copy.start;
-
-        this.performance.latest = performance;
-
-        const { history } = this.performance;
-
-        if (
-            typeof history[0] === 'undefined'
-            || history[0].start + Time.Hour > Date.now()
-        ) return;
-
-        history.unshift(performance);
-
-        history.splice(Options.performanceHistory);
     }
 }

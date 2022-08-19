@@ -9,7 +9,7 @@ type PerformanceOptions = {
 };
 
 export class Performance {
-    public current: Collection<string, number>;
+    private readonly current: Collection<string, number>;
 
     public interval: number;
 
@@ -27,11 +27,35 @@ export class Performance {
         this.maxDataPoints = options?.maxDataPoints ?? Options.performanceMaxDataPoints;
     }
 
-    public addData(key: string) {
+    public set(key: string) {
         this.current.set(key, Date.now());
     }
 
     public addDataPoint() {
+        this.current.sort(
+            (firstValue, secondValue) => firstValue - secondValue,
+        );
+
+        if (this.current.size > 2) {
+            const end = Date.now();
+            const first = this.current.first()!;
+            const last = this.current.last()!;
+            const total = last - first;
+
+            this.current.set('end', end);
+
+            Array.from(this.current).forEach(([key, value], index) => {
+                // Avoid doing this for the last item in the Collection
+                if (index + 1 !== this.current.size) {
+                    const nextData = this.current.at(index + 1)!;
+                    this.current.set(key, nextData - value);
+                }
+            });
+
+            this.current.set('start', end - total);
+            this.current.set('total', total);
+        }
+
         const latestTimestamp = this.dataPoints[0]?.get('_timestamp');
 
         if (
@@ -43,6 +67,8 @@ export class Performance {
             this.dataPoints.length = this.maxDataPoints;
         }
 
-        this.latest = this.current;
+        this.latest = this.current.clone();
+
+        this.current.clear();
     }
 }
