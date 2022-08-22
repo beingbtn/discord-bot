@@ -116,13 +116,19 @@ export class Core extends Base {
                     this.container.logger.info(
                         `${this.constructor.name}:`,
                         `New Posts Found: ${newPosts.length} ${postLinks}.`,
+                        newPosts.length > 0
+                            ? `Links: ${postLinks}.`
+                            : '',
                     );
 
                     const editedPostLinks = newPosts.map((post) => post.link).join(', ');
 
                     this.container.logger.info(
                         `${this.constructor.name}:`,
-                        `Edited Posts Found: ${editedPosts.length} ${editedPostLinks}.`,
+                        `Edited Posts Found: ${editedPosts.length}.`,
+                        editedPosts.length > 0
+                            ? `Links: ${editedPostLinks}.`
+                            : '',
                     );
 
                     const embeds = this.embeds.create(changes);
