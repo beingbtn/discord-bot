@@ -127,7 +127,7 @@ export class InteractionPreconditionErrorHandler extends BaseInteractionErrorHan
                 // no default
             }
         } catch (error) {
-            new ErrorHandler(error, this.incidentID).init();
+            new ErrorHandler(error, this.incidentId).init();
         }
     }
 

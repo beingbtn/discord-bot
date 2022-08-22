@@ -100,13 +100,13 @@ export class EditAnnouncementsCommand extends Command {
     public async chatInputRun(interaction: CommandInteraction) {
         const { i18n } = interaction;
 
-        const messageID = interaction.options.getString('message', true);
+        const messageId = interaction.options.getString('message', true);
         const title = interaction.options.getString('title', false);
         const description = interaction.options.getString('description', false);
         const image = interaction.options.getString('image', false);
         const url = interaction.options.getString('url', false);
 
-        const message = await interaction.channel!.messages.fetch(messageID);
+        const message = await interaction.channel!.messages.fetch(messageId);
 
         const tempEmbed = new MessageEmbed(message.embeds[0]);
 

@@ -15,7 +15,7 @@ export class LinkCommand extends Command {
         super(context, {
             ...options,
             name: 'link',
-            description: 'Links/unlinks a message ID to an ID',
+            description: 'Links/unlinks a message Id to an Id',
             cooldownLimit: 0,
             cooldownDelay: 0,
             cooldownScope: BucketScope.User,
@@ -35,7 +35,7 @@ export class LinkCommand extends Command {
                 {
                     name: 'link',
                     type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                    description: 'Links a message ID to an ID',
+                    description: 'Links a message Id to an Id',
                     options: [
                         {
                             name: 'category',
@@ -59,13 +59,13 @@ export class LinkCommand extends Command {
                         },
                         {
                             name: 'id',
-                            description: 'The ID to link the message to',
+                            description: 'The Id to link the message to',
                             type: ApplicationCommandOptionTypes.STRING,
                             required: true,
                         },
                         {
                             name: 'message',
-                            description: 'The message to link to the ID',
+                            description: 'The message to link to the Id',
                             type: ApplicationCommandOptionTypes.STRING,
                             required: true,
                         },
@@ -73,7 +73,7 @@ export class LinkCommand extends Command {
                 },
                 {
                     name: 'unlink',
-                    description: 'Unlinks a message ID from an ID',
+                    description: 'Unlinks a message Id from an Id',
                     type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     options: [
                         {
@@ -99,7 +99,7 @@ export class LinkCommand extends Command {
                         {
                             name: 'id',
                             type: ApplicationCommandOptionTypes.STRING,
-                            description: 'The ID to unlink the message from',
+                            description: 'The Id to unlink the message from',
                             required: true,
                         },
                     ],
@@ -169,8 +169,8 @@ export class LinkCommand extends Command {
             interactionLogContext(interaction),
             `${this.constructor.name}:`,
             interaction.options.getSubcommand() === 'link'
-                ? `Linked the ID ${id} to ${message}.`
-                : `Unlinked the ID ${id} from a message.`,
+                ? `Linked the Id ${id} to ${message}.`
+                : `Unlinked the Id ${id} from a message.`,
         );
 
         await interaction.editReply({ embeds: [linkEmbed] });

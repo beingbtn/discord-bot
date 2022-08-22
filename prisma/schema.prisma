@@ -20,9 +20,9 @@ model config {
 
 model categories {
   category    String @id(map: "announcements_pkey")
-  channelID   String
+  channelId   String
   maxComments Int
-  roleID      String
+  roleId      String
   url         String
 }
 

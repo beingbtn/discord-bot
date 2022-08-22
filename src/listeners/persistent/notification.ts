@@ -3,9 +3,9 @@ import {
     type MessageComponentInteraction,
     MessageEmbed,
 } from 'discord.js';
-import { type CustomID } from '../../@types/Persistent';
 import { Event } from '../../enums/Event';
 import { InteractionErrorHandler } from '../../errors/InteractionErrorHandler';
+import { type CustomId } from '../../structures/CustomId';
 import { Options } from '../../utility/Options';
 
 export class PersistentNotificationListener extends Listener {
@@ -19,23 +19,23 @@ export class PersistentNotificationListener extends Listener {
 
     public async run(
         interaction: MessageComponentInteraction<'cached'>,
-        customID: CustomID,
+        customId: CustomId,
     ) {
         try {
-            const category = customID.value;
+            const category = customId.value;
 
-            const { roleID } = this.container.announcements.find(
+            const { roleId } = this.container.announcements.find(
                 (announcement) => announcement.category === category,
             )!;
 
             const memberRoles = interaction.member.roles;
-            const hasRole = memberRoles.cache.has(roleID);
+            const hasRole = memberRoles.cache.has(roleId);
 
             const notificationsEmbed = new MessageEmbed()
                 .setColor(Options.colorsNormal);
 
             if (hasRole === true) {
-                await memberRoles.remove(roleID);
+                await memberRoles.remove(roleId);
 
                 notificationsEmbed
                     .setTitle(
@@ -53,7 +53,7 @@ export class PersistentNotificationListener extends Listener {
                         ),
                     );
             } else {
-                await memberRoles.add(roleID);
+                await memberRoles.add(roleId);
 
                 notificationsEmbed
                     .setTitle(
@@ -78,7 +78,7 @@ export class PersistentNotificationListener extends Listener {
                 .addFields([{
                     name: interaction.i18n.getMessage('persistentNotificationCurrentName'),
                     value: this.container.announcements.filter(
-                        (announcement) => memberRoles.cache.has(announcement.roleID),
+                        (announcement) => memberRoles.cache.has(announcement.roleId),
                     ).map(
                         (announcement) => announcement.category,
                     ).join(', ')

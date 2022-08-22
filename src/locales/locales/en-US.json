@@ -243,7 +243,7 @@
         "message": "/$1"
     },
     "commandsLinkLinkedDescription": {
-        "message": "The ID $1 is now linked to the message $2."
+        "message": "The Id $1 is now linked to the message $2."
     },
     "commandsLinkLinkedTitle": {
         "message": "Linked"
@@ -372,7 +372,7 @@
         "message": "An error occurred while executing the interaction! This error has been automatically forwarded for review. Sorry."
     },
     "errorsInteractionReplyIncidentName": {
-        "message": "Incident ID"
+        "message": "Incident Id"
     },
     "errorsInteractionReplyTitle": {
         "message": "Oops"

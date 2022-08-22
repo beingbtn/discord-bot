@@ -16,9 +16,9 @@ import {
     ChannelTypes,
     MessageButtonStyles,
 } from 'discord.js/typings/enums';
-import { CustomID } from '../@types/Persistent';
 import { Event } from '../enums/Event';
 import { BetterEmbed } from '../structures/BetterEmbed';
+import { CustomId } from '../structures/CustomId';
 import { Options } from '../utility/Options';
 
 export class NotificationsCommand extends Command {
@@ -87,10 +87,12 @@ export class NotificationsCommand extends Command {
             .setComponents(
                 this.container.announcements.map(
                     (announcement) => new MessageButton()
-                        .setCustomId(JSON.stringify({
-                            event: Event.PersistentNotification,
-                            value: announcement.category,
-                        } as CustomID))
+                        .setCustomId(
+                            CustomId.create({
+                                event: Event.PersistentNotification,
+                                value: announcement.category,
+                            }),
+                        )
                         .setLabel(announcement.category)
                         .setStyle(MessageButtonStyles.PRIMARY),
                 ),

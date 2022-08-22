@@ -95,7 +95,7 @@ export class ConfigCommand extends Command {
                         {
                             name: 'guilds',
                             type: ApplicationCommandOptionTypes.STRING,
-                            description: 'The IDs of the guilds separated by a comma (no spaces)',
+                            description: 'The Ids of the guilds separated by a comma (no spaces)',
                             required: true,
                         },
                     ],
@@ -108,7 +108,7 @@ export class ConfigCommand extends Command {
                         {
                             name: 'owners',
                             type: ApplicationCommandOptionTypes.STRING,
-                            description: 'The IDs of the owners separated by a comma (no spaces)',
+                            description: 'The Ids of the owners separated by a comma (no spaces)',
                             required: true,
                         },
                     ],

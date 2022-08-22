@@ -35,7 +35,7 @@ export class RequestErrorHandler<E> extends BaseErrorHandler<E> {
                 .requestContext(this.error, this.core)
                 .captureException(this.error);
         } catch (error) {
-            new ErrorHandler(error, this.incidentID).init();
+            new ErrorHandler(error, this.incidentId).init();
         }
     }
 }

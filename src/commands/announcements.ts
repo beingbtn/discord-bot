@@ -187,27 +187,27 @@ export class AnnouncementsCommand extends Command {
             default: type = 'Moderation Information and Changes';
         }
 
-        const announcementChannelID = this.container.announcements.find(
+        const announcementChannelId = this.container.announcements.find(
             (announcement) => announcement.category === type,
-        )!.channelID;
+        )!.channelId;
 
         const oldWebhooks = await channel.fetchWebhooks();
         const existingAnnouncementWebhook = oldWebhooks
-            .filter((webhook) => webhook.sourceChannel?.id === announcementChannelID)
+            .filter((webhook) => webhook.sourceChannel?.id === announcementChannelId)
             .first();
 
         if (typeof existingAnnouncementWebhook === 'undefined') {
             // Add webhook
 
             const newsChannel = await interaction.client.channels.fetch(
-                announcementChannelID,
+                announcementChannelId,
             ) as NewsChannel;
 
             await newsChannel.addFollower(channel);
             const webhooks = await channel.fetchWebhooks();
 
             const announcementWebhook = webhooks
-                .filter((webhook) => webhook.sourceChannel?.id === announcementChannelID)
+                .filter((webhook) => webhook.sourceChannel?.id === announcementChannelId)
                 .first()!;
 
             await announcementWebhook.edit({

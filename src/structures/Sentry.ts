@@ -16,9 +16,9 @@ export class Sentry {
         this.scope = new SentryClient.Scope();
     }
 
-    public baseErrorContext(incidentID: string) {
+    public baseErrorContext(incidentId: string) {
         this.scope.setTags({
-            incidentID: incidentID,
+            incidentId: incidentId,
         });
 
         return this;
@@ -39,14 +39,14 @@ export class Sentry {
                 ).slice(0, 200)
                 : null,
             interactionCreatedTimestamp: interaction.createdTimestamp,
-            userID: user.id,
-            interactionID: interaction.id,
-            guildID: guild?.id,
+            userId: user.id,
+            interactionId: interaction.id,
+            guildId: guild?.id,
             guildName: guild?.name,
-            guildOwnerID: guild?.ownerId,
+            guildOwnerId: guild?.ownerId,
             guildMemberCount: guild?.memberCount,
             guildPermissions: guild?.me?.permissions.bitfield.toString(),
-            channelID: channel?.id,
+            channelId: channel?.id,
             channelType: channel?.type,
             channelName: channel instanceof TextChannel
                 ? channel.name

@@ -6,7 +6,7 @@ import { Sentry } from '../structures/Sentry';
 export class BaseErrorHandler<E> extends Base {
     public readonly error: E;
 
-    public readonly incidentID: string;
+    public readonly incidentId: string;
 
     public readonly sentry: Sentry;
 
@@ -17,13 +17,13 @@ export class BaseErrorHandler<E> extends Base {
 
         this.error = error;
         this.i18n = new i18n();
-        this.incidentID = SnowflakeUtil.generate();
-        this.sentry = new Sentry().baseErrorContext(this.incidentID);
+        this.incidentId = SnowflakeUtil.generate();
+        this.sentry = new Sentry().baseErrorContext(this.incidentId);
     }
 
     public log(...text: unknown[]) {
         this.container.logger.error(
-            `Incident ${this.incidentID}`,
+            `Incident ${this.incidentId}`,
             ...text,
         );
     }

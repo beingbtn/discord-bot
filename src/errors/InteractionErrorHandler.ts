@@ -33,7 +33,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
             handler.errorLog();
             await handler.userNotify();
         } catch (error2) {
-            new ErrorHandler(error2, handler.incidentID).init();
+            new ErrorHandler(error2, handler.incidentId).init();
         }
     }
 
@@ -62,7 +62,7 @@ export class InteractionErrorHandler<E> extends BaseInteractionErrorHandler<E> {
                 name: this.i18n.getMessage(
                     'errorsInteractionReplyIncidentName',
                 ),
-                value: this.incidentID,
+                value: this.incidentId,
             });
 
         const payLoad = {

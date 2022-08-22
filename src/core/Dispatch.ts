@@ -17,27 +17,27 @@ export class Dispatch extends Base {
         components: MessageActionRow[],
         data: RSS,
     ) {
-        const { channelID, roleID } = this.container.announcements.find(
+        const { channelId, roleId } = this.container.announcements.find(
             (announcement) => announcement.category === data.title,
         )!;
 
         const channel = await this.container.client.channels.fetch(
-            channelID,
+            channelId,
         ) as NewsChannel;
 
-        const editedThreadIDs = data.items.filter(
+        const editedThreadIds = data.items.filter(
             (item) => item.edited === true,
         ).map(
             (item) => item.id,
         );
 
-        const editedPosts = editedThreadIDs.length > 0
-            ? await this.postsGet(data, editedThreadIDs)
+        const editedPosts = editedThreadIds.length > 0
+            ? await this.postsGet(data, editedThreadIds)
             : [];
 
         if (data.items.some((item) => item.edited === false)) {
             await channel.send({
-                content: Formatters.roleMention(roleID),
+                content: Formatters.roleMention(roleId),
                 allowedMentions: {
                     parse: ['roles'],
                 },
@@ -78,7 +78,7 @@ export class Dispatch extends Base {
         }
     }
 
-    private async postsGet(data: RSS, editedThreadIDs: string[]) {
+    private async postsGet(data: RSS, editedThreadIds: string[]) {
         return this.container.database.announcements.findMany({
             select: {
                 id: true,
@@ -89,7 +89,7 @@ export class Dispatch extends Base {
                 AND: [
                     {
                         id: {
-                            in: editedThreadIDs,
+                            in: editedThreadIds,
                         },
                     },
                 ],
@@ -97,11 +97,11 @@ export class Dispatch extends Base {
         });
     }
 
-    private async postSet(data: RSS, id: string, messageID: string) {
+    private async postSet(data: RSS, id: string, messageId: string) {
         await this.container.database.announcements.update({
             data: {
                 message: {
-                    set: messageID,
+                    set: messageId,
                 },
             },
             where: {

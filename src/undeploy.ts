@@ -8,7 +8,7 @@ import { Routes } from 'discord-api-types/v10';
         const rest = new REST({ version: '10' })
             .setToken(process.env.DISCORD_TOKEN!);
 
-        const guildIDs = ['873000534955667496'];
+        const guildIss = ['873000534955667496'];
 
         await Promise.all([
             rest.put(
@@ -18,10 +18,10 @@ import { Routes } from 'discord-api-types/v10';
                     body: [],
                 },
             ),
-            ...guildIDs.map((guildID) => rest.put(
+            ...guildIss.map((guildId) => rest.put(
                 Routes.applicationGuildCommands(
                     process.env.CLIENT_ID!,
-                    guildID,
+                    guildId,
                 ), {
                     body: [],
                 },

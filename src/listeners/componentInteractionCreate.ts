@@ -6,9 +6,9 @@ import {
     type Interaction,
     MessageFlags,
 } from 'discord.js';
-import { type CustomID } from '../@types/Persistent';
 import { ErrorHandler } from '../errors/ErrorHandler';
 import { i18n } from '../locales/i18n';
+import { CustomId } from '../structures/CustomId';
 import { interactionLogContext } from '../utility/utility';
 
 export class ComponentInteractionCreateListener extends Listener {
@@ -31,7 +31,7 @@ export class ComponentInteractionCreateListener extends Listener {
                 this.container.logger.info(
                     interactionLogContext(interaction),
                     `${this.constructor.name}:`,
-                    `CustomID is ${interaction.customId}.`,
+                    `CustomId is ${interaction.customId}.`,
                 );
 
                 Object.defineProperty(
@@ -42,12 +42,12 @@ export class ComponentInteractionCreateListener extends Listener {
                     },
                 );
 
-                const customID = JSON.parse(interaction.customId) as CustomID;
+                const customId = CustomId.parse(interaction.customId);
 
                 this.container.client.emit(
-                    customID.event,
+                    customId.event,
                     interaction,
-                    customID,
+                    customId,
                 );
             }
         } catch (error) {

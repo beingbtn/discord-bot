@@ -9,10 +9,10 @@ export class Changes extends Base {
 
         const knownThreads = await this.get(data);
 
-        const knownIDs = knownThreads.map((thread) => thread.id);
+        const knownIds = knownThreads.map((thread) => thread.id);
 
         const potentiallyNewThreads = data.items.filter(
-            (item) => knownIDs.includes(item.id) === false,
+            (item) => knownIds.includes(item.id) === false,
         );
 
         const newThreads = potentiallyNewThreads.filter(
@@ -20,18 +20,18 @@ export class Changes extends Base {
         );
 
         if (potentiallyNewThreads > newThreads) {
-            const potentiallyNewIDs = potentiallyNewThreads.map(
+            const potentiallyNewIds = potentiallyNewThreads.map(
                 (thread) => thread.id,
             ).join(', ');
 
-            const newIDs = potentiallyNewThreads.map(
+            const newIds = potentiallyNewThreads.map(
                 (thread) => thread.id,
             ).join(', ');
 
             this.container.logger.debug(
                 `${this.constructor.name}:`,
-                `The potential new threads ${potentiallyNewIDs} were found.`,
-                `${newIDs} remain after the comment count filter.`,
+                `The potential new threads ${potentiallyNewIds} were found.`,
+                `${newIds} remain after the comment count filter.`,
             );
         }
 

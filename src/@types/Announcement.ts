@@ -1,7 +1,7 @@
 export interface Announcement {
     category: string,
-    channelID: string,
+    channelId: string,
     maxComments: number,
-    roleID: string,
+    roleId: string,
     url: string,
 }
