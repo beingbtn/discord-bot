@@ -30,19 +30,6 @@ export async function awaitComponent<T extends MessageComponentTypeResolvable>(
     }
 }
 
-export function disableComponents(messageActionRows: MessageActionRow[]) {
-    const actionRows = messageActionRows
-        .map((row) => new MessageActionRow(row));
-
-    actionRows.forEach((actionRow) => {
-        actionRow.components.forEach((component) => {
-            component.setDisabled();
-        });
-    });
-
-    return actionRows;
-}
-
 export function cleanDate(ms: number | Date): string | null {
     const newDate = new Date(ms);
     if (
@@ -114,6 +101,19 @@ export function createOffset(date = new Date()): string {
     const minutes = pad(offset % 60);
 
     return `${sign + hours}:${minutes}`;
+}
+
+export function disableComponents(messageActionRows: MessageActionRow[]) {
+    const actionRows = messageActionRows
+        .map((row) => new MessageActionRow(row));
+
+    actionRows.forEach((actionRow) => {
+        actionRow.components.forEach((component) => {
+            component.setDisabled();
+        });
+    });
+
+    return actionRows;
 }
 
 export function formattedUnix({

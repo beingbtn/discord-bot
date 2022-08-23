@@ -1,3 +1,8 @@
+import {
+    type Command,
+    container,
+    RegisterBehavior,
+} from '@sapphire/framework';
 import { PresenceUpdateStatus } from 'discord-api-types/v10';
 import {
     type ColorResolvable,
@@ -23,6 +28,16 @@ export class Options {
     static readonly coreDisabledTimeout = Time.Second * 2.5;
 
     static readonly coreDispatchTimeout = Time.Second * 2.5;
+
+    static readonly commandRegistry = (command: Command) => ({
+        guildIds: command.options.preconditions?.find(
+            (condition) => condition === 'OwnerOnly',
+        )
+            ? container.config.ownerGuilds
+            : undefined,
+        registerCommandIfMissing: true,
+        behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+    });
 
     static readonly defaultLocale: keyof typeof locales = 'en-US';
 

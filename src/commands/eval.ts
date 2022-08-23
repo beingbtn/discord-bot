@@ -3,7 +3,6 @@ import {
     type ApplicationCommandRegistry,
     BucketScope,
     Command,
-    RegisterBehavior,
 } from '@sapphire/framework';
 import {
     type CommandInteraction,
@@ -47,15 +46,10 @@ export class EvalCommand extends Command {
     }
 
     public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
-        registry.registerChatInputCommand(this.chatInputStructure, {
-            guildIds: this.options.preconditions?.find(
-                (condition) => condition === 'OwnerOnly',
-            )
-                ? this.container.config.ownerGuilds
-                : undefined,
-            registerCommandIfMissing: true,
-            behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
-        });
+        registry.registerChatInputCommand(
+            this.chatInputStructure,
+            Options.commandRegistry(this),
+        );
     }
 
     public async chatInputRun(interaction: CommandInteraction) {
