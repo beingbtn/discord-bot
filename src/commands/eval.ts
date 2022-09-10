@@ -72,12 +72,29 @@ export class EvalCommand extends Command {
                 output?.length >= EmbedLimits.MaximumFieldValueLength
             );
 
+            let jsonStringified;
+
+            try {
+                jsonStringified = JSON.stringify(output);
+            // eslint-disable-next-line no-empty
+            } catch {}
+
             evalEmbed.setColor(Options.colorsNormal).addFields(
                 {
                     name: i18n.getMessage('commandsEvalOutputName'),
                     value: Formatters.codeBlock(
                         'javascript',
                         output?.toString()?.slice(
+                            0,
+                            EmbedLimits.MaximumFieldValueLength,
+                        ),
+                    ),
+                },
+                {
+                    name: i18n.getMessage('commandsEvalStringifiedJSONOutputName'),
+                    value: Formatters.codeBlock(
+                        'json',
+                        String(jsonStringified).slice(
                             0,
                             EmbedLimits.MaximumFieldValueLength,
                         ),
@@ -114,6 +131,13 @@ export class EvalCommand extends Command {
 
             await interaction.editReply({ embeds: [evalEmbed] });
         } catch (error) {
+            this.container.logger.warn(
+                interactionLogContext(interaction),
+                `${this.constructor.name}:`,
+                'Encountered error during eval.',
+                error,
+            );
+
             const end = Date.now();
             const timeTaken = end - start;
 

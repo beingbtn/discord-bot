@@ -164,6 +164,9 @@
     "commandsEvalOutputName": {
         "message": "Output"
     },
+    "commandsEvalStringifiedJSONOutputName": {
+        "message": "Stringified JSON Output"
+    },
     "commandsEvalSuccessTitle": {
         "message": "Executed Eval"
     },
