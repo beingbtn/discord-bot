@@ -1,2 +1,3 @@
-# ignore compiled js
+.env
 dist
+node_modules
