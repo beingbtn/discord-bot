@@ -9,9 +9,7 @@ import {
     type PresenceData,
     Sweepers,
 } from 'discord.js';
-import { Announcement } from '../@types/Announcement';
 import { Config } from '../@types/Config';
-import { Core } from '../core/Core';
 import { i18n } from '../locales/i18n';
 
 export class Client extends SapphireClient {
@@ -22,7 +20,7 @@ export class Client extends SapphireClient {
                 repliedUser: true,
             },
             failIfNotExists: false,
-            intents: [Intents.FLAGS.GUILDS],
+            intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS],
             makeCache: Options.cacheWithLimits({
                 GuildBanManager: 0,
                 GuildInviteManager: 0,
@@ -44,12 +42,6 @@ export class Client extends SapphireClient {
                 status: 'online',
             },
             sweepers: {
-                guildMembers: {
-                    interval: 600,
-                    filter: Sweepers.filterByLifetime({
-                        lifetime: 60,
-                    }),
-                },
                 messages: {
                     interval: 600,
                     lifetime: 60,
@@ -78,24 +70,16 @@ export class Client extends SapphireClient {
         const startTime = Date.now();
 
         container.database = new PrismaClient();
-        container.core = new Core();
         container.customPresence = null;
         container.i18n = new i18n();
 
-        const { config, categories } = container.database;
+        const { config } = container.database;
 
         container.config = await config.findFirst() as Config;
 
         container.logger.info(
             `${this.constructor.name}:`,
             'Fetched config from the database.',
-        );
-
-        container.announcements = await categories.findMany();
-
-        container.logger.info(
-            `${this.constructor.name}:`,
-            'Fetched announcements from the database.',
         );
 
         const endTime = Date.now();
@@ -113,9 +97,7 @@ export class Client extends SapphireClient {
 
 declare module '@sapphire/pieces' {
     interface Container {
-        announcements: Announcement[],
         config: Config,
-        core: Core,
         customPresence: PresenceData | null,
         database: PrismaClient;
         i18n: i18n,

@@ -33,7 +33,5 @@ export class ReadyListener extends Listener {
                 new ErrorHandler(error).init();
             }
         }
-
-        await this.container.core.init();
     }
 }

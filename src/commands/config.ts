@@ -32,59 +32,9 @@ export class ConfigCommand extends Command {
             description: this.description,
             options: [
                 {
-                    name: 'core',
-                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                    description: 'Toggle the core',
-                },
-                {
                     name: 'devmode',
                     type: ApplicationCommandOptionTypes.SUB_COMMAND,
                     description: 'Toggle Developer Mode',
-                },
-                {
-                    name: 'interval',
-                    description: 'Set the RSS fetch interval',
-                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                    options: [
-                        {
-                            name: 'milliseconds',
-                            type: ApplicationCommandOptionTypes.INTEGER,
-                            description: 'The interval in milliseconds',
-                            required: true,
-                            minValue: 60,
-                            maxValue: 3600000,
-                        },
-                    ],
-                },
-                {
-                    name: 'restrequesttimeout',
-                    description: 'Set the request timeout before an abort error is thrown',
-                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                    options: [
-                        {
-                            name: 'milliseconds',
-                            type: ApplicationCommandOptionTypes.INTEGER,
-                            description: 'The timeout in milliseconds',
-                            required: true,
-                            minValue: 0,
-                            maxValue: 100000,
-                        },
-                    ],
-                },
-                {
-                    name: 'retrylimit',
-                    description: 'Set the number of request retries before throwing',
-                    type: ApplicationCommandOptionTypes.SUB_COMMAND,
-                    options: [
-                        {
-                            name: 'limit',
-                            type: ApplicationCommandOptionTypes.INTEGER,
-                            description: 'The number of retries',
-                            required: true,
-                            minValue: 0,
-                            maxValue: 100,
-                        },
-                    ],
                 },
                 {
                     name: 'ownerguilds',
@@ -130,20 +80,8 @@ export class ConfigCommand extends Command {
 
     public async chatInputRun(interaction: CommandInteraction) {
         switch (interaction.options.getSubcommand()) {
-            case 'core':
-                await this.core(interaction);
-                break;
             case 'devmode':
                 await this.devModeCommand(interaction);
-                break;
-            case 'interval':
-                await this.interval(interaction);
-                break;
-            case 'restrequesttimeout':
-                await this.restRequestTimeout(interaction);
-                break;
-            case 'retrylimit':
-                await this.retryLimit(interaction);
                 break;
             case 'ownerguilds':
                 await this.ownerGuilds(interaction);
@@ -156,48 +94,6 @@ export class ConfigCommand extends Command {
                 break;
             // no default
         }
-    }
-
-    public async core(interaction: CommandInteraction) {
-        const { i18n } = interaction;
-
-        this.container.config.core = !this.container.config.core;
-
-        await this.container.database.config.update({
-            data: {
-                core: this.container.config.core,
-            },
-            where: {
-                index: 0,
-            },
-        });
-
-        const coreEmbed = new BetterEmbed(interaction)
-            .setColor(Options.colorsNormal)
-            .setTitle(i18n.getMessage('commandsConfigCoreTitle'))
-            .setDescription(
-                i18n.getMessage(
-                    'commandsConfigCoreDescription', [
-                        this.container.config.core === true
-                            ? i18n.getMessage('on')
-                            : i18n.getMessage('off'),
-                    ],
-                ),
-            );
-
-        await interaction.editReply({
-            embeds: [coreEmbed],
-        });
-
-        const state = this.container.config.core === true
-            ? 'on'
-            : 'off';
-
-        this.container.logger.info(
-            interactionLogContext(interaction),
-            `${this.constructor.name}:`,
-            `Developer Mode is now ${state}.`,
-        );
     }
 
     public async devModeCommand(interaction: CommandInteraction) {
@@ -241,137 +137,6 @@ export class ConfigCommand extends Command {
             interactionLogContext(interaction),
             `${this.constructor.name}:`,
             `Developer Mode is now ${state}.`,
-        );
-    }
-
-    public async interval(interaction: CommandInteraction) {
-        const { i18n } = interaction;
-
-        const milliseconds = interaction.options.getInteger(
-            'milliseconds',
-            true,
-        );
-
-        this.container.config.interval = milliseconds;
-
-        await this.container.database.config.update({
-            data: {
-                interval: this.container.config.interval,
-            },
-            where: {
-                index: 0,
-            },
-        });
-
-        const intervalEmbed = new BetterEmbed(interaction)
-            .setColor(Options.colorsNormal)
-            .setTitle(
-                i18n.getMessage(
-                    'commandsConfigIntervalTitle',
-                ),
-            )
-            .setDescription(
-                i18n.getMessage(
-                    'commandsConfigIntervalDescription', [
-                        milliseconds,
-                    ],
-                ),
-            );
-
-        await interaction.editReply({ embeds: [intervalEmbed] });
-
-        this.container.logger.info(
-            interactionLogContext(interaction),
-            `${this.constructor.name}:`,
-            `The interval is now ${milliseconds}ms.`,
-        );
-    }
-
-    public async restRequestTimeout(interaction: CommandInteraction) {
-        const { i18n } = interaction;
-
-        const milliseconds = interaction.options.getInteger(
-            'milliseconds',
-            true,
-        );
-
-        this.container.config.restRequestTimeout = milliseconds;
-
-        await this.container.database.config.update({
-            data: {
-                restRequestTimeout: this.container.config.restRequestTimeout,
-            },
-            where: {
-                index: 0,
-            },
-        });
-
-        const restRequestTimeoutEmbed = new BetterEmbed(interaction)
-            .setColor(Options.colorsNormal)
-            .setTitle(
-                i18n.getMessage(
-                    'commandsConfigRestRequestTimeoutTitle',
-                ),
-            )
-            .setDescription(
-                i18n.getMessage(
-                    'commandsConfigRestRequestTimeoutDescription', [
-                        milliseconds,
-                    ],
-                ),
-            );
-
-        await interaction.editReply({
-            embeds: [restRequestTimeoutEmbed],
-        });
-
-        this.container.logger.info(
-            interactionLogContext(interaction),
-            `${this.constructor.name}:`,
-            `The rest request timeout is now ${milliseconds}ms.`,
-        );
-    }
-
-    public async retryLimit(interaction: CommandInteraction) {
-        const { i18n } = interaction;
-
-        const limit = interaction.options.getInteger(
-            'limit',
-            true,
-        );
-
-        this.container.config.retryLimit = limit;
-
-        await this.container.database.config.update({
-            data: {
-                retryLimit: this.container.config.retryLimit,
-            },
-            where: {
-                index: 0,
-            },
-        });
-
-        const retryLimitEmbed = new BetterEmbed(interaction)
-            .setColor(Options.colorsNormal)
-            .setTitle(
-                i18n.getMessage(
-                    'commandsConfigRetryLimitTitle',
-                ),
-            )
-            .setDescription(
-                i18n.getMessage(
-                    'commandsConfigRetryLimitDescription', [
-                        limit,
-                    ],
-                ),
-            );
-
-        await interaction.editReply({ embeds: [retryLimitEmbed] });
-
-        this.container.logger.info(
-            interactionLogContext(interaction),
-            `${this.constructor.name}:`,
-            `The retry limit is now ${limit}.`,
         );
     }
 
@@ -474,15 +239,9 @@ export class ConfigCommand extends Command {
             .setDescription(
                 i18n.getMessage(
                     'commandsConfigViewDescription', [
-                        this.container.config.core === true
-                            ? i18n.getMessage('on')
-                            : i18n.getMessage('off'),
                         this.container.config.devMode === true
                             ? i18n.getMessage('on')
                             : i18n.getMessage('off'),
-                        this.container.config.interval,
-                        this.container.config.restRequestTimeout,
-                        this.container.config.retryLimit,
                         this.container.config.ownerGuilds.join(', '),
                         this.container.config.owners.join(', '),
 

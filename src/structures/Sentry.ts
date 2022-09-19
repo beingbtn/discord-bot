@@ -5,8 +5,6 @@ import {
     type Interaction,
     TextChannel,
 } from 'discord.js';
-import { type Core } from '../core/Core';
-import { HTTPError } from '../errors/HTTPError';
 import { slashCommandResolver } from '../utility/utility';
 
 export class Sentry {
@@ -83,30 +81,6 @@ export class Sentry {
     public baseInteractionPreconditionContext(precondition: string) {
         this.scope.setTags({
             precondition: precondition,
-        });
-
-        return this;
-    }
-
-    public requestContext(error: unknown, core: Core) {
-        this.scope.setTags({
-            type: error instanceof Error
-                ? error.name
-                : null,
-            resumingIn: core.errors.getTimeout(),
-            lastHourAbort: core.errors.abort.lastHour,
-            lastHourGeneric: core.errors.generic.lastHour,
-            lastHourHTTP: core.errors.http.lastHour,
-            nextTimeoutAbort: core.errors.abort.timeout,
-            nextTimeoutGeneric: core.errors.generic.timeout,
-            nextTimeoutHTTP: core.errors.http.timeout,
-            uses: core.uses,
-            status: error instanceof HTTPError
-                ? error.status
-                : null,
-            statusText: error instanceof HTTPError
-                ? error.statusText
-                : null,
         });
 
         return this;

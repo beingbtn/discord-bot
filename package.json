@@ -1,6 +1,4 @@
 {
-    "name": "hypixel-news",
-    "description": "Hypixel News is a project that sends you the latest news from the Hypixel Network.",
     "license": "MIT",
     "author": "Attituding <attituding@outlook.com>",
     "main": "dist/index.js",

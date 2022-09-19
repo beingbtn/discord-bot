@@ -17,69 +17,6 @@
     "none": {
         "message": "None"
     },
-    "commandsAnnouncementsAddDescription": {
-        "message": "$1 will be sent to $2!"
-    },
-    "commandsAnnouncementsAddTitle": {
-        "message": "Added $1"
-    },
-    "commandsAnnouncementsBotMissingPermissionDescription": {
-        "message": "This bot is unable to use the channel you selected because it is missing permission(s): $1. Grant the bot the listed permissions or select a different channel that the bot can use."
-    },
-    "commandsAnnouncementsBotMissingPermissionTitle": {
-        "message": "Missing Permission"
-    },
-    "commandsAnnouncementsRemoveDescription": {
-        "message": "$1 will no longer be sent to $2!"
-    },
-    "commandsAnnouncementsRemoveNotFoundDescription": {
-        "message": "The announcement type `$1` isn't added to $2!"
-    },
-    "commandsAnnouncementsRemoveNotFoundTitle": {
-        "message": "$1 Type Not Found"
-    },
-    "commandsAnnouncementsRemoveTitle": {
-        "message": "Removed $1"
-    },
-    "commandsAnnouncementsUserMissingPermissionDescription": {
-        "message": "You must have the **Manage Webhook(s)** permission to use this command. This permission can either be granted server-wide or given through a channel's advanced permissions."
-    },
-    "commandsAnnouncementsUserMissingPermissionTitle": {
-        "message": "Missing Permission"
-    },
-    "commandsAPICallDescription": {
-        "message": "Executed <Core>.errors.$1."
-    },
-    "commandsAPICallTitle": {
-        "message": "Executed"
-    },
-    "commandsAPISetDescription": {
-        "message": "<Core>.errors.$1.$2 is now $3."
-    },
-    "commandsAPISetTitle": {
-        "message": "Updated Value"
-    },
-    "commandsAPIStatsEnabledName": {
-        "message": "Enabled"
-    },
-    "commandsAPIStatsLastHourName": {
-        "message": "Last Hour Statistic"
-    },
-    "commandsAPIStatsLastHourValue": {
-        "message": "Aborts: $1\nGeneric Errors: $2\nHTTP: $3"
-    },
-    "commandsAPIStatsNextTimeoutsName": {
-        "message": "Next Timeout Lengths"
-    },
-    "commandsAPIStatsNextTimeoutsValue": {
-        "message": "May not be accurate\nAbort Errors: $1\nGeneric Errors: $2\nHTTP Errors: $3"
-    },
-    "commandsAPIStatsResumeName": {
-        "message": "Resuming In"
-    },
-    "commandsAPIStatsUsesName": {
-        "message": "Uses"
-    },
     "commandsConfigCoreTitle": {
         "message": "Core State Updated"
     },
@@ -127,27 +64,6 @@
     },
     "commandsConfigViewDescription": {
         "message": "Core: **$1**\nDeveloper Mode: **$2**\nInterval: **$3**ms\nRest Request Timeout: **$4**ms\nRetry Limit: **$5**\nOwner Guilds: **$6**\nOwners: **$7**"
-    },
-    "commandsDeployNone": {
-        "message": "None"
-    },
-    "commandsDeployTitle": {
-        "message": "Success"
-    },
-    "commandsEditAnnouncementsPreviewButtonLabel": {
-        "message": "Looks Good!"
-    },
-    "commandsEditAnnouncementsPreviewDescription": {
-        "message": "This is a preview of the new announcement."
-    },
-    "commandsEditAnnouncementsPreviewTitle": {
-        "message": "Announcement Preview"
-    },
-    "commandsEditAnnouncementsSuccessDescription": {
-        "message": "Your edit has been published!"
-    },
-    "commandsEditAnnouncementsSuccessTitle": {
-        "message": "Announcement Published"
     },
     "commandsEvalFailTitle": {
         "message": "Failed Eval"
@@ -207,13 +123,13 @@
         "message": "About"
     },
     "commandsHelpInformationMenuAboutValue": {
-        "message": "Hypixel News is a project that sends you the latest news from the Hypixel Network. When new posts are made by the admins on the forums, you can choose which ones you want to receive as a neat message in a selected Discord channel.\n\nLearn more at https://attituding.github.io/hypixel-news/."
+        "message": "Together, we can be better than Nicholas."
     },
     "commandsHelpInformationMenuLegalName": {
         "message": "Legal Stuff"
     },
     "commandsHelpInformationMenuLegalValue": {
-        "message": "By using this service, you agree to our [Privacy Policy](https://attituding.github.io/Hypixel-News/legal/privacy-policy/ \"Privacy Policy\") and our [Terms of Service](https://attituding.github.io/Hypixel-News/legal/terms-of-service/ \"Terms of Service\")."
+        "message": "Don't sue us pls."
     },
     "commandsHelpCommandsMenuPlaceholder": {
         "message": "/$1"
@@ -244,36 +160,6 @@
     },
     "commandsHelpCommandsMenuTitle": {
         "message": "/$1"
-    },
-    "commandsLinkLinkedDescription": {
-        "message": "The Id $1 is now linked to the message $2."
-    },
-    "commandsLinkLinkedTitle": {
-        "message": "Linked"
-    },
-    "commandsLinkUnlinkedDescription": {
-        "message": "$1 is no longer linked to a message."
-    },
-    "commandsLinkUnlinkedTitle": {
-        "message": "Unlinked"
-    },
-    "commandsNotificationsPrivateTitle": {
-        "message": "Sent"
-    },
-    "commandsNotificationsPublicDescription": {
-        "message": "Use the buttons below to manage the notifications you want to receive. Clicking on a button will toggle notifications for the selected announcement category."
-    },
-    "commandsNotificationsPublicTitle": {
-        "message": "Announcement Notifications"
-    },
-    "commandsPerformanceLatestName": {
-        "message": "Latest Performance"
-    },
-    "commandsPerformanceLatestValue": {
-        "message": "Hypixel RSS Fetch: $1ms\nParse Data: $2ms\nCheck Data: $3ms\nSend: $4ms\nTotal: $5ms"
-    },
-    "commandsPerformanceTitle": {
-        "message": "Performance"
     },
     "commandsPingDescription": {
         "message": "Websocket heartbeat is $1ms. Roundtrip latency is $2ms."
@@ -322,27 +208,6 @@
     },
     "commandsReloadSingleUnknownTitle": {
         "message": "Unknown Item"
-    },
-    "commandsSendAnnouncementsEmbedAuthorName": {
-        "message": "Hypixel News"
-    },
-    "commandsSendAnnouncementsEmbedFooterName": {
-        "message": "Special Announcement"
-    },
-    "commandsSendAnnouncementsPreviewButtonLabel": {
-        "message": "Looks Good!"
-    },
-    "commandsSendAnnouncementsPreviewDescription": {
-        "message": "This is a preview of the announcement."
-    },
-    "commandsSendAnnouncementsPreviewTitle": {
-        "message": "Announcement Preview"
-    },
-    "commandsSendAnnouncementsSuccessDescription": {
-        "message": "Your announcement has been published!"
-    },
-    "commandsSendAnnouncementsSuccessTitle": {
-        "message": "Announcement Published"
     },
     "commandsSystemMemberValue": {
         "message": "$1MB"
@@ -433,20 +298,5 @@
     },
     "errorsPreconditionUserLocalPermissionsTitle": {
         "message": "Missing Permission(s)"
-    },
-    "persistentNotificationAddDescription": {
-        "message": "You will now be notified whenever **$1** are published!"
-    },
-    "persistentNotificationAddTitle": {
-        "message": "Added $1 Notifications"
-    },
-    "persistentNotificationCurrentName": {
-        "message": "Your Notifications"
-    },
-    "persistentNotificationRemoveDescription": {
-        "message": "You will no longer be notified whenever new **$1** are posted!"
-    },
-    "persistentNotificationRemoveTitle": {
-        "message": "Removed $1 Notifications"
     }
 }
