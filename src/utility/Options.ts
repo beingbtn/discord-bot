@@ -46,7 +46,8 @@ export class Options {
     static readonly presence: PresenceData = {
         activities: [{
             name: 'the BTN movement',
-            type: ActivityTypes.WATCHING,
+            type: ActivityTypes.STREAMING,
+            url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         }],
         status: PresenceUpdateStatus.Online,
     };

@@ -17,35 +17,11 @@
     "none": {
         "message": "None"
     },
-    "commandsConfigCoreTitle": {
-        "message": "Core State Updated"
-    },
-    "commandsConfigCoreDescription": {
-        "message": "The core is now **$1**."
-    },
     "commandsConfigDevModeTitle": {
         "message": "Developer Mode Updated"
     },
     "commandsConfigDevModeDescription": {
         "message": "Developer Mode is now **$1**."
-    },
-    "commandsConfigIntervalTitle": {
-        "message": "Interval Updated"
-    },
-    "commandsConfigIntervalDescription": {
-        "message": "The interval is now **$1**ms."
-    },
-    "commandsConfigRestRequestTimeoutTitle": {
-        "message": "Rest Request Timeout Updated"
-    },
-    "commandsConfigRestRequestTimeoutDescription": {
-        "message": "The rest request timeout is now **$1**."
-    },
-    "commandsConfigRetryLimitTitle": {
-        "message": "Retry Limit Updated"
-    },
-    "commandsConfigRetryLimitDescription": {
-        "message": "The retry limit is now **$1**."
     },
     "commandsConfigOwnerGuildsTitle": {
         "message": "Owner Guilds Updated"
@@ -63,7 +39,7 @@
         "message": "Current Configuration"
     },
     "commandsConfigViewDescription": {
-        "message": "Core: **$1**\nDeveloper Mode: **$2**\nInterval: **$3**ms\nRest Request Timeout: **$4**ms\nRetry Limit: **$5**\nOwner Guilds: **$6**\nOwners: **$7**"
+        "message": "Developer Mode: **$1**\nOwner Guilds: **$2**\nOwners: **$3**"
     },
     "commandsEvalFailTitle": {
         "message": "Failed Eval"
