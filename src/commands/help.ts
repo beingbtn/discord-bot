@@ -129,16 +129,10 @@ export class HelpCommand extends Command {
         const informationMenuEmbed = new BetterEmbed(interaction)
             .setColor(Options.colorsNormal)
             .setTitle(i18n.getMessage('commandsHelpInformationMenuTitle'))
-            .addFields(
-                {
-                    name: i18n.getMessage('commandsHelpInformationMenuAboutName'),
-                    value: i18n.getMessage('commandsHelpInformationMenuAboutValue'),
-                },
-                {
-                    name: i18n.getMessage('commandsHelpInformationMenuLegalName'),
-                    value: i18n.getMessage('commandsHelpInformationMenuLegalValue'),
-                },
-            );
+            .addFields({
+                name: i18n.getMessage('commandsHelpInformationMenuAboutName'),
+                value: i18n.getMessage('commandsHelpInformationMenuAboutValue'),
+            });
 
         await component.update({
             embeds: [informationMenuEmbed],

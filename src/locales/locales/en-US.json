@@ -123,13 +123,7 @@
         "message": "About"
     },
     "commandsHelpInformationMenuAboutValue": {
-        "message": "Together, we can be better than Nicholas."
-    },
-    "commandsHelpInformationMenuLegalName": {
-        "message": "Legal Stuff"
-    },
-    "commandsHelpInformationMenuLegalValue": {
-        "message": "Don't sue us pls."
+        "message": "btn ftw"
     },
     "commandsHelpCommandsMenuPlaceholder": {
         "message": "/$1"
@@ -190,6 +184,9 @@
     },
     "commandsPresenceSetURLName": {
         "message": "URL"
+    },
+    "commandsPutTitle": {
+        "message": "Successfully Put Members"
     },
     "commandsReloadAllDescription": {
         "message": "$1 imports have been reloaded! This action took $2ms."

@@ -5,6 +5,7 @@ import {
     type Interaction,
     TextChannel,
 } from 'discord.js';
+import { HTTPError } from '../errors/HTTPError';
 import { slashCommandResolver } from '../utility/utility';
 
 export class Sentry {
@@ -82,6 +83,19 @@ export class Sentry {
         this.scope.setTags({
             precondition: precondition,
         });
+
+        return this;
+    }
+
+    public httpContext(error: unknown) {
+        if (error instanceof HTTPError) {
+            this.scope.setTags({
+                type: error.name,
+                status: error.status,
+                statusText: error.statusText,
+                url: error.url,
+            });
+        }
 
         return this;
     }

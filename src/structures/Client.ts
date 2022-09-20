@@ -24,11 +24,10 @@ export class Client extends SapphireClient {
             makeCache: Options.cacheWithLimits({
                 GuildBanManager: 0,
                 GuildInviteManager: 0,
-                GuildMemberManager: 25,
                 GuildEmojiManager: 0,
                 GuildScheduledEventManager: 0,
                 GuildStickerManager: 0,
-                MessageManager: 50,
+                MessageManager: 0,
                 PresenceManager: 0,
                 ReactionManager: 0,
                 ReactionUserManager: 0,

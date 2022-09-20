@@ -25,10 +25,6 @@ export class Options {
 
     static readonly cooldownMinimum = Time.Second * 2.5;
 
-    static readonly coreDisabledTimeout = Time.Second * 2.5;
-
-    static readonly coreDispatchTimeout = Time.Second * 2.5;
-
     static readonly commandRegistry = (command: Command) => ({
         guildIds: command.options.preconditions?.find(
             (condition) => condition === 'OwnerOnly',
@@ -40,6 +36,8 @@ export class Options {
     });
 
     static readonly defaultLocale: keyof typeof locales = 'en-US';
+
+    static readonly guild = '1020815474709237796';
 
     static readonly pingOkMinimum = 300;
 
