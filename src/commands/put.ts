@@ -77,7 +77,7 @@ export class PutCommand extends Command {
                 Formatters.codeBlock(
                     JSON.stringify(users).slice(
                         0,
-                        EmbedLimits.MaximumDescriptionLength - 6,
+                        EmbedLimits.MaximumDescriptionLength - Formatters.codeBlock('').length,
                     ),
                 ),
             );
